@@ -95,6 +95,35 @@
         .map-zoom-high .marker-circle svg { width: 8px; height: 8px; stroke-width: 2px; }
         .map-zoom-high .marker-circle:hover { transform: scale(1.3); filter: brightness(1.15); }
 
+        /* Tooltip Externo (Solo visible en zoom alto para puntos) */
+        .custom-map-tooltip {
+            background-color: #0F172A;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            box-shadow: none;
+            transition: opacity 0.2s ease;
+        }
+        .custom-map-tooltip::before { display: none; }
+        #map:not(.map-zoom-high) .custom-map-tooltip { display: none !important; }
+
+        /* TOOLTIP UX PARA RESULTADOS 2025 */
+        .tooltip-resultados-2025 {
+            background-color: rgba(255, 255, 255, 0.98) !important;
+            border: 1px solid #E6EDF3 !important;
+            border-radius: 8px !important;
+            padding: 10px !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+            backdrop-filter: blur(4px);
+            white-space: normal;
+            color: #0F172A !important;
+        }
+        .tooltip-resultados-2025::before { display: none; }
+
         /* Loader para las capas del menú */
         .layer-loading { opacity: 0.5; pointer-events: none; position: relative; }
         .layer-loading::after {
@@ -110,15 +139,15 @@
 </head>
 <body class="relative min-h-screen flex flex-col">
 
-    <!-- Encabezado Institucional (MAPA COE) -->
+    <!-- Encabezado Institucional (Atlas de la Comunidad) -->
     <header class="bg-[var(--bg-main)] shadow-lg border-b-4 border-[var(--acento)] relative z-20 flex items-center justify-center w-full shrink-0 py-6 px-4">
         <div class="flex items-center gap-4">
             <div class="bg-[var(--blanco)] text-[var(--bg-main)] rounded-full shadow-md flex items-center justify-center h-14 w-14 shrink-0">
                 <i class="fa-solid fa-map-location-dot text-2xl"></i>
             </div>
             <div class="flex flex-col">
-                <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--blanco)] tracking-tight uppercase leading-none">MAPA COE</h1>
-                <p class="text-[var(--acento)] font-bold text-sm sm:text-base tracking-wide mt-1">CENTRO DE OPERACIONES DE EMERGENCIAS</p>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--blanco)] tracking-tight uppercase leading-none">Atlas de la Comunidad</h1>
+                <p class="text-[var(--acento)] font-bold text-sm sm:text-base tracking-wide mt-1">SISTEMA DE INFORMACIÓN TERRITORIAL</p>
             </div>
         </div>
     </header>
@@ -126,78 +155,305 @@
     <!-- Contenedor Único del Mapa de Análisis Territorial -->
     <div id="map-view" class="w-full max-w-[1600px] mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
         
+        <!-- Controles Superiores: Botones Principales -->
+        <div class="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-6 gap-4 shrink-0">
+            <div id="panel-botones" class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                <button id="btn-exportar" onclick="exportarHTML()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#FFFFFF] text-[#0B5F8D] border-2 border-[#0B5F8D] rounded-full font-bold hover:bg-[#F3F6F9] transition-all shadow-sm hover:shadow-md print:hidden text-sm">
+                    <i data-lucide="download" class="h-4 w-4"></i> Exportar
+                </button>
+                <label id="btn-cargar-label" for="geojson-upload" class="flex-1 sm:flex-none cursor-pointer flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0B5F8D] text-[#FFFFFF] rounded-full font-bold hover:bg-[#084A6F] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 print:hidden text-sm">
+                    <i data-lucide="upload-cloud" class="h-4 w-4"></i> Cargar Datos
+                </label>
+                <input type="file" id="geojson-upload" multiple accept=".geojson,.json" class="hidden">
+            </div>
+        </div>
+
         <!-- Contenedor Principal del Mapa con Layout de Sidebar -->
         <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[600px]">
             
             <!-- MENU LATERAL IZQUIERDO (Capas y Filtros) -->
-            <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-140px)]">
+            <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-200px)]">
                 <div class="p-4 border-b border-[#E6EDF3] bg-[#F3F6F9] rounded-t-xl flex items-center gap-2 shrink-0">
-                    <i data-lucide="layers" class="text-[#0B5F8D] h-5 w-5"></i>
-                    <h3 class="font-bold text-[#0F172A] uppercase tracking-wide text-sm">Capas Disponibles</h3>
+                    <i data-lucide="filter" class="text-[#0B5F8D] h-5 w-5"></i>
+                    <h3 class="font-bold text-[#0F172A] uppercase tracking-wide text-sm">Capas y Filtros</h3>
                 </div>
                 
-                <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-6" id="menu-capas-container">
+                <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-6">
                     
-                    <!-- BLOQUE 1: DIVISIÓN TERRITORIAL -->
-                    <div>
+                    <!-- Bloque 1: Carga de Datos Rápida -->
+                    <div id="panel-carga-lateral" class="bg-[#EAF1F7] p-3 rounded-lg border border-[#D1E1F0]">
+                        <h4 class="text-[11px] font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                            <i data-lucide="upload" class="h-3.5 w-3.5"></i> Importar Capas
+                        </h4>
+                        <input type="file" id="map-geojson-upload" multiple accept=".geojson,.json" class="hidden" onchange="document.getElementById('geojson-upload').files = this.files; document.getElementById('geojson-upload').dispatchEvent(new Event('change'));">
+                        <label for="map-geojson-upload" class="flex items-center justify-center gap-2 w-full py-2 bg-[#FFFFFF] text-[#0B5F8D] rounded shadow-sm font-bold hover:bg-[#F3F6F9] transition-colors cursor-pointer text-xs border border-[#E6EDF3]">
+                            <i data-lucide="plus-circle" class="h-4 w-4"></i> Añadir .geojson
+                        </label>
+                    </div>
+
+                    <!-- Bloque 2: División Territorial -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i data-lucide="map" class="h-4 w-4"></i> División Territorial
                         </h4>
-                        <div class="space-y-3" id="grupo-division-territorial">
-                            <!-- CHECKBOX LIMITE TERRITORIAL MARCADO POR DEFECTO -->
-                            <label class="flex items-center gap-3 cursor-pointer group relative">
-                                <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer" checked>
-                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-municipios" checked class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial</span>
                             </label>
-                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                            <label class="flex items-center gap-3 cursor-pointer group">
                                 <input type="checkbox" id="cb-cgm" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Centros de Gestión Municipal (CGM)</span>
                             </label>
-                            <label class="flex items-center gap-3 cursor-pointer group relative">
-                                <input type="checkbox" id="cb-barrios" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
-                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Barrios Lomas de Zamora</span>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-localidades" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Localidades</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-barrios-populares" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Barrios Populares</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-circuitos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Circuitos Electorales</span>
                             </label>
                         </div>
                     </div>
 
-                    <!-- BLOQUE 2: TAREAS PREVENTIVAS -->
+                    <!-- Bloque 3: Demografía y Zonificación -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
-                            <i data-lucide="shield-alert" class="h-4 w-4"></i> Tareas Preventivas
+                            <i data-lucide="pie-chart" class="h-4 w-4"></i> Demografía y Zonificación
                         </h4>
-                        <div class="space-y-3" id="grupo-tareas-preventivas">
-                            <label class="flex items-center gap-3 cursor-pointer group relative">
-                                <input type="checkbox" id="cb-tareas-preventivas" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
-                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Alertas y Reclamos</span>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-densidad" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Densidad Poblacional</span>
                             </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-pobreza" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Pobreza Crónica / Extrema</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-inundables" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Zonas Inundables</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-parques" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Parques Industriales</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-jubilaciones" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Jubilaciones/Pensiones</span>
+                            </label>
+                        </div>
+                    </div>
 
-                            <!-- Contenedor de Filtros Dinámicos -->
-                            <div id="filtros-tareas" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
-                                <div class="flex flex-col">
-                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
-                                    <select id="filtro-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
-                                        <option value="ALL">Todos los CGM</option>
-                                    </select>
-                                </div>
-                                <div class="flex flex-col">
-                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Tipo</label>
-                                    <select id="filtro-tipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
-                                        <option value="ALL">Todos los Tipos</option>
-                                    </select>
-                                </div>
-                                <div class="flex flex-col">
-                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Sub Tipo</label>
-                                    <select id="filtro-subtipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
-                                        <option value="ALL">Todos los Sub Tipos</option>
-                                    </select>
-                                </div>
-                                <div class="flex flex-col">
-                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
-                                    <select id="filtro-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
-                                        <option value="ALL">Todas las Fechas</option>
-                                    </select>
-                                </div>
-                            </div>
+                    <!-- Bloque 4: Instituciones (DINÁMICO CON FETCH) -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[var(--bg-main)] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns text-[var(--acento)] text-lg"></i> Instituciones
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-centro-jubilados" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Centros de Jubilados</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-centros-culturales" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Centros Culturales</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-centros-sanitarios" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Centros de Atención Sanitaria</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-clubes-deportivos" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Clubes Deportivos</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-comedores" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Comedores</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-establecimientos-educativos" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Establecimientos Educativos</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-iglesias" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Iglesias</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-soc-fomento" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Sociedades de Fomento</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 5: Salud Pública -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i data-lucide="stethoscope" class="h-4 w-4"></i> Salud Pública
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-uso-salud" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Uso Salud</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-uso-salud-interdistrital" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Uso Salud Interdistrital (Comparativa)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 6: Política y Electoral -->
+                    <div class="border-t border-[#E6EDF3] pt-4 pb-2">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i data-lucide="flag" class="h-4 w-4"></i> Política
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-pj" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Sedes PJ</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-resultados-25" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Resultados 2025 (Circuitos)</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-resultados-23" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Resultados 2023 (Circuitos)</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-resultados-21" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Resultados 2021 (Circuitos)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 7: Obras Públicas -->
+                    <div class="border-t border-[#E6EDF3] pt-4 pb-2">
+                        <h4 class="text-xs font-extrabold text-[var(--bg-main)] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-helmet-safety text-[var(--acento)] text-lg"></i> Obras Públicas
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-pavimentacion-concreto" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Pavimentación en Concreto</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-bacheo-concreto" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Bacheo en Concreto</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-bacheo-frio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Bacheo en Frío</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-bacheo-2024" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Bacheo 2024</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-bacheo-2025" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Bacheo 2025</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-bacheo-2026" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Bacheo 2026</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 8: Seguridad -->
+                    <div class="border-t border-[#E6EDF3] pt-4 pb-2">
+                        <h4 class="text-xs font-extrabold text-[var(--bg-main)] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-[var(--acento)] text-lg"></i> Seguridad
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-camaras" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Cámaras de Seguridad</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-patrullajes" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Zonas de Patrullaje</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-paradas" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Paradas Seguras</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-movil-recorrido" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Recorridos Móvil Avenida</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-movil-puntos" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Puntos Móvil Avenida</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-modulos" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Módulos Policiales</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-lpr" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Cámaras LPR</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-alarmas" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Alarmas Comunitarias</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 9: Educación -->
+                    <div class="border-t border-[#E6EDF3] pt-4 pb-2">
+                        <h4 class="text-xs font-extrabold text-[var(--bg-main)] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-[var(--acento)] text-lg"></i> Educación
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-escolaridad" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Nivel de Escolaridad (Radios)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 10: Espacios Públicos -->
+                    <div class="border-t border-[#E6EDF3] pt-4 pb-2">
+                        <h4 class="text-xs font-extrabold text-[var(--bg-main)] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-tree text-[var(--acento)] text-lg"></i> Espacios Públicos
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-plazas" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Plazas y Parques</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-parques-municipales" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Parques Municipales</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-potreros" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Potreros de la Comunidad</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-bicisendas" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Red de Bicisendas</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bloque 11: Servicios Públicos -->
+                    <div class="border-t border-[#E6EDF3] pt-4 pb-2">
+                        <h4 class="text-xs font-extrabold text-[var(--bg-main)] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-broom text-[var(--acento)] text-lg"></i> Servicios Públicos
+                        </h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group">
+                                <input type="checkbox" id="cb-barrido-covelia" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Zonificación Barrido Covelia</span>
+                            </label>
                         </div>
                     </div>
 
@@ -212,6 +468,10 @@
         </div>
     </div>
 
+    <div class="text-center mt-auto mb-6 text-[#64748B] text-sm font-medium">
+        Sistema de Información Territorial v5.0 (Visualizador Geoespacial)
+    </div>
+
     <!-- Scripts de Lógica e Inicialización del Mapa -->
     <script>
         // Inicializar Iconos Lucide
@@ -219,46 +479,155 @@
 
         // Variables Globales del Mapa y Estado
         let map;
-        let mapBounds = null;
+        let layerMunicipios, layerCGM, layerLocalidades, layerBarriosPopulares, layerPj, layerResultados25, layerResultados23, layerResultados21, layerZonasInundables, layerDensidad, layerCircuitos, layerParques, layerPobreza, layerUsoSalud, layerJubilaciones;
+        let layerUsoSaludInterdistrital;
+        let layerPavimentacionConcreto, layerBacheoConcreto, layerBacheoFrio, layerBacheo2024, layerBacheo2025, layerBacheo2026, layerCamaras, layerZonasPatrullajes, layerParadasSeguras, layerMovilRecorrido, layerMovilPuntos, layerModulosPoliciales, layerLPR, layerAlarmas;
+        
+        // INSTITUCIONES
+        let layerCentroJubilados, layerCentrosCulturales, layerCentrosSanitarios, layerClubesDeportivos, layerComedores, layerEstablecimientosEducativos, layerIglesias, layerSocFomento;
+        
+        let layerEscolaridad;
+        let layerPlazas, layerPotreros, layerBicisendas, layerParquesMunicipales;
+        let layerBarridoCovelia;
+        let isMapInitialized = false;
+        let mapBounds = null; // Variable para controlar el encuadre automático del mapa
 
-        // Capa para Tareas Preventivas (CSV)
-        let layerTareasPreventivas;
-        window.sgrData = [];
-        let sgrLoaded = false;
+        window.savedGeoJSONData = window.savedGeoJSONData || [];
 
-        // Icono Especial para Tareas Preventivas
+        /* ICONOGRAFÍA SVG MINIMALISTA PARA MARCADORES (LUCIDE BASE) */
         const svgIconos = {
-            preventiva: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
+            factory: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/></svg>`,
+            pj: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></svg>`,
+            camara: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
+            teatros: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+            fomento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+            iglesias: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M7 8h10"/></svg>`,
+            fundaciones: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+            comedores: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>`,
+            deportes: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+            madres: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
+            cultural: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
+            jubilados: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+            mutuales: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
+            potreros: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 12 16 10 12 6 8 10 12 12z"/><path d="M12 12v5"/><path d="M16 10l4.5 2.5"/><path d="M8 10 3.5 12.5"/><path d="M12 17l-4.5 2.5"/><path d="M12 17l4.5 2.5"/></svg>`,
+            alarma: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
+            lpr: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>`,
+            modulos: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+            car: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a2 2 0 0 0-1.6-.8H8.3a2 2 0 0 0-1.6.8L4 11l-5.16.86a1 1 0 0 0-.84.99V16h3"/><circle cx="6.5" cy="16.5" r="2.5"/><circle cx="16.5" cy="16.5" r="2.5"/></svg>`,
+            parada: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+            educacion: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+            plazas: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="m8 14-2.5-2.5a3.5 3.5 0 0 1 5-5 5 5 0 0 1 7 5 3.5 3.5 0 0 1-2.5 2.5Z"/></svg>`,
+            parqueMunicipal: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 7l3-4 3 4"/><path d="M5 13l7-8 7 8"/><path d="M3 19l9-10 9 10"/></svg>`,
+            hospital: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 21h18"/><path d="M8 21v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6"/><path d="M12 7v4"/><path d="M10 9h4"/></svg>`
         };
 
-        // DICCIONARIO CENTRAL DE CAPAS GEOJSON
-        const CONFIG_CAPAS = {
-            'cb-municipio': { 
-                url: './municipios_Lomas%20de%20Zamora.geojson', 
-                type: 'basic', 
-                style: { color: '#0B5F8D', weight: 4, fillOpacity: 0.05, dashArray: '5,5' } 
-            },
-            'cb-cgm': { 
-                url: './CGM.geojson', 
-                type: 'basic', 
-                style: { color: '#4AB5E0', weight: 2, fillOpacity: 0.15 } 
-            },
-            'cb-barrios': { 
-                url: './barrios_Lomas%20de%20Zamora.geojson', 
-                type: 'basic', 
-                style: { color: '#0B5F8D', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
+        /* Colores adaptados a la paleta monocromática de azules */
+        const estilosCapas = {
+            municipios: { color: '#0B5F8D', weight: 3, fillOpacity: 0.05, dashArray: '5,5' },
+            cgm: { color: '#4AB5E0', weight: 2, fillOpacity: 0.15 },
+            circuitos: { color: '#0B5F8D', weight: 2, fillOpacity: 0.1, dashArray: '4,4' },
+            localidades: { color: '#084A6F', weight: 2, fillOpacity: 0.1 },
+            barriosPopulares: { color: '#0B5F8D', weight: 2, fillOpacity: 0.2, dashArray: '4,4' },
+            zonasInundables: { color: '#EAF1F7', weight: 1, fillOpacity: 0.5 }, 
+            
+            pj: { tipo: 'punto', svg: svgIconos.pj, color: '#003B5C' }, 
+            parques: { tipo: 'punto', svg: svgIconos.factory, color: '#0B5F8D' },
+            
+            // Obras Públicas
+            pavimentacionConcreto: { color: '#D34872', weight: 4, opacity: 0.9 }, // Magenta
+            bacheoConcreto: { color: '#FFFFFF', radius: 5, fillColor: '#19567C', weight: 1.5, fillOpacity: 0.9 }, // Azul Inst
+            bacheoFrio: { color: '#FFFFFF', radius: 5, fillColor: '#4AB5E0', weight: 1.5, fillOpacity: 0.9 }, // Acento Celeste
+            bacheo2024: { color: '#FFFFFF', radius: 5, fillColor: '#64748B', weight: 1.5, fillOpacity: 0.9 }, // Gris Pizarra
+            bacheo2025: { color: '#FFFFFF', radius: 5, fillColor: '#2A7FA8', weight: 1.5, fillOpacity: 0.9 }, // Azul Medio
+            bacheo2026: { color: '#FFFFFF', radius: 5, fillColor: '#D34872', weight: 1.5, fillOpacity: 0.9 }, // Magenta
+            
+            // Espacios Públicos
+            potreros: { tipo: 'punto', svg: svgIconos.potreros, color: '#4AB5E0' }, // Acento Celeste
+            plazas: { tipo: 'punto', svg: svgIconos.plazas, color: '#19567C' }, // Azul Inst
+            parquesMunicipales: { tipo: 'punto', svg: svgIconos.parqueMunicipal, color: '#D34872' }, // Magenta (Contraste)
+            bicisendas: { color: '#4AB5E0', weight: 4, opacity: 0.9 }, // Línea gruesa de acento
+            
+            // Seguridad
+            camaras: { tipo: 'punto', svg: svgIconos.camara, color: '#D34872' }, // Magenta
+            zonasPatrullajes: { color: '#4AB5E0', weight: 2, fillOpacity: 0.1, dashArray: '5,5' }, // Acento (Polígonos)
+            paradasSeguras: { tipo: 'punto', svg: svgIconos.parada, color: '#19567C' }, // Azul Inst
+            movilRecorrido: { color: '#D34872', weight: 3, opacity: 0.8 }, // Magenta (Líneas)
+            movilPuntos: { tipo: 'punto', svg: svgIconos.car, color: '#19567C' }, // Azul Inst
+            modulosPoliciales: { tipo: 'punto', svg: svgIconos.modulos, color: '#0B5F8D' }, // Azul Intermedio
+            lpr: { tipo: 'punto', svg: svgIconos.lpr, color: '#4AB5E0' }, // Acento
+            alarmas: { tipo: 'punto', svg: svgIconos.alarma, color: '#19567C' }, // Azul Inst
+            
+            // Instituciones
+            centroJubilados: { tipo: 'punto', svg: svgIconos.jubilados, color: '#6BA1C7' },
+            centrosCulturales: { tipo: 'punto', svg: svgIconos.cultural, color: '#0B5F8D' },
+            centrosSanitarios: { tipo: 'punto', svg: svgIconos.hospital, color: '#D34872' },
+            clubesDeportivos: { tipo: 'punto', svg: svgIconos.deportes, color: '#4AB5E0' },
+            comedores: { tipo: 'punto', svg: svgIconos.comedores, color: '#2A7FA8' },
+            establecimientosEducativos: { tipo: 'punto', svg: svgIconos.educacion, color: '#084A6F' },
+            iglesias: { tipo: 'punto', svg: svgIconos.iglesias, color: '#19567C' },
+            socFomento: { tipo: 'punto', svg: svgIconos.fomento, color: '#4AB5E0' },
+            
+            // Servicios Públicos
+            barridoCovelia: { color: '#19567C', weight: 3, fillColor: '#4AB5E0', fillOpacity: 0.25, dashArray: '4,4' }
+        };
+
+        // Exportación dedicada de la vista mapa
+        function exportarHTML() {
+            if (window.savedGeoJSONData.length === 0) {
+                alert("Aviso: No has cargado datos en el mapa. El archivo se exportará de todas formas.");
             }
-        };
 
-        const layerInstances = {};
+            const clone = document.documentElement.cloneNode(true);
+            
+            const btnExportar = clone.querySelector('#btn-exportar');
+            if(btnExportar) btnExportar.remove();
+            
+            const btnCargarLabel = clone.querySelector('#btn-cargar-label');
+            if(btnCargarLabel) btnCargarLabel.remove();
+            
+            const inputUpload = clone.querySelector('#geojson-upload');
+            if(inputUpload) inputUpload.remove();
 
-        // Función base para sanear geometrías GeoJSON mal formadas
+            const panelCargaLateral = clone.querySelector('#panel-carga-lateral');
+            if(panelCargaLateral) panelCargaLateral.remove();
+
+            // Limpiar el contenedor del mapa para re-inicialización
+            const mapDiv = clone.querySelector('#map');
+            if(mapDiv) {
+                mapDiv.innerHTML = '';
+                mapDiv.className = 'w-full flex-1 rounded-lg min-h-[500px]';
+                mapDiv.removeAttribute('tabindex'); 
+            }
+
+            if (window.savedGeoJSONData.length > 0) {
+                const scriptData = document.createElement('script');
+                scriptData.textContent = `window.INJECTED_GEOJSON = ${JSON.stringify(window.savedGeoJSONData).replace(/<\/script>/gi, '<\\/script>')};`;
+                clone.querySelector('body').appendChild(scriptData);
+            }
+
+            const htmlContent = "<!DOCTYPE html>\n<html lang=\"es\">\n" + clone.innerHTML + "\n</html>";
+            
+            const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const enlaceDescarga = document.createElement('a');
+            enlaceDescarga.href = url;
+            
+            enlaceDescarga.download = `Mapa_Analisis_Territorial_Interactivo.html`;
+            
+            document.body.appendChild(enlaceDescarga);
+            enlaceDescarga.click();
+            document.body.removeChild(enlaceDescarga);
+            URL.revokeObjectURL(url);
+        }
+
+        // Sanear geometrías GeoJSON mal formadas
         function sanearGeoJSON(data) {
             if (!data || !data.features || !Array.isArray(data.features)) return data;
             
             data.features.forEach(feature => {
                 if (feature && feature.geometry && feature.geometry.coordinates) {
                     let coords = feature.geometry.coordinates;
+                    
                     if (Array.isArray(coords) && coords.length === 2 && typeof coords[0] === 'string' && typeof coords[1] === 'string' && !coords[0].includes(',')) {
                         let lng = parseFloat(coords[0]);
                         let lat = parseFloat(coords[1]);
@@ -283,6 +652,7 @@
                                 }
                             }
                         }
+
                         if (nuevasCoordenadas.length === 0) {
                             feature.geometry.coordinates = null;
                         } else if (feature.geometry.type === "Point") {
@@ -294,11 +664,11 @@
                     }
                 }
             });
+            
             data.features = data.features.filter(feature => feature && feature.geometry && feature.geometry.coordinates);
             return data;
         }
 
-        // Función para encuadrar el mapa cuando se carga una capa nueva
         function actualizarLimitesMapa(layer) {
             if (!map) return;
             try {
@@ -316,14 +686,249 @@
             }
         }
 
-        // Motor Genérico de Renderizado
-        function renderizarCapaGenerica(data, layerGroup, styleOptions) {
+        function agregarGeoJSONCluster(data, clusterGroup, styleOptions) {
+            if (!isMapInitialized || !clusterGroup) return;
             data = sanearGeoJSON(data);
+
+            const geoLayer = L.geoJSON(data, {
+                pointToLayer: function (feature, latlng) {
+                    const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${styleOptions.color}; width: 14px; height: 14px; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);"></div></div>`;
+                    const customIcon = L.divIcon({
+                        html: iconHtml,
+                        className: 'custom-div-icon',
+                        iconSize: [20, 20],
+                        iconAnchor: [10, 10]
+                    });
+                    return L.marker(latlng, { icon: customIcon });
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let popupHtml = `<div class="font-sans min-w-[200px]">
+                                            <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Afiliado / Afiliada</h4>
+                                            <ul class="text-xs text-[#64748B] space-y-1">`;
+                        for (let key in props) {
+                            if (props[key] !== null && key !== 'Municipio' && key !== 'Distrito') {
+                                popupHtml += `<li><b class="capitalize">${key}:</b> ${props[key]}</li>`;
+                            }
+                        }
+                        popupHtml += `</ul></div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            
+            clusterGroup.addLayer(geoLayer);
+            actualizarLimitesMapa(clusterGroup);
+        }
+
+        function agregarGeoJSONResultados25(data, layerGroup) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let color = '#64748B'; 
+                    if (feature.properties) {
+                        let ganador = feature.properties.partido_ganador;
+                        if (ganador && ganador.toUpperCase() === 'ALIANZA LA LIBERTAD AVANZA') color = '#743BBC';
+                        else if (ganador && ganador.toUpperCase() === 'ALIANZA FUERZA PATRIA') color = '#31B8F0'; 
+                    }
+                    return { fillColor: color, weight: 2, opacity: 1, color: '#ffffff', fillOpacity: 0.7 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let circuito = props._circuito_key || 'N/A';
+                        let votosFP = props['ALIANZA FUERZA PATRIA'] || props['FUERZA PATRIA'] || 0;
+                        let votosLLA = props['ALIANZA LA LIBERTAD AVANZA'] || props['LA LIBERTAD AVANZA'] || 0;
+                        let ganador = props['partido_ganador'] || 'Empate / Sin datos';
+                        
+                        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#64748B]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+
+                        let tooltipHtml = `
+                            <div class="font-sans min-w-[180px]">
+                                <h4 class="font-bold text-[#0F172A] border-b border-[#E6EDF3] pb-1.5 mb-2 uppercase text-[11px] tracking-wider flex items-center justify-between">
+                                    <span>Circuito ${circuito}</span> ${checkIcon}
+                                </h4>
+                                <div class="space-y-1.5">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold" style="color: #31B8F0;">Fuerza Patria:</span>
+                                        <span class="font-bold text-[#0F172A]">${votosFP.toLocaleString('es-AR')}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold" style="color: #743BBC;">La Lib. Avanza:</span>
+                                        <span class="font-bold text-[#0F172A]">${votosLLA.toLocaleString('es-AR')}</span>
+                                    </div>
+                                    <div class="mt-2 pt-2 border-t border-[#E6EDF3] text-[10px] text-[#64748B] text-center uppercase tracking-wide">
+                                        Ganador: <br><strong class="text-[#0F172A]">${ganador}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        layer.bindTooltip(tooltipHtml, { sticky: true, className: 'tooltip-resultados-2025', direction: 'auto', opacity: 1 });
+                        layer.unbindPopup();
+                        layer.on({
+                            mouseover: function (e) {
+                                var l = e.target;
+                                l.setStyle({ weight: 3, color: '#0F172A', fillOpacity: 0.9 });
+                                if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) { l.bringToFront(); }
+                            },
+                            mouseout: function (e) { geoLayer.resetStyle(e.target); },
+                            click: function (e) { L.DomEvent.stopPropagation(e); }
+                        });
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function agregarGeoJSONResultados23(data, layerGroup) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let color = '#64748B'; 
+                    if (feature.properties) {
+                        let ganador = feature.properties.partido_ganador;
+                        if (ganador && ganador.toUpperCase() === 'LA LIBERTAD AVANZA') color = '#8B5CF6';
+                        else if (ganador && ganador.toUpperCase() === 'JUNTOS POR EL CAMBIO') color = '#F7C948';
+                        else if (ganador && ganador.toUpperCase() === 'UNION POR LA PATRIA') color = '#31B8F0';
+                    }
+                    return { fillColor: color, weight: 2, opacity: 1, color: '#ffffff', fillOpacity: 0.7 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let circuito = props._circuito_key || 'N/A';
+                        let votosUP = props['UNION POR LA PATRIA'] || 0;
+                        let votosJxC = props['JUNTOS POR EL CAMBIO'] || 0;
+                        let votosLLA = props['LA LIBERTAD AVANZA'] || 0;
+                        let ganador = props['partido_ganador'] || 'Empate / Sin datos';
+                        
+                        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#64748B]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+
+                        let tooltipHtml = `
+                            <div class="font-sans min-w-[180px]">
+                                <h4 class="font-bold text-[#0F172A] border-b border-[#E6EDF3] pb-1.5 mb-2 uppercase text-[11px] tracking-wider flex items-center justify-between">
+                                    <span>Circuito ${circuito}</span> ${checkIcon}
+                                </h4>
+                                <div class="space-y-1.5">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold" style="color: #31B8F0;">Unión por la Patria:</span>
+                                        <span class="font-bold text-[#0F172A]">${votosUP.toLocaleString('es-AR')}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold" style="color: #F7C948;">Juntos por el Cambio:</span>
+                                        <span class="font-bold text-[#0F172A]">${votosJxC.toLocaleString('es-AR')}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold" style="color: #8B5CF6;">La Lib. Avanza:</span>
+                                        <span class="font-bold text-[#0F172A]">${votosLLA.toLocaleString('es-AR')}</span>
+                                    </div>
+                                    <div class="mt-2 pt-2 border-t border-[#E6EDF3] text-[10px] text-[#64748B] text-center uppercase tracking-wide">
+                                        Ganador: <br><strong class="text-[#0F172A]">${ganador}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        layer.bindTooltip(tooltipHtml, { sticky: true, className: 'tooltip-resultados-2025', direction: 'auto', opacity: 1 });
+                        layer.unbindPopup();
+                        layer.on({
+                            mouseover: function (e) {
+                                var l = e.target;
+                                l.setStyle({ weight: 3, color: '#0F172A', fillOpacity: 0.9 });
+                                if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) { l.bringToFront(); }
+                            },
+                            mouseout: function (e) { geoLayer.resetStyle(e.target); },
+                            click: function (e) { L.DomEvent.stopPropagation(e); }
+                        });
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function agregarGeoJSONResultados21(data, layerGroup) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let color = '#64748B'; 
+                    if (feature.properties) {
+                        let ganador = feature.properties.partido_ganador;
+                        if (ganador && ganador.toUpperCase() === 'AVANZA LIBERTAD') color = '#8B5CF6';
+                        else if (ganador && ganador.toUpperCase() === 'JUNTOS') color = '#F7C948';
+                        else if (ganador && ganador.toUpperCase() === 'FRENTE DE TODOS') color = '#31B8F0';
+                    }
+                    return { fillColor: color, weight: 2, opacity: 1, color: '#ffffff', fillOpacity: 0.7 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let circuito = props._circuito_key || 'N/A';
+                        let votosFDT = props['FRENTE DE TODOS'] || 0;
+                        let votosJuntos = props['JUNTOS'] || 0;
+                        let votosAL = props['AVANZA LIBERTAD'] || 0;
+                        let ganador = props['partido_ganador'] || 'Empate / Sin datos';
+                        
+                        const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#64748B]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+
+                        let tooltipHtml = `
+                            <div class="font-sans min-w-[180px]">
+                                <h4 class="font-bold text-[#0F172A] border-b border-[#E6EDF3] pb-1.5 mb-2 uppercase text-[11px] tracking-wider flex items-center justify-between">
+                                    <span>Circuito ${circuito}</span> ${checkIcon}
+                                </h4>
+                                <div class="space-y-1.5">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold" style="color: #31B8F0;">Frente de Todos:</span>
+                                        <span class="font-bold text-[#0F172A]">${votosFDT.toLocaleString('es-AR')}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold" style="color: #F7C948;">Juntos:</span>
+                                        <span class="font-bold text-[#0F172A]">${votosJuntos.toLocaleString('es-AR')}</span>
+                                    </div>
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold" style="color: #8B5CF6;">Avanza Libertad:</span>
+                                        <span class="font-bold text-[#0F172A]">${votosAL.toLocaleString('es-AR')}</span>
+                                    </div>
+                                    <div class="mt-2 pt-2 border-t border-[#E6EDF3] text-[10px] text-[#64748B] text-center uppercase tracking-wide">
+                                        Ganador: <br><strong class="text-[#0F172A]">${ganador}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        layer.bindTooltip(tooltipHtml, { sticky: true, className: 'tooltip-resultados-2025', direction: 'auto', opacity: 1 });
+                        layer.unbindPopup();
+                        layer.on({
+                            mouseover: function (e) {
+                                var l = e.target;
+                                l.setStyle({ weight: 3, color: '#0F172A', fillOpacity: 0.9 });
+                                if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) { l.bringToFront(); }
+                            },
+                            mouseout: function (e) { geoLayer.resetStyle(e.target); },
+                            click: function (e) { L.DomEvent.stopPropagation(e); }
+                        });
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function agregarGeoJSONAlMapa(data, layerGroup, styleOptions) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
+
             const geoLayer = L.geoJSON(data, {
                 style: styleOptions,
                 pointToLayer: function (feature, latlng) {
-                    if (styleOptions && styleOptions.tipo === 'punto' && styleOptions.svg) {
-                        const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${styleOptions.color || '#0B5F8D'};">${styleOptions.svg}</div></div>`;
+                    if (styleOptions && styleOptions.tipo === 'punto') {
+                        const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${styleOptions.color};">${styleOptions.svg}</div></div>`;
                         const customIcon = L.divIcon({
                             html: iconHtml,
                             className: 'custom-div-icon',
@@ -332,6 +937,7 @@
                         });
                         return L.marker(latlng, { icon: customIcon });
                     } else {
+                        // Renderizado dinámico para múltiples tipos de puntos
                         let radius = styleOptions && styleOptions.radius ? styleOptions.radius : 6;
                         let fillColor = styleOptions && styleOptions.fillColor ? styleOptions.fillColor : "#0B5F8D";
                         let color = styleOptions && styleOptions.color ? styleOptions.color : "#FFFFFF";
@@ -342,12 +948,80 @@
                 onEachFeature: function (feature, layer) {
                     if (feature.properties) {
                         let props = feature.properties;
-                        let nombreStr = props.NOMBRE || props.NAME || props.Name || props.nombre || props.name || "Elemento";
+                        if(props.partido_ganador) return;
+
+                        let nombreStr = props.Zona ? "Zona " + props.Zona : props['Nombre Ins'] || props.CALLE || props.PLAZA || props.NOMBRE || props.NAME || props.Name || props.Municipio || props.cabecera || props.nombre || props.name || props.Potrero || props.CGM || "Punto de Interés";
                         
+                        if (styleOptions && styleOptions.tipo === 'punto') {
+                            layer.bindTooltip(nombreStr, { direction: 'top', offset: [0, -10], className: 'custom-map-tooltip' });
+                        }
+
                         let popupHtml = `<div class="font-sans min-w-[200px]"><h4 class="font-bold text-[var(--bg-main)] border-b border-[#E6EDF3] pb-1 mb-2">${nombreStr}</h4><ul class="text-xs text-[#64748B] space-y-1">`;
-                        const keysToIgnore = ['NOMBRE', 'NAME', 'Name', 'nombre', 'name'];
+                        
+                        const keysToIgnore = ['Zona', 'Nombre Ins', 'CALLE', 'PLAZA', 'NOMBRE', 'NAME', 'Name', 'nombre', 'name', 'Municipio', 'CGM', 'Potrero', 'timestamp', 'begin', 'end', 'altitudeMode', 'tessellate', 'extrude', 'visibility', 'drawOrder', 'icon', 'descripci__n'];
+                        
                         for (let key in props) {
                             if (!keysToIgnore.includes(key) && props[key] !== null && props[key] !== "") {
+                                popupHtml += `<li><b class="capitalize">${key.replace(/_/g, ' ')}:</b> ${props[key]}</li>`;
+                            }
+                        }
+                        popupHtml += `</ul></div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function agregarGeoJSONCoropleta(data, layerGroup) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
+
+            let propName = null;
+            if (data.features.length > 0) {
+                let props = data.features[0].properties;
+                if (props['Habitantes'] !== undefined) propName = 'Habitantes';
+                else if (props['habitantes'] !== undefined) propName = 'habitantes';
+                else {
+                    let candidateKeys = Object.keys(props).filter(k => k.toLowerCase().includes('habitante') || k.toLowerCase().includes('pobla') || k.toLowerCase().includes('pop') || k.toLowerCase() === 'total');
+                    if (candidateKeys.length > 0) propName = candidateKeys[0];
+                }
+            }
+
+            let maxVal = 0;
+            if (propName) {
+                data.features.forEach(f => {
+                    let val = f.properties[propName];
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    if (val > maxVal) maxVal = val;
+                });
+            }
+
+            function getColor(d) {
+                if(!maxVal || d === undefined) return '#F3F6F9'; 
+                return d > maxVal * 0.8 ? '#084A6F' : d > maxVal * 0.6 ? '#0B5F8D' : d > maxVal * 0.4 ? '#2A7FA8' : d > maxVal * 0.2 ? '#6BA1C7' : '#D1E1F0';  
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = 0;
+                    if (propName) {
+                        val = feature.properties[propName];
+                        if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    }
+                    return { fillColor: getColor(val), weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let nombreStr = props.NOMBRE || props.NAME || props.Municipio || props.cabecera || props.name || "Geometría";
+                        let valStr = propName && props[propName] ? Number(props[propName]).toLocaleString('es-AR') : "Sin datos";
+                        
+                        let popupHtml = `<div class="font-sans min-w-[200px]"><h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${nombreStr}</h4><div class="bg-[#EAF1F7] p-2 rounded-md mb-2 border border-[#D1E1F0]"><p class="text-xs font-bold text-[#64748B] uppercase">Habitantes</p><p class="text-xl font-extrabold text-[#0B5F8D]">${valStr}</p></div><ul class="text-xs text-[#64748B] space-y-1">`;
+                        for (let key in props) {
+                            if (key !== 'NOMBRE' && key !== 'NAME' && key !== 'Municipio' && key !== propName && props[key] !== null) {
                                 popupHtml += `<li><b class="capitalize">${key.replace(/_/g, ' ')}:</b> ${props[key]}</li>`;
                             }
                         }
@@ -360,157 +1034,308 @@
             actualizarLimitesMapa(geoLayer);
         }
 
-        /* -----------------------------------------------------------
-           LÓGICA ESPECÍFICA PARA TAREAS PREVENTIVAS (sgr.csv)
-        ------------------------------------------------------------- */
-        
-        function cargarTareasPreventivas() {
-            const cb = document.getElementById('cb-tareas-preventivas');
-            const label = cb.closest('label');
-            label.classList.add('layer-loading');
+        function agregarGeoJSONInundables(data, layerGroup) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
 
-            fetch('./sgr.csv')
-                .then(response => {
-                    if (!response.ok) throw new Error("Archivo sgr.csv no encontrado.");
-                    return response.text();
-                })
-                .then(csvText => {
-                    // Limpieza de caracteres BOM (Byte Order Mark) que corrompen el header en CSV exportados
-                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
-                    
-                    Papa.parse(cleanCsvText, {
-                        header: true,
-                        delimiter: ';',
-                        skipEmptyLines: true,
-                        complete: function(results) {
-                            window.sgrData = results.data;
-                            sgrLoaded = true;
-                            document.getElementById('filtros-tareas').classList.remove('hidden');
-                            poblarFiltrosTareas();
-                            filtrarYRenderizarTareas();
-                            label.classList.remove('layer-loading');
-                        }
-                    });
-                })
-                .catch(err => {
-                    console.error("Error al cargar Tareas Preventivas:", err);
-                    alert("Error al cargar sgr.csv. Verifica que el archivo exista en el mismo directorio.");
-                    cb.checked = false;
-                    label.classList.remove('layer-loading');
-                });
-        }
-
-        function poblarFiltrosTareas() {
-            const cgms = new Set();
-            const tipos = new Set();
-            const subtipos = new Set();
-            const fechas = new Set();
-
-            window.sgrData.forEach(row => {
-                if (row.Zonificacion_CAV) cgms.add(row.Zonificacion_CAV.trim());
-                if (row.Tipo) tipos.add(row.Tipo.trim());
-                if (row['Sub Tipo']) subtipos.add(row['Sub Tipo'].trim());
-                if (row.Fecha) fechas.add(row.Fecha.trim());
-            });
-
-            const poblarSelect = (id, setValores) => {
-                const select = document.getElementById(id);
-                select.innerHTML = select.options[0].outerHTML; 
-                Array.from(setValores).sort().forEach(val => {
-                    if (val === '') return;
-                    const opt = document.createElement('option');
-                    opt.value = val;
-                    opt.textContent = val;
-                    select.appendChild(opt);
-                });
-            };
-
-            poblarSelect('filtro-cgm', cgms);
-            poblarSelect('filtro-tipo', tipos);
-            poblarSelect('filtro-subtipo', subtipos);
-
-            // Ordenar Fechas (DD/MM/YYYY) de manera descendente
-            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => {
-                const [d1, m1, y1] = a.split('/');
-                const [d2, m2, y2] = b.split('/');
-                return new Date(y2, m2-1, d2) - new Date(y1, m1-1, d1);
-            });
-            
-            const selectFecha = document.getElementById('filtro-fecha');
-            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
-            arrayFechas.forEach(val => {
-                const opt = document.createElement('option');
-                opt.value = val;
-                opt.textContent = val;
-                selectFecha.appendChild(opt);
-            });
-        }
-
-        function filtrarYRenderizarTareas() {
-            layerTareasPreventivas.clearLayers();
-            
-            const fCgm = document.getElementById('filtro-cgm').value;
-            const fTipo = document.getElementById('filtro-tipo').value;
-            const fSubtipo = document.getElementById('filtro-subtipo').value;
-            const fFecha = document.getElementById('filtro-fecha').value;
-
-            const latLngs = [];
-
-            window.sgrData.forEach(row => {
-                const cgm = (row.Zonificacion_CAV || '').trim();
-                const tipo = (row.Tipo || '').trim();
-                const subtipo = (row['Sub Tipo'] || '').trim();
-                const fecha = (row.Fecha || '').trim();
-
-                // Evaluar todos los filtros
-                if (fCgm !== 'ALL' && cgm !== fCgm) return;
-                if (fTipo !== 'ALL' && tipo !== fTipo) return;
-                if (fSubtipo !== 'ALL' && subtipo !== fSubtipo) return;
-                if (fFecha !== 'ALL' && fecha !== fFecha) return;
-
-                if (!row.Latitud || !row.Longitud) return;
-
-                const lat = parseFloat(row.Latitud.replace(',', '.'));
-                const lng = parseFloat(row.Longitud.replace(',', '.'));
-
-                if (isNaN(lat) || isNaN(lng)) return;
-
-                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: #0B5F8D; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.preventiva}</div></div>`;
-                const customIcon = L.divIcon({
-                    html: iconHtml,
-                    className: 'custom-div-icon',
-                    iconSize: [24, 24], 
-                    iconAnchor: [12, 12]
-                });
-
-                const marker = L.marker([lat, lng], { icon: customIcon });
-
-                let popupHtml = `
-                    <div class="font-sans min-w-[220px]">
-                        <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${tipo}</h4>
-                        <ul class="text-xs text-[#64748B] space-y-1.5">
-                            <li><b class="text-[#0F172A]">Sub Tipo:</b> ${subtipo}</li>
-                            <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
-                            <li><b class="text-[#0F172A]">Vecino:</b> ${row.Nombre || ''} ${row.Apellido || ''}</li>
-                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
-                            <li><b class="text-[#0F172A]">Estado:</b> <span class="text-green-600 font-bold">${row.Estado || '-'}</span></li>
-                            <li><b class="text-[#0F172A]">Zonificación:</b> ${cgm || '-'}</li>
-                        </ul>
-                    </div>`;
-                
-                marker.bindPopup(popupHtml);
-                layerTareasPreventivas.addLayer(marker);
-                latLngs.push([lat, lng]);
-            });
-
-            // Ajustar el zoom automáticamente si hay puntos filtrados
-            if (latLngs.length > 0 && map.hasLayer(layerTareasPreventivas)) {
-                const zoomBounds = L.latLngBounds(latLngs);
-                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            function getColor(d) {
+                if(d === undefined || d === null) return '#F3F6F9'; 
+                return d >= 80 ? '#DC2626' : d >= 60 ? '#084A6F' : d >= 40 ? '#0B5F8D' : d >= 20 ? '#2A7FA8' : '#D1E1F0';  
             }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = feature.properties['PORCENTAJE'];
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return { fillColor: getColor(val), weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let nombreStr = props.NOMBRE || props.NAME || props.Municipio || props.cabecera || props.name || "Zona Inundable";
+                        let valStr = props['PORCENTAJE'] !== undefined ? Number(props['PORCENTAJE']).toLocaleString('es-AR') + '%' : "Sin datos";
+                        
+                        let popupHtml = `<div class="font-sans min-w-[200px]"><h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${nombreStr}</h4><div class="bg-[#FEF2F2] p-2 rounded-md mb-2 border border-[#FECACA]"><p class="text-xs font-bold text-[#DC2626] uppercase">Riesgo / Porcentaje</p><p class="text-xl font-extrabold text-[#B91C1C]">${valStr}</p></div><ul class="text-xs text-[#64748B] space-y-1">`;
+                        for (let key in props) {
+                            if (key !== 'NOMBRE' && key !== 'NAME' && key !== 'Municipio' && key !== 'PORCENTAJE' && props[key] !== null) {
+                                popupHtml += `<li><b class="capitalize">${key.replace(/_/g, ' ')}:</b> ${props[key]}</li>`;
+                            }
+                        }
+                        popupHtml += `</ul></div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
         }
 
-        // LÓGICA PRINCIPAL DE INICIALIZACIÓN
+        function agregarGeoJSONPobreza(data, layerGroup) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
+
+            function getColor(d) {
+                if(d === undefined || d === null) return '#F3F6F9';
+                return d >= 15 ? '#003B5C' : d >= 10 ? '#084A6F' : d >= 5  ? '#0B5F8D' : d >= 2  ? '#2A7FA8' : d > 0   ? '#6BA1C7' : '#EAF1F7';
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = feature.properties['P_PC_HOG'] || 0;
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return { fillColor: getColor(val), weight: 1, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let radioStr = props.LINK_RADIO || "S/D";
+                        let valHogares = props.PC_HOG || 0;
+                        let valPersonas = props.PC_PER || 0;
+                        let pctHogares = props.P_PC_HOG || 0;
+                        let pctPersonas = props.P_PC_PER || 0;
+                        
+                        let popupHtml = `<div class="font-sans min-w-[200px]">
+                                            <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Radio Censal: ${radioStr}</h4>
+                                            <div class="bg-[#EAF1F7] p-2 rounded-md mb-2 border border-[#D1E1F0]">
+                                                <p class="text-xs font-bold text-[#0B5F8D] uppercase">Incidencia (Hogares)</p>
+                                                <p class="text-xl font-extrabold text-[#0B5F8D]">${pctHogares}%</p>
+                                            </div>
+                                            <ul class="text-xs text-[#64748B] space-y-1">
+                                                <li><b class="capitalize">Hogares Afectados:</b> ${valHogares.toLocaleString('es-AR')}</li>
+                                                <li><b class="capitalize">Personas Afectadas:</b> ${valPersonas.toLocaleString('es-AR')}</li>
+                                                <li><b class="capitalize">Incidencia (Personas):</b> ${pctPersonas}%</li>
+                                            </ul>
+                                        </div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function agregarGeoJSONUsoSalud(data, layerGroup) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
+
+            function getColor(pct) {
+                if (pct >= 60) return '#003B5C';
+                if (pct >= 45) return '#084A6F';
+                if (pct >= 30) return '#0B5F8D';
+                if (pct >= 15) return '#2A7FA8';
+                if (pct > 0) return '#6BA1C7';
+                return '#EAF1F7';
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let p = feature.properties;
+                    let total = p['Población total'] || (p['Obra social o prepaga (incluye PAMI)'] + p['Programas o planes estatales de salud'] + p['Solo salud pública']) || 1;
+                    let publica = p['Solo salud pública'] || 0;
+                    let pct = total > 0 ? (publica / total) * 100 : 0;
+                    return { fillColor: getColor(pct), weight: 1, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let radio = props['Código de radio.'] || props['Código de radio'] || 'Radio Censal';
+                        let total = props['Población total'] || 0;
+                        let obraSocial = props['Obra social o prepaga (incluye PAMI)'] || 0;
+                        let estatal = props['Programas o planes estatales de salud'] || 0;
+                        let publica = props['Solo salud pública'] || 0;
+                        
+                        let pctObra = total > 0 ? ((obraSocial/total)*100).toFixed(1) : 0;
+                        let pctEstatal = total > 0 ? ((estatal/total)*100).toFixed(1) : 0;
+                        let pctPublica = total > 0 ? ((publica/total)*100).toFixed(1) : 0;
+
+                        let popupHtml = `<div class="font-sans min-w-[240px]">
+                                            <h4 class="font-bold text-[#0F172A] border-b border-[#E6EDF3] pb-1.5 mb-3 uppercase text-[11px] tracking-wider flex items-center gap-1.5">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#0B5F8D]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                                                Uso de Salud - Radio ${radio}
+                                            </h4>
+                                            <div class="space-y-3">
+                                                <div>
+                                                    <div class="flex justify-between items-center text-[10px] mb-1">
+                                                        <span class="font-bold text-[#0F172A] uppercase">Obra Social/Prepaga</span>
+                                                        <span class="font-bold text-[#0B5F8D]">${obraSocial.toLocaleString('es-AR')} <span class="text-[#64748B] font-medium">(${pctObra}%)</span></span>
+                                                    </div>
+                                                    <div class="w-full bg-[#EAF1F7] rounded-full h-1.5"><div class="bg-[#0B5F8D] h-1.5 rounded-full transition-all duration-500" style="width: ${pctObra}%"></div></div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex justify-between items-center text-[10px] mb-1">
+                                                        <span class="font-bold text-[#0F172A] uppercase">Planes Estatales</span>
+                                                        <span class="font-bold text-[#2A7FA8]">${estatal.toLocaleString('es-AR')} <span class="text-[#64748B] font-medium">(${pctEstatal}%)</span></span>
+                                                    </div>
+                                                    <div class="w-full bg-[#EAF1F7] rounded-full h-1.5"><div class="bg-[#2A7FA8] h-1.5 rounded-full transition-all duration-500" style="width: ${pctEstatal}%"></div></div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex justify-between items-center text-[10px] mb-1">
+                                                        <span class="font-bold text-[#0F172A] uppercase">Solo Salud Pública</span>
+                                                        <span class="font-bold text-[#6BA1C7]">${publica.toLocaleString('es-AR')} <span class="text-[#64748B] font-medium">(${pctPublica}%)</span></span>
+                                                    </div>
+                                                    <div class="w-full bg-[#EAF1F7] rounded-full h-1.5"><div class="bg-[#6BA1C7] h-1.5 rounded-full transition-all duration-500" style="width: ${pctPublica}%"></div></div>
+                                                </div>
+                                                <div class="mt-2 pt-2 border-t border-[#E6EDF3] text-right">
+                                                    <span class="text-[10px] font-bold text-[#64748B] uppercase">Población Total: ${total.toLocaleString('es-AR')}</span>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function agregarGeoJSONUsoSaludInterdistrital(data, layerGroup) {
+            if (!isMapInitialized || !layerGroup) return;
+            data = sanearGeoJSON(data);
+
+            function getColor(pct) {
+                if (pct >= 50) return '#D34872'; // Magenta
+                if (pct >= 40) return '#003B5C'; // Azul muy oscuro
+                if (pct >= 30) return '#0B5F8D'; // Azul Institucional
+                if (pct >= 20) return '#2A7FA8'; // Celeste Oscuro
+                return '#6BA1C7';                // Celeste Claro
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let p = feature.properties;
+                    let total = (p['Obra social o prepaga (incluye PAMI)'] || 0) + (p['Programas o planes estatales de salud'] || 0) + (p['Solo salud pública'] || 0) || 1;
+                    let publica = p['Solo salud pública'] || 0;
+                    let pct = (publica / total) * 100;
+                    return { fillColor: getColor(pct), weight: 2, opacity: 1, color: '#ffffff', dashArray: '4', fillOpacity: 0.8 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let partido = props['Partido'] || 'Municipio';
+                        let obraSocial = props['Obra social o prepaga (incluye PAMI)'] || 0;
+                        let estatal = props['Programas o planes estatales de salud'] || 0;
+                        let publica = props['Solo salud pública'] || 0;
+                        let total = obraSocial + estatal + publica;
+                        
+                        let pctObra = total > 0 ? ((obraSocial/total)*100).toFixed(1) : 0;
+                        let pctEstatal = total > 0 ? ((estatal/total)*100).toFixed(1) : 0;
+                        let pctPublica = total > 0 ? ((publica/total)*100).toFixed(1) : 0;
+
+                        let popupHtml = `<div class="font-sans min-w-[250px]">
+                                            <h4 class="font-bold text-[#0F172A] border-b border-[#E6EDF3] pb-1.5 mb-3 uppercase text-[12px] tracking-wider flex items-center gap-1.5">
+                                                <i class="fa-solid fa-city text-[#D34872]"></i>
+                                                Municipio: ${partido}
+                                            </h4>
+                                            <div class="space-y-3">
+                                                <div>
+                                                    <div class="flex justify-between items-center text-[10px] mb-1">
+                                                        <span class="font-bold text-[#0F172A] uppercase">Obra Social/Prepaga</span>
+                                                        <span class="font-bold text-[#0B5F8D]">${obraSocial.toLocaleString('es-AR')} <span class="text-[#64748B] font-medium">(${pctObra}%)</span></span>
+                                                    </div>
+                                                    <div class="w-full bg-[#EAF1F7] rounded-full h-1.5"><div class="bg-[#0B5F8D] h-1.5 rounded-full transition-all duration-500" style="width: ${pctObra}%"></div></div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex justify-between items-center text-[10px] mb-1">
+                                                        <span class="font-bold text-[#0F172A] uppercase">Planes Estatales</span>
+                                                        <span class="font-bold text-[#2A7FA8]">${estatal.toLocaleString('es-AR')} <span class="text-[#64748B] font-medium">(${pctEstatal}%)</span></span>
+                                                    </div>
+                                                    <div class="w-full bg-[#EAF1F7] rounded-full h-1.5"><div class="bg-[#2A7FA8] h-1.5 rounded-full transition-all duration-500" style="width: ${pctEstatal}%"></div></div>
+                                                </div>
+                                                <div>
+                                                    <div class="flex justify-between items-center text-[10px] mb-1">
+                                                        <span class="font-bold text-[#0F172A] uppercase">Solo Salud Pública</span>
+                                                        <span class="font-bold text-[#D34872]">${publica.toLocaleString('es-AR')} <span class="text-[#64748B] font-medium">(${pctPublica}%)</span></span>
+                                                    </div>
+                                                    <div class="w-full bg-[#FCE8ED] rounded-full h-1.5"><div class="bg-[#D34872] h-1.5 rounded-full transition-all duration-500" style="width: ${pctPublica}%"></div></div>
+                                                </div>
+                                                <div class="mt-2 pt-2 border-t border-[#E6EDF3] text-right">
+                                                    <span class="text-[11px] font-bold text-[#0F172A] uppercase">Total Relevado: ${total.toLocaleString('es-AR')}</span>
+                                                </div>
+                                            </div>
+                                        </div>`;
+                        layer.bindPopup(popupHtml);
+                        
+                        layer.on({
+                            mouseover: function (e) {
+                                var l = e.target;
+                                l.setStyle({ weight: 3, color: '#0F172A', fillOpacity: 0.95 });
+                                if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) { l.bringToFront(); }
+                            },
+                            mouseout: function (e) { geoLayer.resetStyle(e.target); }
+                        });
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        // SISTEMA DE ENRUTAMIENTO INTELIGENTE DE CAPAS (MANUAL UPLOAD)
+        function procesarCapaGeoJson(fileName, data) {
+            let isResultados21 = fileName.includes('circuitos_resultados_21') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties['FRENTE DE TODOS'] !== undefined && data.features[0].properties.partido_ganador !== undefined);
+            let isResultados23 = fileName.includes('circuitos_resultados23') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties['UNION POR LA PATRIA'] !== undefined && data.features[0].properties.partido_ganador !== undefined);
+            let isResultados25 = (fileName.includes('circuitos_resultados') && !isResultados21 && !isResultados23) || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties.partido_ganador !== undefined && !isResultados21 && !isResultados23);
+            
+            if (isResultados21) agregarGeoJSONResultados21(data, layerResultados21);
+            else if (isResultados23) agregarGeoJSONResultados23(data, layerResultados23);
+            else if (isResultados25) agregarGeoJSONResultados25(data, layerResultados25);
+            else if (fileName.includes('circuito') && !isResultados21 && !isResultados25 && !isResultados23) agregarGeoJSONAlMapa(data, layerCircuitos, estilosCapas.circuitos);
+            else if (fileName.includes('municipio') || fileName.includes('limite') || fileName.includes('mapa')) agregarGeoJSONAlMapa(data, layerMunicipios, estilosCapas.municipios);
+            else if (fileName.includes('cgm') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties.CGM !== undefined && data.features[0].properties.Manzanas !== undefined)) agregarGeoJSONAlMapa(data, layerCGM, estilosCapas.cgm);
+            else if (fileName.includes('localidad')) agregarGeoJSONAlMapa(data, layerLocalidades, estilosCapas.localidades);
+            else if (fileName.includes('barrio') && (fileName.includes('popular') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties.ID_RENABAP !== undefined))) agregarGeoJSONAlMapa(data, layerBarriosPopulares, estilosCapas.barriosPopulares);
+            else if (fileName.includes('pj') || fileName.includes('geo_muni')) agregarGeoJSONAlMapa(data, layerPj, estilosCapas.pj);
+            else if (fileName.includes('inundable')) agregarGeoJSONInundables(data, layerZonasInundables);
+            else if (fileName.includes('densidad') || fileName.includes('habitante') || (fileName.includes('poblacion') && fileName.endsWith('.geojson'))) agregarGeoJSONCoropleta(data, layerDensidad);
+            else if (fileName.includes('pobreza')) agregarGeoJSONPobreza(data, layerPobreza);
+            
+            else if (fileName.includes('escolaridad')) agregarGeoJSONCoropleta(data, layerEscolaridad);
+            else if (fileName.includes('comparativa') || fileName.includes('interdistrital') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties.Partido !== undefined && data.features[0].properties['Solo salud pública'] !== undefined)) agregarGeoJSONUsoSaludInterdistrital(data, layerUsoSaludInterdistrital);
+            else if (fileName.includes('uso_salud') || fileName.includes('indicadores_salud') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties['Solo salud pública'] !== undefined)) agregarGeoJSONUsoSalud(data, layerUsoSalud);
+            else if (fileName.includes('jubilacion') || fileName.includes('pensiones') || (data.features && data.features.length > 0 && data.features[0].properties && data.features[0].properties['Jubilacion/Pension'] !== undefined)) agregarGeoJSONJubilaciones(data, layerJubilaciones);
+            
+            // Rutas Obras Públicas
+            else if (fileName.includes('pavimentacion') && fileName.includes('concreto')) agregarGeoJSONAlMapa(data, layerPavimentacionConcreto, estilosCapas.pavimentacionConcreto);
+            else if (fileName.includes('bacheo') && fileName.includes('concreto')) agregarGeoJSONAlMapa(data, layerBacheoConcreto, estilosCapas.bacheoConcreto);
+            else if (fileName.includes('bacheo') && fileName.includes('frio')) agregarGeoJSONAlMapa(data, layerBacheoFrio, estilosCapas.bacheoFrio);
+            else if (fileName.includes('bacheo 2024')) agregarGeoJSONAlMapa(data, layerBacheo2024, estilosCapas.bacheo2024);
+            else if (fileName.includes('bacheo 2025')) agregarGeoJSONAlMapa(data, layerBacheo2025, estilosCapas.bacheo2025);
+            else if (fileName.includes('bacheo 2026')) agregarGeoJSONAlMapa(data, layerBacheo2026, estilosCapas.bacheo2026);
+            
+            // Rutas Espacios Públicos
+            else if (fileName.includes('plaza')) agregarGeoJSONAlMapa(data, layerPlazas, estilosCapas.plazas);
+            else if (fileName.includes('parque') && fileName.includes('municipal')) agregarGeoJSONAlMapa(data, layerParquesMunicipales, estilosCapas.parquesMunicipales);
+            else if (fileName.includes('parque')) agregarGeoJSONAlMapa(data, layerParques, estilosCapas.parques);
+            else if (fileName.includes('potrero')) agregarGeoJSONAlMapa(data, layerPotreros, estilosCapas.potreros);
+            else if (fileName.includes('bicisenda')) agregarGeoJSONAlMapa(data, layerBicisendas, estilosCapas.bicisendas);
+            
+            // Rutas Seguridad
+            else if (fileName.includes('camara') || fileName.includes('cámara')) agregarGeoJSONAlMapa(data, layerCamaras, estilosCapas.camaras);
+            else if (fileName.includes('patrullaje')) agregarGeoJSONAlMapa(data, layerZonasPatrullajes, estilosCapas.zonasPatrullajes);
+            else if (fileName.includes('parada')) agregarGeoJSONAlMapa(data, layerParadasSeguras, estilosCapas.paradasSeguras);
+            else if (fileName.includes('recorrido')) agregarGeoJSONAlMapa(data, layerMovilRecorrido, estilosCapas.movilRecorrido);
+            else if (fileName.includes('movil')) agregarGeoJSONAlMapa(data, layerMovilPuntos, estilosCapas.movilPuntos);
+            else if (fileName.includes('modulo') || fileName.includes('módulo')) agregarGeoJSONAlMapa(data, layerModulosPoliciales, estilosCapas.modulosPoliciales);
+            else if (fileName.includes('lpr')) agregarGeoJSONAlMapa(data, layerLPR, estilosCapas.lpr);
+            else if (fileName.includes('alarma')) agregarGeoJSONAlMapa(data, layerAlarmas, estilosCapas.alarmas);
+            
+            // Rutas Instituciones
+            else if (fileName.includes('sanitaria') || fileName.includes('atencion') || fileName.includes('atención')) agregarGeoJSONAlMapa(data, layerCentrosSanitarios, estilosCapas.centrosSanitarios);
+            else if (fileName.includes('jubilado')) agregarGeoJSONAlMapa(data, layerCentroJubilados, estilosCapas.centroJubilados);
+            else if (fileName.includes('cultural')) agregarGeoJSONAlMapa(data, layerCentrosCulturales, estilosCapas.centrosCulturales);
+            else if (fileName.includes('deportivo') || fileName.includes('clubes')) agregarGeoJSONAlMapa(data, layerClubesDeportivos, estilosCapas.clubesDeportivos);
+            else if (fileName.includes('comedor')) agregarGeoJSONAlMapa(data, layerComedores, estilosCapas.comedores);
+            else if (fileName.includes('establecimiento') || fileName.includes('educativo')) agregarGeoJSONAlMapa(data, layerEstablecimientosEducativos, estilosCapas.establecimientosEducativos);
+            else if (fileName.includes('iglesia')) agregarGeoJSONAlMapa(data, layerIglesias, estilosCapas.iglesias);
+            else if (fileName.includes('fomento')) agregarGeoJSONAlMapa(data, layerSocFomento, estilosCapas.socFomento);
+            
+            // Rutas Servicios Públicos
+            else if (fileName.includes('covelia') || fileName.includes('barrido')) agregarGeoJSONAlMapa(data, layerBarridoCovelia, estilosCapas.barridoCovelia);
+            
+            // Default
+            else console.log("Capa cargada sin clasificar en el menú: " + fileName);
+        }
+
         function initMap() {
             const mapContainer = document.getElementById('map');
             if (!mapContainer) return;
@@ -522,79 +1347,162 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            layerTareasPreventivas = L.layerGroup();
+            layerMunicipios = L.layerGroup();
+            layerCGM = L.layerGroup();
+            layerLocalidades = L.layerGroup();
+            layerBarriosPopulares = L.layerGroup();
+            layerCircuitos = L.layerGroup();
+            layerPj = L.layerGroup();
+            layerResultados25 = L.layerGroup();
+            layerResultados23 = L.layerGroup();
+            layerResultados21 = L.layerGroup();
+            
+            layerZonasInundables = L.layerGroup();
+            layerDensidad = L.layerGroup();
+            layerParques = L.layerGroup();
+            layerPobreza = L.layerGroup();
+            layerUsoSalud = L.layerGroup();
+            layerUsoSaludInterdistrital = L.layerGroup();
+            layerJubilaciones = L.layerGroup();
+            
+            // Grupos Obras Públicas
+            layerPavimentacionConcreto = L.layerGroup();
+            layerBacheoConcreto = L.layerGroup();
+            layerBacheoFrio = L.layerGroup();
+            layerBacheo2024 = L.layerGroup();
+            layerBacheo2025 = L.layerGroup();
+            layerBacheo2026 = L.layerGroup();
+            
+            // Grupos Espacios Públicos
+            layerPlazas = L.layerGroup();
+            layerParquesMunicipales = L.layerGroup();
+            layerPotreros = L.layerGroup();
+            layerBicisendas = L.layerGroup();
+            
+            // Grupo Seguridad
+            layerCamaras = L.layerGroup();
+            layerZonasPatrullajes = L.layerGroup();
+            layerParadasSeguras = L.layerGroup();
+            layerMovilRecorrido = L.layerGroup();
+            layerMovilPuntos = L.layerGroup();
+            layerModulosPoliciales = L.layerGroup();
+            layerLPR = L.layerGroup();
+            layerAlarmas = L.layerGroup();
+            
+            // Grupos Instituciones (NUEVOS)
+            layerCentroJubilados = L.layerGroup();
+            layerCentrosCulturales = L.layerGroup();
+            layerCentrosSanitarios = L.layerGroup();
+            layerClubesDeportivos = L.layerGroup();
+            layerComedores = L.layerGroup();
+            layerEstablecimientosEducativos = L.layerGroup();
+            layerIglesias = L.layerGroup();
+            layerSocFomento = L.layerGroup();
+            
+            // Grupos Educación
+            layerEscolaridad = L.layerGroup();
+            
+            // Grupos Servicios Públicos
+            layerBarridoCovelia = L.layerGroup();
 
-            const setupLayerControl = (checkboxId, configParams) => {
+            const setupLayerControl = (layerVar, checkboxId) => {
                 const cb = document.getElementById(checkboxId);
                 if (!cb) return;
-                
-                layerInstances[checkboxId] = L.layerGroup();
-                const layer = layerInstances[checkboxId];
+                if(cb.checked) { map.addLayer(layerVar); }
+                cb.addEventListener('change', (e) => {
+                    if(e.target.checked) map.addLayer(layerVar); 
+                    else map.removeLayer(layerVar); 
+                });
+            };
 
-                // Carga inicial y listeners
-                const handleLayerToggle = async (isChecked) => {
-                    if (isChecked) {
-                        if (!layer.hasLoaded) {
+            // Setup general
+            setupLayerControl(layerMunicipios, 'cb-municipios');
+            setupLayerControl(layerCGM, 'cb-cgm');
+            setupLayerControl(layerCircuitos, 'cb-circuitos');
+            setupLayerControl(layerLocalidades, 'cb-localidades');
+            setupLayerControl(layerBarriosPopulares, 'cb-barrios-populares');
+            setupLayerControl(layerZonasInundables, 'cb-inundables');
+            setupLayerControl(layerParques, 'cb-parques');
+            setupLayerControl(layerPj, 'cb-pj');
+            setupLayerControl(layerResultados25, 'cb-resultados-25');
+            setupLayerControl(layerResultados23, 'cb-resultados-23');
+            setupLayerControl(layerResultados21, 'cb-resultados-21');
+            setupLayerControl(layerDensidad, 'cb-densidad');
+            setupLayerControl(layerPobreza, 'cb-pobreza');
+            setupLayerControl(layerUsoSalud, 'cb-uso-salud');
+            setupLayerControl(layerUsoSaludInterdistrital, 'cb-uso-salud-interdistrital');
+            setupLayerControl(layerJubilaciones, 'cb-jubilaciones');
+            setupLayerControl(layerPavimentacionConcreto, 'cb-pavimentacion-concreto');
+            setupLayerControl(layerBacheoConcreto, 'cb-bacheo-concreto');
+            setupLayerControl(layerBacheoFrio, 'cb-bacheo-frio');
+            setupLayerControl(layerBacheo2024, 'cb-bacheo-2024');
+            setupLayerControl(layerBacheo2025, 'cb-bacheo-2025');
+            setupLayerControl(layerBacheo2026, 'cb-bacheo-2026');
+            setupLayerControl(layerPlazas, 'cb-plazas');
+            setupLayerControl(layerParquesMunicipales, 'cb-parques-municipales');
+            setupLayerControl(layerPotreros, 'cb-potreros');
+            setupLayerControl(layerBicisendas, 'cb-bicisendas');
+            setupLayerControl(layerCamaras, 'cb-camaras');
+            setupLayerControl(layerZonasPatrullajes, 'cb-patrullajes');
+            setupLayerControl(layerParadasSeguras, 'cb-paradas');
+            setupLayerControl(layerMovilRecorrido, 'cb-movil-recorrido');
+            setupLayerControl(layerMovilPuntos, 'cb-movil-puntos');
+            setupLayerControl(layerModulosPoliciales, 'cb-modulos');
+            setupLayerControl(layerLPR, 'cb-lpr');
+            setupLayerControl(layerAlarmas, 'cb-alarmas');
+            setupLayerControl(layerEscolaridad, 'cb-escolaridad');
+            setupLayerControl(layerBarridoCovelia, 'cb-barrido-covelia');
+
+            // --- SISTEMA FETCH DINÁMICO PARA INSTITUCIONES ---
+            const fetchConfigInstituciones = [
+                { id: 'cb-centro-jubilados', url: './Centro de Jubilados.geojson', layer: layerCentroJubilados, style: estilosCapas.centroJubilados },
+                { id: 'cb-centros-culturales', url: './Centros Culturales.geojson', layer: layerCentrosCulturales, style: estilosCapas.centrosCulturales },
+                { id: 'cb-centros-sanitarios', url: './Centros de Atencion Sanitaria.geojson', layer: layerCentrosSanitarios, style: estilosCapas.centrosSanitarios },
+                { id: 'cb-clubes-deportivos', url: './Clubes Deportivos.geojson', layer: layerClubesDeportivos, style: estilosCapas.clubesDeportivos },
+                { id: 'cb-comedores', url: './Comedores.geojson', layer: layerComedores, style: estilosCapas.comedores },
+                { id: 'cb-establecimientos-educativos', url: './Establecimientos Educativos.geojson', layer: layerEstablecimientosEducativos, style: estilosCapas.establecimientosEducativos },
+                { id: 'cb-iglesias', url: './Iglesias.geojson', layer: layerIglesias, style: estilosCapas.iglesias },
+                { id: 'cb-soc-fomento', url: './Sociedades de Fomento.geojson', layer: layerSocFomento, style: estilosCapas.socFomento }
+            ];
+
+            fetchConfigInstituciones.forEach(config => {
+                const cb = document.getElementById(config.id);
+                if (!cb) return;
+                
+                cb.addEventListener('change', async (e) => {
+                    if (e.target.checked) {
+                        if (!config.layer.hasLoaded) {
                             try {
                                 const label = cb.closest('label');
                                 label.classList.add('layer-loading');
                                 
-                                // Solución al error de parseo: Codificar espacios en la URL de fetch
-                                // Usamos una estrategia más robusta para escapar caracteres
-                                const parsedUrl = new URL(configParams.url, window.location.href);
+                                const parsedUrl = new URL(config.url, window.location.href);
                                 const encodedUrl = parsedUrl.href;
                                 
                                 const response = await fetch(encodedUrl);
                                 if (!response.ok) throw new Error("HTTP " + response.status);
                                 const data = await response.json();
                                 
-                                renderizarCapaGenerica(data, layer, configParams.style);
-                                layer.hasLoaded = true;
+                                agregarGeoJSONAlMapa(data, config.layer, config.style);
+                                config.layer.hasLoaded = true;
                             } catch (err) {
-                                console.error(`Error al cargar capa: ${configParams.url}`, err);
-                                alert(`No se pudo cargar la información. Verifica que el archivo exista en la ruta: ${configParams.url}`);
+                                console.error(`Error al cargar capa Instituciones: ${config.url}`, err);
+                                alert(`No se pudo cargar la información. Verifica que el archivo exista en la ruta local: ${config.url}`);
                                 cb.checked = false;
+                                return;
                             } finally {
                                 const label = cb.closest('label');
                                 label.classList.remove('layer-loading');
                             }
                         }
-                        if (cb.checked) map.addLayer(layer);
+                        map.addLayer(config.layer);
                     } else {
-                        map.removeLayer(layer);
-                    }
-                };
-
-                cb.addEventListener('change', (e) => handleLayerToggle(e.target.checked));
-            };
-
-            // Setup de Control Especial: Tareas Preventivas CSV
-            const cbTareas = document.getElementById('cb-tareas-preventivas');
-            if (cbTareas) {
-                cbTareas.addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        map.addLayer(layerTareasPreventivas);
-                        if (!sgrLoaded) cargarTareasPreventivas();
-                        else filtrarYRenderizarTareas();
-                    } else {
-                        map.removeLayer(layerTareasPreventivas);
-                        document.getElementById('filtros-tareas').classList.add('hidden'); 
-                    }
-                });
-            }
-
-            // Setup Eventos de Cambio en Filtros
-            ['filtro-cgm', 'filtro-tipo', 'filtro-subtipo', 'filtro-fecha'].forEach(id => {
-                document.getElementById(id).addEventListener('change', () => {
-                    if(document.getElementById('cb-tareas-preventivas').checked) {
-                        filtrarYRenderizarTareas();
+                        map.removeLayer(config.layer);
                     }
                 });
             });
 
-            for (const checkboxId in CONFIG_CAPAS) {
-                setupLayerControl(checkboxId, CONFIG_CAPAS[checkboxId]);
-            }
+            isMapInitialized = true;
 
             function updateMapZoomClass() {
                 if (!map) return;
@@ -602,6 +1510,7 @@
                 const mapDomContainer = document.getElementById('map');
                 
                 mapDomContainer.classList.remove('map-zoom-far', 'map-zoom-medium', 'map-zoom-high');
+                
                 if (zoom < 13) mapDomContainer.classList.add('map-zoom-far');
                 else if (zoom <= 15) mapDomContainer.classList.add('map-zoom-medium');
                 else mapDomContainer.classList.add('map-zoom-high');
@@ -610,19 +1519,55 @@
             map.on('zoomend', updateMapZoomClass);
             updateMapZoomClass();
 
-            // Cargar municipio automáticamente al iniciar
-            setTimeout(() => {
-                const cbMuni = document.getElementById('cb-municipio');
-                if (cbMuni && cbMuni.checked) {
-                    cbMuni.dispatchEvent(new Event('change'));
-                }
-            }, 200);
+            if (window.INJECTED_GEOJSON && window.INJECTED_GEOJSON.length > 0) {
+                window.INJECTED_GEOJSON.forEach(item => {
+                    const fileName = item.filename ? item.filename.toLowerCase().trim() : '';
+                    if (fileName.endsWith('.geojson') || (item.data && item.data.type === 'FeatureCollection')) {
+                        procesarCapaGeoJson(fileName, item.data);
+                    }
+                });
+            }
         }
 
+        // Inicializamos el mapa apenas cargue el DOM
         document.addEventListener('DOMContentLoaded', () => {
             initMap();
         });
 
+        document.getElementById('geojson-upload').addEventListener('change', function(e) {
+            const files = e.target.files;
+            let filesProcessed = 0;
+            
+            for(let file of files) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    try {
+                        let rawText = event.target.result;
+                        rawText = rawText.replace(/:\s*NaN/g, ': null').replace(/,\s*NaN/g, ', null').replace(/\[\s*NaN/g, '[null');
+                        const jsonData = JSON.parse(rawText);
+                        const fileName = file.name ? file.name.toLowerCase().trim() : '';
+                        
+                        window.savedGeoJSONData.push({ filename: fileName, data: jsonData });
+                        
+                        if (fileName.endsWith('.geojson') || (jsonData && jsonData.type === 'FeatureCollection')) {
+                            procesarCapaGeoJson(fileName, jsonData);
+                        } else {
+                            console.warn("El archivo cargado contiene métricas que no aplican a la vista geoespacial actual: " + fileName);
+                        }
+                    } catch (err) {
+                        alert("Error al procesar el archivo " + file.name + ". Revisa su formato.");
+                        console.error(err);
+                    } finally {
+                        filesProcessed++;
+                        if (filesProcessed === files.length) {
+                            alert("¡Datos geoespaciales cargados exitosamente en el mapa!");
+                        }
+                    }
+                };
+                reader.readAsText(file);
+            }
+            this.value = '';
+        });
     </script>
 </body>
 </html>

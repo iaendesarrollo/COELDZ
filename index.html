@@ -126,6 +126,21 @@
     <!-- Contenedor Único del Mapa de Análisis Territorial -->
     <div id="map-view" class="w-full max-w-[1600px] mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
         
+        <!-- Controles Superiores: Botones Principales -->
+        <div class="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-6 gap-4 shrink-0">
+            <div id="panel-botones" class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                <!-- Botón Exportar Mapa -->
+                <button id="btn-exportar" onclick="exportarHTML()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#FFFFFF] text-[#0B5F8D] border-2 border-[#0B5F8D] rounded-full font-bold hover:bg-[#F3F6F9] transition-all shadow-sm hover:shadow-md print:hidden text-sm">
+                    <i data-lucide="download" class="h-4 w-4"></i> Exportar
+                </button>
+                <!-- Botón Cargar Datos Principal -->
+                <label id="btn-cargar-label" for="geojson-upload" class="flex-1 sm:flex-none cursor-pointer flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0B5F8D] text-[#FFFFFF] rounded-full font-bold hover:bg-[#084A6F] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 print:hidden text-sm">
+                    <i data-lucide="upload-cloud" class="h-4 w-4"></i> Cargar Datos
+                </label>
+                <input type="file" id="geojson-upload" multiple accept=".geojson,.json" class="hidden">
+            </div>
+        </div>
+
         <!-- Contenedor Principal del Mapa con Layout de Sidebar -->
         <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[600px]">
             
@@ -144,7 +159,6 @@
                             <i data-lucide="map" class="h-4 w-4"></i> División Territorial
                         </h4>
                         <div class="space-y-3" id="grupo-division-territorial">
-                            <!-- CHECKBOX LIMITE TERRITORIAL MARCADO POR DEFECTO -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer" checked>
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
@@ -222,7 +236,7 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 4: EVENTOS POR TORMENTA (NUEVO) -->
+                    <!-- BLOQUE 4: EVENTOS POR TORMENTA -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-cloud-showers-heavy text-[var(--acento)] text-lg"></i> Eventos por Tormenta
@@ -233,7 +247,7 @@
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Incidentes Reportados (COE)</span>
                             </label>
 
-                            <!-- Contenedor de Filtros Dinámicos -->
+                            <!-- Contenedor de Filtros Dinámicos Eventos COE -->
                             <div id="filtros-eventos" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
                                 <div class="flex flex-col">
                                     <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
@@ -254,6 +268,35 @@
                                     </select>
                                 </div>
                             </div>
+                            
+                            <!-- NUEVO: CORTES DE LUZ -->
+                            <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
+                                <input type="checkbox" id="cb-cortes-luz" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Cortes de Luz</span>
+                            </label>
+
+                            <!-- Contenedor de Filtros Dinámicos Cortes de Luz -->
+                            <div id="filtros-cortes-luz" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-corte-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
+                                    <select id="filtro-corte-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los CGM</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Afectación</label>
+                                    <select id="filtro-corte-tipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los Tipos</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -352,6 +395,10 @@
         window.coeData = [];
         let coeLoaded = false;
 
+        let layerCortesLuz;
+        window.cortesData = [];
+        let cortesLoaded = false;
+
         // Iconografía SVG general para puntos dinámicos
         const svgIconos = {
             preventiva: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
@@ -367,11 +414,12 @@
             fomento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
             camara: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
             alarma: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
-            // SVGs para Eventos COE
+            // SVGs para Eventos COE y Cortes
             anegamiento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-3a6 6 0 0 1 12 0v3"/><path d="M12 2v2"/><path d="M4 22v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><path d="M14 14h-4"/><path d="M16 14h.01"/><path d="M8 14h.01"/></svg>`,
             arbol: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="m8 14-2.5-2.5a3.5 3.5 0 0 1 5-5 5 5 0 0 1 7 5 3.5 3.5 0 0 1-2.5 2.5Z"/></svg>`,
             poste: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M8 22h8"/><path d="M8 2h8"/></svg>`,
-            alerta: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`
+            alerta: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
+            energia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`
         };
 
         // DICCIONARIO CENTRAL DE CAPAS GEOJSON
@@ -721,7 +769,7 @@
         }
 
         /* -----------------------------------------------------------
-           LÓGICA ESPECÍFICA PARA EVENTOS POR TORMENTA (coe.csv)
+           LÓGICA ESPECÍFICA PARA EVENTOS POR TORMENTA (coe.csv y corte_luz.csv)
         ------------------------------------------------------------- */
 
         function cargarEventosTormenta() {
@@ -877,6 +925,151 @@
             }
         }
 
+        // ---------- NUEVO: CORTES DE LUZ -----------
+        function cargarCortesLuz() {
+            const cb = document.getElementById('cb-cortes-luz');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./corte_luz.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo corte_luz.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            window.cortesData = results.data;
+                            cortesLoaded = true;
+                            document.getElementById('filtros-cortes-luz').classList.remove('hidden');
+                            poblarFiltrosCortes();
+                            filtrarYRenderizarCortes();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Cortes de Luz:", err);
+                    alert("Error al cargar corte_luz.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosCortes() {
+            const cgms = new Set();
+            const tipos = new Set();
+            const fechas = new Set();
+
+            window.cortesData.forEach(row => {
+                if (row.CGM) cgms.add(row.CGM.trim());
+                if (row.TIPO_AFECTACION) tipos.add(row.TIPO_AFECTACION.trim());
+                if (row.FECHA) fechas.add(row.FECHA.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-corte-cgm', cgms);
+            poblarSelect('filtro-corte-tipo', tipos);
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-corte-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarCortes() {
+            layerCortesLuz.clearLayers();
+            
+            const fCgm = document.getElementById('filtro-corte-cgm').value;
+            const fTipo = document.getElementById('filtro-corte-tipo').value;
+            const fFecha = document.getElementById('filtro-corte-fecha').value;
+
+            const latLngs = [];
+
+            window.cortesData.forEach(row => {
+                const cgm = (row.CGM || '').trim();
+                const tipo = (row.TIPO_AFECTACION || '').trim();
+                const fecha = (row.FECHA || '').trim();
+
+                // Evaluar todos los filtros
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTipo !== 'ALL' && tipo !== fTipo) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                let coordsStr = (row.COORDENADAS || "").trim();
+                if (!coordsStr) return;
+                
+                coordsStr = coordsStr.replace(/['"]/g, '');
+                let parts = coordsStr.split(',');
+                if (parts.length < 2) return;
+
+                const lat = parseFloat(parts[0].trim());
+                const lng = parseFloat(parts[1].trim());
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                // Color e ícono estandarizado para energía
+                let bgColor = '#F59E0B'; // Naranja Alerta
+
+                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.energia}</div></div>`;
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-div-icon',
+                    iconSize: [24, 24], 
+                    iconAnchor: [12, 12]
+                });
+
+                const marker = L.marker([lat, lng], { icon: customIcon });
+
+                let usuariosInfo = (row.USUARIOS_AFECTADOS && row.USUARIOS_AFECTADOS !== '') ? Number(row.USUARIOS_AFECTADOS).toLocaleString('es-AR') : 'Sin datos';
+
+                let popupHtml = `
+                    <div class="font-sans min-w-[220px]">
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};"><i class="fa-solid fa-bolt mr-1"></i> ${tipo}</h4>
+                        <div class="bg-[#FFFBEB] p-2 rounded-md mb-2 border border-[#FEF3C7]">
+                            <p class="text-[10px] font-bold text-[#D97706] uppercase">Usuarios Afectados</p>
+                            <p class="text-lg font-extrabold text-[#B45309]">${usuariosInfo}</p>
+                        </div>
+                        <ul class="text-xs text-[#64748B] space-y-1.5">
+                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
+                            <li><b class="text-[#0F172A]">Inicio:</b> ${row.HORA_INICIO || '-'}</li>
+                            <li><b class="text-[#0F172A]">Fin:</b> ${row.HORA_FIN || '-'}</li>
+                            <li><b class="text-[#0F172A]">Duración:</b> ${row.DURACION_CORTE || '-'}</li>
+                            <li><b class="text-[#0F172A]">CGM:</b> ${cgm || '-'}</li>
+                        </ul>
+                    </div>`;
+                
+                marker.bindPopup(popupHtml);
+                layerCortesLuz.addLayer(marker);
+                latLngs.push([lat, lng]);
+            });
+
+            // Ajustar el zoom automáticamente si hay puntos filtrados
+            if (latLngs.length > 0 && map.hasLayer(layerCortesLuz)) {
+                const zoomBounds = L.latLngBounds(latLngs);
+                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            }
+        }
 
         /* -----------------------------------------------------------
            LÓGICA ESPECÍFICA PARA TAREAS PREVENTIVAS (sgr.csv)
@@ -1041,6 +1234,7 @@
 
             layerTareasPreventivas = L.layerGroup();
             layerEventosTormenta = L.layerGroup();
+            layerCortesLuz = L.layerGroup();
 
             const setupLayerControl = (checkboxId, configParams) => {
                 const cb = document.getElementById(checkboxId);
@@ -1136,6 +1330,30 @@
                 document.getElementById(id).addEventListener('change', () => {
                     if(document.getElementById('cb-eventos-tormenta').checked) {
                         filtrarYRenderizarEventos();
+                    }
+                });
+            });
+
+            // Setup de Control Especial: Cortes de Luz CSV
+            const cbCortesLuz = document.getElementById('cb-cortes-luz');
+            if (cbCortesLuz) {
+                cbCortesLuz.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerCortesLuz);
+                        if (!cortesLoaded) cargarCortesLuz();
+                        else filtrarYRenderizarCortes();
+                    } else {
+                        map.removeLayer(layerCortesLuz);
+                        document.getElementById('filtros-cortes-luz').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Eventos de Cambio en Filtros Cortes de Luz
+            ['filtro-corte-fecha', 'filtro-corte-cgm', 'filtro-corte-tipo'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    if(document.getElementById('cb-cortes-luz').checked) {
+                        filtrarYRenderizarCortes();
                     }
                 });
             });

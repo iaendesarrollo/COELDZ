@@ -160,7 +160,28 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 2: TAREAS PREVENTIVAS -->
+                    <!-- BLOQUE 2: DATOS DEMOGRÁFICOS -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i data-lucide="pie-chart" class="h-4 w-4"></i> Datos Demográficos
+                        </h4>
+                        <div class="space-y-3" id="grupo-datos-demograficos">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-poblacion" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Población</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-pobreza" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Pobreza Crónica</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-inundables" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Zonas Inundables</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 3: TAREAS PREVENTIVAS -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i data-lucide="shield-alert" class="h-4 w-4"></i> Tareas Preventivas
@@ -201,7 +222,7 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 3: INSTITUCIONES -->
+                    <!-- BLOQUE 4: INSTITUCIONES -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-building-columns text-[var(--acento)] text-lg"></i> Instituciones
@@ -306,6 +327,22 @@
                 url: './barrios_Lomas de Zamora.geojson', 
                 type: 'basic', 
                 style: { color: '#0B5F8D', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
+            },
+            // DATOS DEMOGRÁFICOS
+            'cb-poblacion': { 
+                url: './poblacion_Lomas de Zamora.geojson', 
+                type: 'basic', 
+                style: { color: '#0F172A', weight: 1, fillColor: '#0B5F8D', fillOpacity: 0.5 } 
+            },
+            'cb-pobreza': { 
+                url: './pobreza_cronica_Lomas de Zamora.geojson', 
+                type: 'basic', 
+                style: { color: '#0F172A', weight: 1, fillColor: '#D34872', fillOpacity: 0.5 } 
+            },
+            'cb-inundables': { 
+                url: './zonas_inundables_Lomas de Zamora.geojson', 
+                type: 'basic', 
+                style: { color: '#0F172A', weight: 1, fillColor: '#4AB5E0', fillOpacity: 0.5 } 
             },
             // NUEVAS CAPAS DE INSTITUCIONES
             'cb-asoc-civiles': { 
@@ -504,7 +541,7 @@
                 })
                 .catch(err => {
                     console.error("Error al cargar Tareas Preventivas:", err);
-                    alert("Error al cargar sgr.csv. Verifica que el archivo exista en el mismo directorio e intentes abrirlo mediante un servidor local (Localhost) por políticas de seguridad del navegador.");
+                    alert("Error al cargar sgr.csv. Verifica que el archivo exista en la ruta local correspondiente.");
                     cb.checked = false;
                     label.classList.remove('layer-loading');
                 });
@@ -649,7 +686,6 @@
                                 const label = cb.closest('label');
                                 label.classList.add('layer-loading');
                                 
-                                // Direct Fetch: el navegador maneja la ruta tal como está en el origen (sin doble codificación)
                                 const response = await fetch(configParams.url);
                                 
                                 if (!response.ok) throw new Error("HTTP " + response.status);
@@ -659,7 +695,7 @@
                                 layer.hasLoaded = true;
                             } catch (err) {
                                 console.error(`Error al cargar capa: ${configParams.url}`, err);
-                                alert(`No se pudo cargar la información. Verifica que el archivo exista en la ruta: ${configParams.url} y que te encuentres ejecutando el HTML a través de un servidor local (Ej: Live Server).`);
+                                alert(`No se pudo cargar la información. Verifica que el archivo exista en la ruta: ${configParams.url}`);
                                 cb.checked = false;
                             } finally {
                                 const label = cb.closest('label');

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAPA COE</title>
+    <!-- Tailwind CSS para estilos -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fuentes de Google (Montserrat) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Leaflet CSS (Para el Mapa) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Leaflet MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Leaflet Heat -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js" crossorigin="anonymous"></script>
+    <!-- Leaflet MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #19567C;
+            --blanco: #FFFFFF;
+            --acento: #4AB5E0;
+            --magenta: #D34872;
+            --glass-claro: #E2F1F7;
+            --azul-inst: #19567C;
+            --radius-sys: 12px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--blanco);
+            min-height: 100vh;
+            margin: 0;
+        }
+        
+        /* Asegurar que el mapa no se superponga con otros elementos z-index */
+        #map { z-index: 10; }
+        .leaflet-control-layers { font-family: 'Montserrat', sans-serif; }
+
+        /* Scrollbar personalizado usando la paleta */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #F3F6F9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #E6EDF3; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748B; }
+
+        /* ESTILOS CUSTOM PARA CLUSTERS */
+        .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
+            background-color: rgba(11, 95, 141, 0.6) !important;
+        }
+        .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
+            background-color: rgba(8, 74, 111, 0.9) !important;
+            color: white !important;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        /* SISTEMA DE MARCADORES GEOESPACIALES - ZOOM AWARE */
+        .custom-div-icon { background: none; border: none; }
+        .marker-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        
+        .marker-circle {
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        .marker-circle svg { transition: all 0.3s ease; }
+
+        .map-zoom-far .marker-circle { width: 8px; height: 8px; }
+        .map-zoom-far .marker-circle svg { width: 4px; height: 4px; stroke-width: 3px; }
+        .map-zoom-medium .marker-circle { width: 12px; height: 12px; }
+        .map-zoom-medium .marker-circle svg { width: 7px; height: 7px; stroke-width: 2.5px; }
+        .map-zoom-high .marker-circle { width: 14px; height: 14px; }
+        .map-zoom-high .marker-circle svg { width: 8px; height: 8px; stroke-width: 2px; }
+        .map-zoom-high .marker-circle:hover { transform: scale(1.3); filter: brightness(1.15); }
+
+        /* Loader para las capas del menú */
+        .layer-loading { opacity: 0.5; pointer-events: none; position: relative; }
+        .layer-loading::after {
+            content: "\f110"; /* FontAwesome spinner */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute; right: 0; top: 50%;
+            transform: translateY(-50%);
+            animation: fa-spin 2s infinite linear;
+            color: var(--bg-main);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col">
+
+    <!-- Encabezado Institucional (MAPA COE) -->
+    <header class="bg-[var(--bg-main)] shadow-lg border-b-4 border-[var(--acento)] relative z-20 flex items-center justify-center w-full shrink-0 py-6 px-4">
+        <div class="flex items-center gap-4">
+            <div class="bg-[var(--blanco)] text-[var(--bg-main)] rounded-full shadow-md flex items-center justify-center h-14 w-14 shrink-0">
+                <i class="fa-solid fa-map-location-dot text-2xl"></i>
+            </div>
+            <div class="flex flex-col">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-[var(--blanco)] tracking-tight uppercase leading-none">MAPA COE</h1>
+                <p class="text-[var(--acento)] font-bold text-sm sm:text-base tracking-wide mt-1">CENTRO DE OPERACIONES DE EMERGENCIAS</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor Único del Mapa de Análisis Territorial -->
+    <div id="map-view" class="w-full max-w-[1600px] mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
+        
+        <!-- Contenedor Principal del Mapa con Layout de Sidebar -->
+        <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[600px]">
+            
+            <!-- MENU LATERAL IZQUIERDO (Capas y Filtros) -->
+            <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-140px)]">
+                <div class="p-4 border-b border-[#E6EDF3] bg-[#F3F6F9] rounded-t-xl flex items-center gap-2 shrink-0">
+                    <i data-lucide="layers" class="text-[#0B5F8D] h-5 w-5"></i>
+                    <h3 class="font-bold text-[#0F172A] uppercase tracking-wide text-sm">Capas Disponibles</h3>
+                </div>
+                
+                <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-6" id="menu-capas-container">
+                    
+                    <!-- BLOQUE 1: DIVISIÓN TERRITORIAL -->
+                    <div>
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i data-lucide="map" class="h-4 w-4"></i> División Territorial
+                        </h4>
+                        <div class="space-y-3" id="grupo-division-territorial">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-cgm" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Centros de Gestión Municipal (CGM)</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-barrios" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Barrios Lomas de Zamora</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+
+            <!-- MAPA PRINCIPAL -->
+            <div class="w-full flex-1 bg-[#FFFFFF] p-2 rounded-xl shadow-lg border border-[#E6EDF3] relative z-10 flex flex-col">
+                <div id="map" class="w-full flex-1 rounded-lg relative z-0 min-h-[500px]"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts de Lógica e Inicialización del Mapa -->
+    <script>
+        // Inicializar Iconos Lucide
+        lucide.createIcons();
+
+        // Variables Globales del Mapa y Estado
+        let map;
+        let mapBounds = null; // Variable para controlar el encuadre automático del mapa
+
+        // DICCIONARIO CENTRAL DE CAPAS
+        // Aquí configuraremos las URL de los GeoJSON y sus estilos a medida que avancemos.
+        const CONFIG_CAPAS = {
+            'cb-municipio': { 
+                url: './municipios_Lomas de Zamora.geojson', 
+                type: 'basic', 
+                style: { color: '#0B5F8D', weight: 4, fillOpacity: 0.05, dashArray: '5,5' } 
+            },
+            'cb-cgm': { 
+                url: './CGM.geojson', 
+                type: 'basic', 
+                style: { color: '#4AB5E0', weight: 2, fillOpacity: 0.15 } 
+            },
+            'cb-barrios': { 
+                url: './barrios_Lomas de Zamora.geojson', 
+                type: 'basic', 
+                style: { color: '#D34872', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
+            }
+        };
+
+        // Objeto para almacenar las instancias de LayerGroup de Leaflet
+        const layerInstances = {};
+
+        // Función base para sanear geometrías GeoJSON mal formadas (Motor mantenido)
+        function sanearGeoJSON(data) {
+            if (!data || !data.features || !Array.isArray(data.features)) return data;
+            
+            data.features.forEach(feature => {
+                if (feature && feature.geometry && feature.geometry.coordinates) {
+                    let coords = feature.geometry.coordinates;
+                    if (Array.isArray(coords) && coords.length === 2 && typeof coords[0] === 'string' && typeof coords[1] === 'string' && !coords[0].includes(',')) {
+                        let lng = parseFloat(coords[0]);
+                        let lat = parseFloat(coords[1]);
+                        if (!isNaN(lng) && !isNaN(lat)) {
+                            feature.geometry.coordinates = [lng, lat];
+                        } else {
+                            feature.geometry.coordinates = null;
+                        }
+                    }
+                    else if (Array.isArray(coords) && coords.length > 0 && typeof coords[0] === 'string' && coords[0].includes(',')) {
+                        let nuevasCoordenadas = [];
+                        for (let i = 0; i < coords.length; i++) {
+                            let coordStr = coords[i];
+                            if (coordStr && typeof coordStr === 'string') {
+                                let partes = coordStr.split(',');
+                                if (partes.length >= 2) {
+                                    let lat = parseFloat(partes[0].trim());
+                                    let lng = parseFloat(partes[1].trim());
+                                    if (!isNaN(lat) && !isNaN(lng)) {
+                                        nuevasCoordenadas.push([lng, lat]);
+                                    }
+                                }
+                            }
+                        }
+                        if (nuevasCoordenadas.length === 0) {
+                            feature.geometry.coordinates = null;
+                        } else if (feature.geometry.type === "Point") {
+                            feature.geometry.coordinates = nuevasCoordenadas[0];
+                        } else {
+                            feature.geometry.type = "MultiPoint";
+                            feature.geometry.coordinates = nuevasCoordenadas;
+                        }
+                    }
+                }
+            });
+            data.features = data.features.filter(feature => feature && feature.geometry && feature.geometry.coordinates);
+            return data;
+        }
+
+        // Función para encuadrar el mapa cuando se carga una capa nueva
+        function actualizarLimitesMapa(layer) {
+            if (!map) return;
+            try {
+                const bounds = layer.getBounds();
+                if (bounds && bounds.isValid()) {
+                    if (!mapBounds) {
+                        mapBounds = bounds;
+                    } else {
+                        mapBounds.extend(bounds);
+                    }
+                    map.fitBounds(mapBounds, { padding: [30, 30] });
+                }
+            } catch (e) {
+                console.warn("No se pudo calcular el encuadre para la capa actual.");
+            }
+        }
+
+        // Motor Genérico de Renderizado (Listo para ser utilizado cuando agreguemos capas)
+        function renderizarCapaGenerica(data, layerGroup, styleOptions) {
+            data = sanearGeoJSON(data);
+            const geoLayer = L.geoJSON(data, {
+                style: styleOptions,
+                pointToLayer: function (feature, latlng) {
+                    if (styleOptions && styleOptions.tipo === 'punto' && styleOptions.svg) {
+                        const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${styleOptions.color || '#0B5F8D'};">${styleOptions.svg}</div></div>`;
+                        const customIcon = L.divIcon({
+                            html: iconHtml,
+                            className: 'custom-div-icon',
+                            iconSize: [24, 24], 
+                            iconAnchor: [12, 12]
+                        });
+                        return L.marker(latlng, { icon: customIcon });
+                    } else {
+                        let radius = styleOptions && styleOptions.radius ? styleOptions.radius : 6;
+                        let fillColor = styleOptions && styleOptions.fillColor ? styleOptions.fillColor : "#0B5F8D";
+                        let color = styleOptions && styleOptions.color ? styleOptions.color : "#FFFFFF";
+                        let weight = styleOptions && styleOptions.weight ? styleOptions.weight : 2;
+                        return L.circleMarker(latlng, { radius: radius, fillColor: fillColor, color: color, weight: weight, opacity: 1, fillOpacity: 0.9 });
+                    }
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let nombreStr = props.NOMBRE || props.NAME || props.Name || props.nombre || props.name || "Elemento";
+                        
+                        let popupHtml = `<div class="font-sans min-w-[200px]"><h4 class="font-bold text-[var(--bg-main)] border-b border-[#E6EDF3] pb-1 mb-2">${nombreStr}</h4><ul class="text-xs text-[#64748B] space-y-1">`;
+                        const keysToIgnore = ['NOMBRE', 'NAME', 'Name', 'nombre', 'name'];
+                        for (let key in props) {
+                            if (!keysToIgnore.includes(key) && props[key] !== null && props[key] !== "") {
+                                popupHtml += `<li><b class="capitalize">${key.replace(/_/g, ' ')}:</b> ${props[key]}</li>`;
+                            }
+                        }
+                        popupHtml += `</ul></div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        // LÓGICA PRINCIPAL DE INICIALIZACIÓN
+        function initMap() {
+            const mapContainer = document.getElementById('map');
+            if (!mapContainer) return;
+
+            // Inicializar centrado en Lomas de Zamora (Ajustable a futuro)
+            map = L.map('map').setView([-34.7573, -58.4035], 12);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Preparar el motor de Fetch para las capas futuras
+            const setupLayerControl = (checkboxId, configParams) => {
+                const cb = document.getElementById(checkboxId);
+                if (!cb) return;
+                
+                layerInstances[checkboxId] = L.layerGroup();
+                const layer = layerInstances[checkboxId];
+
+                cb.addEventListener('change', async (e) => {
+                    if (e.target.checked) {
+                        if (!layer.hasLoaded) {
+                            try {
+                                const label = cb.closest('label');
+                                label.classList.add('layer-loading');
+                                
+                                const response = await fetch(configParams.url);
+                                if (!response.ok) throw new Error("HTTP " + response.status);
+                                const data = await response.json();
+                                
+                                // Renderizado por defecto
+                                renderizarCapaGenerica(data, layer, configParams.style);
+                                
+                                layer.hasLoaded = true;
+                            } catch (err) {
+                                console.error(`Error al cargar capa: ${configParams.url}`, err);
+                                alert(`No se pudo cargar la información. Verifica que el archivo exista en la ruta: ${configParams.url}`);
+                                cb.checked = false;
+                            } finally {
+                                const label = cb.closest('label');
+                                label.classList.remove('layer-loading');
+                            }
+                        }
+                        if (cb.checked) map.addLayer(layer);
+                    } else {
+                        map.removeLayer(layer);
+                    }
+                });
+            };
+
+            // Recorrer configuración (actualmente vacía)
+            for (const checkboxId in CONFIG_CAPAS) {
+                setupLayerControl(checkboxId, CONFIG_CAPAS[checkboxId]);
+            }
+
+            // Lógica de clases CSS para hacer los SVG escalables según el nivel de zoom
+            function updateMapZoomClass() {
+                if (!map) return;
+                const zoom = map.getZoom();
+                const mapDomContainer = document.getElementById('map');
+                
+                mapDomContainer.classList.remove('map-zoom-far', 'map-zoom-medium', 'map-zoom-high');
+                if (zoom < 13) mapDomContainer.classList.add('map-zoom-far');
+                else if (zoom <= 15) mapDomContainer.classList.add('map-zoom-medium');
+                else mapDomContainer.classList.add('map-zoom-high');
+            }
+            
+            map.on('zoomend', updateMapZoomClass);
+            updateMapZoomClass();
+        }
+
+        // Ejecutar todo cuando cargue la página
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+        });
+
+    </script>
+</body>
+</html>

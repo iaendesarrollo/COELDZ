@@ -464,8 +464,7 @@
             },
             'cb-arroyos': { 
                 url: './ARROYOS.geojson', 
-                type: 'basic', 
-                style: { color: '#4AB5E0', weight: 4, opacity: 0.9 } 
+                type: 'arroyos'
             },
             // INSTITUCIONES
             'cb-asoc-civiles': { 
@@ -776,6 +775,34 @@
                                 </ul>
                             </div>`;
                         layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        // Renderizado específico para Arroyos (Capa Demográfica base)
+        function renderizarCapaArroyos(data, layerGroup) {
+            data = sanearGeoJSON(data);
+            const geoLayer = L.geoJSON(data, {
+                style: { color: '#4AB5E0', weight: 4, opacity: 0.9 }, // Color celeste visible
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name || "Arroyo";
+                        let umbral = feature.properties.umbral_desborde || feature.properties['UMBRAL DESBORDE'] || "Sin datos";
+
+                        let popupHtml = `
+                            <div class="font-sans min-w-[200px]">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2 flex items-center gap-1">
+                                    <i class="fa-solid fa-water"></i> ${name}
+                                </h4>
+                                <ul class="text-xs text-[#64748B] space-y-1">
+                                    <li><b class="text-[#0F172A]">Umbral de Desborde:</b> ${umbral} mts</li>
+                                </ul>
+                            </div>`;
+                        layer.bindPopup(popupHtml);
+                        layer.bindTooltip(name, { direction: 'top', className: 'custom-map-tooltip' });
                     }
                 }
             });
@@ -1185,13 +1212,17 @@
             const geoLayer = L.geoJSON({ type: 'FeatureCollection', features: featuresRenderizar }, {
                 style: { color: '#DC2626', weight: 6, opacity: 0.9 }, // Color Rojo de emergencia y trazo grueso
                 onEachFeature: function(feature, layer) {
-                    let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name;
+                    let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name || "Arroyo";
+                    let umbral = feature.properties.umbral_desborde || feature.properties['UMBRAL DESBORDE'] || "Sin datos";
                     let registros = desbordadosMap[name];
                     
                     let popupHtml = `<div class="font-sans min-w-[240px]">
                         <h4 class="font-bold text-[#DC2626] border-b border-[#FECACA] pb-1.5 mb-2 flex items-center gap-1">
                             <i class="fa-solid fa-water"></i> Desborde: ${name}
                         </h4>
+                        <div class="mb-2 text-xs">
+                            <b class="text-[#0F172A]">Umbral de Desborde:</b> <span class="text-[#DC2626] font-bold">${umbral} mts</span>
+                        </div>
                         <div class="max-h-[180px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
                     
                     registros.forEach(r => {
@@ -1199,12 +1230,13 @@
                         popupHtml += `
                             <div class="bg-[#FEF2F2] p-2 rounded border border-[#FECACA] text-xs">
                                 <p><b class="text-[#0F172A]">${r.Fecha} ${r.Hora}</b> ${cgmStr}</p>
-                                <p class="text-[#B91C1C] mt-0.5"><b>Nivel:</b> ${r['Nivel Arroyo']} cm</p>
+                                <p class="text-[#B91C1C] mt-0.5"><b>Nivel Medido:</b> ${r['Nivel Arroyo']} cm</p>
                             </div>`;
                     });
 
                     popupHtml += `</div></div>`;
                     layer.bindPopup(popupHtml);
+                    layer.bindTooltip(name, { direction: 'top', className: 'custom-map-tooltip' });
                 }
             });
 
@@ -1412,6 +1444,8 @@
                                     renderizarCapaPobreza(data, layer);
                                 } else if (configParams.type === 'inundables') {
                                     renderizarCapaInundables(data, layer);
+                                } else if (configParams.type === 'arroyos') {
+                                    renderizarCapaArroyos(data, layer);
                                 } else {
                                     renderizarCapaGenerica(data, layer, configParams.style);
                                 }

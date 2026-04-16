@@ -126,21 +126,6 @@
     <!-- Contenedor Único del Mapa de Análisis Territorial -->
     <div id="map-view" class="w-full max-w-[1600px] mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
         
-        <!-- Controles Superiores: Botones Principales -->
-        <div class="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-6 gap-4 shrink-0">
-            <div id="panel-botones" class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-                <!-- Botón Exportar Mapa -->
-                <button id="btn-exportar" onclick="exportarHTML()" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#FFFFFF] text-[#0B5F8D] border-2 border-[#0B5F8D] rounded-full font-bold hover:bg-[#F3F6F9] transition-all shadow-sm hover:shadow-md print:hidden text-sm">
-                    <i data-lucide="download" class="h-4 w-4"></i> Exportar
-                </button>
-                <!-- Botón Cargar Datos Principal -->
-                <label id="btn-cargar-label" for="geojson-upload" class="flex-1 sm:flex-none cursor-pointer flex items-center justify-center gap-2 px-5 py-2.5 bg-[#0B5F8D] text-[#FFFFFF] rounded-full font-bold hover:bg-[#084A6F] transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 print:hidden text-sm">
-                    <i data-lucide="upload-cloud" class="h-4 w-4"></i> Cargar Datos
-                </label>
-                <input type="file" id="geojson-upload" multiple accept=".geojson,.json" class="hidden">
-            </div>
-        </div>
-
         <!-- Contenedor Principal del Mapa con Layout de Sidebar -->
         <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[600px]">
             
@@ -512,8 +497,8 @@
             'cb-alarmas': { 
                 url: './Alarmas.geojson', 
                 type: 'basic', 
-                style: { tipo: 'punto', svg: svgIconos.alarma, color: '#19567C' } 
-            }
+            // Servicios Públicos
+            barridoCovelia: { color: '#19567C', weight: 3, fillColor: '#4AB5E0', fillOpacity: 0.25, dashArray: '4,4' }
         };
 
         const layerInstances = {};

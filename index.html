@@ -7,6 +7,9 @@
     <!-- Tailwind CSS para estilos -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- PapaParse para lectura de CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -156,6 +159,41 @@
                         </div>
                     </div>
 
+                    <!-- BLOQUE 2: TAREAS PREVENTIVAS -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i data-lucide="shield-alert" class="h-4 w-4"></i> Tareas Preventivas
+                        </h4>
+                        <div class="space-y-3" id="grupo-tareas-preventivas">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-tareas-preventivas" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Alertas y Reclamos</span>
+                            </label>
+
+                            <!-- Contenedor de Filtros Dinámicos -->
+                            <div id="filtros-tareas" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Tipo</label>
+                                    <select id="filtro-tipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los Tipos</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Sub Tipo</label>
+                                    <select id="filtro-subtipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los Sub Tipos</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </aside>
 
@@ -176,8 +214,17 @@
         let map;
         let mapBounds = null; // Variable para controlar el encuadre automático del mapa
 
-        // DICCIONARIO CENTRAL DE CAPAS
-        // Aquí configuraremos las URL de los GeoJSON y sus estilos a medida que avancemos.
+        // Capa para Tareas Preventivas (CSV)
+        let layerTareasPreventivas;
+        window.sgrData = [];
+        let sgrLoaded = false;
+
+        // Icono Especial para Tareas Preventivas
+        const svgIconos = {
+            preventiva: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`
+        };
+
+        // DICCIONARIO CENTRAL DE CAPAS GEOJSON
         const CONFIG_CAPAS = {
             'cb-municipio': { 
                 url: './municipios_Lomas de Zamora.geojson', 
@@ -192,14 +239,14 @@
             'cb-barrios': { 
                 url: './barrios_Lomas de Zamora.geojson', 
                 type: 'basic', 
-                style: { color: '#D34872', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
+                style: { color: '#0B5F8D', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
             }
         };
 
         // Objeto para almacenar las instancias de LayerGroup de Leaflet
         const layerInstances = {};
 
-        // Función base para sanear geometrías GeoJSON mal formadas (Motor mantenido)
+        // Función base para sanear geometrías GeoJSON mal formadas
         function sanearGeoJSON(data) {
             if (!data || !data.features || !Array.isArray(data.features)) return data;
             
@@ -263,7 +310,7 @@
             }
         }
 
-        // Motor Genérico de Renderizado (Listo para ser utilizado cuando agreguemos capas)
+        // Motor Genérico de Renderizado
         function renderizarCapaGenerica(data, layerGroup, styleOptions) {
             data = sanearGeoJSON(data);
             const geoLayer = L.geoJSON(data, {
@@ -307,12 +354,153 @@
             actualizarLimitesMapa(geoLayer);
         }
 
+        /* -----------------------------------------------------------
+           LÓGICA ESPECÍFICA PARA TAREAS PREVENTIVAS (sgr.csv)
+        ------------------------------------------------------------- */
+        
+        function cargarTareasPreventivas() {
+            const cb = document.getElementById('cb-tareas-preventivas');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./sgr.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo sgr.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    Papa.parse(csvText, {
+                        header: true,
+                        delimiter: ';',
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            window.sgrData = results.data;
+                            sgrLoaded = true;
+                            document.getElementById('filtros-tareas').classList.remove('hidden');
+                            poblarFiltrosTareas();
+                            filtrarYRenderizarTareas();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Tareas Preventivas:", err);
+                    alert("Error al cargar sgr.csv. Verifica que el archivo exista en el mismo directorio.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosTareas() {
+            const tipos = new Set();
+            const subtipos = new Set();
+            const fechas = new Set();
+
+            window.sgrData.forEach(row => {
+                if (row.Tipo) tipos.add(row.Tipo.trim());
+                if (row['Sub Tipo']) subtipos.add(row['Sub Tipo'].trim());
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            // Función para rellenar los Dropdowns manteniendo la opción 'ALL'
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; // Keep only "ALL"
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-tipo', tipos);
+            poblarSelect('filtro-subtipo', subtipos);
+
+            // Ordenar Fechas (DD/MM/YYYY) de manera descendente
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => {
+                const [d1, m1, y1] = a.split('/');
+                const [d2, m2, y2] = b.split('/');
+                return new Date(y2, m2-1, d2) - new Date(y1, m1-1, d1);
+            });
+            
+            const selectFecha = document.getElementById('filtro-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarTareas() {
+            layerTareasPreventivas.clearLayers();
+            
+            const fTipo = document.getElementById('filtro-tipo').value;
+            const fSubtipo = document.getElementById('filtro-subtipo').value;
+            const fFecha = document.getElementById('filtro-fecha').value;
+
+            const latLngs = [];
+
+            window.sgrData.forEach(row => {
+                const tipo = (row.Tipo || '').trim();
+                const subtipo = (row['Sub Tipo'] || '').trim();
+                const fecha = (row.Fecha || '').trim();
+
+                // Evaluar filtros
+                if (fTipo !== 'ALL' && tipo !== fTipo) return;
+                if (fSubtipo !== 'ALL' && subtipo !== fSubtipo) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                if (!row.Latitud || !row.Longitud) return;
+
+                // Reparación de comas por puntos para el parseo Float del GIS
+                const lat = parseFloat(row.Latitud.replace(',', '.'));
+                const lng = parseFloat(row.Longitud.replace(',', '.'));
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: #0B5F8D; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.preventiva}</div></div>`;
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-div-icon',
+                    iconSize: [24, 24], 
+                    iconAnchor: [12, 12]
+                });
+
+                const marker = L.marker([lat, lng], { icon: customIcon });
+
+                let popupHtml = `
+                    <div class="font-sans min-w-[220px]">
+                        <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${tipo}</h4>
+                        <ul class="text-xs text-[#64748B] space-y-1.5">
+                            <li><b class="text-[#0F172A]">Sub Tipo:</b> ${subtipo}</li>
+                            <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
+                            <li><b class="text-[#0F172A]">Vecino:</b> ${row.Nombre || ''} ${row.Apellido || ''}</li>
+                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
+                            <li><b class="text-[#0F172A]">Estado:</b> <span class="text-green-600 font-bold">${row.Estado || '-'}</span></li>
+                            <li><b class="text-[#0F172A]">Zonificación:</b> ${row.Zonificacion_CAV || '-'}</li>
+                        </ul>
+                    </div>`;
+                
+                marker.bindPopup(popupHtml);
+                layerTareasPreventivas.addLayer(marker);
+                latLngs.push([lat, lng]);
+            });
+
+            if (latLngs.length > 0 && map.hasLayer(layerTareasPreventivas)) {
+                mapBounds = L.latLngBounds(latLngs);
+                map.fitBounds(mapBounds, { padding: [30, 30] });
+            }
+        }
+
         // LÓGICA PRINCIPAL DE INICIALIZACIÓN
         function initMap() {
             const mapContainer = document.getElementById('map');
             if (!mapContainer) return;
 
-            // Inicializar centrado en Lomas de Zamora (Ajustable a futuro)
             map = L.map('map').setView([-34.7573, -58.4035], 12);
 
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -320,7 +508,10 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // Preparar el motor de Fetch para las capas futuras
+            // Inicializar capa independiente de CSV
+            layerTareasPreventivas = L.layerGroup();
+
+            // Preparar el motor de Fetch para las capas GeoJSON estándar
             const setupLayerControl = (checkboxId, configParams) => {
                 const cb = document.getElementById(checkboxId);
                 if (!cb) return;
@@ -339,9 +530,7 @@
                                 if (!response.ok) throw new Error("HTTP " + response.status);
                                 const data = await response.json();
                                 
-                                // Renderizado por defecto
                                 renderizarCapaGenerica(data, layer, configParams.style);
-                                
                                 layer.hasLoaded = true;
                             } catch (err) {
                                 console.error(`Error al cargar capa: ${configParams.url}`, err);
@@ -359,7 +548,31 @@
                 });
             };
 
-            // Recorrer configuración (actualmente vacía)
+            // Setup de Control Especial: Tareas Preventivas CSV
+            const cbTareas = document.getElementById('cb-tareas-preventivas');
+            if (cbTareas) {
+                cbTareas.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerTareasPreventivas);
+                        if (!sgrLoaded) cargarTareasPreventivas();
+                        else filtrarYRenderizarTareas(); // re-encuadrar si ya estaba cargado
+                    } else {
+                        map.removeLayer(layerTareasPreventivas);
+                        document.getElementById('filtros-tareas').classList.add('hidden'); // Esconder filtros al apagar capa
+                    }
+                });
+            }
+
+            // Setup Eventos de Cambio en Filtros
+            ['filtro-tipo', 'filtro-subtipo', 'filtro-fecha'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    if(document.getElementById('cb-tareas-preventivas').checked) {
+                        filtrarYRenderizarTareas();
+                    }
+                });
+            });
+
+            // Recorrer configuración GeoJSON
             for (const checkboxId in CONFIG_CAPAS) {
                 setupLayerControl(checkboxId, CONFIG_CAPAS[checkboxId]);
             }

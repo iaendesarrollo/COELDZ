@@ -1,0 +1,19 @@
+{
+"type": "FeatureCollection",
+"name": "Fundaciones",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "CGM": "Temperley", "NOMBRE": "Fundacion Suenos Celestes De Temperley", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.77857319, "LONGITUD": -58.40491776 }, "geometry": { "type": "Point", "coordinates": [ -58.40491776, -34.77857319 ] } },
+{ "type": "Feature", "properties": { "CGM": "Villa Fiorito", "NOMBRE": "Fundacion Hermana Maria Teresa Durand Centro Infanto Juvenil", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.70151909, "LONGITUD": -58.4411425 }, "geometry": { "type": "Point", "coordinates": [ -58.4411425, -34.70151909 ] } },
+{ "type": "Feature", "properties": { "CGM": "Temperley", "NOMBRE": "Fundacion Experiencia Anicca", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.784244, "LONGITUD": -58.40171 }, "geometry": { "type": "Point", "coordinates": [ -58.40171, -34.784244 ] } },
+{ "type": "Feature", "properties": { "CGM": "Temperley", "NOMBRE": "Fundacion Crecer Juntos", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.767212, "LONGITUD": -58.397205 }, "geometry": { "type": "Point", "coordinates": [ -58.397205, -34.767212 ] } },
+{ "type": "Feature", "properties": { "CGM": "Temperley", "NOMBRE": "Fundacion Sendero", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.767212, "LONGITUD": -58.397205 }, "geometry": { "type": "Point", "coordinates": [ -58.397205, -34.767212 ] } },
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Fundacion Para La Salud Lomas", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.761614, "LONGITUD": -58.424188 }, "geometry": { "type": "Point", "coordinates": [ -58.424188, -34.761614 ] } },
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Fundacion Redondel", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.759785, "LONGITUD": -58.407818 }, "geometry": { "type": "Point", "coordinates": [ -58.407818, -34.759785 ] } },
+{ "type": "Feature", "properties": { "CGM": "Lomas", "NOMBRE": "Fundacion Mayordomos Cristianos", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.757198, "LONGITUD": -58.416389 }, "geometry": { "type": "Point", "coordinates": [ -58.416389, -34.757198 ] } },
+{ "type": "Feature", "properties": { "CGM": "Banfield", "NOMBRE": "Fundacion Adelfos", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.744773, "LONGITUD": -58.406413 }, "geometry": { "type": "Point", "coordinates": [ -58.406413, -34.744773 ] } },
+{ "type": "Feature", "properties": { "CGM": "Banfield", "NOMBRE": "Fundacion Vida Cultura Y Sociedad", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.743954, "LONGITUD": -58.420413 }, "geometry": { "type": "Point", "coordinates": [ -58.420413, -34.743954 ] } },
+{ "type": "Feature", "properties": { "CGM": "Banfield", "NOMBRE": "Fundacion Sur Solidario Todos Podemos Ayudar", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.741723, "LONGITUD": -58.404533 }, "geometry": { "type": "Point", "coordinates": [ -58.404533, -34.741723 ] } },
+{ "type": "Feature", "properties": { "CGM": "Villa Centenario", "NOMBRE": "Fundacion Vida Nueva Cura Brochero", "TIPO": "FUNDACIONES", "Fecha Vencimiento Reconocimiento": "2026-12-21T00:00:00", "LATITUD": -34.725884, "LONGITUD": -58.423902 }, "geometry": { "type": "Point", "coordinates": [ -58.423902, -34.725884 ] } }
+]
+}

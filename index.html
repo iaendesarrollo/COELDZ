@@ -144,8 +144,9 @@
                             <i data-lucide="map" class="h-4 w-4"></i> División Territorial
                         </h4>
                         <div class="space-y-3" id="grupo-division-territorial">
+                            <!-- CHECKBOX LIMITE TERRITORIAL MARCADO POR DEFECTO -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
-                                <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer" checked>
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group relative">
@@ -172,6 +173,12 @@
 
                             <!-- Contenedor de Filtros Dinámicos -->
                             <div id="filtros-tareas" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
+                                    <select id="filtro-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los CGM</option>
+                                    </select>
+                                </div>
                                 <div class="flex flex-col">
                                     <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Tipo</label>
                                     <select id="filtro-tipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
@@ -212,7 +219,7 @@
 
         // Variables Globales del Mapa y Estado
         let map;
-        let mapBounds = null; // Variable para controlar el encuadre automático del mapa
+        let mapBounds = null;
 
         // Capa para Tareas Preventivas (CSV)
         let layerTareasPreventivas;
@@ -227,7 +234,7 @@
         // DICCIONARIO CENTRAL DE CAPAS GEOJSON
         const CONFIG_CAPAS = {
             'cb-municipio': { 
-                url: './municipios_Lomas de Zamora.geojson', 
+                url: './municipios_Lomas%20de%20Zamora.geojson', 
                 type: 'basic', 
                 style: { color: '#0B5F8D', weight: 4, fillOpacity: 0.05, dashArray: '5,5' } 
             },
@@ -237,13 +244,12 @@
                 style: { color: '#4AB5E0', weight: 2, fillOpacity: 0.15 } 
             },
             'cb-barrios': { 
-                url: './barrios_Lomas de Zamora.geojson', 
+                url: './barrios_Lomas%20de%20Zamora.geojson', 
                 type: 'basic', 
                 style: { color: '#0B5F8D', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
             }
         };
 
-        // Objeto para almacenar las instancias de LayerGroup de Leaflet
         const layerInstances = {};
 
         // Función base para sanear geometrías GeoJSON mal formadas
@@ -369,7 +375,10 @@
                     return response.text();
                 })
                 .then(csvText => {
-                    Papa.parse(csvText, {
+                    // Limpieza de caracteres BOM (Byte Order Mark) que corrompen el header en CSV exportados
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    
+                    Papa.parse(cleanCsvText, {
                         header: true,
                         delimiter: ';',
                         skipEmptyLines: true,
@@ -392,20 +401,21 @@
         }
 
         function poblarFiltrosTareas() {
+            const cgms = new Set();
             const tipos = new Set();
             const subtipos = new Set();
             const fechas = new Set();
 
             window.sgrData.forEach(row => {
+                if (row.Zonificacion_CAV) cgms.add(row.Zonificacion_CAV.trim());
                 if (row.Tipo) tipos.add(row.Tipo.trim());
                 if (row['Sub Tipo']) subtipos.add(row['Sub Tipo'].trim());
                 if (row.Fecha) fechas.add(row.Fecha.trim());
             });
 
-            // Función para rellenar los Dropdowns manteniendo la opción 'ALL'
             const poblarSelect = (id, setValores) => {
                 const select = document.getElementById(id);
-                select.innerHTML = select.options[0].outerHTML; // Keep only "ALL"
+                select.innerHTML = select.options[0].outerHTML; 
                 Array.from(setValores).sort().forEach(val => {
                     if (val === '') return;
                     const opt = document.createElement('option');
@@ -415,6 +425,7 @@
                 });
             };
 
+            poblarSelect('filtro-cgm', cgms);
             poblarSelect('filtro-tipo', tipos);
             poblarSelect('filtro-subtipo', subtipos);
 
@@ -438,6 +449,7 @@
         function filtrarYRenderizarTareas() {
             layerTareasPreventivas.clearLayers();
             
+            const fCgm = document.getElementById('filtro-cgm').value;
             const fTipo = document.getElementById('filtro-tipo').value;
             const fSubtipo = document.getElementById('filtro-subtipo').value;
             const fFecha = document.getElementById('filtro-fecha').value;
@@ -445,18 +457,19 @@
             const latLngs = [];
 
             window.sgrData.forEach(row => {
+                const cgm = (row.Zonificacion_CAV || '').trim();
                 const tipo = (row.Tipo || '').trim();
                 const subtipo = (row['Sub Tipo'] || '').trim();
                 const fecha = (row.Fecha || '').trim();
 
-                // Evaluar filtros
+                // Evaluar todos los filtros
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
                 if (fTipo !== 'ALL' && tipo !== fTipo) return;
                 if (fSubtipo !== 'ALL' && subtipo !== fSubtipo) return;
                 if (fFecha !== 'ALL' && fecha !== fFecha) return;
 
                 if (!row.Latitud || !row.Longitud) return;
 
-                // Reparación de comas por puntos para el parseo Float del GIS
                 const lat = parseFloat(row.Latitud.replace(',', '.'));
                 const lng = parseFloat(row.Longitud.replace(',', '.'));
 
@@ -481,7 +494,7 @@
                             <li><b class="text-[#0F172A]">Vecino:</b> ${row.Nombre || ''} ${row.Apellido || ''}</li>
                             <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
                             <li><b class="text-[#0F172A]">Estado:</b> <span class="text-green-600 font-bold">${row.Estado || '-'}</span></li>
-                            <li><b class="text-[#0F172A]">Zonificación:</b> ${row.Zonificacion_CAV || '-'}</li>
+                            <li><b class="text-[#0F172A]">Zonificación:</b> ${cgm || '-'}</li>
                         </ul>
                     </div>`;
                 
@@ -490,9 +503,10 @@
                 latLngs.push([lat, lng]);
             });
 
+            // Ajustar el zoom automáticamente si hay puntos filtrados
             if (latLngs.length > 0 && map.hasLayer(layerTareasPreventivas)) {
-                mapBounds = L.latLngBounds(latLngs);
-                map.fitBounds(mapBounds, { padding: [30, 30] });
+                const zoomBounds = L.latLngBounds(latLngs);
+                map.fitBounds(zoomBounds, { padding: [30, 30] });
             }
         }
 
@@ -508,10 +522,8 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // Inicializar capa independiente de CSV
             layerTareasPreventivas = L.layerGroup();
 
-            // Preparar el motor de Fetch para las capas GeoJSON estándar
             const setupLayerControl = (checkboxId, configParams) => {
                 const cb = document.getElementById(checkboxId);
                 if (!cb) return;
@@ -519,14 +531,20 @@
                 layerInstances[checkboxId] = L.layerGroup();
                 const layer = layerInstances[checkboxId];
 
-                cb.addEventListener('change', async (e) => {
-                    if (e.target.checked) {
+                // Carga inicial y listeners
+                const handleLayerToggle = async (isChecked) => {
+                    if (isChecked) {
                         if (!layer.hasLoaded) {
                             try {
                                 const label = cb.closest('label');
                                 label.classList.add('layer-loading');
                                 
-                                const response = await fetch(configParams.url);
+                                // Solución al error de parseo: Codificar espacios en la URL de fetch
+                                // Usamos una estrategia más robusta para escapar caracteres
+                                const parsedUrl = new URL(configParams.url, window.location.href);
+                                const encodedUrl = parsedUrl.href;
+                                
+                                const response = await fetch(encodedUrl);
                                 if (!response.ok) throw new Error("HTTP " + response.status);
                                 const data = await response.json();
                                 
@@ -545,7 +563,9 @@
                     } else {
                         map.removeLayer(layer);
                     }
-                });
+                };
+
+                cb.addEventListener('change', (e) => handleLayerToggle(e.target.checked));
             };
 
             // Setup de Control Especial: Tareas Preventivas CSV
@@ -555,16 +575,16 @@
                     if (e.target.checked) {
                         map.addLayer(layerTareasPreventivas);
                         if (!sgrLoaded) cargarTareasPreventivas();
-                        else filtrarYRenderizarTareas(); // re-encuadrar si ya estaba cargado
+                        else filtrarYRenderizarTareas();
                     } else {
                         map.removeLayer(layerTareasPreventivas);
-                        document.getElementById('filtros-tareas').classList.add('hidden'); // Esconder filtros al apagar capa
+                        document.getElementById('filtros-tareas').classList.add('hidden'); 
                     }
                 });
             }
 
             // Setup Eventos de Cambio en Filtros
-            ['filtro-tipo', 'filtro-subtipo', 'filtro-fecha'].forEach(id => {
+            ['filtro-cgm', 'filtro-tipo', 'filtro-subtipo', 'filtro-fecha'].forEach(id => {
                 document.getElementById(id).addEventListener('change', () => {
                     if(document.getElementById('cb-tareas-preventivas').checked) {
                         filtrarYRenderizarTareas();
@@ -572,12 +592,10 @@
                 });
             });
 
-            // Recorrer configuración GeoJSON
             for (const checkboxId in CONFIG_CAPAS) {
                 setupLayerControl(checkboxId, CONFIG_CAPAS[checkboxId]);
             }
 
-            // Lógica de clases CSS para hacer los SVG escalables según el nivel de zoom
             function updateMapZoomClass() {
                 if (!map) return;
                 const zoom = map.getZoom();
@@ -591,9 +609,16 @@
             
             map.on('zoomend', updateMapZoomClass);
             updateMapZoomClass();
+
+            // Cargar municipio automáticamente al iniciar
+            setTimeout(() => {
+                const cbMuni = document.getElementById('cb-municipio');
+                if (cbMuni && cbMuni.checked) {
+                    cbMuni.dispatchEvent(new Event('change'));
+                }
+            }, 200);
         }
 
-        // Ejecutar todo cuando cargue la página
         document.addEventListener('DOMContentLoaded', () => {
             initMap();
         });

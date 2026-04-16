@@ -331,18 +331,15 @@
             // DATOS DEMOGRÁFICOS
             'cb-poblacion': { 
                 url: './poblacion_Lomas de Zamora.geojson', 
-                type: 'basic', 
-                style: { color: '#0F172A', weight: 1, fillColor: '#0B5F8D', fillOpacity: 0.5 } 
+                type: 'poblacion' // Renderizado especial enfocado
             },
             'cb-pobreza': { 
                 url: './pobreza_cronica_Lomas de Zamora.geojson', 
-                type: 'basic', 
-                style: { color: '#0F172A', weight: 1, fillColor: '#D34872', fillOpacity: 0.5 } 
+                type: 'pobreza'   // Renderizado especial enfocado
             },
             'cb-inundables': { 
                 url: './zonas_inundables_Lomas de Zamora.geojson', 
-                type: 'basic', 
-                style: { color: '#0F172A', weight: 1, fillColor: '#4AB5E0', fillOpacity: 0.5 } 
+                type: 'inundables' // Renderizado especial enfocado
             },
             // NUEVAS CAPAS DE INSTITUCIONES
             'cb-asoc-civiles': { 
@@ -463,7 +460,7 @@
             }
         }
 
-        // Motor Genérico de Renderizado
+        // Motor Genérico de Renderizado (Aplica para Instituciones y División Territorial)
         function renderizarCapaGenerica(data, layerGroup, styleOptions) {
             data = sanearGeoJSON(data);
             const geoLayer = L.geoJSON(data, {
@@ -508,6 +505,148 @@
         }
 
         /* -----------------------------------------------------------
+           RENDERIZADOS DEMOGRÁFICOS ENFOCADOS (ATLAS UI)
+        ------------------------------------------------------------- */
+
+        function renderizarCapaPoblacion(data, layerGroup) {
+            data = sanearGeoJSON(data);
+
+            let maxVal = 0;
+            data.features.forEach(f => {
+                let val = f.properties['Habitantes'] || f.properties['RADIOS_POB'] || 0;
+                if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                if (val > maxVal) maxVal = val;
+            });
+
+            function getColor(d) {
+                if(!maxVal || d === undefined) return '#F3F6F9'; 
+                return d > maxVal * 0.8 ? '#084A6F' : d > maxVal * 0.6 ? '#0B5F8D' : d > maxVal * 0.4 ? '#2A7FA8' : d > maxVal * 0.2 ? '#6BA1C7' : '#D1E1F0';  
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = feature.properties['Habitantes'] || feature.properties['RADIOS_POB'] || 0;
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return { fillColor: getColor(val), weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let radioStr = props.REDCODE || props.RADIO || props.LINK_RADIO || props.NOMBRE || "Radio Censal";
+                        let valHabitantes = props.Habitantes || props.RADIOS_POB || props.POBLACION || 0;
+                        let valHogares = props.RADIOS_HOG || props.HOGARES;
+
+                        let popupHtml = `
+                            <div class="font-sans min-w-[200px]">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                                <div class="bg-[#EAF1F7] p-2 rounded-md mb-2 border border-[#D1E1F0]">
+                                    <p class="text-xs font-bold text-[#0B5F8D] uppercase">Total Habitantes</p>
+                                    <p class="text-xl font-extrabold text-[#0B5F8D]">${Number(valHabitantes).toLocaleString('es-AR')}</p>
+                                </div>`;
+                        
+                        if (valHogares !== undefined && valHogares !== null) {
+                            popupHtml += `
+                                <ul class="text-xs text-[#64748B] space-y-1 mt-1">
+                                    <li><b class="capitalize text-[#0F172A]">Cantidad de Hogares:</b> ${Number(valHogares).toLocaleString('es-AR')}</li>
+                                </ul>`;
+                        }
+
+                        popupHtml += `</div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function renderizarCapaPobreza(data, layerGroup) {
+            data = sanearGeoJSON(data);
+
+            function getColor(d) {
+                if(d === undefined || d === null) return '#F3F6F9';
+                return d >= 15 ? '#003B5C' : d >= 10 ? '#084A6F' : d >= 5  ? '#0B5F8D' : d >= 2  ? '#2A7FA8' : d > 0   ? '#6BA1C7' : '#EAF1F7';
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = feature.properties['P_PC_HOG'] || 0;
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return { fillColor: getColor(val), weight: 1, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let radioStr = props.LINK_RADIO || "Sector Censal";
+                        let pctHogares = props.P_PC_HOG || 0;
+                        let pctPersonas = props.P_PC_PER || 0;
+                        let valHogares = props.PC_HOG || 0;
+                        let valPersonas = props.PC_PER || 0;
+                        
+                        let popupHtml = `
+                            <div class="font-sans min-w-[220px]">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                                <div class="bg-[#FFF5F8] p-2 rounded-md mb-2 border border-[#FBCFE8]">
+                                    <p class="text-xs font-bold text-[#D34872] uppercase">Incidencia (Hogares)</p>
+                                    <p class="text-xl font-extrabold text-[#BE185D]">${pctHogares}%</p>
+                                </div>
+                                <ul class="text-xs text-[#64748B] space-y-1.5">
+                                    <li><b class="text-[#0F172A]">Incidencia (Personas):</b> ${pctPersonas}%</li>
+                                    <li><b class="text-[#0F172A]">Hogares Afectados:</b> ${Number(valHogares).toLocaleString('es-AR')}</li>
+                                    <li><b class="text-[#0F172A]">Personas Afectadas:</b> ${Number(valPersonas).toLocaleString('es-AR')}</li>
+                                </ul>
+                            </div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function renderizarCapaInundables(data, layerGroup) {
+            data = sanearGeoJSON(data);
+
+            function getColor(d) {
+                if(d === undefined || d === null) return '#F3F6F9'; 
+                return d >= 80 ? '#DC2626' : d >= 60 ? '#084A6F' : d >= 40 ? '#0B5F8D' : d >= 20 ? '#2A7FA8' : '#D1E1F0';  
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = feature.properties['PORCENTAJE'];
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return { fillColor: getColor(val), weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let radioStr = props.REDCODE || props.LINK_RADIO || props.NOMBRE || "Sector Geográfico";
+                        let pctRiesgo = props.PORCENTAJE || props.ZONA_INUND || 0;
+                        let pobAfectada = props.POBLACION || props.RADIOS_POB || 0;
+                        let hogAfectados = props.RADIOS_HOG || 0;
+                        
+                        let popupHtml = `
+                            <div class="font-sans min-w-[200px]">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                                <div class="bg-[#FEF2F2] p-2 rounded-md mb-2 border border-[#FECACA]">
+                                    <p class="text-xs font-bold text-[#DC2626] uppercase">Riesgo de Inundación</p>
+                                    <p class="text-xl font-extrabold text-[#B91C1C]">${Number(pctRiesgo).toLocaleString('es-AR')}%</p>
+                                </div>
+                                <ul class="text-xs text-[#64748B] space-y-1">
+                                    <li><b class="capitalize text-[#0F172A]">Población Afectada:</b> ${Number(pobAfectada).toLocaleString('es-AR')}</li>
+                                    <li><b class="capitalize text-[#0F172A]">Hogares Afectados:</b> ${Number(hogAfectados).toLocaleString('es-AR')}</li>
+                                </ul>
+                            </div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        /* -----------------------------------------------------------
            LÓGICA ESPECÍFICA PARA TAREAS PREVENTIVAS (sgr.csv)
         ------------------------------------------------------------- */
         
@@ -522,7 +661,6 @@
                     return response.text();
                 })
                 .then(csvText => {
-                    // Limpieza de caracteres BOM (Byte Order Mark) que corrompen el header en CSV exportados
                     const cleanCsvText = csvText.replace(/^\uFEFF/, '');
                     
                     Papa.parse(cleanCsvText, {
@@ -691,7 +829,17 @@
                                 if (!response.ok) throw new Error("HTTP " + response.status);
                                 const data = await response.json();
                                 
-                                renderizarCapaGenerica(data, layer, configParams.style);
+                                // Enrutador para usar los renders especializados
+                                if (configParams.type === 'poblacion') {
+                                    renderizarCapaPoblacion(data, layer);
+                                } else if (configParams.type === 'pobreza') {
+                                    renderizarCapaPobreza(data, layer);
+                                } else if (configParams.type === 'inundables') {
+                                    renderizarCapaInundables(data, layer);
+                                } else {
+                                    renderizarCapaGenerica(data, layer, configParams.style);
+                                }
+
                                 layer.hasLoaded = true;
                             } catch (err) {
                                 console.error(`Error al cargar capa: ${configParams.url}`, err);

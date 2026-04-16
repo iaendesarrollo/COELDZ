@@ -144,6 +144,7 @@
                             <i data-lucide="map" class="h-4 w-4"></i> División Territorial
                         </h4>
                         <div class="space-y-3" id="grupo-division-territorial">
+                            <!-- CHECKBOX LIMITE TERRITORIAL MARCADO POR DEFECTO -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer" checked>
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
@@ -254,7 +255,7 @@
                                 </div>
                             </div>
                             
-                            <!-- NUEVO: CORTES DE LUZ -->
+                            <!-- CORTES DE LUZ -->
                             <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
                                 <input type="checkbox" id="cb-cortes-luz" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Cortes de Luz</span>
@@ -399,7 +400,6 @@
             fomento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
             camara: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
             alarma: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
-            // SVGs para Eventos COE y Cortes
             anegamiento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-3a6 6 0 0 1 12 0v3"/><path d="M12 2v2"/><path d="M4 22v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><path d="M14 14h-4"/><path d="M16 14h.01"/><path d="M8 14h.01"/></svg>`,
             arbol: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="m8 14-2.5-2.5a3.5 3.5 0 0 1 5-5 5 5 0 0 1 7 5 3.5 3.5 0 0 1-2.5 2.5Z"/></svg>`,
             poste: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M8 22h8"/><path d="M8 2h8"/></svg>`,
@@ -427,17 +427,17 @@
             // DATOS DEMOGRÁFICOS
             'cb-poblacion': { 
                 url: './poblacion_Lomas de Zamora.geojson', 
-                type: 'poblacion' // Renderizado especial enfocado
+                type: 'poblacion' 
             },
             'cb-pobreza': { 
                 url: './pobreza_cronica_Lomas de Zamora.geojson', 
-                type: 'pobreza'   // Renderizado especial enfocado
+                type: 'pobreza'   
             },
             'cb-inundables': { 
                 url: './zonas_inundables_Lomas de Zamora.geojson', 
-                type: 'inundables' // Renderizado especial enfocado
+                type: 'inundables' 
             },
-            // NUEVAS CAPAS DE INSTITUCIONES
+            // INSTITUCIONES
             'cb-asoc-civiles': { 
                 url: './Asociaciones Civiles.geojson', 
                 type: 'basic', 
@@ -497,8 +497,8 @@
             'cb-alarmas': { 
                 url: './Alarmas.geojson', 
                 type: 'basic', 
-            // Servicios Públicos
-            barridoCovelia: { color: '#19567C', weight: 3, fillColor: '#4AB5E0', fillOpacity: 0.25, dashArray: '4,4' }
+                style: { tipo: 'punto', svg: svgIconos.alarma, color: '#19567C' } 
+            }
         };
 
         const layerInstances = {};
@@ -1361,13 +1361,26 @@
             map.on('zoomend', updateMapZoomClass);
             updateMapZoomClass();
 
+            // FIX: Forzar recálculo del mapa cuando se carga el contenedor para evitar grises
+            setTimeout(function() {
+                if (map) {
+                    map.invalidateSize();
+                }
+            }, 500);
+
             // Cargar municipio automáticamente al iniciar
             setTimeout(() => {
                 const cbMuni = document.getElementById('cb-municipio');
                 if (cbMuni && cbMuni.checked) {
                     cbMuni.dispatchEvent(new Event('change'));
                 }
-            }, 200);
+            }, 800);
+            
+            // Vigilar el contenedor del mapa para recalibrar en caso de que Flexbox se reajuste
+            const resizeObserver = new ResizeObserver(() => {
+                if (map) map.invalidateSize();
+            });
+            resizeObserver.observe(document.getElementById('map'));
         }
 
         document.addEventListener('DOMContentLoaded', () => {

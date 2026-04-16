@@ -178,6 +178,11 @@
                                 <input type="checkbox" id="cb-inundables" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Zonas Inundables</span>
                             </label>
+                            <!-- NUEVO: ARROYOS -->
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-arroyos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Arroyos</span>
+                            </label>
                         </div>
                     </div>
 
@@ -436,6 +441,11 @@
             'cb-inundables': { 
                 url: './zonas_inundables_Lomas de Zamora.geojson', 
                 type: 'inundables' 
+            },
+            'cb-arroyos': { 
+                url: './ARROYOS.geojson', 
+                type: 'basic', 
+                style: { color: '#4AB5E0', weight: 4, opacity: 0.9 } 
             },
             // INSTITUCIONES
             'cb-asoc-civiles': { 

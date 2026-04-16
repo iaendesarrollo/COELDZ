@@ -222,7 +222,42 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 4: INSTITUCIONES -->
+                    <!-- BLOQUE 4: EVENTOS POR TORMENTA (NUEVO) -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-showers-heavy text-[var(--acento)] text-lg"></i> Eventos por Tormenta
+                        </h4>
+                        <div class="space-y-3" id="grupo-eventos-tormenta">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-eventos-tormenta" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Incidentes Reportados (COE)</span>
+                            </label>
+
+                            <!-- Contenedor de Filtros Dinámicos -->
+                            <div id="filtros-eventos" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-evt-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
+                                    <select id="filtro-evt-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los CGM</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Tipo</label>
+                                    <select id="filtro-evt-tipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los Tipos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 5: INSTITUCIONES -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-building-columns text-[var(--acento)] text-lg"></i> Instituciones
@@ -271,7 +306,7 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 5: SEGURIDAD -->
+                    <!-- BLOQUE 6: SEGURIDAD -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-shield-halved text-[var(--acento)] text-lg"></i> Seguridad
@@ -308,12 +343,16 @@
         let map;
         let mapBounds = null;
 
-        // Capa para Tareas Preventivas (CSV)
+        // Capas CSV
         let layerTareasPreventivas;
         window.sgrData = [];
         let sgrLoaded = false;
 
-        // Icono Especial para Tareas Preventivas, Instituciones y Seguridad
+        let layerEventosTormenta;
+        window.coeData = [];
+        let coeLoaded = false;
+
+        // Iconografía SVG general para puntos dinámicos
         const svgIconos = {
             preventiva: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
             civiles: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="11" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
@@ -327,7 +366,12 @@
             iglesias: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M7 8h10"/></svg>`,
             fomento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
             camara: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
-            alarma: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`
+            alarma: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
+            // SVGs para Eventos COE
+            anegamiento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-3a6 6 0 0 1 12 0v3"/><path d="M12 2v2"/><path d="M4 22v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><path d="M14 14h-4"/><path d="M16 14h.01"/><path d="M8 14h.01"/></svg>`,
+            arbol: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="m8 14-2.5-2.5a3.5 3.5 0 0 1 5-5 5 5 0 0 1 7 5 3.5 3.5 0 0 1-2.5 2.5Z"/></svg>`,
+            poste: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M8 22h8"/><path d="M8 2h8"/></svg>`,
+            alerta: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`
         };
 
         // DICCIONARIO CENTRAL DE CAPAS GEOJSON
@@ -677,6 +721,164 @@
         }
 
         /* -----------------------------------------------------------
+           LÓGICA ESPECÍFICA PARA EVENTOS POR TORMENTA (coe.csv)
+        ------------------------------------------------------------- */
+
+        function cargarEventosTormenta() {
+            const cb = document.getElementById('cb-eventos-tormenta');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./coe.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo coe.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            window.coeData = results.data;
+                            coeLoaded = true;
+                            document.getElementById('filtros-eventos').classList.remove('hidden');
+                            poblarFiltrosEventos();
+                            filtrarYRenderizarEventos();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Eventos por Tormenta:", err);
+                    alert("Error al cargar coe.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosEventos() {
+            const cgms = new Set();
+            const tipos = new Set();
+            const fechas = new Set();
+
+            window.coeData.forEach(row => {
+                if (row.CGM) cgms.add(row.CGM.trim());
+                if (row['Tipo Evento']) tipos.add(row['Tipo Evento'].trim());
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-evt-cgm', cgms);
+            poblarSelect('filtro-evt-tipo', tipos);
+
+            // Ordenar Fechas asumiendo formato AAAA-MM-DD
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            
+            const selectFecha = document.getElementById('filtro-evt-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarEventos() {
+            layerEventosTormenta.clearLayers();
+            
+            const fCgm = document.getElementById('filtro-evt-cgm').value;
+            const fTipo = document.getElementById('filtro-evt-tipo').value;
+            const fFecha = document.getElementById('filtro-evt-fecha').value;
+
+            const latLngs = [];
+
+            window.coeData.forEach(row => {
+                const cgm = (row.CGM || '').trim();
+                const tipo = (row['Tipo Evento'] || '').trim();
+                const fecha = (row.Fecha || '').trim();
+
+                // Evaluar todos los filtros
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTipo !== 'ALL' && tipo !== fTipo) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                let coordsStr = (row.Coordenadas || "").trim();
+                if (!coordsStr) return;
+                
+                // Remover posibles comillas si quedaron en el parsing y dividir por la coma
+                coordsStr = coordsStr.replace(/['"]/g, '');
+                let parts = coordsStr.split(',');
+                if (parts.length < 2) return;
+
+                const lat = parseFloat(parts[0].trim());
+                const lng = parseFloat(parts[1].trim());
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                // Asignar Color e Ícono según el tipo de evento
+                let tipoEventoLower = tipo.toLowerCase();
+                let svgUsado = svgIconos.alerta;
+                let bgColor = '#D34872'; // Magenta por defecto (alerta general)
+
+                if (tipoEventoLower.includes('anegamiento') || tipoEventoLower.includes('agua') || tipoEventoLower.includes('inundacion')) {
+                    svgUsado = svgIconos.anegamiento;
+                    bgColor = '#4AB5E0'; // Celeste
+                } else if (tipoEventoLower.includes('arbol') || tipoEventoLower.includes('árbol') || tipoEventoLower.includes('rama')) {
+                    svgUsado = svgIconos.arbol;
+                    bgColor = '#19567C'; // Azul Oscuro (o verde si prefieres)
+                } else if (tipoEventoLower.includes('poste') || tipoEventoLower.includes('cable') || tipoEventoLower.includes('luz')) {
+                    svgUsado = svgIconos.poste;
+                    bgColor = '#F59E0B'; // Naranja/Amarillo Alerta Eléctrica
+                }
+
+                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgUsado}</div></div>`;
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-div-icon',
+                    iconSize: [24, 24], 
+                    iconAnchor: [12, 12]
+                });
+
+                const marker = L.marker([lat, lng], { icon: customIcon });
+
+                let popupHtml = `
+                    <div class="font-sans min-w-[220px]">
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${tipo}</h4>
+                        <ul class="text-xs text-[#64748B] space-y-1.5">
+                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
+                            <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
+                            <li><b class="text-[#0F172A]">CGM:</b> ${cgm || '-'}</li>
+                        </ul>
+                    </div>`;
+                
+                marker.bindPopup(popupHtml);
+                layerEventosTormenta.addLayer(marker);
+                latLngs.push([lat, lng]);
+            });
+
+            // Ajustar el zoom automáticamente si hay puntos filtrados
+            if (latLngs.length > 0 && map.hasLayer(layerEventosTormenta)) {
+                const zoomBounds = L.latLngBounds(latLngs);
+                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            }
+        }
+
+
+        /* -----------------------------------------------------------
            LÓGICA ESPECÍFICA PARA TAREAS PREVENTIVAS (sgr.csv)
         ------------------------------------------------------------- */
         
@@ -838,6 +1040,7 @@
             }).addTo(map);
 
             layerTareasPreventivas = L.layerGroup();
+            layerEventosTormenta = L.layerGroup();
 
             const setupLayerControl = (checkboxId, configParams) => {
                 const cb = document.getElementById(checkboxId);
@@ -904,11 +1107,35 @@
                 });
             }
 
-            // Setup Eventos de Cambio en Filtros
+            // Setup Eventos de Cambio en Filtros Tareas Preventivas
             ['filtro-cgm', 'filtro-tipo', 'filtro-subtipo', 'filtro-fecha'].forEach(id => {
                 document.getElementById(id).addEventListener('change', () => {
                     if(document.getElementById('cb-tareas-preventivas').checked) {
                         filtrarYRenderizarTareas();
+                    }
+                });
+            });
+
+            // Setup de Control Especial: Eventos Tormenta CSV
+            const cbEventos = document.getElementById('cb-eventos-tormenta');
+            if (cbEventos) {
+                cbEventos.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerEventosTormenta);
+                        if (!coeLoaded) cargarEventosTormenta();
+                        else filtrarYRenderizarEventos();
+                    } else {
+                        map.removeLayer(layerEventosTormenta);
+                        document.getElementById('filtros-eventos').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Eventos de Cambio en Filtros Eventos Tormenta
+            ['filtro-evt-fecha', 'filtro-evt-cgm', 'filtro-evt-tipo'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    if(document.getElementById('cb-eventos-tormenta').checked) {
+                        filtrarYRenderizarEventos();
                     }
                 });
             });

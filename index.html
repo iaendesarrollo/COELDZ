@@ -178,7 +178,7 @@
                                 <input type="checkbox" id="cb-inundables" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Zonas Inundables</span>
                             </label>
-                            <!-- NUEVO: ARROYOS -->
+                            <!-- ARROYOS -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-arroyos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Arroyos</span>
@@ -288,6 +288,21 @@
                                 </div>
                             </div>
 
+                            <!-- NUEVO: ARROYOS DESBORDADOS -->
+                            <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
+                                <input type="checkbox" id="cb-arroyos-desbordados" class="w-4 h-4 accent-[#DC2626] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#DC2626] transition-colors font-medium">Arroyos Desbordados</span>
+                            </label>
+
+                            <div id="filtros-arroyos-desbordados" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-arroyo-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#DC2626] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -389,6 +404,11 @@
         let layerCortesLuz;
         window.cortesData = [];
         let cortesLoaded = false;
+
+        let layerArroyosDesbordados;
+        window.arroyosCsvData = [];
+        window.arroyosGeojsonData = null;
+        let arroyosDesbordadosLoaded = false;
 
         // Iconografía SVG general para puntos dinámicos
         const svgIconos = {
@@ -920,7 +940,7 @@
             }
         }
 
-        // ---------- NUEVO: CORTES DE LUZ -----------
+        // ---------- CORTES DE LUZ -----------
         function cargarCortesLuz() {
             const cb = document.getElementById('cb-cortes-luz');
             const label = cb.closest('label');
@@ -1063,6 +1083,139 @@
             if (latLngs.length > 0 && map.hasLayer(layerCortesLuz)) {
                 const zoomBounds = L.latLngBounds(latLngs);
                 map.fitBounds(zoomBounds, { padding: [30, 30] });
+            }
+        }
+
+        // ---------- NUEVO: ARROYOS DESBORDADOS -----------
+        async function cargarArroyosDesbordados() {
+            const cb = document.getElementById('cb-arroyos-desbordados');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            try {
+                // Leer ambos archivos en paralelo para mayor velocidad
+                const [csvRes, geoRes] = await Promise.all([
+                    fetch('./arroyos.csv'),
+                    fetch('./ARROYOS.geojson')
+                ]);
+
+                if (!csvRes.ok) throw new Error("Archivo arroyos.csv no encontrado.");
+                if (!geoRes.ok) throw new Error("Archivo ARROYOS.geojson no encontrado.");
+
+                const csvText = await csvRes.text();
+                const geoData = await geoRes.json();
+
+                window.arroyosGeojsonData = sanearGeoJSON(geoData);
+
+                const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                
+                Papa.parse(cleanCsvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        window.arroyosCsvData = results.data;
+                        arroyosDesbordadosLoaded = true;
+                        document.getElementById('filtros-arroyos-desbordados').classList.remove('hidden');
+                        poblarFiltrosArroyosDesbordados();
+                        filtrarYRenderizarArroyosDesbordados();
+                        label.classList.remove('layer-loading');
+                    }
+                });
+            } catch(err) {
+                console.error("Error al cargar Arroyos Desbordados:", err);
+                alert("Error al cargar datos de arroyos. Verifica que arroyos.csv y ARROYOS.geojson existan.");
+                cb.checked = false;
+                label.classList.remove('layer-loading');
+            }
+        }
+
+        function poblarFiltrosArroyosDesbordados() {
+            const fechas = new Set();
+
+            window.arroyosCsvData.forEach(row => {
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-arroyo-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarArroyosDesbordados() {
+            layerArroyosDesbordados.clearLayers();
+            
+            const fFecha = document.getElementById('filtro-arroyo-fecha').value;
+
+            // 1. Encontrar qué arroyos están desbordados
+            let desbordadosMap = {}; 
+            
+            window.arroyosCsvData.forEach(row => {
+                const fecha = (row.Fecha || '').trim();
+                const estado = (row.Estado_Arroyo || '').trim().toUpperCase();
+                const nombre = (row.Arroyo || '').trim();
+
+                // Foco del proceso: Solo si está desbordado
+                if (estado !== 'DESBORDADO') return;
+                
+                // Filtro por fecha si aplica
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                if (!desbordadosMap[nombre]) desbordadosMap[nombre] = [];
+                desbordadosMap[nombre].push(row);
+            });
+
+            // Si no hay ninguno desbordado bajo estos filtros, salimos
+            if (Object.keys(desbordadosMap).length === 0) return;
+
+            // 2. Extraer solo las líneas de esos arroyos específicos desde el GeoJSON
+            const featuresRenderizar = window.arroyosGeojsonData.features.filter(f => {
+                let name = f.properties.name || f.properties.NOMBRE || f.properties.Name;
+                return name && desbordadosMap[name];
+            });
+
+            if (featuresRenderizar.length === 0) return;
+
+            // 3. Renderizar las líneas en ROJO
+            const geoLayer = L.geoJSON({ type: 'FeatureCollection', features: featuresRenderizar }, {
+                style: { color: '#DC2626', weight: 6, opacity: 0.9 }, // Color Rojo de emergencia y trazo grueso
+                onEachFeature: function(feature, layer) {
+                    let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name;
+                    let registros = desbordadosMap[name];
+                    
+                    let popupHtml = `<div class="font-sans min-w-[240px]">
+                        <h4 class="font-bold text-[#DC2626] border-b border-[#FECACA] pb-1.5 mb-2 flex items-center gap-1">
+                            <i class="fa-solid fa-water"></i> Desborde: ${name}
+                        </h4>
+                        <div class="max-h-[180px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
+                    
+                    registros.forEach(r => {
+                        let cgmStr = r.CGM ? `(CGM: ${r.CGM})` : '';
+                        popupHtml += `
+                            <div class="bg-[#FEF2F2] p-2 rounded border border-[#FECACA] text-xs">
+                                <p><b class="text-[#0F172A]">${r.Fecha} ${r.Hora}</b> ${cgmStr}</p>
+                                <p class="text-[#B91C1C] mt-0.5"><b>Nivel:</b> ${r['Nivel Arroyo']} cm</p>
+                            </div>`;
+                    });
+
+                    popupHtml += `</div></div>`;
+                    layer.bindPopup(popupHtml);
+                }
+            });
+
+            layerArroyosDesbordados.addLayer(geoLayer);
+            
+            // Auto Zoom a las áreas desbordadas
+            if (map.hasLayer(layerArroyosDesbordados)) {
+                const bounds = geoLayer.getBounds();
+                if (bounds.isValid()) {
+                    map.fitBounds(bounds, { padding: [30, 30] });
+                }
             }
         }
 
@@ -1230,6 +1383,7 @@
             layerTareasPreventivas = L.layerGroup();
             layerEventosTormenta = L.layerGroup();
             layerCortesLuz = L.layerGroup();
+            layerArroyosDesbordados = L.layerGroup();
 
             const setupLayerControl = (checkboxId, configParams) => {
                 const cb = document.getElementById(checkboxId);
@@ -1352,6 +1506,31 @@
                     }
                 });
             });
+
+            // Setup de Control Especial: Arroyos Desbordados
+            const cbArroyosDesb = document.getElementById('cb-arroyos-desbordados');
+            if (cbArroyosDesb) {
+                cbArroyosDesb.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerArroyosDesbordados);
+                        if (!arroyosDesbordadosLoaded) cargarArroyosDesbordados();
+                        else filtrarYRenderizarArroyosDesbordados();
+                    } else {
+                        map.removeLayer(layerArroyosDesbordados);
+                        document.getElementById('filtros-arroyos-desbordados').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Filtro de Arroyos Desbordados
+            const fArroyoFecha = document.getElementById('filtro-arroyo-fecha');
+            if (fArroyoFecha) {
+                fArroyoFecha.addEventListener('change', () => {
+                    if(cbArroyosDesb && cbArroyosDesb.checked) {
+                        filtrarYRenderizarArroyosDesbordados();
+                    }
+                });
+            }
 
             for (const checkboxId in CONFIG_CAPAS) {
                 setupLayerControl(checkboxId, CONFIG_CAPAS[checkboxId]);

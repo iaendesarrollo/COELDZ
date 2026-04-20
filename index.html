@@ -95,6 +95,17 @@
         .map-zoom-high .marker-circle svg { width: 8px; height: 8px; stroke-width: 2px; }
         .map-zoom-high .marker-circle:hover { transform: scale(1.3); filter: brightness(1.15); }
 
+        /* ANIMACIÓN PARA EVENTOS RECURRENTES */
+        @keyframes parpadeo-recurrente {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.8); }
+            50% { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .marker-recurrent .marker-circle {
+            animation: parpadeo-recurrente 1.2s infinite ease-in-out !important;
+            border: 2px solid #DC2626 !important; /* Borde rojo intenso */
+        }
+
         /* Loader para las capas del menú */
         .layer-loading { opacity: 0.5; pointer-events: none; position: relative; }
         .layer-loading::after {
@@ -895,6 +906,7 @@
             const fFecha = document.getElementById('filtro-evt-fecha').value;
 
             const latLngs = [];
+            const eventosAgrupados = {};
 
             window.coeData.forEach(row => {
                 const cgm = (row.CGM || '').trim();
@@ -919,6 +931,24 @@
 
                 if (isNaN(lat) || isNaN(lng)) return;
 
+                // Agrupamos por coordenadas para detectar recurrencia
+                const key = `${lat},${lng}`;
+                if (!eventosAgrupados[key]) eventosAgrupados[key] = [];
+                eventosAgrupados[key].push(row);
+            });
+
+            for (const key in eventosAgrupados) {
+                const grupo = eventosAgrupados[key];
+                const [latStr, lngStr] = key.split(',');
+                const lat = parseFloat(latStr);
+                const lng = parseFloat(lngStr);
+                const isRecurrent = grupo.length > 1;
+
+                // Tomamos el tipo del primer evento como representativo para el color del ícono
+                const primerEvento = grupo[0];
+                const tipo = primerEvento['Tipo Evento'] || '';
+                const cgm = primerEvento.CGM || '';
+
                 // Asignar Color e Ícono según el tipo de evento
                 let tipoEventoLower = tipo.toLowerCase();
                 let svgUsado = svgIconos.alerta;
@@ -929,13 +959,15 @@
                     bgColor = '#4AB5E0'; // Celeste
                 } else if (tipoEventoLower.includes('arbol') || tipoEventoLower.includes('árbol') || tipoEventoLower.includes('rama')) {
                     svgUsado = svgIconos.arbol;
-                    bgColor = '#19567C'; // Azul Oscuro (o verde si prefieres)
+                    bgColor = '#19567C'; // Azul Oscuro
                 } else if (tipoEventoLower.includes('poste') || tipoEventoLower.includes('cable') || tipoEventoLower.includes('luz')) {
                     svgUsado = svgIconos.poste;
                     bgColor = '#F59E0B'; // Naranja/Amarillo Alerta Eléctrica
                 }
 
-                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgUsado}</div></div>`;
+                let claseExtra = isRecurrent ? 'marker-recurrent relative z-50' : '';
+
+                const iconHtml = `<div class="marker-container ${claseExtra}"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgUsado}</div></div>`;
                 const customIcon = L.divIcon({
                     html: iconHtml,
                     className: 'custom-div-icon',
@@ -945,20 +977,33 @@
 
                 const marker = L.marker([lat, lng], { icon: customIcon });
 
-                let popupHtml = `
-                    <div class="font-sans min-w-[220px]">
-                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${tipo}</h4>
-                        <ul class="text-xs text-[#64748B] space-y-1.5">
-                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
-                            <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
-                            <li><b class="text-[#0F172A]">CGM:</b> ${cgm || '-'}</li>
-                        </ul>
-                    </div>`;
+                let popupHtml = `<div class="font-sans min-w-[240px]">`;
+                
+                if (isRecurrent) {
+                    popupHtml += `<div class="bg-[#FEF2F2] text-[#DC2626] text-[10px] font-bold px-2 py-1.5 rounded mb-2 uppercase flex items-center gap-1.5 border border-[#FECACA]"><i class="fa-solid fa-triangle-exclamation"></i> ALERTA: PUNTO RECURRENTE (${grupo.length} Reportes)</div>`;
+                }
+
+                popupHtml += `<h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${isRecurrent ? 'Múltiples Incidentes' : tipo}</h4>
+                    <div class="max-h-[160px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
+
+                grupo.forEach(row => {
+                    popupHtml += `
+                        <div class="bg-[#F8FAFC] p-2 rounded border border-[#E2E8F0]">
+                            <p class="text-xs font-bold text-[#0F172A] mb-1 leading-tight">${row['Tipo Evento']}</p>
+                            <ul class="text-[10px] text-[#64748B] space-y-0.5">
+                                <li><b class="text-[#475569]">Fecha:</b> ${row.Fecha}</li>
+                                <li><b class="text-[#475569]">Dirección:</b> ${row.Direccion || '-'}</li>
+                                <li><b class="text-[#475569]">CGM:</b> ${row.CGM || '-'}</li>
+                            </ul>
+                        </div>`;
+                });
+
+                popupHtml += `</div></div>`;
                 
                 marker.bindPopup(popupHtml);
                 layerEventosTormenta.addLayer(marker);
                 latLngs.push([lat, lng]);
-            });
+            }
 
             // Ajustar el zoom automáticamente si hay puntos filtrados
             if (latLngs.length > 0 && map.hasLayer(layerEventosTormenta)) {
@@ -1432,7 +1477,9 @@
                                 const label = cb.closest('label');
                                 label.classList.add('layer-loading');
                                 
-                                const response = await fetch(configParams.url);
+                                // Reemplazar espacios por %20 para evitar problemas de parseo en el fetch
+                                const safeUrl = configParams.url.replace(/ /g, '%20');
+                                const response = await fetch(safeUrl);
                                 
                                 if (!response.ok) throw new Error("HTTP " + response.status);
                                 const data = await response.json();

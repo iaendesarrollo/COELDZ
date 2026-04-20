@@ -440,7 +440,8 @@
             arbol: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="m8 14-2.5-2.5a3.5 3.5 0 0 1 5-5 5 5 0 0 1 7 5 3.5 3.5 0 0 1-2.5 2.5Z"/></svg>`,
             poste: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M8 22h8"/><path d="M8 2h8"/></svg>`,
             alerta: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
-            energia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`
+            energia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+            check: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
         };
 
         // DICCIONARIO CENTRAL DE CAPAS GEOJSON
@@ -1396,6 +1397,7 @@
                 const tipo = (row.Tipo || '').trim();
                 const subtipo = (row['Sub Tipo'] || '').trim();
                 const fecha = (row.Fecha || '').trim();
+                const estado = (row.Estado || '').trim().toLowerCase();
 
                 // Evaluar todos los filtros
                 if (fCgm !== 'ALL' && cgm !== fCgm) return;
@@ -1410,7 +1412,13 @@
 
                 if (isNaN(lat) || isNaN(lng)) return;
 
-                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: #0B5F8D; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.preventiva}</div></div>`;
+                // Lógica Visual: Verde para "Solucionado", Azul por defecto
+                let isSolucionado = estado === 'solucionado';
+                let bgColor = isSolucionado ? '#16A34A' : '#0B5F8D'; // Verde o Azul
+                let svgIcono = isSolucionado ? svgIconos.check : svgIconos.preventiva; // Palomita o Escudo
+                let estadoClassColor = isSolucionado ? 'text-green-600' : 'text-[#0B5F8D]';
+
+                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIcono}</div></div>`;
                 const customIcon = L.divIcon({
                     html: iconHtml,
                     className: 'custom-div-icon',
@@ -1422,13 +1430,13 @@
 
                 let popupHtml = `
                     <div class="font-sans min-w-[220px]">
-                        <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${tipo}</h4>
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${tipo}</h4>
                         <ul class="text-xs text-[#64748B] space-y-1.5">
                             <li><b class="text-[#0F172A]">Sub Tipo:</b> ${subtipo}</li>
                             <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
                             <li><b class="text-[#0F172A]">Vecino:</b> ${row.Nombre || ''} ${row.Apellido || ''}</li>
                             <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
-                            <li><b class="text-[#0F172A]">Estado:</b> <span class="text-green-600 font-bold">${row.Estado || '-'}</span></li>
+                            <li><b class="text-[#0F172A]">Estado:</b> <span class="${estadoClassColor} font-bold">${row.Estado || '-'}</span></li>
                             <li><b class="text-[#0F172A]">Zonificación:</b> ${cgm || '-'}</li>
                         </ul>
                     </div>`;

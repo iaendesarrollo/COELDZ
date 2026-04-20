@@ -4,33 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAPA COE</title>
-    <!-- Tailwind CSS para estilos -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- PapaParse para lectura de CSV -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Fuentes de Google (Montserrat) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Iconos Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Leaflet CSS (Para el Mapa) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <!-- Leaflet MarkerCluster CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     
-    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <!-- Leaflet Heat -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js" crossorigin="anonymous"></script>
-    <!-- Leaflet MarkerCluster JS -->
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
     <style>
@@ -121,7 +111,6 @@
 </head>
 <body class="relative min-h-screen flex flex-col">
 
-    <!-- Encabezado Institucional (MAPA COE) -->
     <header class="bg-[var(--bg-main)] shadow-lg border-b-4 border-[var(--acento)] relative z-20 flex items-center justify-center w-full shrink-0 py-6 px-4">
         <div class="flex items-center gap-4">
             <div class="bg-[var(--blanco)] text-[var(--bg-main)] rounded-full shadow-md flex items-center justify-center h-14 w-14 shrink-0">
@@ -134,13 +123,10 @@
         </div>
     </header>
 
-    <!-- Contenedor Único del Mapa de Análisis Territorial -->
     <div id="map-view" class="w-full max-w-[1600px] mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
         
-        <!-- Contenedor Principal del Mapa con Layout de Sidebar -->
         <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[600px]">
             
-            <!-- MENU LATERAL IZQUIERDO (Capas y Filtros) -->
             <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-140px)]">
                 <div class="p-4 border-b border-[#E6EDF3] bg-[#F3F6F9] rounded-t-xl flex items-center gap-2 shrink-0">
                     <i data-lucide="layers" class="text-[#0B5F8D] h-5 w-5"></i>
@@ -149,13 +135,11 @@
                 
                 <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-6" id="menu-capas-container">
                     
-                    <!-- BLOQUE 1: DIVISIÓN TERRITORIAL -->
                     <div>
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i data-lucide="map" class="h-4 w-4"></i> División Territorial
                         </h4>
                         <div class="space-y-3" id="grupo-division-territorial">
-                            <!-- CHECKBOX LIMITE TERRITORIAL MARCADO POR DEFECTO -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer" checked>
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
@@ -171,7 +155,6 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 2: DATOS DEMOGRÁFICOS -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i data-lucide="pie-chart" class="h-4 w-4"></i> Datos Demográficos
@@ -189,7 +172,6 @@
                                 <input type="checkbox" id="cb-inundables" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Zonas Inundables</span>
                             </label>
-                            <!-- ARROYOS -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-arroyos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Arroyos</span>
@@ -197,7 +179,6 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 3: TAREAS PREVENTIVAS -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i data-lucide="shield-alert" class="h-4 w-4"></i> Tareas Preventivas
@@ -208,7 +189,6 @@
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Alertas y Reclamos</span>
                             </label>
 
-                            <!-- Contenedor de Filtros Dinámicos -->
                             <div id="filtros-tareas" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
                                 <div class="flex flex-col">
                                     <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
@@ -238,7 +218,6 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 4: EVENTOS POR TORMENTA -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-cloud-showers-heavy text-[var(--acento)] text-lg"></i> Eventos por Tormenta
@@ -249,7 +228,6 @@
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Incidentes Reportados (COE)</span>
                             </label>
 
-                            <!-- Contenedor de Filtros Dinámicos Eventos COE -->
                             <div id="filtros-eventos" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
                                 <div class="flex flex-col">
                                     <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
@@ -271,13 +249,11 @@
                                 </div>
                             </div>
                             
-                            <!-- CORTES DE LUZ -->
                             <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
                                 <input type="checkbox" id="cb-cortes-luz" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Cortes de Luz</span>
                             </label>
 
-                            <!-- Contenedor de Filtros Dinámicos Cortes de Luz -->
                             <div id="filtros-cortes-luz" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
                                 <div class="flex flex-col">
                                     <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
@@ -299,7 +275,6 @@
                                 </div>
                             </div>
 
-                            <!-- NUEVO: ARROYOS DESBORDADOS -->
                             <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
                                 <input type="checkbox" id="cb-arroyos-desbordados" class="w-4 h-4 accent-[#DC2626] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#DC2626] transition-colors font-medium">Arroyos Desbordados</span>
@@ -317,7 +292,6 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 5: INSTITUCIONES -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-building-columns text-[var(--acento)] text-lg"></i> Instituciones
@@ -366,7 +340,6 @@
                         </div>
                     </div>
 
-                    <!-- BLOQUE 6: SEGURIDAD -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-shield-halved text-[var(--acento)] text-lg"></i> Seguridad
@@ -386,7 +359,6 @@
                 </div>
             </aside>
 
-            <!-- MAPA PRINCIPAL -->
             <div class="w-full flex-1 bg-[#FFFFFF] p-2 rounded-xl shadow-lg border border-[#E6EDF3] relative z-10 flex flex-col">
                 <div id="map" class="w-full flex-1 rounded-lg relative z-0 min-h-[500px]"></div>
             </div>
@@ -394,7 +366,6 @@
         </div>
     </div>
 
-    <!-- Scripts de Lógica e Inicialización del Mapa -->
     <script>
         // Inicializar Iconos Lucide
         lucide.createIcons();

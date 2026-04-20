@@ -97,13 +97,13 @@
 
         /* ANIMACIÓN PARA EVENTOS RECURRENTES */
         @keyframes parpadeo-recurrente {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.8); }
-            50% { transform: scale(1.15); box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.9); }
+            50% { transform: scale(1.35); box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
         .marker-recurrent .marker-circle {
-            animation: parpadeo-recurrente 1.2s infinite ease-in-out !important;
-            border: 2px solid #DC2626 !important; /* Borde rojo intenso */
+            animation: parpadeo-recurrente 0.85s infinite ease-in-out !important;
+            border: 3px solid #DC2626 !important; /* Borde rojo intenso más grueso */
         }
 
         /* Loader para las capas del menú */

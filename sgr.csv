@@ -1,523 +1,523 @@
-Tipo,Sub Tipo,Apellido,Nombre,DNI,Direccion,Estado,Fecha,Latitud,Longitud,Origen,Zonificacion_CAV
-Asuntos Hidricos,Zanja obstruida,Font,Lorena Paola,29919485,FRANCISCO DE MORAZAN 130,Solucionado,2026-04-19 15:56:51,-34.729689997088,-58.427546654385,relevamiento,CENTENARIO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,belmas,cintia,26721965,CERRITO 2157,Solucionado,2026-04-19 14:11:24,-34.755176277924,-58.374795203258,relevamiento,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Rotman,Maria Paula,22656462,LAS HERAS 612,Solucionado,2026-04-19 09:42:48,-34.749206474646,-58.403976273816,relevamiento,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,BARDON,SOFIA,36064677,ZUVIRIA 355,Solucionado,2026-04-18 16:00:58,-34.766718406615,-58.38888109355,relevamiento,TEMPERLEY
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,AGUSTIN MAGALDI ,Solucionado,2026-04-18 13:12:55,-34.73384847608,-58.476097269639,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-18 13:11:37,-34.740325745607,-58.475273745257,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-18 13:10:07,-34.739560804217,-58.473781385384,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Velarde,Elvira Elizabeth,25242327,Lituania  689,Solucionado,2026-04-18 13:09:40,-34.774314154203,-58.370611570347,sitio_web,TEMPERLEY
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-18 13:09:15,-34.739104496551,-58.47298737672,relevamiento,SANTA CATALINA
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,paladino,Stella Maris,27280811,ARAGUAYA 775,Solucionado,2026-04-18 12:40:54,-34.788529885757,-58.420630883377,whatsapp,LLAVALLOL
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,12 DE OCTUBRE ,Solucionado,2026-04-18 12:33:50,-34.737040092701,-58.426603305602,relevamiento,CENTENARIO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Morales,Laura Alejandra,33203824,FONROUGE 93,Solucionado,2026-04-18 10:13:18,-34.759958655265,-58.396585813113,whatsapp,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Leiva,Sofía Daniela,37877595,SEBASTIAN ELCANO 678,Solucionado,2026-04-18 10:01:21,-34.736646,-58.467743,whatsapp,ALBERTINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Guardia,Jorge ,17302730,MONSEÑOR A PIAGGIO 1086,Solucionado,2026-04-17 16:58:24,-34.76022704918,-58.408628565063,whatsapp,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,BELGRANO 402,Solucionado,2026-04-17 16:51:05,-34.75607305697,-58.394049131956,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,J L MURATURE 1261,Solucionado,2026-04-17 16:26:14,-34.715916256978,-58.431252753709,relevamiento,CENTENARIO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,nuñez,betiana,32789036,SEBASTIAN ELCANO 671,Solucionado,2026-04-17 15:48:04,-34.736646,-58.467743,relevamiento,ALBERTINA
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Fernandez,Norma,12270491,MARTIN CAPELLO 237,Solucionado,2026-04-17 15:47:20,-34.747511022654,-58.399013956724,whatsapp,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Atención Vecinal ,Subsecretaría ,801,PRES JUAN D PERON ,Solucionado,2026-04-17 15:08:40,-34.736096293811,-58.434946588653,whatsapp,ALBERTINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,SALTO,SUSANA ELSA,10118792,SANCHEZ DE BUSTAMANTE 1490,Solucionado,2026-04-17 14:58:24,-34.767663405469,-58.419831712502,whatsapp_cgm,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Corral,Gustavo Alfredo ,26328777,RINCON  392,Solucionado,2026-04-17 14:53:30,-34.74129959141,-58.390482909648,whatsapp_cgm,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,MARIANO BOEDO ,Solucionado,2026-04-17 14:08:58,-34.755543696253,-58.428653147045,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,FERNANDEZ<,GABRIEL,22589820,MANUEL CASTRO 1926,Solucionado,2026-04-17 13:42:46,-34.736919541435,-58.399194115721,0800,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Solla ,pablo ,34382230,C MOLINA ARROTEA ,Solucionado,2026-04-17 13:11:04,-34.765980800406,-58.423431284829,whatsapp_cgm,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Caccaviello,Natalia,31641673,B MONTEAGUDO 811,Solucionado,2026-04-17 13:08:46,-34.747477667151,-58.408046306072,whatsapp,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Nuñez,Dalma,38564286,GENERAL CONESA 945,Solucionado,2026-04-17 13:06:21,-34.717782167368,-58.428118646394,whatsapp,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Bobadilla,Bernardita,93191477,EL CHINGOLO 1458,Solucionado,2026-04-17 13:03:16,-34.75497778564,-58.343275753837,centro_de_atencion_vecinal,SAN JOSE
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,KARLEN,LILIANA ,12972295,EL CHURRINCHE 3536,Solucionado,2026-04-17 12:57:18,-34.761280585477,-58.355235520059,centro_de_atencion_vecinal,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Moglia,Walter,13088816,R J PAYRO 2048,Solucionado,2026-04-17 11:56:09,-34.733413053099,-58.413148393008,whatsapp_cgm,BANFIELD
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,TEVEZ,PABLO ,32947310,GRANADEROS 791,Solucionado,2026-04-17 11:39:30,-34.749085828733,-58.386063796361,whatsapp,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Gilles,Ayelen ,37751836,CID GUIDY DE FRANC 1046,Solucionado,2026-04-17 11:14:16,-34.738350750824,-58.426718264681,whatsapp_cgm,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Chavez,Beatriz,14142091,ESTEVES CORREA 530,Solucionado,2026-04-17 10:59:54,-34.783884327201,-58.390085299623,whatsapp_cgm,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Alfonso,Susana Alejandra,29292563,G KURTH ,Solucionado,2026-04-17 10:57:41,-34.804820641142,-58.428199081386,whatsapp_cgm,LLAVALLOL
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,SOLARI,ANA MARIA,5653977,AVENIDA HIPOLITO YRIGOYEN ,Solucionado,2026-04-17 10:48:43,-34.759202698739,-58.402318981229,0800,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Escarcena ,Gustavo ,17229731,JOSE E COLOMBRES 2251,Solucionado,2026-04-17 10:48:07,-34.760477128884,-58.427151393829,whatsapp,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,FLAMINI,FABIANA ,18696438,FOURNIER 1933,Solucionado,2026-04-17 10:39:34,-34.740022265315,-58.440670847293,whatsapp,SANTA MARTA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,BALCARCE 139,Solucionado,2026-04-17 09:34:15,-34.761309602481,-58.395721185683,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Siakaluk ,Evelyn ,23149299,JUAN LARREA ,Solucionado,2026-04-17 09:32:56,-34.747846768211,-58.422045283474,whatsapp,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,SANDOVAL ,ALICIA ,17062389,MARIO BRAVO ,Solucionado,2026-04-17 09:08:06,-34.70768722407,-58.441488073778,whatsapp,FIORITO
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,ZAJC,LUCRECIA NAIR ,31822072,AVENIDA HIPOLITO YRIGOYEN ,Solucionado,2026-04-17 08:33:41,-34.766329016165,-58.403814457343,whatsapp,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,C GAITO 424,Solucionado,2026-04-17 08:12:56,-34.750875916882,-58.431109267997,relevamiento,LOMAS
-Asuntos Hidricos,Zanja obstruida,DE AMBIENTE,SECRETARIA ,21,CABO CASERES ,Solucionado,2026-04-16 20:32:34,-34.736687391375,-58.473902206193,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CABO CASERES ,Solucionado,2026-04-16 20:31:24,-34.736687391375,-58.473902206193,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,HOMERO MANZI ,Solucionado,2026-04-16 20:30:39,-34.736338674231,-58.473204905123,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,MANUELA PEDRAZA ,Solucionado,2026-04-16 20:29:42,-34.737491465292,-58.475378832016,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,SOLDADO V RODRIGUEZ ,Solucionado,2026-04-16 20:28:54,-34.741497778681,-58.472277191945,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,MANUELA PEDRAZA ,Solucionado,2026-04-16 20:28:17,-34.741497778681,-58.472277191945,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero reconstrucción,DE AMBIENTE,SECRETARIA ,21,CALLE 105 ,Solucionado,2026-04-16 20:27:28,-34.750349524261,-58.469209011254,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,ANDRADE,ALEJANDRO,18465091,INT FELIPE CASTRO 1697,Solucionado,2026-04-16 17:51:27,-34.745194335323,-58.431128847109,0800,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,J DARRAGUEIRA 1530,Solucionado,2026-04-16 17:50:27,-34.736037534117,-58.416933278043,relevamiento,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,CAFAYATE 92,Solucionado,2026-04-16 17:02:34,-34.729721822672,-58.463468775908,relevamiento,LAMADRID
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Alonso,Paula Daniela ,36872414,MANUEL BALIÑA 1905 ,Solucionado,2026-04-16 16:38:26,-34.734925452311,-58.410630757908,whatsapp,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,IRIARTE,ANA MARIA,10361657,C SAAVEDRA 648,Solucionado,2026-04-16 16:30:43,-34.767708441772,-58.407020285589,0800,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,ESTRADA 1299,Solucionado,2026-04-16 16:15:46,-34.743076210281,-58.417106174659,relevamiento,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,clarke,cristian,27634658,ESTEVES CORREA ,Solucionado,2026-04-16 15:54:57,-34.778592539172,-58.39433154019,centro_de_atencion_vecinal,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,CUADRADO,PAULA,28080409,GERVASIO ANTONIO DE POSADAS 1096,Solucionado,2026-04-16 15:46:12,-34.771060722667,-58.417005559259,redes,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,GOMEZ,LORENA BEATRIZ ,34203863,EIBAR 337,Solucionado,2026-04-16 15:29:42,-34.741271595521,-58.459515052034,whatsapp,ALBERTINA
-Alumbrado Público,Luminaria con riesgo de caída,VIDOTTO, ROSANA MABEL ,25160569,FRANCISCO B RECONDO 949,Solucionado,2026-04-16 15:26:01,-34.711358707145,-58.445065274033,whatsapp,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,J DARRAGUEIRA ,Solucionado,2026-04-16 15:18:24,-34.737444300598,-58.408082391792,relevamiento,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DIAZ,IVANA YAMILA,35537484,BENITO PEREZ GALDOS 1700,Solucionado,2026-04-16 14:38:53,-34.716798635965,-58.44225786269,whatsapp,FIORITO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,adomavicius ,luis,7759505,PICHINCHA 1495,Solucionado,2026-04-16 14:22:58,-34.786991267241,-58.413606399178,0800,TURDERA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Gómez , Luisa Beatriz ,13088382,FOURNIER 1360,Solucionado,2026-04-16 14:21:51,-34.745195697235,-58.436076421808,whatsapp_cgm,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Coloma,Norma Beatriz,18225688,LA HAYA 918,Solucionado,2026-04-16 14:00:59,-34.721572071462,-58.437409800936,whatsapp_cgm,CENTENARIO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,ARANA GOIRI 3175,Solucionado,2026-04-16 13:41:58,-34.737230214608,-58.463364566365,relevamiento,ALBERTINA
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,GOMEZ,MERCEDES,10082700,ALBERTO LARROQUE 1499,Solucionado,2026-04-16 13:19:24,-34.742405767832,-58.416034681222,0800,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,VESCIO,PABLO,31657100,FAMATINA ,Solucionado,2026-04-16 12:54:16,-34.766961983202,-58.437224736421,relevamiento,PARQUE BARON
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,Atención Vecinal ,Subsecretaría ,801,EL HORNERO 4448,Solucionado,2026-04-16 12:27:49,-34.753624058261,-58.341355751182,whatsapp,SAN JOSE
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Zaloga,Franco,45225495,MANUEL BALIÑA 1950,Solucionado,2026-04-16 12:20:02,-34.734925452311,-58.410630757908,relevamiento,BANFIELD
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Pigni,Franco,28585369,CERRITO 1844,Solucionado,2026-04-16 11:45:33,-34.756912171919,-58.378111856049,whatsapp_cgm,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Bernasconi ,Romina,30594184,DIEGO GIBSON ,Solucionado,2026-04-16 11:44:51,-34.800242460784,-58.42718244258,whatsapp,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Dagostino,Daniel Hernan,26824214,GENERAL CARLOS DE ALVEAR 2049,Solucionado,2026-04-16 11:18:15,-34.735034528336,-58.403181515083,0800,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Milone ,Antonio ,93207167,BELELLI 140,Solucionado,2026-04-16 11:13:26,-34.755855612784,-58.422082894405,whatsapp,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Salasia,Graciela ,16198243,ESTRADA 452,Solucionado,2026-04-16 10:59:50,-34.752633294744,-58.418477485888,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Fernández,Jorge Omar,13289046,RIOBAMBA 1395,Solucionado,2026-04-16 10:33:59,-34.761179582532,-58.384024564043,whatsapp,TEMPERLEY
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Zaloga,Franco,45225495,CARLOS GUIDO SPANO 25,Solucionado,2026-04-16 10:02:41,-34.774431487595,-58.409758469456,relevamiento,TEMPERLEY
-Defensa Civil,Asistencia por Temporal,DEFENSA CIVIL,AREA,22,ROBERTO ARLT 2232,Solucionado,2026-04-16 09:55:21,-34.709486117428,-58.445723502544,relevamiento,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,PEREZ BAUMANN,ALICIA SUSANA,18407308,MELO 829,Solucionado,2026-04-16 09:26:34,-34.751180043389,-58.384239418207,0800,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Gona,Roxana,16259366,GERVASIO ANTONIO DE POSADAS 863,Solucionado,2026-04-16 09:13:09,-34.768731402819,-58.416502290228,whatsapp,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,petronio,mariela,28467046,BOQUERON 141,Solucionado,2026-04-16 08:45:57,-34.760013651099,-58.417654938654,0800,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,RUIZ,CAROLINA,96393202,POBLADORA 370,Solucionado,2026-04-16 07:59:56,-34.801934604656,-58.41251083478,relevamiento,LLAVALLOL
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,AVENIDA CAP GIACHINO ,Solucionado,2026-04-15 19:54:06,-34.740187003064,-58.477847029949,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CAPITAN JACINTO YABEN ,Solucionado,2026-04-15 19:52:19,-34.740380969185,-58.48105715954,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CAPITAN JACINTO YABEN ,Solucionado,2026-04-15 19:50:42,-34.740527858286,-58.480046908259,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 103 ,Solucionado,2026-04-15 19:38:22,-34.747400941794,-58.466045980485,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 105 ,Solucionado,2026-04-15 19:37:27,-34.750349524261,-58.469209011254,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 107 ,Solucionado,2026-04-15 19:36:39,-34.751304853478,-58.4685151544,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,GENERAL JUAN F QUIROGA ,Solucionado,2026-04-15 19:35:28,-34.744355087773,-58.465624614408,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,lantero,María violeta,12001737,LORIA 201,Solucionado,2026-04-15 19:31:49,-34.763067943692,-58.400850579682,whatsapp,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,MATEO,PAMELA,30374252,GENERAL LEVALLE 1905,Solucionado,2026-04-15 18:40:07,-34.739611124643,-58.384195478172,0800,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,TREJO ,NESTOR GABRIEL ,31257341,LA MADRESELVA 2433,Solucionado,2026-04-15 18:29:21,-34.758548854489,-58.36738132651,whatsapp,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,SARI,ANDREA,22819550,GENERAL CARLOS DE ALVEAR 178,Solucionado,2026-04-15 16:38:42,-34.757759600183,-58.408114473041,whatsapp,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Viloria,Alejandra,22023331,JUAN B VAGO 395,Solucionado,2026-04-15 15:32:28,-34.780891799918,-58.414680156947,relevamiento,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Medina,Martin ,14411500,BRUSELAS 2798,Solucionado,2026-04-15 13:39:18,-34.719796836169,-58.469977892957,whatsapp_cgm,LAMADRID
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,PAZ,ERCIRA,23525270,REVOLUCION DE TEMPERLEY 2536,Solucionado,2026-04-15 13:14:56,-34.75996,-58.36902,relevamiento,SAN JOSE
-Alumbrado Público,Luminaria con riesgo de caída,SANTA CATALINA,CGM,7,CMTE TOMAS ESPORA ,Solucionado,2026-04-15 12:13:06,-34.731393279624,-58.490812316948,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,LOMBARDO,FABIANA,18253775,PRESIDENTE DERQUI 370,Solucionado,2026-04-15 11:49:34,-34.741274716868,-58.377177964131,whatsapp,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,IRIARTE,ANA MARIA,10361657,C SAAVEDRA 648,Solucionado,2026-04-15 11:01:16,-34.767708441772,-58.407020285589,0800,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,ROMERO,MARIA TELMA,12114778,EL MIRASOL ,Solucionado,2026-04-15 10:57:15,-34.75899553681,-58.360638145185,whatsapp,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,MONTERO,PAOLA,24731691,C LUJAN ,Solucionado,2026-04-15 10:23:15,-34.803437282399,-58.420235538321,relevamiento,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Fernández,Daniela ,22875080,GENERAL CAMPOS 147,Solucionado,2026-04-15 10:20:26,-34.755182129321,-58.378335615895,whatsapp_cgm,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Damore,Walter,17275273,VOLTAIRE 2043,Solucionado,2026-04-15 10:07:25,-34.745322656128,-58.45353645911,whatsapp_cgm,SANTA MARTA
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Zaloga,Franco,45225495,EL MIRASOL 4395,Solucionado,2026-04-15 10:02:16,-34.751706011936,-58.346806462346,relevamiento,SAN JOSE
-Asuntos Hidricos,Zanja obstruida,SOTO,LUIS MARIO,12941936,CORONEL TERRADA 1032,Solucionado,2026-04-15 09:59:18,-34.759635724311,-58.451207434587,centro_de_atencion_vecinal,PARQUE BARON
-Asuntos Hidricos,Zanja obstruida,LAMADRID,CGM,14,IGUAZU 1025,Solucionado,2026-04-15 09:51:44,-34.731208247631,-58.476991775735,relevamiento,LAMADRID
-Asuntos Hidricos,Zanja obstruida, Gentile , Fabian alejandro,20694891,CORONEL TERRADA 1019,Solucionado,2026-04-15 09:45:58,-34.759635724311,-58.451207434587,centro_de_atencion_vecinal,PARQUE BARON
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Viloria,Alejandra,22023331,JUAN B VAGO 1300,Solucionado,2026-04-15 09:00:48,-34.781404865943,-58.414289499516,whatsapp,TEMPERLEY
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,CHACABUCO ,Solucionado,2026-04-15 08:52:55,-34.745623133779,-58.393637805854,relevamiento,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,mansilla,guillermo ,17540667,AVENIDA GRAL HORNOS ,Solucionado,2026-04-15 08:42:03,-34.713506354543,-58.428042507838,0800,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,FERNANDEZ,CAMILA,42684746,ALBERTO GOMEZ 138,Solucionado,2026-04-15 08:40:08,-34.757533875697,-58.431246658758,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,PEÑA 951,Solucionado,2026-04-15 08:37:38,-34.749068865878,-58.384162066417,relevamiento,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Garcia,Daniela ,231146341,CORONEL R FALCON ,Solucionado,2026-04-15 08:25:46,-34.767499260144,-58.404048590523,whatsapp,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,BIALBA,MARCELA,94937045,BOULEVARD SANTA FE 780,Solucionado,2026-04-15 08:13:00,-34.748717583787,-58.419353512841,relevamiento,LOMAS
-Asuntos Hidricos,Zanja obstruida,Ledesma,Maximiliano,29826297,GABRIEL MIRO 835,Solucionado,2026-04-15 08:07:19,-34.724903018411,-58.438814706281,centro_de_atencion_vecinal,CENTENARIO
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 107 ,Solucionado,2026-04-14 22:03:08,-34.751304853478,-58.4685151544,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 105 ,Solucionado,2026-04-14 22:01:15,-34.750349524261,-58.469209011254,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 107 ,Solucionado,2026-04-14 22:00:05,-34.751304853478,-58.4685151544,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,belmonte ,alicia ,12921369,SIMON BOLIVAR 507,Solucionado,2026-04-14 18:20:04,-34.766314221482,-58.408375314137,whatsapp,LOMAS
-Asuntos Hidricos,Boca de tormenta obstruida,ISZCZYK,MIGUEL ,18685557,AMANCIO ALCORTA 99,Solucionado,2026-04-14 17:56:08,-34.778381025344,-58.392535854538,unidad_intendente,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Rea claros,Jaqueline,94941948,CALLE 1 ,Solucionado,2026-04-14 17:50:34,-34.71671720473,-58.443669655385,relevamiento,FIORITO
-Alumbrado Público,Luminaria con riesgo de caída,LUMINARIAS,RECLAMOS,25,MENDOZA 1205,Solucionado,2026-04-14 16:31:36,-34.805570908682,-58.411754058824,relevamiento,LLAVALLOL
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Pizzatti,Diego Gastón ,23022832,RUBEN DE ROSAS 1369,Solucionado,2026-04-14 15:25:46,-34.775854062319,-58.374871974419,whatsapp_cgm,TEMPERLEY
-Asuntos Hidricos,Sumidero tapado,Rivero,Mónica ,14201193,25 DE MAYO ,Solucionado,2026-04-14 15:17:08,-34.776329337248,-58.39733557049,whatsapp_cgm,TEMPERLEY
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Santangelo,Andrea,20416301,SIXTO FERNANDEZ 1804,Solucionado,2026-04-14 15:06:40,-34.763380163832,-58.424183907323,whatsapp,LOMAS
-Asuntos Hidricos,Zanja obstruida,DE AMBIENTE,SECRETARIA ,21,EVITA ,Solucionado,2026-04-14 14:52:14,-34.741640760267,-58.475231143466,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,SITARO,ADRIANA ALICIA,16323037,VETERE 849,Solucionado,2026-04-14 14:18:25,-34.747282123909,-58.422011192097,whatsapp_cgm,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,lopez,graciela,18552644,BOLONIA 726,Solucionado,2026-04-14 14:05:58,-34.722414407135,-58.433046433764,whatsapp,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,RONDEAU 378,Solucionado,2026-04-14 13:49:51,-34.799019898698,-58.421793819043,relevamiento,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,CORPAR,MARIA ,23026664,HUNGRIA 950,Solucionado,2026-04-14 13:46:57,-34.75315702805,-58.349280792802,whatsapp,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,SANCHEZ,NANCY GRACIELA,31224730,MIGUEL DE CERVANTES ,Solucionado,2026-04-14 13:44:09,-34.755997581135,-58.434587417732,whatsapp,PARQUE BARON
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,CAPUTO,CARMEN NELLY,2906980,PRESIDENTE DERQUI MALABIA,Solucionado,2026-04-14 13:07:25,-34.741697145498,-58.378951920533,centro_de_atencion_vecinal,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,FERREYRA,BEATRIZ NOEMÍ,11613787,RIOBAMBA 1355,Solucionado,2026-04-14 12:59:52,-34.761179582532,-58.384024564043,0800,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,RITA,ALVAREZ ,2764533877,C SUCRE 714,Solucionado,2026-04-14 12:43:30,-34.76162,-58.41944,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,aldacor,maria,18769955,NOGOYA 283,Solucionado,2026-04-14 12:22:12,-34.733442814603,-58.422617149192,relevamiento,CENTENARIO
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,ciccarellia ,marcela ,16079363,GRANADEROS 783,Solucionado,2026-04-14 12:13:48,-34.749085828733,-58.386063796361,centro_de_atencion_vecinal,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,ANDRADE,ALEJANDRO,18865091,INT FELIPE CASTRO 1695,Solucionado,2026-04-14 11:56:26,-34.745194335323,-58.431128847109,whatsapp_cgm,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Luna,Omar,12581695,ALBERTO LARROQUE 1502,Solucionado,2026-04-14 11:49:20,-34.742223106012,-58.417685134181,0800,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Andrade,Roxana ,21649853,FALUCHO 290,Solucionado,2026-04-14 11:26:10,-34.751770654568,-58.43996681833,centro_de_atencion_vecinal,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,couso ,Mariano ,24694123,MANUEL BALIÑA 881,Solucionado,2026-04-14 11:18:12,-34.748524906998,-58.413596317435,whatsapp_cgm,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Soraires,Adriana ,16749107,LOS CASTAÑOS 50,Solucionado,2026-04-14 11:13:54,-34.76383792909,-58.431141751341,0800,PARQUE BARON
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,arregui,monica,16819214,GUALEGUAY 600,Solucionado,2026-04-14 11:08:54,-34.729466805019,-58.471475037707,centro_de_atencion_vecinal,LAMADRID
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,russo,julia haidee,5408097,GUAMINI 2533,Solucionado,2026-04-14 11:04:40,-34.710989791779,-58.45943756161,operativos,BUDGE
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Gould,Federico,37363332,CERRITO 567,Solucionado,2026-04-14 11:03:05,-34.76438803422,-58.39244966335,whatsapp,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,MANOUKIAN,MARTIN,20024404,MEEKS 620,Solucionado,2026-04-14 10:58:49,-34.769463780758,-58.398084773534,whatsapp_cgm,TEMPERLEY
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Zaloga,Franco,45225495,PATRICIOS 360,Solucionado,2026-04-14 10:54:32,-34.793520842236,-58.408304914396,relevamiento,TURDERA
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,DEFENSA CIVIL,AREA,22,EL MIRASOL ,Solucionado,2026-04-14 10:33:16,-34.752235265101,-58.34792452973,relevamiento,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,VAZQUEZ,CARMEN,6701980,SIXTO FERNANDEZ 978,Solucionado,2026-04-14 10:31:15,-34.765166171469,-58.411907931008,centro_de_atencion_vecinal,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,SANCHEZ,PABLO,11513667,REPUBLICA ARGENTINA 850,Solucionado,2026-04-14 10:27:12,-34.7726202,-58.3625346,relevamiento,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEVER,CARLOS,14216843,JUAN DE DIOS FILIBERTO 92,Solucionado,2026-04-14 10:16:57,-34.757341260176,-58.429023288869,centro_de_atencion_vecinal,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,gitali,roberto ,23029491,A ALSINA 270,Solucionado,2026-04-14 09:55:44,-34.739202689069,-58.392477970437,centro_de_atencion_vecinal,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Culsndins,Aida,5746887,RIOBAMBA 2296,Solucionado,2026-04-14 09:49:25,-34.755431299806,-58.372922962347,0800,SAN JOSE
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,caballero,Cesar ,29153929,CANADA 1717,Solucionado,2026-04-14 09:46:30,-34.719982530052,-58.451355003759,whatsapp_cgm,BUDGE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,sellitti,anabella,35864277,B ROLDAN 1458,Solucionado,2026-04-14 09:38:49,-34.748857771108,-58.370813824037,centro_de_atencion_vecinal,BANFIELD
-Asuntos Hidricos,Boca de tormenta obstruida,CABRERA BARRIOS,NELIDA ,93103751,EVITA 3532,Solucionado,2026-04-14 09:37:02,-34.740136924766,-58.476379434473,unidad_intendente,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,TAPIA,Laureano Rodriguez ,21771571,MALVINAS ARGENTINAS 1103,Solucionado,2026-04-14 09:11:58,-34.773233615452,-58.381160790374,relevamiento,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,SAN JOSÉ,CGM,6,EL MIRASOL ,Solucionado,2026-04-14 09:07:12,-34.752235265101,-58.34792452973,relevamiento,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DOLJANIN,MARIA ELENA,14690518,ALBERTI 251,Solucionado,2026-04-14 08:58:58,-34.754429261686,-58.392699013002,0800,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Berasain,Marta,10330329,MANUEL CASTRO 1975,Solucionado,2026-04-14 08:53:47,-34.736919541435,-58.399194115721,0800,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,TAPIA,Laureano Rodriguez ,21771571,MALVINAS ARGENTINAS 1103,Solucionado,2026-04-14 08:47:39,-34.773233615452,-58.381160790374,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,MALDONADO MIRET,ZULMA CECILIA,92885130,CONSEJAL RAJO 3384,Solucionado,2026-04-14 08:18:31,-34.694827443294,-58.446810676962,whatsapp_cgm,FIORITO
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 3 ,Solucionado,2026-04-13 20:32:11,-34.746403343393,-58.466788611623,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 103 ,Solucionado,2026-04-13 20:30:54,-34.747400941794,-58.466045980485,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 104 ,Solucionado,2026-04-13 20:29:46,-34.747861896237,-58.465702830538,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,GENERAL JUAN F QUIROGA ,Solucionado,2026-04-13 20:28:48,-34.744355087773,-58.465624614408,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero reconstrucción,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-13 20:27:56,-34.740325745607,-58.475273745257,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-13 20:26:12,-34.739560804217,-58.473781385384,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Avalos,Ivan Alexis,37422422,FOURNIER 1871,Solucionado,2026-04-13 18:58:25,-34.741054757386,-58.439897165226,whatsapp,SANTA MARTA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,BALLESTERO,NATALIA PAULA ,26821877,GRL ALVARADO 316,Solucionado,2026-04-13 18:29:35,-34.789706108257,-58.402294468298,whatsapp,TURDERA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Binetti,Natalia,26879811,SILVA ,Solucionado,2026-04-13 16:41:31,-34.807562717371,-58.412744955453,whatsapp,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,FINOCCHIO,SERGIO ATILIO,32022365,ALBERTO LARROQUE ,Solucionado,2026-04-13 15:45:20,-34.741560000576,-58.425162015625,whatsapp_cgm,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,fregenal ,Camila,41921609,JUAN B JUSTO 1090,Solucionado,2026-04-13 15:30:15,-34.802871637824,-58.411152207729,whatsapp_cgm,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Atención Vecinal ,Subsecretaría ,801,SAN FRANCISCO 365,Solucionado,2026-04-13 15:15:31,-34.792706878181,-58.410850632419,whatsapp_cgm,TURDERA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Aranda,Carlos,32197316,PARAGUAY 615 ,Solucionado,2026-04-13 15:02:33,-34.725331597048,-58.428264535336,whatsapp_cgm,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,ferreyra,silvia,17024378,JOSE GARIBALDI 1787,Solucionado,2026-04-13 14:04:31,-34.779281897236,-58.420129680284,whatsapp,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Natale,Gabriela,14462219,MANUEL CASTRO 623,Solucionado,2026-04-13 13:24:18,-34.752463337323,-58.402445979495,whatsapp_cgm,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,KUS,SILVIA,16913449,COLON 235,Solucionado,2026-04-13 12:53:28,-34.768742799163,-58.392719633417,whatsapp_cgm,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,puglia,Susana Graciela ,10361742,JOSE I GORRITI 1353,Solucionado,2026-04-13 12:48:40,-34.759546840873,-58.416821568431,whatsapp_cgm,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,SPOLLI,OLGA,16737795,BRUNO TAVANO 805,Solucionado,2026-04-13 12:07:43,-34.75801,-58.44271,whatsapp_cgm,PARQUE BARON
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,CARBIA,OSCAR,10588290,EL CHURRINCHE 1797,Solucionado,2026-04-13 12:06:19,-34.769828612184,-58.373137986766,centro_de_atencion_vecinal,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Santoquieti,Jose ,13088277,ARANA GOIRI 90,Solucionado,2026-04-13 12:03:11,-34.768712743405,-58.439713277082,centro_de_atencion_vecinal,PARQUE BARON
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,caceres,eduardo,17975018,VALPARAISO 340,Solucionado,2026-04-13 11:54:44,-34.751474733637,-58.451779648483,centro_de_atencion_vecinal,SANTA MARTA
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Fiorruccio,Horacio,11175678,JUNCAL VELEZ,Solucionado,2026-04-13 11:53:09,-34.763799692101,-58.384253619535,centro_de_atencion_vecinal,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Atencion a la comunidad,Subsecretaria,800,FELIX DE AZARA 736,Solucionado,2026-04-13 11:46:57,-34.75112903636,-58.403617394271,0800,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,LICEN,ROBERTO LUIS,10960765,PRESIDENTE DERQUI 1375,Solucionado,2026-04-13 11:44:44,-34.743697062205,-58.378437957789,centro_de_atencion_vecinal,BANFIELD
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,BOCCHI,LEONARDO,10354393,MANUEL CASTRO 2023,Solucionado,2026-04-13 11:34:01,-34.736239452962,-58.399021828528,centro_de_atencion_vecinal,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,RODRIGUEZ,OSVALDO,16914093,PICUN LEUFU 1280,Solucionado,2026-04-13 11:30:13,-34.762774446182,-58.415944906247,0800,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,RIOS,MARIA PAULA,32401783,MSTRA CATALINA RODRIGUEZ 180,Solucionado,2026-04-13 11:24:59,-34.758814388079,-58.426057637452,whatsapp_cgm,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,CRUZ,ESTELA,14721978,B FERNANDEZ MORENO 135,Solucionado,2026-04-13 11:15:41,-34.758634034321,-58.427309438844,whatsapp_cgm,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Caraballo,Víctor Hugo  ,22389329,PERGAMINO ,Solucionado,2026-04-13 10:52:47,-34.726838861017,-58.481413666653,whatsapp_cgm,LAMADRID
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,chaparro,mariana,33501793,HOMERO ,Solucionado,2026-04-13 10:48:03,-34.751868456644,-58.449552686104,centro_de_atencion_vecinal,SANTA MARTA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Diaz , vivían vanesa,32381342,PEDRO RIVERA 2481,Solucionado,2026-04-13 10:43:56,-34.751760724073,-58.428398109022,whatsapp_cgm,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,ALBORNOZ,CARLOS MARCELO,18123742,DINAMARCA 3426,Solucionado,2026-04-13 10:43:03,-34.743939421654,-58.349442420132,centro_de_atencion_vecinal,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,cuevas ,silvina,20383256,BOULEVARD SANTA FE 1121,Solucionado,2026-04-13 10:40:03,-34.74412688615,-58.418701785427,0800,BANFIELD
-Alumbrado Público,Luminaria con riesgo de caída,BUDGE,CGM,2,INT PEDRO PABLO TURNER 1897,Solucionado,2026-04-13 10:28:53,-34.709491939981,-58.461337720587,relevamiento,BUDGE
-Alumbrado Público,Luminaria con riesgo de caída,BUDGE,CGM,2,COSQUIN 2577,Solucionado,2026-04-13 10:26:01,-34.709995871292,-58.457121517338,relevamiento,BUDGE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública, CARISTI,JUAN CARLOS,4888232,VIENA 173,Solucionado,2026-04-13 09:54:28,-34.768871263792,-58.435434196732,centro_de_atencion_vecinal,PARQUE BARON
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,....,CGM TEMPERLEY,36903864,SAN CARLOS 299,Solucionado,2026-04-13 09:22:59,-34.778158461112,-58.411998001263,relevamiento,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Mazariego,Sara Nilda ,5867970,FELIPE BOERO 203,Solucionado,2026-04-13 09:10:55,-34.753463617765,-58.429134072337,centro_de_atencion_vecinal,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,gonzalez,juan carlos ,7795373,DEAN G FUNES 1268,Solucionado,2026-04-13 08:54:16,-34.805902,-58.412733,whatsapp_cgm,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Osorio,Miguel,27273661,Caaguazu  1587 esquina golondrina ,Solucionado,2026-04-13 06:51:10,-34.756162640063,-58.341463321439,sitio_web,SAN JOSE
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,DEFENSA CIVIL,AREA,22,SAN CARLOS ,Solucionado,2026-04-13 05:51:00,-34.777679572177,-58.412334512944,relevamiento,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,SAN CARLOS ,Solucionado,2026-04-13 05:28:21,-34.777679572177,-58.412334512944,relevamiento,TEMPERLEY
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,ALBERTO LARROQUE 996,Solucionado,2026-04-12 19:39:41,-34.743580051077,-58.40861715916,relevamiento,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Elliot,Valeria,23906470,TRIUNVIRATO 22,Solucionado,2026-04-12 16:25:46,-34.781419831354,-58.389434479664,relevamiento,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,SARACENI,LUIS,93164826,GENERAL MULLER 437 ,Solucionado,2026-04-12 12:36:35,-34.786675945968,-58.393354166869,whatsapp,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,TOVAR,RUBEN,20964004,EL PLUMERILLO 2659,Solucionado,2026-04-12 11:20:36,-34.70171866762,-58.444537974107,relevamiento,FIORITO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Rodriguez ,Julián ,33121225,GENERAL GUEMES 809,Solucionado,2026-04-12 10:18:01,-34.767121710946,-58.380207626997,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Fagalde ,Delia ,34613484,LAUTARO 547,Solucionado,2026-04-12 09:22:06,-34.77449815258,-58.373574936869,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Alvarez,Rita,27026051,Sucre  710 y 714,Solucionado,2026-04-12 02:34:53,-34.76162,-58.41944,sitio_web,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,GENERAL A J DE SUCRE ,Solucionado,2026-04-11 23:20:13,-34.766216665172,-58.421810362141,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DIRESE,OMAR,13258318,Castro Barros  1037,Solucionado,2026-04-11 19:45:02,-34.740018279138,-58.380531093177,sitio_web,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,cabrera,dora,93900624,barcelona  2050,Solucionado,2026-04-11 18:57:37,-34.734244874868,-58.44594520395,sitio_web,BUDGE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,OJEDA,IVAN DARIO ,30424927,LUIS DAVILA 498,Solucionado,2026-04-11 18:21:52,-34.804801557389,-58.411602727557,relevamiento,LLAVALLOL
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CALLE 4 ,Solucionado,2026-04-11 17:37:29,-34.746868238153,-58.463719833129,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 103 ,Solucionado,2026-04-11 17:36:37,-34.747400941794,-58.466045980485,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 103 ,Solucionado,2026-04-11 17:35:45,-34.747400941794,-58.466045980485,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 106 ,Solucionado,2026-04-11 17:34:35,-34.750789437356,-58.468889503928,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-11 17:02:12,-34.739104496551,-58.47298737672,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-11 16:56:05,-34.739560804217,-58.473781385384,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-11 16:55:14,-34.739560804217,-58.473781385384,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-11 16:54:19,-34.739560804217,-58.473781385384,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,MIZZARDO,MIRTA,17586248,J DARRAGUEIRA 1518,Solucionado,2026-04-11 12:14:02,-34.736037534117,-58.416933278043,relevamiento,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Monje,Carlos Roberto,21461919,JOSE E COLOMBRES 1740,Solucionado,2026-04-11 11:17:20,-34.761091750343,-58.422785712313,whatsapp,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Briz,Rosa,14722512,REVOLUCION DE TEMPERLEY 529,Solucionado,2026-04-11 10:46:25,-34.757024231963,-58.368500196117,redes,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Gomez,Blanca ,6707676,GENOVA 1931,Solucionado,2026-04-11 09:41:33,-34.744363025381,-58.37090382809,0800,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Achával,Carlos,27642324,Cochabamba  945,Solucionado,2026-04-11 09:36:55,-34.745777228485,-58.382623308942,sitio_web,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,LONGUEIRAS,ROBERTO,4703016,JUAN A GARONA 1198,Solucionado,2026-04-11 09:23:28,-34.763650234672,-58.414451333639,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,ANDRES BELLO 1097,Solucionado,2026-04-11 08:44:27,-34.732347282991,-58.456998218529,relevamiento,ALBERTINA
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Gandaria ,Estela ,17898962,IPARRAGUIRRE 404,Solucionado,2026-04-11 00:01:46,-34.765713740144,-58.445113424788,relevamiento,PARQUE BARON
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,Gandaria ,Estela ,17898962,IPARRAGUIRRE 406,Solucionado,2026-04-10 23:14:43,-34.765713740144,-58.445113424788,relevamiento,PARQUE BARON
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Aranda,Carlos,32197316,Paraguay  615 entre paris  y barcelona ,Solucionado,2026-04-10 20:03:31,-34.724160831413,-58.429177757013,sitio_web,CENTENARIO
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,CABO CORREA ,Solucionado,2026-04-10 19:46:54,-34.739560804217,-58.473781385384,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,JUAN LARREA ,Solucionado,2026-04-10 18:42:10,-34.74957754743,-58.410634073136,relevamiento,LOMAS
-Asuntos Hidricos,Zanja obstruida,HERRERA,JORGE DAVID ,35358646,MACACHA GUEMES ,Solucionado,2026-04-10 18:25:45,-34.736226213851,-58.478482866936,whatsapp,SANTA CATALINA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,PONS,MARIA GRACIA,14937514,MANUEL DE FALLA 426,Solucionado,2026-04-10 17:24:58,-34.750884809464,-58.42993497359,whatsapp,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,Caballero,Karina ,30746843,AVENIDA GRAL MARTIN RODRIGUEZ 1600,Solucionado,2026-04-10 15:33:21,-34.736489157857,-58.435668010795,whatsapp_cgm,ALBERTINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,RODRIGUEZ,ZULEMA SEBASTIANA,4941987,J J PASO 2215,Solucionado,2026-04-10 15:11:06,-34.748195617698,-58.427371071633,whatsapp,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Gonzalez,Gaston ,28778228,ANIBAL PONCE ,Solucionado,2026-04-10 14:38:24,-34.747654252136,-58.439978654992,whatsapp_cgm,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,GONZALEZ CIGOJ,SILVINA CECILIA,16914484,VALENTIN VERGARA 2056,Solucionado,2026-04-10 14:15:38,-34.736663412463,-58.393373510871,whatsapp,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Cambre,Micaela,38491205,MAIPU 873,Solucionado,2026-04-10 13:42:34,-34.744439874681,-58.383796600115,whatsapp,BANFIELD
-Asuntos Hidricos,Boca de tormenta obstruida,HERNANDEZ,NORA ,16266535,ARMONIA ,Solucionado,2026-04-10 13:29:48,-34.787856502645,-58.423878065097,whatsapp,LLAVALLOL
-Asuntos Hidricos,Zanja obstruida,LAMADRID,CGM,14,CAÑUELAS 100,Solucionado,2026-04-10 13:20:57,-34.728958115661,-58.464003271311,relevamiento,LAMADRID
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Beraldi,Paula,31224432,24 DE NOVIEMBRE ,Solucionado,2026-04-10 12:57:46,-34.791966845029,-58.422085746773,whatsapp_cgm,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Ramírez,Wanda,47383135,EL ZORZAL 3526,Solucionado,2026-04-10 12:49:36,-34.761921921827,-58.354704283295,whatsapp,SAN JOSE
-Asuntos Hidricos,Sumidero tapado,ibañez,marile,22854815,J L MURATURE 961 ,Solucionado,2026-04-10 12:14:24,-34.718687380318,-58.429097601926,whatsapp_cgm,CENTENARIO
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-10 12:01:03,-34.739560804217,-58.473781385384,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-10 11:59:24,-34.738728322585,-58.472306502672,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-10 11:58:15,-34.739104496551,-58.47298737672,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-10 11:31:11,-34.738377558996,-58.4716148501,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,PADRE CARLOS MUJICA ,Solucionado,2026-04-10 11:30:07,-34.737726876926,-58.470266515656,relevamiento,SANTA CATALINA
-Alumbrado Público,Luminaria con riesgo de caída,DEFENSA CIVIL,AREA,22,EUSKADI ,Solucionado,2026-04-10 11:24:34,-34.723375846174,-58.472462819697,relevamiento,LAMADRID
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,rosaires,miriam ,27999380,GENERAL LEVALLE 2060,Solucionado,2026-04-10 11:20:16,-34.738501668189,-58.383650104302,centro_de_atencion_vecinal,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Marrone ,Carina,24321858,FRAY LUIS BELTRAN 1396,Solucionado,2026-04-10 09:55:56,-34.773932274588,-58.416983236843,0800,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Scriffignano,Carlos,7746203,JOSE M DE HEREDIA 783,Solucionado,2026-04-10 09:51:50,-34.770761243315,-58.361091427657,centro_de_atencion_vecinal,SAN JOSE
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,ORTIZ,LUIS BELTRAN ,11418837,BLANDENGUES ,Solucionado,2026-04-10 09:51:25,-34.722997405761,-58.47293263459,centro_de_atencion_vecinal,LAMADRID
-Asuntos Hidricos,Zanja obstruida,Martinez,Mariana Beatriz,28382181,MACACHA GUEMES 3906,Solucionado,2026-04-10 08:57:26,-34.735694475623,-58.478881344086,centro_de_atencion_vecinal,SANTA CATALINA
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Gianelli,Andrea,23297846,ESMERALDA 2275,Solucionado,2026-04-10 08:43:24,-34.759295046171,-58.370191061298,centro_de_atencion_vecinal,SAN JOSE
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,TEMPERLEY,CGM,9,ALZAGA ,Solucionado,2026-04-10 08:42:13,-34.776972821879,-58.38635074414,relevamiento,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,J J CASTELLI 422,Solucionado,2026-04-09 19:35:13,-34.753140894529,-58.401830420861,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,J J CASTELLI 422,Solucionado,2026-04-09 19:23:40,-34.753140894529,-58.401830420861,relevamiento,LOMAS
-Alumbrado Público,Luminaria con riesgo de caída,ALBORNOZ,SABINA,21617979,PROSPERO G ALLEMANDRI 1210,Solucionado,2026-04-09 16:07:09,-34.767128319857,-58.381098663615,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Cagliolo,Claudio ,22147709,CARLOS CROCE 50,Solucionado,2026-04-09 15:33:03,-34.758804384886,-58.409775801994,0800,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Ray,Julio Alberto ,12274513,SAN FRANCISCO 635,Solucionado,2026-04-09 15:19:19,-34.7837750953,-58.417396184249,whatsapp_cgm,TEMPERLEY
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,soria,andrea,20023815,13 DE DICIEMBRE 1300,Solucionado,2026-04-09 15:16:22,-34.73621168363,-58.411179441858,whatsapp_cgm,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,TRINIDAD,ERMELINDA,14385287,SAN PATRICIO 605,Solucionado,2026-04-09 15:12:37,-34.757547908684,-58.363100203538,whatsapp_cgm,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,LEGIsAMON,STELLAMARIS,17340430,BARTOLOME CALCAGNO 275 ,Solucionado,2026-04-09 14:52:14,-34.772140249351,-58.437862566826,whatsapp_cgm,PARQUE BARON
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Ruiz ,Lorena ,40389449,OTTAWA 157,Solucionado,2026-04-09 14:49:05,-34.751603137693,-58.363473524068,whatsapp_cgm,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,González,Romina Alejandra ,42029202,CALLE 102 573,Solucionado,2026-04-09 14:42:06,-34.748596758074,-58.467839649784,whatsapp,SANTA CATALINA
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,caceres ,cristian ,29165212,PASAJE 6 1180,Solucionado,2026-04-09 14:36:00,-34.745209415537,-58.475697524579,whatsapp_cgm,SANTA CATALINA
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Rojas Revollo ,Rosalio ,93067345,AVENIDA OLIMPO 2115,Solucionado,2026-04-09 14:31:39,-34.73772139037,-58.485266591021,centro_de_atencion_vecinal,SANTA CATALINA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,amado,Natalia ,34922020,PRENSA ARGENTINA 1495,Solucionado,2026-04-09 14:09:04,-34.740459120738,-58.429621826928,whatsapp,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,CASTRO,FEDERICO,38837927,GENERAL CONESA 1359,Solucionado,2026-04-09 13:17:36,-34.714264039269,-58.430819372761,relevamiento,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,eberle,leonardo,22918766,LISANDRO DE LA TORRE 2195 ,Solucionado,2026-04-09 12:54:52,-34.747385008001,-58.43765668555,whatsapp,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,PAPADOPULOS,JUAN CARLOS,12596765,HIPOLITO VIEYTES 726,Solucionado,2026-04-09 12:49:10,-34.739091417273,-58.404933083212,centro_de_atencion_vecinal,BANFIELD
-Alumbrado Público,Luminaria con riesgo de caída,LUMINARIAS,RECLAMOS,25,BENITO PEREZ GALDOS 2385 ENTRE BARADERO Y PASAJE LOS PINOS ESTA POR CAER Y NO FUNCIONA ,Solucionado,2026-04-09 12:45:46,-34.708600612661,-58.448924011457,relevamiento,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Mercado,Nelida Graciela,12673355,ESTRADA 1655,Solucionado,2026-04-09 12:39:32,-34.738087799594,-58.416435567471,whatsapp,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,LA FONTAINE 1574,Solucionado,2026-04-09 11:58:59,-34.750142390689,-58.44776489352,relevamiento,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Tripodi,Adriana ,26357664,AVENIDA GRAL MARTIN RODRIGUEZ 2293,Solucionado,2026-04-09 11:05:39,-34.741128419654,-58.444093650154,whatsapp,ALBERTINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,frias,cristian,39715606,CORONEL TERRADA 1479,Solucionado,2026-04-09 10:50:43,-34.755191039538,-58.454539308853,whatsapp_cgm,SANTA MARTA
-Asuntos Hidricos,Zanja obstruida,IMPA,NORA,17975500,NEUQUEN ,Solucionado,2026-04-09 10:04:49,-34.748497765617,-58.454884389766,atencion_vecinal_azara,SANTA MARTA
-Asuntos Hidricos,Boca de tormenta obstruida,Contreras,Maria ,20228767,CABO CORREA 1212,Solucionado,2026-04-09 10:03:13,-34.738906201109,-58.47263282581,whatsapp_cgm,SANTA CATALINA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,loprete ,graciela ,17732289,COCHABAMBA 1000,Solucionado,2026-04-09 09:42:57,-34.745777228485,-58.382623308942,centro_de_atencion_vecinal,BANFIELD
-Asuntos Hidricos,Boca de tormenta obstruida,MONTERO,SANDRA ADRIANA ,20198059,MANUELA PEDRAZA 1500,Solucionado,2026-04-09 09:36:27,-34.739560804217,-58.473781385384,whatsapp,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Suárez ,Héctor Miguel,13193419,GENERAL J MOLDES 425,Solucionado,2026-04-09 08:54:52,-34.790234232065,-58.431017820061,0800,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,VERA,RICARDO DANIEL,17746198,CARLOS PELLEGRINI 321,Solucionado,2026-04-09 08:30:24,-34.756759933595,-58.397432775091,relevamiento,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,AVENIDA HIPOLITO YRIGOYEN ,Solucionado,2026-04-09 07:50:55,-34.759202698739,-58.402318981229,relevamiento,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,AVENIDA HIPOLITO YRIGOYEN ,Solucionado,2026-04-09 07:50:10,-34.759202698739,-58.402318981229,relevamiento,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,AVENIDA HIPOLITO YRIGOYEN ,Solucionado,2026-04-09 07:31:59,-34.759202698739,-58.402318981229,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,almiron,georgina,35031039,Suiza  835 entre los recuerdos y el tala,Solucionado,2026-04-09 03:23:11,-34.755290532878,-58.355204380026,sitio_web,TEMPERLEY
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CALLE 107 ,Solucionado,2026-04-08 20:59:56,-34.751304853478,-58.4685151544,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CALLE 105 ,Solucionado,2026-04-08 20:58:35,-34.750349524261,-58.469209011254,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,CALLE 106 ,Solucionado,2026-04-08 20:57:16,-34.750789437356,-58.468889503928,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Bontas ,Laura ,12947290,JUJUY 215 ,Solucionado,2026-04-08 19:33:33,-34.76293414289,-58.359298854611,whatsapp,SAN JOSE
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,MIGUEL DE UNAMUNO 1500,Solucionado,2026-04-08 18:57:53,-34.717789124793,-58.440146195727,relevamiento,FIORITO
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,VUÑUELA,RUBEN MARCELO,18582377,CERRITO ,Solucionado,2026-04-08 18:56:29,-34.766657227462,-58.39655600882,whatsapp,TEMPERLEY
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Bocanegra,Agustín,33774958,TUCUMAN 2077,Solucionado,2026-04-08 18:42:55,-34.734232342919,-58.409069522388,whatsapp,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,braun,nadia,31032275,CERROS COLORADOS ,Solucionado,2026-04-08 18:42:53,-34.737083552886,-58.413935902578,whatsapp,BANFIELD
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,DEFENSA CIVIL,AREA,22,J J CASTELLI 2300,Solucionado,2026-04-08 18:06:37,-34.749549799913,-58.426378268529,relevamiento,LOMAS
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,DEFENSA CIVIL,AREA,22,J J CASTELLI 2300,Solucionado,2026-04-08 18:05:28,-34.749549799913,-58.426378268529,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,DEFENSA CIVIL,AREA,22,J J CASTELLI 2300,Solucionado,2026-04-08 17:54:45,-34.749549799913,-58.426378268529,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,voulgaris,emilia ,5334815,LAS HERAS 251,Solucionado,2026-04-08 16:17:40,-34.750043217778,-58.398243132288,0800,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,DEFENSA CIVIL,AREA,22,MENDOZA 1205,Solucionado,2026-04-08 16:03:35,-34.805570908682,-58.411754058824,relevamiento,LLAVALLOL
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Villan,Mario alberto,27152301,GRAL PAZ 2287,Solucionado,2026-04-08 16:03:06,-34.71868772105,-58.461521216424,0800,BUDGE
-Asuntos Hidricos,Boca de tormenta obstruida,Mucholi,Jorge,10149345,ARAOZ ,Solucionado,2026-04-08 16:00:46,-34.733889385689,-58.414007864777,0800,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída, MARIS CARAYOL,LUCIA STELLA ,13088316,F MONTERO 1551,Solucionado,2026-04-08 15:55:46,-34.738821060607,-58.420170406355,whatsapp,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,VARGAS,RAMON ALFREDO,28460167,HOMERO 4565,Solucionado,2026-04-08 15:53:07,-34.724605281209,-58.469910535142,whatsapp,LAMADRID
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,MIRA,GUSTAVO JAVIER,18253855,PEDRO RIVERA 2375,Solucionado,2026-04-08 15:34:36,-34.751897,-58.427362,atencion_vecinal_azara,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Ibarra,Josefa Cristina,21887296,MOSOTTI 185,Solucionado,2026-04-08 15:28:08,-34.698981865747,-58.441663674532,whatsapp_cgm,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Otero,Andrea viviana ,21786872,VIRREY CEVALLOS 52,Solucionado,2026-04-08 15:00:41,-34.762363730929,-58.392318034497,whatsapp_cgm,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Beltracchi,Verónica Andrea,33149540,JUAN B JUSTO ,Solucionado,2026-04-08 14:37:36,-34.794422192763,-58.41795708561,whatsapp,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Burgos ,Elizabeth fernanda,35755439,BARILARI 3081,Solucionado,2026-04-08 14:25:57,-34.743702583472,-58.356884387513,whatsapp_cgm,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DAmelio,Gustavo ,20831468,TUPAC AMARU 55,Solucionado,2026-04-08 14:24:25,-34.802051409983,-58.431875662157,whatsapp,LLAVALLOL
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Merlo,Maria,30652819,MANUEL BALIÑA 1868,Solucionado,2026-04-08 14:22:33,-34.736636352431,-58.41045954612,whatsapp,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Avila,Ruth,26667345,F MONTERO 1545,Solucionado,2026-04-08 14:20:48,-34.738821060607,-58.420170406355,0800,BANFIELD
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CABO CORREA ,Solucionado,2026-04-08 14:01:24,-34.738009201383,-58.470878821694,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 107 ,Solucionado,2026-04-08 13:59:46,-34.751304853478,-58.4685151544,relevamiento,SANTA CATALINA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída, Balenzuela,Diego,22021535,JOSE N PENNA 1610,Solucionado,2026-04-08 13:56:00,-34.739550153659,-58.407095814535,whatsapp_cgm,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Atención Vecinal ,Subsecretaría ,801,PILCOMAYO 2285,Solucionado,2026-04-08 13:13:57,-34.708889531048,-58.446225362967,whatsapp,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Pin Trumino,Maria Florencia ,31293021,CABRERA  1265,Solucionado,2026-04-08 13:07:27,-34.741888222399,-58.378323315773,whatsapp_cgm,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,CORONEL,JOSE DANIEL,10361360,J J CASTELLI 2300,Solucionado,2026-04-08 12:51:19,-34.749549799913,-58.426378268529,centro_de_atencion_vecinal,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Valle,Mariana,24935206,C MOLINA ARROTEA 1470,Solucionado,2026-04-08 12:32:19,-34.766496450882,-58.419784053233,0800,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Ferro,Matias Viegas,33442141,ALMTE BROWN 2302,Solucionado,2026-04-08 12:17:29,-34.764065446683,-58.396568915806,whatsapp,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,CONDORI,PEDRO  CATALINO,6949528,LA FONTAINE 1574,Solucionado,2026-04-08 12:13:40,-34.750142390689,-58.44776489352,whatsapp_cgm,SANTA MARTA
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,ABRIL,GERMAN,24434472,CABRERA 220,Solucionado,2026-04-08 11:31:58,-34.738742481125,-58.391618428837,centro_de_atencion_vecinal,BANFIELD
-Asuntos Hidricos,Sumidero reconstrucción,Marx,Sabina ,24036900,TRIUNVIRATO 198,Solucionado,2026-04-08 11:12:35,-34.781102,-58.388649,centro_de_atencion_vecinal,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,RECONQUISTA ,Solucionado,2026-04-08 11:07:26,-34.791808218094,-58.410332051653,relevamiento,TURDERA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,AGUILAR,GLADYS MABEL,12978500,FRANCISCO SIRITTO 139,Solucionado,2026-04-08 10:50:39,-34.767405779079,-58.433567487696,centro_de_atencion_vecinal,PARQUE BARON
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,ARTAZA,JORGE LUIS,18600936,PADRE BRUNO 60,Solucionado,2026-04-08 10:41:03,-34.787742136551,-58.40394596244,whatsapp_cgm,TURDERA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,RODRIGUEZ,GUILLERMO,14142126,AVENIDA HIPOLITO YRIGOYEN 10768,Solucionado,2026-04-08 10:38:44,-34.784017399949,-58.407212912769,centro_de_atencion_vecinal,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Puck,Silvia,20430454,ELOY ALFARO 1361,Solucionado,2026-04-08 10:35:25,-34.74402136677,-58.431376956711,whatsapp,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Martinez,Raul ,7663558,ASCASUBI ,Solucionado,2026-04-08 10:10:12,-34.802034905748,-58.424657124399,relevamiento,LLAVALLOL
-Asuntos Hidricos,Boca de tormenta obstruida,cenci,silvia nancy,20383329,MARTINA CESPEDES 1761,Solucionado,2026-04-08 10:05:46,-34.736098918699,-58.428532781966,whatsapp,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública, Binda ,María Alejandra,12274358,ESTEVES CORREA 1002,Solucionado,2026-04-08 09:57:30,-34.785142501282,-58.390089877488,whatsapp,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Villalba ,Agustin ,44627118,GENERAL CONESA 2415,Solucionado,2026-04-08 09:54:41,-34.702509292232,-58.439789262273,whatsapp_cgm,FIORITO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,SANTA CATALINA,CGM,7,EVITA ,Solucionado,2026-04-08 09:19:45,-34.742629270014,-58.474461965537,relevamiento,SANTA CATALINA
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Gomez,Alicia Beatriz,11875888,C LUJAN 780,Solucionado,2026-04-08 08:53:29,-34.813598172278,-58.433086214694,whatsapp_cgm,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Davalos ,Deisy Paola,94297163,MANUEL DE LAVARDEN 376,Solucionado,2026-04-08 08:50:58,-34.740042962263,-58.452772848474,centro_de_atencion_vecinal,ALBERTINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Davalos ,Deisy Paola,94297163,MANUEL DE LAVARDEN 390,Solucionado,2026-04-08 08:46:38,-34.740042962263,-58.452772848474,centro_de_atencion_vecinal,ALBERTINA
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,GARCIA,CLAUDIO,20024341,SAN CARLOS 110,Solucionado,2026-04-08 08:31:08,-34.777278592773,-58.412666934112,whatsapp_cgm,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,TEMPERLEY,CGM,9,PICHINCHA ,Solucionado,2026-04-08 08:26:02,-34.782191276581,-58.405152951006,relevamiento,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,BAENA,BEATRIZ ISABEL,11510103,CUYO ,Solucionado,2026-04-08 08:15:11,-34.811814140372,-58.428592194688,whatsapp_cgm,LLAVALLOL
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,MIGUEL DE UNAMUNO ,Solucionado,2026-04-08 07:44:06,-34.719001207118,-58.4385390257,relevamiento,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,RIMOLDI,MARIA INES,14142332,SOLER 1233,Solucionado,2026-04-07 19:46:23,-34.775054177173,-58.411053915497,0800,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,ANTONIO SAENZ 2264,Solucionado,2026-04-07 17:36:14,-34.754282588118,-58.426875156413,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,gargiulo,maria eugenia,21738419,VIAMONTE 618,Solucionado,2026-04-07 17:30:48,-34.754087267077,-58.390782785362,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,sicich ,rosana ,20027162,V LONGHI 211,Solucionado,2026-04-07 17:00:33,-34.784413905462,-58.393235811561,relevamiento,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,NAVIA,CLAUDIA ,22004536,LANUS 2846,Solucionado,2026-04-07 14:56:31,-34.743153993526,-58.359982792852,whatsapp,SAN JOSE
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,Aranda,Lia,29179482,EL TALA 3282,Solucionado,2026-04-07 14:12:49,-34.754015606392,-58.356714759617,whatsapp_cgm,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,ATENCION AL VECINO,SUBSECRETARIA GESTION INTEGRAL,803,TILCARA 2812,Solucionado,2026-04-07 13:54:52,-34.719399877365,-58.472522868728,whatsapp,LAMADRID
-Asuntos Hidricos,Boca de tormenta obstruida,COLONNELLO,LILIANA,16602236,RIOBAMBA ,Solucionado,2026-04-07 13:50:21,-34.761477644481,-58.384500915078,centro_de_atencion_vecinal,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,GUITIERREZ,MONICA LILIANA,26551997,COSTA RICA 610,Solucionado,2026-04-07 13:47:09,-34.753521441044,-58.354908127577,centro_de_atencion_vecinal,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,ANGEL,CECILIA,14400834,G KURTH 36,Solucionado,2026-04-07 13:45:54,-34.796757775385,-58.4123536245,0800,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,CRASL,NOELIA,35189399,CONSTITUYENTES 515,Solucionado,2026-04-07 13:23:09,-34.78719853,-58.426335446157,relevamiento,LLAVALLOL
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Zaloga,Franco,45225495,MONACO 800,Solucionado,2026-04-07 13:21:45,-34.78455924645,-58.423617975478,relevamiento,LLAVALLOL
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico, Vega Actis,Leonardo ,25969256,CORONEL ISIDRO SUAREZ 700,Solucionado,2026-04-07 12:44:39,-34.777470729233,-58.400262542702,whatsapp,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,SANTA CATALINA,CGM,7,RAUL LLOBERA ,Solucionado,2026-04-07 12:06:54,-34.732078360181,-58.480596441437,relevamiento,SANTA CATALINA
-Alumbrado Público,Luminaria con riesgo de caída,BUDGE,CGM,2,FIGUEREDO 1913,Solucionado,2026-04-07 12:06:42,-34.71323240503,-58.461485417056,relevamiento,BUDGE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Insua,Cristian Nahuel Ceferino,24686705,CASEROS 1883,Solucionado,2026-04-07 12:00:34,-34.769371120771,-58.425544836441,whatsapp_cgm,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,ferro,norma,11331715,CARLOS CROCE 111,Solucionado,2026-04-07 11:31:32,-34.757550641655,-58.409510638741,0800,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,CABRERA,JUAN CARLOS,11176129,ANCHORENA 198,Solucionado,2026-04-07 11:29:36,-34.772953428506,-58.393581776074,0800,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Cervenko,Diana ,16120888,AVENIDA HIPOLITO YRIGOYEN 11887,Solucionado,2026-04-07 11:27:56,-34.794261824662,-58.409085866767,whatsapp,TURDERA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,VARICENTI,YANINA SOLANGE,35997700,PASAJE PALICH 1679 (VEREDA DE ENFRENTE),Solucionado,2026-04-07 11:26:18,-34.75783,-58.46885,0800,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,JUSTINIANO,HECTOR,21466671,CID GUIDY DE FRANC ,Solucionado,2026-04-07 11:19:48,-34.749286360732,-58.445675327639,whatsapp_cgm,SANTA MARTA
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,ROMERO,ELBA LUISA,12634159,CUYO 980,Solucionado,2026-04-07 11:13:36,-34.80694670588,-58.419038566332,centro_de_atencion_vecinal,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Atención Vecinal ,Subsecretaría ,801,LAS HERAS 175,Solucionado,2026-04-07 11:10:43,-34.750229776933,-58.396902625966,whatsapp,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,aguilar,jorge luis ,29497047,INT PEDRO PABLO TURNER 1988,Solucionado,2026-04-07 11:09:57,-34.710686919104,-58.463527336773,centro_de_atencion_vecinal,BUDGE
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,TOLOZA,"GRACIELA LILIANA, ",22742997,OSTENDE 274,Solucionado,2026-04-07 11:06:56,-34.718208992192,-58.429197870427,centro_de_atencion_vecinal,CENTENARIO
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DELAMO,JUSTO,16914616,GENERAL ARENALES ,Solucionado,2026-04-07 10:49:38,-34.754997827245,-58.388957062697,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,BENITEZ,EMA  BEATRIZ,94869608,CALLE 105 448,Solucionado,2026-04-07 10:39:54,-34.728551502144,-58.493046232912,whatsapp_cgm,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,SZEGO,CELIA,10960240,FERNANDO FADER 2631,Solucionado,2026-04-07 10:37:09,-34.763401750225,-58.433754305845,0800,PARQUE BARON
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Fernández,Valentina,93117773,CLAUDIO DE ALAS 376,Solucionado,2026-04-07 10:26:18,-34.738135506444,-58.449021857249,whatsapp,ALBERTINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,CGM,CGM temperley,22177607,CERRITO 1700,Solucionado,2026-04-07 10:25:06,-34.758405855248,-58.381000780665,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Rivas ,Claudio Daniel ,21886363,ANTONIO FILARDI 2469,Solucionado,2026-04-07 10:24:22,-34.70520256871,-58.444952662,whatsapp_cgm,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,CAÑETE,OLGA,22266299,R J PAYRO 672,Solucionado,2026-04-07 10:00:36,-34.750401273942,-58.416756630491,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,seguin ,noemi,5082148,LA GOLONDRINA 1757,Solucionado,2026-04-07 08:51:45,-34.772261655015,-58.37288816037,0800,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Arce,Marisa,23060997,GENERAL EUSTAQUIO FRIAS ,Solucionado,2026-04-07 08:49:19,-34.78214663881,-58.423060674204,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,GALEANO,HORACIO ALBERTO ,18375483,C GASPAR NUÑEZ DE ARCE 261,Solucionado,2026-04-07 08:47:14,-34.732301250776,-58.434736417611,centro_de_atencion_vecinal,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,gelpi,alba,95000520,14 DE JULIO 158,Solucionado,2026-04-07 08:30:08,-34.773980556312,-58.392833297807,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,VERA,CARLOS ALBERTO ,23468823,PEÑA 818,Solucionado,2026-04-07 08:08:48,-34.749758431984,-58.385476772289,centro_de_atencion_vecinal,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,CABARONI,LOLA,44823228,PRESIDENTE QUINTANA 386,Solucionado,2026-04-06 23:48:50,-34.740617400868,-58.378410717548,relevamiento,BANFIELD
-Asuntos Hidricos,Zanja obstruida,Martinez,Leandro Ivan ,35216213,BERNARDO O HIGGINS 1700,Solucionado,2026-04-06 19:30:56,-34.753429840019,-58.456943341462,whatsapp,SANTA MARTA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,ARAGUAYA 615,Solucionado,2026-04-06 18:44:37,-34.789379397366,-58.420004086379,relevamiento,LLAVALLOL
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Villalba ,Agustin ,44627118,GENERAL CONESA 2415 ,Solucionado,2026-04-06 18:26:39,-34.702509292232,-58.439789262273,whatsapp,FIORITO
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,Gonzalez,Carolina,21738152,PRES JUAN D PERON ,Solucionado,2026-04-06 18:06:16,-34.725865132623,-58.442018406284,whatsapp,CENTENARIO
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,gonzalez,natalia,27147428,POBLADORA 1153,Solucionado,2026-04-06 17:50:11,-34.806056751156,-58.420913752418,relevamiento,LLAVALLOL
-Asuntos Hidricos,Boca de tormenta obstruida,RINITI,VICENTE RICARDI ,16774357,MARTINA CESPEDES 1785,Solucionado,2026-04-06 17:23:01,-34.735583260281,-58.428861157109,whatsapp,CENTENARIO
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,DEFENSA CIVIL,AREA,22,6 DE AGOSTO ,Solucionado,2026-04-06 16:47:04,-34.752152779771,-58.473988620774,relevamiento,SANTA CATALINA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Mori,Martin ,26327803,FELIX DE AZARA 1759,Solucionado,2026-04-06 16:45:42,-34.739054286647,-58.401128424217,whatsapp,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Periolo,Osvaldo ,7829497,E GASCON 151,Solucionado,2026-04-06 16:42:24,-34.747132973226,-58.393149061006,mail,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,GALARZA,LUCIANA ,28057317,SAN BENITO 929,Solucionado,2026-04-06 16:20:23,-34.796754694973,-58.41016385731,0800,TURDERA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Biccai,Claudio,16207312,MARIANO BOEDO 815,Solucionado,2026-04-06 15:04:47,-34.758275325348,-58.408893728315,0800,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Doncoff,Estefania ,30321134,NAHUEL HUAPI 115,Solucionado,2026-04-06 15:00:33,-34.746211063824,-58.364888563177,whatsapp_cgm,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Fernández,Valentina,93117773,CLAUDIO DE ALAS 376,Solucionado,2026-04-06 15:00:22,-34.738135506444,-58.449021857249,whatsapp,ALBERTINA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,SANTA CATALINA,CGM,7,CALLE 1 294,Solucionado,2026-04-06 14:45:02,-34.732747537442,-58.491531328509,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,JARA,JASMIN,33928405,PEDERNERA 1951,Solucionado,2026-04-06 14:42:58,-34.751401795775,-58.374758047387,whatsapp,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Valdés,Esther,13525758,CAROLINA MUZZILI 60 ,Solucionado,2026-04-06 14:34:19,-34.770712802057,-58.431963881063,whatsapp_cgm,PARQUE BARON
-Asuntos Hidricos,Boca de tormenta obstruida,Laumann,Gladys,16961433,ARAOZ ,Solucionado,2026-04-06 14:20:58,-34.734434263614,-58.41052017826,whatsapp_cgm,BANFIELD
-Asuntos Hidricos,Boca de tormenta obstruida,ibañez,marile,22854815,J L MURATURE ,Solucionado,2026-04-06 14:08:24,-34.718306949862,-58.429390816865,whatsapp_cgm,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,ATENCION AL VECINO,SUBSECRETARIA GESTION INTEGRAL,803,JOSE N PENNA 99,Solucionado,2026-04-06 13:43:19,-34.758679900593,-58.411166556198,whatsapp,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,MAYMO,MAURO,36294790,CUYO 1822,Solucionado,2026-04-06 13:26:36,-34.812124017643,-58.4292119916,whatsapp_cgm,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,LEAL,MAURO,28250711,EL CARDENAL 3691,Solucionado,2026-04-06 13:07:06,-34.757064914144,-58.354611783149,whatsapp,SAN JOSE
-Asuntos Hidricos,Sumidero tapado,Duranti ,Diego,24913273,JUNCAL 1025,Solucionado,2026-04-06 12:52:36,-34.764676547994,-58.386081342275,redes,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,gutierrez ,Rosa ,18457826,BENITO PEREZ GALDOS 2385,Solucionado,2026-04-06 12:46:10,-34.708600612661,-58.448924011457,centro_de_atencion_vecinal,FIORITO
-Asuntos Hidricos,Sumidero tapado,GONZALEZ,LIRIA OLINDA,9675,JUNCAL ,Solucionado,2026-04-06 12:30:39,-34.765648569961,-58.387745298744,centro_de_atencion_vecinal,TEMPERLEY
-Asuntos Hidricos,Sumidero tapado,GONZALEZ,LIRIA OLINDA,9675,JUNCAL ,Solucionado,2026-04-06 12:29:48,-34.765098697063,-58.386718436407,centro_de_atencion_vecinal,TEMPERLEY
-Asuntos Hidricos,Sumidero tapado,GONZALEZ,LIRIA OLINDA,9675,JUNCAL ,Solucionado,2026-04-06 12:27:44,-34.764396158698,-58.385394218322,centro_de_atencion_vecinal,TEMPERLEY
-Asuntos Hidricos,Sumidero tapado,BERNARDEZ,ROCIO ,38705074,CORONEL PRINGLES 52,Solucionado,2026-04-06 12:26:24,-34.769407753404,-58.399204403641,redes,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,TAPIA,Laureano Rodriguez ,21771571,MALVINAS ARGENTINAS 1103 ,Solucionado,2026-04-06 12:25:09,-34.773233615452,-58.381160790374,whatsapp,TEMPERLEY
-Asuntos Hidricos,Boca de tormenta obstruida,ALCANTARA,ALEXIS ,33060104,D VELEZ SARSFIELD ,Solucionado,2026-04-06 12:24:49,-34.76289279826,-58.384850126114,whatsapp,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,LEDESMA,BARBARA,34863371,DR CARLOS VOSS ,Solucionado,2026-04-06 12:22:38,-34.752152779771,-58.473988620774,relevamiento,SANTA CATALINA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,serafín,Nadia Romina ,41065318,JOSE N PENNA 127,Solucionado,2026-04-06 12:19:26,-34.75735946637,-58.410890569955,whatsapp,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,vargas,norma ,16258332,GUALEGUAY ,Solucionado,2026-04-06 12:08:12,-34.731842636944,-58.476063133156,centro_de_atencion_vecinal,LAMADRID
-Asuntos Hidricos,Boca de tormenta obstruida,Atención Vecinal ,Subsecretaría ,801,MANUEL BALIÑA ,Solucionado,2026-04-06 11:43:14,-34.734434263614,-58.41052017826,whatsapp_cgm,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,HACHEN,JORGE ORLANDO,10552232,ESTANZUELA DE REY 1902,Solucionado,2026-04-06 11:37:21,-34.729998599807,-58.423668267144,centro_de_atencion_vecinal,CENTENARIO
-Asuntos Hidricos,Boca de tormenta obstruida,MERCURI,VALERIA,26588061,LUIS SAENZ PEÑA ,Solucionado,2026-04-06 11:26:35,-34.76289279826,-58.384850126114,whatsapp,TEMPERLEY
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,diaz,andres,22004107,FRANCISCO DE MORAZAN ,Solucionado,2026-04-06 11:23:58,-34.71687525581,-58.437206021065,centro_de_atencion_vecinal,FIORITO
-Asuntos Hidricos,Boca de tormenta obstruida,PARDO,LEONOR,9988068,JUNCAL 1100,Solucionado,2026-04-06 11:15:16,-34.764676547994,-58.386081342275,0800,TEMPERLEY
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Zaloga,Franco,45225495,ANCHORIS 3388,Solucionado,2026-04-06 11:13:37,-34.751920017534,-58.356725922733,relevamiento,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Lopez,Guillermo,4591929,ISLA SOLEDAD 232 ,Solucionado,2026-04-06 11:06:44,-34.775524126263,-58.430904201619,whatsapp_cgm,PARQUE BARON
-Asuntos Hidricos,Sumidero tapado,MONTEFERRANTE,ALFREDO DANIEL,13088122,ARAOZ ,Solucionado,2026-04-06 10:47:54,-34.734005867888,-58.413263241472,centro_de_atencion_vecinal,BANFIELD
-Asuntos Hidricos,Sumidero tapado,MONTEFERRANTE,ALFREDO DANIEL,13088122,ARAOZ ,Solucionado,2026-04-06 10:45:45,-34.734434263614,-58.41052017826,centro_de_atencion_vecinal,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Hermosa,Jorge,93898022,CALLE 104 ,Solucionado,2026-04-06 10:23:26,-34.747861896237,-58.465702830538,unidad_gabinete,SANTA CATALINA
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,DEFENSA CIVIL,AREA,22,PUERTO ARGENTINO 525,Solucionado,2026-04-06 09:59:13,-34.727717897987,-58.427081322807,relevamiento,CENTENARIO
-Alumbrado Público,Luminaria con riesgo de caída,ayala,olga,18739134,MAR DEL PLATA 62,Solucionado,2026-04-06 09:36:16,-34.750573631888,-58.447047737138,centro_de_atencion_vecinal,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,GALCERAN,SILVANA GALCERAN,23505617,VIAMONTE 74,Solucionado,2026-04-06 09:28:18,-34.761279031737,-58.392118612568,whatsapp,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,DEFENSA CIVIL,AREA,22,PUERTO ARGENTINO 525,Solucionado,2026-04-06 09:26:22,-34.727717897987,-58.427081322807,relevamiento,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Fernandez,Ana,27988576,BLVD ARMESTI 3225,Solucionado,2026-04-06 09:20:25,-34.743343010016,-58.351875476879,whatsapp_cgm,SAN JOSE
-Asuntos Hidricos,Boca de tormenta obstruida,Iramain,Claudia,22940534,1 DE MARZO 590,Solucionado,2026-04-06 09:18:12,-34.801086281946,-58.415583950457,whatsapp_cgm,LLAVALLOL
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,sicich ,rosana ,20027162,V LONGHI ,Solucionado,2026-04-06 09:11:00,-34.78390114985,-58.393649671253,whatsapp_cgm,TEMPERLEY
-Asuntos Hidricos,Boca de tormenta obstruida,Alfaro,Jorge,29055383,RIOBAMBA 1326,Solucionado,2026-04-06 09:05:04,-34.761179582532,-58.384024564043,whatsapp_cgm,TEMPERLEY
-Asuntos Hidricos,Boca de tormenta obstruida,LLAVALLOL,CGM,3,DOYHENARD ,Solucionado,2026-04-06 09:04:27,-34.809214279992,-58.419144131059,relevamiento,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Arminio,Jorge 	,12000498,C MOLINA ARROTEA 2097,Solucionado,2026-04-06 08:51:46,-34.765541248439,-58.426387076277,0800,LOMAS
-Asuntos Hidricos,Boca de tormenta obstruida,carreira,marta,5076721,JUAN A DE CONDARCO ,Solucionado,2026-04-06 08:45:20,-34.777341703963,-58.389363844087,whatsapp,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,PULVIRENTI,GRACIELA,12685696,MONSEÑOR A PIAGGIO 646 650,Solucionado,2026-04-06 08:38:43,-34.767273321826,-58.410111314681,0800,LOMAS
-Asuntos Hidricos,Boca de tormenta obstruida,Nupieri,Laura ,17732734,JOSE GARIBALDI 1000,Solucionado,2026-04-06 08:37:27,-34.774337254208,-58.410775640419,whatsapp,TEMPERLEY
-Defensa Civil,Cartel Publicitario Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,TOMAS ESPORA ,Solucionado,2026-04-05 23:28:52,-34.776758825321,-58.398124657277,relevamiento,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Mendicoa,Cristian,21704361,Nicora (esquina Fonrouge) ,Solucionado,2026-04-05 13:18:36,-34.759103647346,-58.384569011641,sitio_web,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,MALABIA ,Solucionado,2026-04-04 22:24:44,-34.736504876546,-58.390206943692,relevamiento,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,METAN ,Solucionado,2026-04-04 19:19:12,-34.727376283943,-58.473874423181,relevamiento,LAMADRID
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Guerrero,Soledad,38860020,López de Vega  1550,Solucionado,2026-04-04 19:16:28,-34.748273648361,-58.444769741525,sitio_web,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,MANUEL CASTRO 1045,Solucionado,2026-04-04 16:35:16,-34.747716002763,-58.401420578862,relevamiento,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,LUGANO 304,Solucionado,2026-04-04 16:24:52,-34.755586319389,-58.383904222975,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,GENERAL JOSE DE SAN MARTIN 1415,Solucionado,2026-04-04 14:56:51,-34.742602477004,-58.40341915442,relevamiento,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,A ALSINA ,Solucionado,2026-04-04 14:14:00,-34.745623133779,-58.393637805854,relevamiento,BANFIELD
-Defensa Civil,Asistencia por Temporal,Martinez,Marisol,32475360, 14 de julio 142,Solucionado,2026-04-04 12:51:08,-34.773980556312,-58.392833297807,sitio_web,TEMPERLEY
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Martínez ,José ,24796321,AVENIDA HIPOLITO YRIGOYEN 10137,Solucionado,2026-04-04 12:40:01,-34.774567904939,-58.40528399892,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Aquilano,Guillermo,35996025,ALMAFUERTE ,Solucionado,2026-04-04 12:29:57,-34.75779313845,-58.41238228681,0800,LOMAS
-Asuntos Hidricos,Boca de tormenta obstruida,Alfaro,Jorge,29055383,RIOBAMBA ,Solucionado,2026-04-04 12:19:11,-34.761477644481,-58.384500915078,redes,TEMPERLEY
-Asuntos Hidricos,Boca de tormenta obstruida,ALEVATO,MARTIN,28631725,RIOBAMBA 1277 ,Solucionado,2026-04-04 12:05:06,-34.761697974328,-58.38499491575,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,E CARRIEGO 605,Solucionado,2026-04-04 11:47:45,-34.735443558414,-58.452806259251,relevamiento,ALBERTINA
-Asuntos Hidricos,Boca de tormenta obstruida,Oraison ,Andrea ,16105485,MAYOR OLIVERO 201,Solucionado,2026-04-04 08:57:52,-34.730919408257,-58.417803757075,whatsapp,CENTENARIO
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Bejarano y Luna ,Martin ,30592955,ALBERTO LARROQUE 900,Solucionado,2026-04-04 08:31:54,-34.743803249089,-58.407234592323,0800,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Rossi,Yazmin,47483430,Aníbal Ponce  1972 entre olivos y Fournier ,Solucionado,2026-04-04 08:29:58,-34.744983500395,-58.435032294742,sitio_web,SANTA MARTA
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,DON BOSCO 1520,Solucionado,2026-04-04 07:47:39,-34.773726730795,-58.377877568425,relevamiento,TEMPERLEY
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,DEFENSA CIVIL,AREA,22,BOQUERON 800,Solucionado,2026-04-04 02:06:22,-34.76722331097,-58.419139041147,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,VILELA,HECTOR LEONEL,29266579,YATAY 1017,Solucionado,2026-04-04 01:56:39,-34.753016637165,-58.347333433498,relevamiento,SAN JOSE
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,BOQUERON ,Solucionado,2026-04-04 01:46:20,-34.76778770377,-58.41924653207,relevamiento,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,DEFENSA CIVIL,AREA,22,CHACABUCO ,Solucionado,2026-04-04 01:27:28,-34.745623133779,-58.393637805854,relevamiento,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,DEFENSA CIVIL,AREA,22,LORIA 390,Solucionado,2026-04-04 01:22:00,-34.762867232969,-58.402409924143,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,GENERAL CARLOS DE ALVEAR ,Solucionado,2026-04-04 01:19:27,-34.755992332567,-58.407688190589,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,TORTOSA,NATALIA,30086228,CASEROS 1985,Solucionado,2026-04-03 23:51:57,-34.769257757788,-58.426340049723,relevamiento,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,QUIROZ ,JOSE ,29005902,JOSE N PENNA 1557,Solucionado,2026-04-03 23:41:01,-34.740957369255,-58.407400071722,relevamiento,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Angel,Ariel,28585982,Ramon Falcon al  200 frente al colegio ,Solucionado,2026-04-03 23:13:18,-34.767620834787,-58.401565165069,sitio_web,LOMAS
-Defensa Civil,Asistencia por Temporal,costas,karina,20832127,Portela  111,Solucionado,2026-04-03 22:59:02,-34.75728092803,-58.398327281288,sitio_web,LOMAS
-Defensa Civil,Asistencia por Temporal,Uranga Marchesini,Mauro Ismael,31079807,Alsina  1700,Solucionado,2026-04-03 22:39:04,-34.754637288869,-58.395261049156,sitio_web,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DOSNIFF,ESTEFANIA,303211336,NAHUEL HUAPI 115,Solucionado,2026-04-03 22:30:32,-34.746211063824,-58.364888563177,relevamiento,SAN JOSE
-Asuntos Hidricos,Zanja obstruida,SAURO,FERNANDO JORGE,11875519,Av Eva Peron al  100,Solucionado,2026-04-03 22:27:21,-34.779004027578,-58.394850480747,sitio_web,TEMPERLEY
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,DEFENSA CIVIL,AREA,22,GINEBRA 1702,Solucionado,2026-04-03 21:01:22,-34.725314512711,-58.447503174855,relevamiento,ALBERTINA
-Alumbrado Público,Luminaria con riesgo de caída,ONETO,JIMENA NATALIA,27913584,Juan Zamora  49,Solucionado,2026-04-03 19:54:38,-34.733715942634,-58.416922905035,sitio_web,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,EDUARDO,CARLOS,34178402,UCRANIA 895,Solucionado,2026-04-03 18:47:19,-34.811481945069,-58.428765502705,relevamiento,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,GENERAL A J DE SUCRE ,Solucionado,2026-04-03 17:13:52,-34.775855478522,-58.421768811419,relevamiento,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Romero,Fernando,30320615,Guido Spano Nº  1060,Solucionado,2026-04-03 16:25:11,-34.783495387739,-58.402462087568,sitio_web,TURDERA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Bustamante,Paola,28210703,Mayor Olivero  41,Solucionado,2026-04-03 12:59:38,-34.729990366039,-58.416172275115,sitio_web,CENTENARIO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Zorzoli,Carlos,20540059,EL TALA 2281,Solucionado,2026-04-03 10:09:24,-34.760648681225,-58.368616359216,redes,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,SILVA,YANINA,29053848,Gandhi  470,Solucionado,2026-04-03 04:17:17,-34.759749877283,-58.373764393748,sitio_web,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,DEFENSA CIVIL,AREA,22,RUBEN DE ROSAS 1369,Solucionado,2026-04-02 14:10:16,-34.775854062319,-58.374871974419,relevamiento,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,LUNGARETTI,CARLOS,33554290,JOSE I GORRITI 1169,Solucionado,2026-04-02 12:52:22,-34.7599914221,-58.413720781819,whatsapp,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,carrosana,carolina,22742126,MARTIN CAPELLO 1995,Solucionado,2026-04-02 12:37:23,-34.744320045237,-58.423871720981,whatsapp,BANFIELD
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,TURDERA,CGM,10,AVENIDA 9 DE JULIO ,Solucionado,2026-04-02 12:01:57,-34.790081124558,-58.415428937077,relevamiento,TURDERA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Donato,Norberto,18287782,Darragueira  1418,Solucionado,2026-04-02 11:51:18,-34.736285956869,-58.414715268327,sitio_web,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Alvarez,Lwopoldo,24155026,RODRIGUEZ PEÑA 520,Solucionado,2026-04-02 09:09:21,-34.74090738818,-58.402215048258,whatsapp,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,FONROUGE 700,Solucionado,2026-04-02 08:34:30,-34.760985848399,-58.388664614478,relevamiento,LOMAS
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 107 ,Solucionado,2026-04-01 23:03:50,-34.751304853478,-58.4685151544,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Sumidero tapado,DE AMBIENTE,SECRETARIA ,21,CALLE 103 ,Solucionado,2026-04-01 23:02:52,-34.747400941794,-58.466045980485,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,DIAGONAL 61 ,Solucionado,2026-04-01 23:01:58,-34.747133518407,-58.480575533074,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,GENERAL JUAN F QUIROGA ,Solucionado,2026-04-01 23:00:50,-34.747768942413,-58.472123489219,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,MANUELA PEDRAZA ,Solucionado,2026-04-01 22:58:55,-34.741497778681,-58.472277191945,relevamiento,SANTA CATALINA
-Asuntos Hidricos,Boca de tormenta obstruida,DE AMBIENTE,SECRETARIA ,21,MANUELA PEDRAZA ,Solucionado,2026-04-01 22:57:56,-34.742484030025,-58.471504819669,relevamiento,SANTA CATALINA
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Vaccaro,Maria Cecilia ,23090517,BARTOLOME MITRE 300,Solucionado,2026-04-01 21:37:22,-34.765299624133,-58.400838584153,relevamiento,LOMAS
-Alumbrado Público,Luminaria con riesgo de caída,Morlacchi ,Ana Laura ,18253904,JULIAN AGUIRRE 1079,Solucionado,2026-04-01 21:18:35,-34.746358381552,-58.412247742342,relevamiento,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Morlacchi ,Ana Laura ,18253904,JULIAN AGUIRRE 1079,Solucionado,2026-04-01 18:39:53,-34.746358381552,-58.412247742342,whatsapp,BANFIELD
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,INTERNARDI,THOMAS,33504032,MARIANO BOEDO ,Solucionado,2026-04-01 18:37:40,-34.759202698739,-58.402318981229,relevamiento,LOMAS
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,Martínez,Gladys ,17541497,Almafuerte  1855,Solucionado,2026-04-01 18:13:58,-34.736803382309,-58.407971883528,sitio_web,BANFIELD
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,martinez borda,victor daniel,18370022,G HUDSON 2490,Solucionado,2026-04-01 16:46:33,-34.758116939813,-58.433914302804,whatsapp,PARQUE BARON
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,TAGLIAFICO,SILVIA,13359266,ALMAFUERTE 397,Solucionado,2026-04-01 16:14:45,-34.754847470915,-58.411772643634,whatsapp,LOMAS
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,VILLARUEL,GABRIELA ,26084780,LARRAZABAL 2499,Solucionado,2026-04-01 15:06:25,-34.702813439512,-58.440283711958,whatsapp,FIORITO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,DEFENSA CIVIL,AREA,22,D MATHEU 750,Solucionado,2026-04-01 15:01:08,-34.755521871542,-58.386504475555,relevamiento,LOMAS
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Lorenzo,Matilde,32835609,CARLOS GLADE 975,Solucionado,2026-04-01 14:59:06,-34.7379181,-58.4251942,whatsapp,CENTENARIO
-Alumbrado Público,Luminaria con riesgo de caída,LUMINARIAS,RECLAMOS,25,OSTENDE 588 E/ FILARDI Poste de estructura de Hierro inclinado apoyado sobre Cables,Solucionado,2026-04-01 14:53:54,-34.719849509855,-58.43248761465,relevamiento,CENTENARIO
-Alumbrado Público,Luminaria con riesgo de caída,LUMINARIAS,RECLAMOS,25,ANTONIO FILARDI 1002 entre Ostende y La Haya,Solucionado,2026-04-01 14:51:40,-34.719855085232,-58.433245880969,relevamiento,CENTENARIO
-Alumbrado Público,Luminaria con riesgo de caída,LUMINARIAS,RECLAMOS,25,LITUANIA 517,Solucionado,2026-04-01 14:43:52,-34.77335016397,-58.371312021558,relevamiento,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Benitez,Silvio Hernán,21841922,PIO BAROJA 2337,Solucionado,2026-04-01 14:14:39,-34.709403413953,-58.449901499195,whatsapp,FIORITO
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Acevedo,Sergio,33431590,OLIVOS 1601,Solucionado,2026-04-01 14:05:53,-34.742732717953,-58.436198750722,whatsapp_cgm,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Chaij,David,31531386,JACINTO VIERA 270,Solucionado,2026-04-01 13:15:40,-34.797496464928,-58.412278698364,whatsapp,LLAVALLOL
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,PRADO,AGUSTINA,40423540,LAS CASUARINAS 3353,Solucionado,2026-04-01 13:09:21,-34.750715950885,-58.35773540876,whatsapp,SAN JOSE
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,Zaloga,Franco,45225495,NECOL 742,Solucionado,2026-04-01 13:05:58,-34.709016913516,-58.444050374311,relevamiento,FIORITO
-Alumbrado Público,Luminaria con riesgo de caída,VIDOTTO, ROSANA MABEL ,25160569,FRANCISCO B RECONDO 949,Solucionado,2026-04-01 12:51:53,-34.711358707145,-58.445065274033,whatsapp,FIORITO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,SOLLA,Mariana Lorena,24564437,GENERAL CAPDEVILA 2045,Solucionado,2026-04-01 12:43:54,-34.751134485463,-58.380028727921,whatsapp_cgm,BANFIELD
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,Palleros, Mariela,36676494,INT FELIPE CASTRO ,Solucionado,2026-04-01 12:39:26,-34.751126871001,-58.442302369,whatsapp_cgm,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública, Monzo,Pablo,22001154,ESTEVES CORREA 477,Solucionado,2026-04-01 12:35:32,-34.782556929037,-58.391163225057,whatsapp,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,El gharbi ,Gloria,35372674,TIMOTEO GORDILLO 933,Solucionado,2026-04-01 12:30:42,-34.736745476138,-58.426032643243,whatsapp,CENTENARIO
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Vaccaro,Maria Cecilia ,23090517,BARTOLOME MITRE 300,Solucionado,2026-04-01 12:11:33,-34.765299624133,-58.400838584153,whatsapp,LOMAS
-Defensa Civil,Señalización de Poste / Columna con Riesgo Eléctrico,TEMPERLEY,CGM,9,GENERAL GUEMES 898,Solucionado,2026-04-01 12:11:20,-34.767121710946,-58.380207626997,relevamiento,TEMPERLEY
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,González,diego,25152517,REVOLUCION DE TEMPERLEY 2898,Solucionado,2026-04-01 11:35:49,-34.75996,-58.36902,whatsapp_cgm,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Funes ,viviana ,26997850,EL PLUMERILLO 2709,Solucionado,2026-04-01 11:33:37,-34.700570821999,-58.445381496577,whatsapp_cgm,FIORITO
-Defensa Civil,Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda,MAZZOLA,JESICA ,30373542,GRAL IRIARTE 525,Solucionado,2026-04-01 11:19:56,-34.768775481609,-58.390060016116,whatsapp,TEMPERLEY
-Empresa de Servicios Públicos,Poste de empresa de servicios en mal estado,DEFENSA CIVIL,AREA,22,AVENIDA 9 DE JULIO ,Solucionado,2026-04-01 11:13:30,-34.790081124558,-58.415428937077,relevamiento,TURDERA
-Asuntos Hidricos,Zanja obstruida,GONZALEZ,NOEMI,25871068,EUSKADI ,Solucionado,2026-04-01 11:00:41,-34.73124269619,-58.466324959009,centro_de_atencion_vecinal,LAMADRID
-Defensa Civil,Señalización de Poste / Columna con Riesgo de Caída,Pieroni,Maria Luisa ,9748419,DORREGO 587,Solucionado,2026-04-01 09:47:46,-34.777977591298,-58.403578549161,relevamiento,TEMPERLEY
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Villanueva ,Graciela,11247833,EL CHURRINCHE 3440,Solucionado,2026-04-01 09:47:25,-34.761602508397,-58.356388374839,whatsapp_cgm,SAN JOSE
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,Traversaro,Gustavo Fabian,20955387,AVENIDA GRAL HORNOS 2066,Solucionado,2026-04-01 09:33:58,-34.706065148136,-58.433727122246,operativos,FIORITO
-Defensa Civil,Señalización de Bocas de Tormenta / Sumideros sin Tapa,SALVO,ALBERTO EFRAIN,33199425,HOMERO ,Solucionado,2026-04-01 09:03:23,-34.751868456644,-58.449552686104,centro_de_atencion_vecinal,SANTA MARTA
-Defensa Civil,Árbol Caído con Riesgo de Caída en la Vía Pública,avalos,brisa,46118626,CAMPANA ,Solucionado,2026-04-01 08:35:06,-34.712431789294,-58.453536156116,whatsapp,BUDGE
+﻿Tipo;Sub Tipo;Apellido;Nombre;DNI;Direccion;Estado;Fecha;Latitud;Longitud;Origen;Zonificacion_CAV
+Asuntos Hidricos;Zanja obstruida;Font;Lorena Paola;29919485;FRANCISCO DE MORAZAN 130;Solucionado;19/04/2026;-34,72969;-58,42754665;relevamiento;CENTENARIO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;belmas;cintia;26721965;CERRITO 2157;Solucionado;19/04/2026;-34,75517628;-58,3747952;relevamiento;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Rotman;Maria Paula;22656462;LAS HERAS 612;Solucionado;19/04/2026;-34,74920647;-58,40397627;relevamiento;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;BARDON;SOFIA;36064677;ZUVIRIA 355;Solucionado;18/04/2026;-34,76671841;-58,38888109;relevamiento;TEMPERLEY
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;AGUSTIN MAGALDI ;Solucionado;18/04/2026;-34,73384848;-58,47609727;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;18/04/2026;-34,74032575;-58,47527375;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;18/04/2026;-34,7395608;-58,47378139;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Velarde;Elvira Elizabeth;25242327;Lituania  689;Solucionado;18/04/2026;-34,77431415;-58,37061157;sitio_web;TEMPERLEY
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;18/04/2026;-34,7391045;-58,47298738;relevamiento;SANTA CATALINA
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;paladino;Stella Maris;27280811;ARAGUAYA 775;Solucionado;18/04/2026;-34,78852989;-58,42063088;whatsapp;LLAVALLOL
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;12 DE OCTUBRE ;Solucionado;18/04/2026;-34,73704009;-58,42660331;relevamiento;CENTENARIO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Morales;Laura Alejandra;33203824;FONROUGE 93;Solucionado;18/04/2026;-34,75995866;-58,39658581;whatsapp;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Leiva;Sofía Daniela;37877595;SEBASTIAN ELCANO 678;Solucionado;18/04/2026;-34,736646;-58,467743;whatsapp;ALBERTINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Guardia;Jorge ;17302730;MONSEÑOR A PIAGGIO 1086;Solucionado;17/04/2026;-34,76022705;-58,40862857;whatsapp;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;BELGRANO 402;Solucionado;17/04/2026;-34,75607306;-58,39404913;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;J L MURATURE 1261;Solucionado;17/04/2026;-34,71591626;-58,43125275;relevamiento;CENTENARIO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;nuñez;betiana;32789036;SEBASTIAN ELCANO 671;Solucionado;17/04/2026;-34,736646;-58,467743;relevamiento;ALBERTINA
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Fernandez;Norma;12270491;MARTIN CAPELLO 237;Solucionado;17/04/2026;-34,74751102;-58,39901396;whatsapp;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Atención Vecinal ;Subsecretaría ;801;PRES JUAN D PERON ;Solucionado;17/04/2026;-34,73609629;-58,43494659;whatsapp;ALBERTINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;SALTO;SUSANA ELSA;10118792;SANCHEZ DE BUSTAMANTE 1490;Solucionado;17/04/2026;-34,76766341;-58,41983171;whatsapp_cgm;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Corral;Gustavo Alfredo ;26328777;RINCON  392;Solucionado;17/04/2026;-34,74129959;-58,39048291;whatsapp_cgm;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;MARIANO BOEDO ;Solucionado;17/04/2026;-34,7555437;-58,42865315;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;FERNANDEZ<;GABRIEL;22589820;MANUEL CASTRO 1926;Solucionado;17/04/2026;-34,73691954;-58,39919412;0800;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Solla ;pablo ;34382230;C MOLINA ARROTEA ;Solucionado;17/04/2026;-34,7659808;-58,42343128;whatsapp_cgm;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Caccaviello;Natalia;31641673;B MONTEAGUDO 811;Solucionado;17/04/2026;-34,74747767;-58,40804631;whatsapp;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Nuñez;Dalma;38564286;GENERAL CONESA 945;Solucionado;17/04/2026;-34,71778217;-58,42811865;whatsapp;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Bobadilla;Bernardita;93191477;EL CHINGOLO 1458;Solucionado;17/04/2026;-34,75497779;-58,34327575;centro_de_atencion_vecinal;SAN JOSE
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;KARLEN;LILIANA ;12972295;EL CHURRINCHE 3536;Solucionado;17/04/2026;-34,76128059;-58,35523552;centro_de_atencion_vecinal;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Moglia;Walter;13088816;R J PAYRO 2048;Solucionado;17/04/2026;-34,73341305;-58,41314839;whatsapp_cgm;BANFIELD
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;TEVEZ;PABLO ;32947310;GRANADEROS 791;Solucionado;17/04/2026;-34,74908583;-58,3860638;whatsapp;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Gilles;Ayelen ;37751836;CID GUIDY DE FRANC 1046;Solucionado;17/04/2026;-34,73835075;-58,42671826;whatsapp_cgm;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Chavez;Beatriz;14142091;ESTEVES CORREA 530;Solucionado;17/04/2026;-34,78388433;-58,3900853;whatsapp_cgm;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Alfonso;Susana Alejandra;29292563;G KURTH ;Solucionado;17/04/2026;-34,80482064;-58,42819908;whatsapp_cgm;LLAVALLOL
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;SOLARI;ANA MARIA;5653977;AVENIDA HIPOLITO YRIGOYEN ;Solucionado;17/04/2026;-34,7592027;-58,40231898;0800;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Escarcena ;Gustavo ;17229731;JOSE E COLOMBRES 2251;Solucionado;17/04/2026;-34,76047713;-58,42715139;whatsapp;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;FLAMINI;FABIANA ;18696438;FOURNIER 1933;Solucionado;17/04/2026;-34,74002227;-58,44067085;whatsapp;SANTA MARTA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;BALCARCE 139;Solucionado;17/04/2026;-34,7613096;-58,39572119;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Siakaluk ;Evelyn ;23149299;JUAN LARREA ;Solucionado;17/04/2026;-34,74784677;-58,42204528;whatsapp;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;SANDOVAL ;ALICIA ;17062389;MARIO BRAVO ;Solucionado;17/04/2026;-34,70768722;-58,44148807;whatsapp;FIORITO
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;ZAJC;LUCRECIA NAIR ;31822072;AVENIDA HIPOLITO YRIGOYEN ;Solucionado;17/04/2026;-34,76632902;-58,40381446;whatsapp;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;C GAITO 424;Solucionado;17/04/2026;-34,75087592;-58,43110927;relevamiento;LOMAS
+Asuntos Hidricos;Zanja obstruida;DE AMBIENTE;SECRETARIA ;21;CABO CASERES ;Solucionado;16/04/2026;-34,73668739;-58,47390221;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CABO CASERES ;Solucionado;16/04/2026;-34,73668739;-58,47390221;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;HOMERO MANZI ;Solucionado;16/04/2026;-34,73633867;-58,47320491;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;MANUELA PEDRAZA ;Solucionado;16/04/2026;-34,73749147;-58,47537883;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;SOLDADO V RODRIGUEZ ;Solucionado;16/04/2026;-34,74149778;-58,47227719;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;MANUELA PEDRAZA ;Solucionado;16/04/2026;-34,74149778;-58,47227719;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero reconstrucción;DE AMBIENTE;SECRETARIA ;21;CALLE 105 ;Solucionado;16/04/2026;-34,75034952;-58,46920901;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;ANDRADE;ALEJANDRO;18465091;INT FELIPE CASTRO 1697;Solucionado;16/04/2026;-34,74519434;-58,43112885;0800;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;J DARRAGUEIRA 1530;Solucionado;16/04/2026;-34,73603753;-58,41693328;relevamiento;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;CAFAYATE 92;Solucionado;16/04/2026;-34,72972182;-58,46346878;relevamiento;LAMADRID
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Alonso;Paula Daniela ;36872414;MANUEL BALIÑA 1905 ;Solucionado;16/04/2026;-34,73492545;-58,41063076;whatsapp;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;IRIARTE;ANA MARIA;10361657;C SAAVEDRA 648;Solucionado;16/04/2026;-34,76770844;-58,40702029;0800;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;ESTRADA 1299;Solucionado;16/04/2026;-34,74307621;-58,41710617;relevamiento;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;clarke;cristian;27634658;ESTEVES CORREA ;Solucionado;16/04/2026;-34,77859254;-58,39433154;centro_de_atencion_vecinal;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;CUADRADO;PAULA;28080409;GERVASIO ANTONIO DE POSADAS 1096;Solucionado;16/04/2026;-34,77106072;-58,41700556;redes;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;GOMEZ;LORENA BEATRIZ ;34203863;EIBAR 337;Solucionado;16/04/2026;-34,7412716;-58,45951505;whatsapp;ALBERTINA
+Alumbrado Público;Luminaria con riesgo de caída;VIDOTTO; ROSANA MABEL ;25160569;FRANCISCO B RECONDO 949;Solucionado;16/04/2026;-34,71135871;-58,44506527;whatsapp;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;J DARRAGUEIRA ;Solucionado;16/04/2026;-34,7374443;-58,40808239;relevamiento;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DIAZ;IVANA YAMILA;35537484;BENITO PEREZ GALDOS 1700;Solucionado;16/04/2026;-34,71679864;-58,44225786;whatsapp;FIORITO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;adomavicius ;luis;7759505;PICHINCHA 1495;Solucionado;16/04/2026;-34,78699127;-58,4136064;0800;TURDERA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Gómez ; Luisa Beatriz ;13088382;FOURNIER 1360;Solucionado;16/04/2026;-34,7451957;-58,43607642;whatsapp_cgm;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Coloma;Norma Beatriz;18225688;LA HAYA 918;Solucionado;16/04/2026;-34,72157207;-58,4374098;whatsapp_cgm;CENTENARIO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;ARANA GOIRI 3175;Solucionado;16/04/2026;-34,73723021;-58,46336457;relevamiento;ALBERTINA
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;GOMEZ;MERCEDES;10082700;ALBERTO LARROQUE 1499;Solucionado;16/04/2026;-34,74240577;-58,41603468;0800;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;VESCIO;PABLO;31657100;FAMATINA ;Solucionado;16/04/2026;-34,76696198;-58,43722474;relevamiento;PARQUE BARON
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;Atención Vecinal ;Subsecretaría ;801;EL HORNERO 4448;Solucionado;16/04/2026;-34,75362406;-58,34135575;whatsapp;SAN JOSE
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Zaloga;Franco;45225495;MANUEL BALIÑA 1950;Solucionado;16/04/2026;-34,73492545;-58,41063076;relevamiento;BANFIELD
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Pigni;Franco;28585369;CERRITO 1844;Solucionado;16/04/2026;-34,75691217;-58,37811186;whatsapp_cgm;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Bernasconi ;Romina;30594184;DIEGO GIBSON ;Solucionado;16/04/2026;-34,80024246;-58,42718244;whatsapp;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Dagostino;Daniel Hernan;26824214;GENERAL CARLOS DE ALVEAR 2049;Solucionado;16/04/2026;-34,73503453;-58,40318152;0800;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Milone ;Antonio ;93207167;BELELLI 140;Solucionado;16/04/2026;-34,75585561;-58,42208289;whatsapp;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Salasia;Graciela ;16198243;ESTRADA 452;Solucionado;16/04/2026;-34,75263329;-58,41847749;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Fernández;Jorge Omar;13289046;RIOBAMBA 1395;Solucionado;16/04/2026;-34,76117958;-58,38402456;whatsapp;TEMPERLEY
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Zaloga;Franco;45225495;CARLOS GUIDO SPANO 25;Solucionado;16/04/2026;-34,77443149;-58,40975847;relevamiento;TEMPERLEY
+Defensa Civil;Asistencia por Temporal;DEFENSA CIVIL;AREA;22;ROBERTO ARLT 2232;Solucionado;16/04/2026;-34,70948612;-58,4457235;relevamiento;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;PEREZ BAUMANN;ALICIA SUSANA;18407308;MELO 829;Solucionado;16/04/2026;-34,75118004;-58,38423942;0800;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Gona;Roxana;16259366;GERVASIO ANTONIO DE POSADAS 863;Solucionado;16/04/2026;-34,7687314;-58,41650229;whatsapp;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;petronio;mariela;28467046;BOQUERON 141;Solucionado;16/04/2026;-34,76001365;-58,41765494;0800;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;RUIZ;CAROLINA;96393202;POBLADORA 370;Solucionado;16/04/2026;-34,8019346;-58,41251083;relevamiento;LLAVALLOL
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;AVENIDA CAP GIACHINO ;Solucionado;15/04/2026;-34,740187;-58,47784703;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CAPITAN JACINTO YABEN ;Solucionado;15/04/2026;-34,74038097;-58,48105716;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CAPITAN JACINTO YABEN ;Solucionado;15/04/2026;-34,74052786;-58,48004691;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 103 ;Solucionado;15/04/2026;-34,74740094;-58,46604598;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 105 ;Solucionado;15/04/2026;-34,75034952;-58,46920901;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 107 ;Solucionado;15/04/2026;-34,75130485;-58,46851515;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;GENERAL JUAN F QUIROGA ;Solucionado;15/04/2026;-34,74435509;-58,46562461;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;lantero;María violeta;12001737;LORIA 201;Solucionado;15/04/2026;-34,76306794;-58,40085058;whatsapp;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;MATEO;PAMELA;30374252;GENERAL LEVALLE 1905;Solucionado;15/04/2026;-34,73961112;-58,38419548;0800;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;TREJO ;NESTOR GABRIEL ;31257341;LA MADRESELVA 2433;Solucionado;15/04/2026;-34,75854885;-58,36738133;whatsapp;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;SARI;ANDREA;22819550;GENERAL CARLOS DE ALVEAR 178;Solucionado;15/04/2026;-34,7577596;-58,40811447;whatsapp;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Viloria;Alejandra;22023331;JUAN B VAGO 395;Solucionado;15/04/2026;-34,7808918;-58,41468016;relevamiento;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Medina;Martin ;14411500;BRUSELAS 2798;Solucionado;15/04/2026;-34,71979684;-58,46997789;whatsapp_cgm;LAMADRID
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;PAZ;ERCIRA;23525270;REVOLUCION DE TEMPERLEY 2536;Solucionado;15/04/2026;-34,75996;-58,36902;relevamiento;SAN JOSE
+Alumbrado Público;Luminaria con riesgo de caída;SANTA CATALINA;CGM;7;CMTE TOMAS ESPORA ;Solucionado;15/04/2026;-34,73139328;-58,49081232;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;LOMBARDO;FABIANA;18253775;PRESIDENTE DERQUI 370;Solucionado;15/04/2026;-34,74127472;-58,37717796;whatsapp;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;IRIARTE;ANA MARIA;10361657;C SAAVEDRA 648;Solucionado;15/04/2026;-34,76770844;-58,40702029;0800;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;ROMERO;MARIA TELMA;12114778;EL MIRASOL ;Solucionado;15/04/2026;-34,75899554;-58,36063815;whatsapp;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;MONTERO;PAOLA;24731691;C LUJAN ;Solucionado;15/04/2026;-34,80343728;-58,42023554;relevamiento;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Fernández;Daniela ;22875080;GENERAL CAMPOS 147;Solucionado;15/04/2026;-34,75518213;-58,37833562;whatsapp_cgm;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Damore;Walter;17275273;VOLTAIRE 2043;Solucionado;15/04/2026;-34,74532266;-58,45353646;whatsapp_cgm;SANTA MARTA
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Zaloga;Franco;45225495;EL MIRASOL 4395;Solucionado;15/04/2026;-34,75170601;-58,34680646;relevamiento;SAN JOSE
+Asuntos Hidricos;Zanja obstruida;SOTO;LUIS MARIO;12941936;CORONEL TERRADA 1032;Solucionado;15/04/2026;-34,75963572;-58,45120743;centro_de_atencion_vecinal;PARQUE BARON
+Asuntos Hidricos;Zanja obstruida;LAMADRID;CGM;14;IGUAZU 1025;Solucionado;15/04/2026;-34,73120825;-58,47699178;relevamiento;LAMADRID
+Asuntos Hidricos;Zanja obstruida; Gentile ; Fabian alejandro;20694891;CORONEL TERRADA 1019;Solucionado;15/04/2026;-34,75963572;-58,45120743;centro_de_atencion_vecinal;PARQUE BARON
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Viloria;Alejandra;22023331;JUAN B VAGO 1300;Solucionado;15/04/2026;-34,78140487;-58,4142895;whatsapp;TEMPERLEY
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;CHACABUCO ;Solucionado;15/04/2026;-34,74562313;-58,39363781;relevamiento;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;mansilla;guillermo ;17540667;AVENIDA GRAL HORNOS ;Solucionado;15/04/2026;-34,71350635;-58,42804251;0800;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;FERNANDEZ;CAMILA;42684746;ALBERTO GOMEZ 138;Solucionado;15/04/2026;-34,75753388;-58,43124666;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;PEÑA 951;Solucionado;15/04/2026;-34,74906887;-58,38416207;relevamiento;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Garcia;Daniela ;231146341;CORONEL R FALCON ;Solucionado;15/04/2026;-34,76749926;-58,40404859;whatsapp;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;BIALBA;MARCELA;94937045;BOULEVARD SANTA FE 780;Solucionado;15/04/2026;-34,74871758;-58,41935351;relevamiento;LOMAS
+Asuntos Hidricos;Zanja obstruida;Ledesma;Maximiliano;29826297;GABRIEL MIRO 835;Solucionado;15/04/2026;-34,72490302;-58,43881471;centro_de_atencion_vecinal;CENTENARIO
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 107 ;Solucionado;14/04/2026;-34,75130485;-58,46851515;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 105 ;Solucionado;14/04/2026;-34,75034952;-58,46920901;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 107 ;Solucionado;14/04/2026;-34,75130485;-58,46851515;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;belmonte ;alicia ;12921369;SIMON BOLIVAR 507;Solucionado;14/04/2026;-34,76631422;-58,40837531;whatsapp;LOMAS
+Asuntos Hidricos;Boca de tormenta obstruida;ISZCZYK;MIGUEL ;18685557;AMANCIO ALCORTA 99;Solucionado;14/04/2026;-34,77838103;-58,39253585;unidad_intendente;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Rea claros;Jaqueline;94941948;CALLE 1 ;Solucionado;14/04/2026;-34,7167172;-58,44366966;relevamiento;FIORITO
+Alumbrado Público;Luminaria con riesgo de caída;LUMINARIAS;RECLAMOS;25;MENDOZA 1205;Solucionado;14/04/2026;-34,80557091;-58,41175406;relevamiento;LLAVALLOL
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Pizzatti;Diego Gastón ;23022832;RUBEN DE ROSAS 1369;Solucionado;14/04/2026;-34,77585406;-58,37487197;whatsapp_cgm;TEMPERLEY
+Asuntos Hidricos;Sumidero tapado;Rivero;Mónica ;14201193;25 DE MAYO ;Solucionado;14/04/2026;-34,77632934;-58,39733557;whatsapp_cgm;TEMPERLEY
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Santangelo;Andrea;20416301;SIXTO FERNANDEZ 1804;Solucionado;14/04/2026;-34,76338016;-58,42418391;whatsapp;LOMAS
+Asuntos Hidricos;Zanja obstruida;DE AMBIENTE;SECRETARIA ;21;EVITA ;Solucionado;14/04/2026;-34,74164076;-58,47523114;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;SITARO;ADRIANA ALICIA;16323037;VETERE 849;Solucionado;14/04/2026;-34,74728212;-58,42201119;whatsapp_cgm;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;lopez;graciela;18552644;BOLONIA 726;Solucionado;14/04/2026;-34,72241441;-58,43304643;whatsapp;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;RONDEAU 378;Solucionado;14/04/2026;-34,7990199;-58,42179382;relevamiento;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;CORPAR;MARIA ;23026664;HUNGRIA 950;Solucionado;14/04/2026;-34,75315703;-58,34928079;whatsapp;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;SANCHEZ;NANCY GRACIELA;31224730;MIGUEL DE CERVANTES ;Solucionado;14/04/2026;-34,75599758;-58,43458742;whatsapp;PARQUE BARON
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;CAPUTO;CARMEN NELLY;2906980;PRESIDENTE DERQUI MALABIA;Solucionado;14/04/2026;-34,74169715;-58,37895192;centro_de_atencion_vecinal;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;FERREYRA;BEATRIZ NOEMÍ;11613787;RIOBAMBA 1355;Solucionado;14/04/2026;-34,76117958;-58,38402456;0800;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;RITA;ALVAREZ ;2764533877;C SUCRE 714;Solucionado;14/04/2026;-34,76162;-58,41944;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;aldacor;maria;18769955;NOGOYA 283;Solucionado;14/04/2026;-34,73344281;-58,42261715;relevamiento;CENTENARIO
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;ciccarellia ;marcela ;16079363;GRANADEROS 783;Solucionado;14/04/2026;-34,74908583;-58,3860638;centro_de_atencion_vecinal;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;ANDRADE;ALEJANDRO;18865091;INT FELIPE CASTRO 1695;Solucionado;14/04/2026;-34,74519434;-58,43112885;whatsapp_cgm;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Luna;Omar;12581695;ALBERTO LARROQUE 1502;Solucionado;14/04/2026;-34,74222311;-58,41768513;0800;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Andrade;Roxana ;21649853;FALUCHO 290;Solucionado;14/04/2026;-34,75177065;-58,43996682;centro_de_atencion_vecinal;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;couso ;Mariano ;24694123;MANUEL BALIÑA 881;Solucionado;14/04/2026;-34,74852491;-58,41359632;whatsapp_cgm;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Soraires;Adriana ;16749107;LOS CASTAÑOS 50;Solucionado;14/04/2026;-34,76383793;-58,43114175;0800;PARQUE BARON
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;arregui;monica;16819214;GUALEGUAY 600;Solucionado;14/04/2026;-34,72946681;-58,47147504;centro_de_atencion_vecinal;LAMADRID
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;russo;julia haidee;5408097;GUAMINI 2533;Solucionado;14/04/2026;-34,71098979;-58,45943756;operativos;BUDGE
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Gould;Federico;37363332;CERRITO 567;Solucionado;14/04/2026;-34,76438803;-58,39244966;whatsapp;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;MANOUKIAN;MARTIN;20024404;MEEKS 620;Solucionado;14/04/2026;-34,76946378;-58,39808477;whatsapp_cgm;TEMPERLEY
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Zaloga;Franco;45225495;PATRICIOS 360;Solucionado;14/04/2026;-34,79352084;-58,40830491;relevamiento;TURDERA
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;DEFENSA CIVIL;AREA;22;EL MIRASOL ;Solucionado;14/04/2026;-34,75223527;-58,34792453;relevamiento;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;VAZQUEZ;CARMEN;6701980;SIXTO FERNANDEZ 978;Solucionado;14/04/2026;-34,76516617;-58,41190793;centro_de_atencion_vecinal;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;SANCHEZ;PABLO;11513667;REPUBLICA ARGENTINA 850;Solucionado;14/04/2026;-34,7726202;-58,3625346;relevamiento;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEVER;CARLOS;14216843;JUAN DE DIOS FILIBERTO 92;Solucionado;14/04/2026;-34,75734126;-58,42902329;centro_de_atencion_vecinal;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;gitali;roberto ;23029491;A ALSINA 270;Solucionado;14/04/2026;-34,73920269;-58,39247797;centro_de_atencion_vecinal;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Culsndins;Aida;5746887;RIOBAMBA 2296;Solucionado;14/04/2026;-34,7554313;-58,37292296;0800;SAN JOSE
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;caballero;Cesar ;29153929;CANADA 1717;Solucionado;14/04/2026;-34,71998253;-58,451355;whatsapp_cgm;BUDGE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;sellitti;anabella;35864277;B ROLDAN 1458;Solucionado;14/04/2026;-34,74885777;-58,37081382;centro_de_atencion_vecinal;BANFIELD
+Asuntos Hidricos;Boca de tormenta obstruida;CABRERA BARRIOS;NELIDA ;93103751;EVITA 3532;Solucionado;14/04/2026;-34,74013692;-58,47637943;unidad_intendente;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;TAPIA;Laureano Rodriguez ;21771571;MALVINAS ARGENTINAS 1103;Solucionado;14/04/2026;-34,77323362;-58,38116079;relevamiento;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;SAN JOSÉ;CGM;6;EL MIRASOL ;Solucionado;14/04/2026;-34,75223527;-58,34792453;relevamiento;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DOLJANIN;MARIA ELENA;14690518;ALBERTI 251;Solucionado;14/04/2026;-34,75442926;-58,39269901;0800;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Berasain;Marta;10330329;MANUEL CASTRO 1975;Solucionado;14/04/2026;-34,73691954;-58,39919412;0800;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;TAPIA;Laureano Rodriguez ;21771571;MALVINAS ARGENTINAS 1103;Solucionado;14/04/2026;-34,77323362;-58,38116079;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;MALDONADO MIRET;ZULMA CECILIA;92885130;CONSEJAL RAJO 3384;Solucionado;14/04/2026;-34,69482744;-58,44681068;whatsapp_cgm;FIORITO
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 3 ;Solucionado;13/04/2026;-34,74640334;-58,46678861;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 103 ;Solucionado;13/04/2026;-34,74740094;-58,46604598;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 104 ;Solucionado;13/04/2026;-34,7478619;-58,46570283;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;GENERAL JUAN F QUIROGA ;Solucionado;13/04/2026;-34,74435509;-58,46562461;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero reconstrucción;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;13/04/2026;-34,74032575;-58,47527375;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;13/04/2026;-34,7395608;-58,47378139;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Avalos;Ivan Alexis;37422422;FOURNIER 1871;Solucionado;13/04/2026;-34,74105476;-58,43989717;whatsapp;SANTA MARTA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;BALLESTERO;NATALIA PAULA ;26821877;GRL ALVARADO 316;Solucionado;13/04/2026;-34,78970611;-58,40229447;whatsapp;TURDERA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Binetti;Natalia;26879811;SILVA ;Solucionado;13/04/2026;-34,80756272;-58,41274496;whatsapp;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;FINOCCHIO;SERGIO ATILIO;32022365;ALBERTO LARROQUE ;Solucionado;13/04/2026;-34,74156;-58,42516202;whatsapp_cgm;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;fregenal ;Camila;41921609;JUAN B JUSTO 1090;Solucionado;13/04/2026;-34,80287164;-58,41115221;whatsapp_cgm;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Atención Vecinal ;Subsecretaría ;801;SAN FRANCISCO 365;Solucionado;13/04/2026;-34,79270688;-58,41085063;whatsapp_cgm;TURDERA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Aranda;Carlos;32197316;PARAGUAY 615 ;Solucionado;13/04/2026;-34,7253316;-58,42826454;whatsapp_cgm;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;ferreyra;silvia;17024378;JOSE GARIBALDI 1787;Solucionado;13/04/2026;-34,7792819;-58,42012968;whatsapp;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Natale;Gabriela;14462219;MANUEL CASTRO 623;Solucionado;13/04/2026;-34,75246334;-58,40244598;whatsapp_cgm;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;KUS;SILVIA;16913449;COLON 235;Solucionado;13/04/2026;-34,7687428;-58,39271963;whatsapp_cgm;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;puglia;Susana Graciela ;10361742;JOSE I GORRITI 1353;Solucionado;13/04/2026;-34,75954684;-58,41682157;whatsapp_cgm;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;SPOLLI;OLGA;16737795;BRUNO TAVANO 805;Solucionado;13/04/2026;-34,75801;-58,44271;whatsapp_cgm;PARQUE BARON
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;CARBIA;OSCAR;10588290;EL CHURRINCHE 1797;Solucionado;13/04/2026;-34,76982861;-58,37313799;centro_de_atencion_vecinal;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Santoquieti;Jose ;13088277;ARANA GOIRI 90;Solucionado;13/04/2026;-34,76871274;-58,43971328;centro_de_atencion_vecinal;PARQUE BARON
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;caceres;eduardo;17975018;VALPARAISO 340;Solucionado;13/04/2026;-34,75147473;-58,45177965;centro_de_atencion_vecinal;SANTA MARTA
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Fiorruccio;Horacio;11175678;JUNCAL VELEZ;Solucionado;13/04/2026;-34,76379969;-58,38425362;centro_de_atencion_vecinal;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Atencion a la comunidad;Subsecretaria;800;FELIX DE AZARA 736;Solucionado;13/04/2026;-34,75112904;-58,40361739;0800;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;LICEN;ROBERTO LUIS;10960765;PRESIDENTE DERQUI 1375;Solucionado;13/04/2026;-34,74369706;-58,37843796;centro_de_atencion_vecinal;BANFIELD
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;BOCCHI;LEONARDO;10354393;MANUEL CASTRO 2023;Solucionado;13/04/2026;-34,73623945;-58,39902183;centro_de_atencion_vecinal;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;RODRIGUEZ;OSVALDO;16914093;PICUN LEUFU 1280;Solucionado;13/04/2026;-34,76277445;-58,41594491;0800;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;RIOS;MARIA PAULA;32401783;MSTRA CATALINA RODRIGUEZ 180;Solucionado;13/04/2026;-34,75881439;-58,42605764;whatsapp_cgm;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;CRUZ;ESTELA;14721978;B FERNANDEZ MORENO 135;Solucionado;13/04/2026;-34,75863403;-58,42730944;whatsapp_cgm;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Caraballo;Víctor Hugo  ;22389329;PERGAMINO ;Solucionado;13/04/2026;-34,72683886;-58,48141367;whatsapp_cgm;LAMADRID
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;chaparro;mariana;33501793;HOMERO ;Solucionado;13/04/2026;-34,75186846;-58,44955269;centro_de_atencion_vecinal;SANTA MARTA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Diaz ; vivían vanesa;32381342;PEDRO RIVERA 2481;Solucionado;13/04/2026;-34,75176072;-58,42839811;whatsapp_cgm;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;ALBORNOZ;CARLOS MARCELO;18123742;DINAMARCA 3426;Solucionado;13/04/2026;-34,74393942;-58,34944242;centro_de_atencion_vecinal;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;cuevas ;silvina;20383256;BOULEVARD SANTA FE 1121;Solucionado;13/04/2026;-34,74412689;-58,41870179;0800;BANFIELD
+Alumbrado Público;Luminaria con riesgo de caída;BUDGE;CGM;2;INT PEDRO PABLO TURNER 1897;Solucionado;13/04/2026;-34,70949194;-58,46133772;relevamiento;BUDGE
+Alumbrado Público;Luminaria con riesgo de caída;BUDGE;CGM;2;COSQUIN 2577;Solucionado;13/04/2026;-34,70999587;-58,45712152;relevamiento;BUDGE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública; CARISTI;JUAN CARLOS;4888232;VIENA 173;Solucionado;13/04/2026;-34,76887126;-58,4354342;centro_de_atencion_vecinal;PARQUE BARON
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;....;CGM TEMPERLEY;36903864;SAN CARLOS 299;Solucionado;13/04/2026;-34,77815846;-58,411998;relevamiento;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Mazariego;Sara Nilda ;5867970;FELIPE BOERO 203;Solucionado;13/04/2026;-34,75346362;-58,42913407;centro_de_atencion_vecinal;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;gonzalez;juan carlos ;7795373;DEAN G FUNES 1268;Solucionado;13/04/2026;-34,805902;-58,412733;whatsapp_cgm;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Osorio;Miguel;27273661;Caaguazu  1587 esquina golondrina ;Solucionado;13/04/2026;-34,75616264;-58,34146332;sitio_web;SAN JOSE
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;DEFENSA CIVIL;AREA;22;SAN CARLOS ;Solucionado;13/04/2026;-34,77767957;-58,41233451;relevamiento;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;SAN CARLOS ;Solucionado;13/04/2026;-34,77767957;-58,41233451;relevamiento;TEMPERLEY
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;ALBERTO LARROQUE 996;Solucionado;12/04/2026;-34,74358005;-58,40861716;relevamiento;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Elliot;Valeria;23906470;TRIUNVIRATO 22;Solucionado;12/04/2026;-34,78141983;-58,38943448;relevamiento;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;SARACENI;LUIS;93164826;GENERAL MULLER 437 ;Solucionado;12/04/2026;-34,78667595;-58,39335417;whatsapp;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;TOVAR;RUBEN;20964004;EL PLUMERILLO 2659;Solucionado;12/04/2026;-34,70171867;-58,44453797;relevamiento;FIORITO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Rodriguez ;Julián ;33121225;GENERAL GUEMES 809;Solucionado;12/04/2026;-34,76712171;-58,38020763;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Fagalde ;Delia ;34613484;LAUTARO 547;Solucionado;12/04/2026;-34,77449815;-58,37357494;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Alvarez;Rita;27026051;Sucre  710 y 714;Solucionado;12/04/2026;-34,76162;-58,41944;sitio_web;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;GENERAL A J DE SUCRE ;Solucionado;11/04/2026;-34,76621667;-58,42181036;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DIRESE;OMAR;13258318;Castro Barros  1037;Solucionado;11/04/2026;-34,74001828;-58,38053109;sitio_web;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;cabrera;dora;93900624;barcelona  2050;Solucionado;11/04/2026;-34,73424487;-58,4459452;sitio_web;BUDGE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;OJEDA;IVAN DARIO ;30424927;LUIS DAVILA 498;Solucionado;11/04/2026;-34,80480156;-58,41160273;relevamiento;LLAVALLOL
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CALLE 4 ;Solucionado;11/04/2026;-34,74686824;-58,46371983;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 103 ;Solucionado;11/04/2026;-34,74740094;-58,46604598;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 103 ;Solucionado;11/04/2026;-34,74740094;-58,46604598;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 106 ;Solucionado;11/04/2026;-34,75078944;-58,4688895;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;11/04/2026;-34,7391045;-58,47298738;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;11/04/2026;-34,7395608;-58,47378139;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;11/04/2026;-34,7395608;-58,47378139;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;11/04/2026;-34,7395608;-58,47378139;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;MIZZARDO;MIRTA;17586248;J DARRAGUEIRA 1518;Solucionado;11/04/2026;-34,73603753;-58,41693328;relevamiento;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Monje;Carlos Roberto;21461919;JOSE E COLOMBRES 1740;Solucionado;11/04/2026;-34,76109175;-58,42278571;whatsapp;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Briz;Rosa;14722512;REVOLUCION DE TEMPERLEY 529;Solucionado;11/04/2026;-34,75702423;-58,3685002;redes;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Gomez;Blanca ;6707676;GENOVA 1931;Solucionado;11/04/2026;-34,74436303;-58,37090383;0800;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Achával;Carlos;27642324;Cochabamba  945;Solucionado;11/04/2026;-34,74577723;-58,38262331;sitio_web;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;LONGUEIRAS;ROBERTO;4703016;JUAN A GARONA 1198;Solucionado;11/04/2026;-34,76365023;-58,41445133;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;ANDRES BELLO 1097;Solucionado;11/04/2026;-34,73234728;-58,45699822;relevamiento;ALBERTINA
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Gandaria ;Estela ;17898962;IPARRAGUIRRE 404;Solucionado;11/04/2026;-34,76571374;-58,44511342;relevamiento;PARQUE BARON
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;Gandaria ;Estela ;17898962;IPARRAGUIRRE 406;Solucionado;10/04/2026;-34,76571374;-58,44511342;relevamiento;PARQUE BARON
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Aranda;Carlos;32197316;Paraguay  615 entre paris  y barcelona ;Solucionado;10/04/2026;-34,72416083;-58,42917776;sitio_web;CENTENARIO
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;CABO CORREA ;Solucionado;10/04/2026;-34,7395608;-58,47378139;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;JUAN LARREA ;Solucionado;10/04/2026;-34,74957755;-58,41063407;relevamiento;LOMAS
+Asuntos Hidricos;Zanja obstruida;HERRERA;JORGE DAVID ;35358646;MACACHA GUEMES ;Solucionado;10/04/2026;-34,73622621;-58,47848287;whatsapp;SANTA CATALINA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;PONS;MARIA GRACIA;14937514;MANUEL DE FALLA 426;Solucionado;10/04/2026;-34,75088481;-58,42993497;whatsapp;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;Caballero;Karina ;30746843;AVENIDA GRAL MARTIN RODRIGUEZ 1600;Solucionado;10/04/2026;-34,73648916;-58,43566801;whatsapp_cgm;ALBERTINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;RODRIGUEZ;ZULEMA SEBASTIANA;4941987;J J PASO 2215;Solucionado;10/04/2026;-34,74819562;-58,42737107;whatsapp;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Gonzalez;Gaston ;28778228;ANIBAL PONCE ;Solucionado;10/04/2026;-34,74765425;-58,43997865;whatsapp_cgm;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;GONZALEZ CIGOJ;SILVINA CECILIA;16914484;VALENTIN VERGARA 2056;Solucionado;10/04/2026;-34,73666341;-58,39337351;whatsapp;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Cambre;Micaela;38491205;MAIPU 873;Solucionado;10/04/2026;-34,74443987;-58,3837966;whatsapp;BANFIELD
+Asuntos Hidricos;Boca de tormenta obstruida;HERNANDEZ;NORA ;16266535;ARMONIA ;Solucionado;10/04/2026;-34,7878565;-58,42387807;whatsapp;LLAVALLOL
+Asuntos Hidricos;Zanja obstruida;LAMADRID;CGM;14;CAÑUELAS 100;Solucionado;10/04/2026;-34,72895812;-58,46400327;relevamiento;LAMADRID
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Beraldi;Paula;31224432;24 DE NOVIEMBRE ;Solucionado;10/04/2026;-34,79196685;-58,42208575;whatsapp_cgm;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Ramírez;Wanda;47383135;EL ZORZAL 3526;Solucionado;10/04/2026;-34,76192192;-58,35470428;whatsapp;SAN JOSE
+Asuntos Hidricos;Sumidero tapado;ibañez;marile;22854815;J L MURATURE 961 ;Solucionado;10/04/2026;-34,71868738;-58,4290976;whatsapp_cgm;CENTENARIO
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;10/04/2026;-34,7395608;-58,47378139;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;10/04/2026;-34,73872832;-58,4723065;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;10/04/2026;-34,7391045;-58,47298738;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;10/04/2026;-34,73837756;-58,47161485;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;PADRE CARLOS MUJICA ;Solucionado;10/04/2026;-34,73772688;-58,47026652;relevamiento;SANTA CATALINA
+Alumbrado Público;Luminaria con riesgo de caída;DEFENSA CIVIL;AREA;22;EUSKADI ;Solucionado;10/04/2026;-34,72337585;-58,47246282;relevamiento;LAMADRID
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;rosaires;miriam ;27999380;GENERAL LEVALLE 2060;Solucionado;10/04/2026;-34,73850167;-58,3836501;centro_de_atencion_vecinal;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Marrone ;Carina;24321858;FRAY LUIS BELTRAN 1396;Solucionado;10/04/2026;-34,77393227;-58,41698324;0800;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Scriffignano;Carlos;7746203;JOSE M DE HEREDIA 783;Solucionado;10/04/2026;-34,77076124;-58,36109143;centro_de_atencion_vecinal;SAN JOSE
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;ORTIZ;LUIS BELTRAN ;11418837;BLANDENGUES ;Solucionado;10/04/2026;-34,72299741;-58,47293263;centro_de_atencion_vecinal;LAMADRID
+Asuntos Hidricos;Zanja obstruida;Martinez;Mariana Beatriz;28382181;MACACHA GUEMES 3906;Solucionado;10/04/2026;-34,73569448;-58,47888134;centro_de_atencion_vecinal;SANTA CATALINA
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Gianelli;Andrea;23297846;ESMERALDA 2275;Solucionado;10/04/2026;-34,75929505;-58,37019106;centro_de_atencion_vecinal;SAN JOSE
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;TEMPERLEY;CGM;9;ALZAGA ;Solucionado;10/04/2026;-34,77697282;-58,38635074;relevamiento;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;J J CASTELLI 422;Solucionado;09/04/2026;-34,75314089;-58,40183042;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;J J CASTELLI 422;Solucionado;09/04/2026;-34,75314089;-58,40183042;relevamiento;LOMAS
+Alumbrado Público;Luminaria con riesgo de caída;ALBORNOZ;SABINA;21617979;PROSPERO G ALLEMANDRI 1210;Solucionado;09/04/2026;-34,76712832;-58,38109866;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Cagliolo;Claudio ;22147709;CARLOS CROCE 50;Solucionado;09/04/2026;-34,75880438;-58,4097758;0800;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Ray;Julio Alberto ;12274513;SAN FRANCISCO 635;Solucionado;09/04/2026;-34,7837751;-58,41739618;whatsapp_cgm;TEMPERLEY
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;soria;andrea;20023815;13 DE DICIEMBRE 1300;Solucionado;09/04/2026;-34,73621168;-58,41117944;whatsapp_cgm;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;TRINIDAD;ERMELINDA;14385287;SAN PATRICIO 605;Solucionado;09/04/2026;-34,75754791;-58,3631002;whatsapp_cgm;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;LEGIsAMON;STELLAMARIS;17340430;BARTOLOME CALCAGNO 275 ;Solucionado;09/04/2026;-34,77214025;-58,43786257;whatsapp_cgm;PARQUE BARON
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Ruiz ;Lorena ;40389449;OTTAWA 157;Solucionado;09/04/2026;-34,75160314;-58,36347352;whatsapp_cgm;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;González;Romina Alejandra ;42029202;CALLE 102 573;Solucionado;09/04/2026;-34,74859676;-58,46783965;whatsapp;SANTA CATALINA
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;caceres ;cristian ;29165212;PASAJE 6 1180;Solucionado;09/04/2026;-34,74520942;-58,47569752;whatsapp_cgm;SANTA CATALINA
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Rojas Revollo ;Rosalio ;93067345;AVENIDA OLIMPO 2115;Solucionado;09/04/2026;-34,73772139;-58,48526659;centro_de_atencion_vecinal;SANTA CATALINA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;amado;Natalia ;34922020;PRENSA ARGENTINA 1495;Solucionado;09/04/2026;-34,74045912;-58,42962183;whatsapp;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;CASTRO;FEDERICO;38837927;GENERAL CONESA 1359;Solucionado;09/04/2026;-34,71426404;-58,43081937;relevamiento;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;eberle;leonardo;22918766;LISANDRO DE LA TORRE 2195 ;Solucionado;09/04/2026;-34,74738501;-58,43765669;whatsapp;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;PAPADOPULOS;JUAN CARLOS;12596765;HIPOLITO VIEYTES 726;Solucionado;09/04/2026;-34,73909142;-58,40493308;centro_de_atencion_vecinal;BANFIELD
+Alumbrado Público;Luminaria con riesgo de caída;LUMINARIAS;RECLAMOS;25;BENITO PEREZ GALDOS 2385 ENTRE BARADERO Y PASAJE LOS PINOS ESTA POR CAER Y NO FUNCIONA ;Solucionado;09/04/2026;-34,70860061;-58,44892401;relevamiento;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Mercado;Nelida Graciela;12673355;ESTRADA 1655;Solucionado;09/04/2026;-34,7380878;-58,41643557;whatsapp;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;LA FONTAINE 1574;Solucionado;09/04/2026;-34,75014239;-58,44776489;relevamiento;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Tripodi;Adriana ;26357664;AVENIDA GRAL MARTIN RODRIGUEZ 2293;Solucionado;09/04/2026;-34,74112842;-58,44409365;whatsapp;ALBERTINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;frias;cristian;39715606;CORONEL TERRADA 1479;Solucionado;09/04/2026;-34,75519104;-58,45453931;whatsapp_cgm;SANTA MARTA
+Asuntos Hidricos;Zanja obstruida;IMPA;NORA;17975500;NEUQUEN ;Solucionado;09/04/2026;-34,74849777;-58,45488439;atencion_vecinal_azara;SANTA MARTA
+Asuntos Hidricos;Boca de tormenta obstruida;Contreras;Maria ;20228767;CABO CORREA 1212;Solucionado;09/04/2026;-34,7389062;-58,47263283;whatsapp_cgm;SANTA CATALINA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;loprete ;graciela ;17732289;COCHABAMBA 1000;Solucionado;09/04/2026;-34,74577723;-58,38262331;centro_de_atencion_vecinal;BANFIELD
+Asuntos Hidricos;Boca de tormenta obstruida;MONTERO;SANDRA ADRIANA ;20198059;MANUELA PEDRAZA 1500;Solucionado;09/04/2026;-34,7395608;-58,47378139;whatsapp;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Suárez ;Héctor Miguel;13193419;GENERAL J MOLDES 425;Solucionado;09/04/2026;-34,79023423;-58,43101782;0800;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;VERA;RICARDO DANIEL;17746198;CARLOS PELLEGRINI 321;Solucionado;09/04/2026;-34,75675993;-58,39743278;relevamiento;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;AVENIDA HIPOLITO YRIGOYEN ;Solucionado;09/04/2026;-34,7592027;-58,40231898;relevamiento;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;AVENIDA HIPOLITO YRIGOYEN ;Solucionado;09/04/2026;-34,7592027;-58,40231898;relevamiento;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;AVENIDA HIPOLITO YRIGOYEN ;Solucionado;09/04/2026;-34,7592027;-58,40231898;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;almiron;georgina;35031039;Suiza  835 entre los recuerdos y el tala;Solucionado;09/04/2026;-34,75529053;-58,35520438;sitio_web;TEMPERLEY
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CALLE 107 ;Solucionado;08/04/2026;-34,75130485;-58,46851515;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CALLE 105 ;Solucionado;08/04/2026;-34,75034952;-58,46920901;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;CALLE 106 ;Solucionado;08/04/2026;-34,75078944;-58,4688895;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Bontas ;Laura ;12947290;JUJUY 215 ;Solucionado;08/04/2026;-34,76293414;-58,35929885;whatsapp;SAN JOSE
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;MIGUEL DE UNAMUNO 1500;Solucionado;08/04/2026;-34,71778912;-58,4401462;relevamiento;FIORITO
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;VUÑUELA;RUBEN MARCELO;18582377;CERRITO ;Solucionado;08/04/2026;-34,76665723;-58,39655601;whatsapp;TEMPERLEY
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Bocanegra;Agustín;33774958;TUCUMAN 2077;Solucionado;08/04/2026;-34,73423234;-58,40906952;whatsapp;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;braun;nadia;31032275;CERROS COLORADOS ;Solucionado;08/04/2026;-34,73708355;-58,4139359;whatsapp;BANFIELD
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;DEFENSA CIVIL;AREA;22;J J CASTELLI 2300;Solucionado;08/04/2026;-34,7495498;-58,42637827;relevamiento;LOMAS
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;DEFENSA CIVIL;AREA;22;J J CASTELLI 2300;Solucionado;08/04/2026;-34,7495498;-58,42637827;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;DEFENSA CIVIL;AREA;22;J J CASTELLI 2300;Solucionado;08/04/2026;-34,7495498;-58,42637827;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;voulgaris;emilia ;5334815;LAS HERAS 251;Solucionado;08/04/2026;-34,75004322;-58,39824313;0800;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;DEFENSA CIVIL;AREA;22;MENDOZA 1205;Solucionado;08/04/2026;-34,80557091;-58,41175406;relevamiento;LLAVALLOL
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Villan;Mario alberto;27152301;GRAL PAZ 2287;Solucionado;08/04/2026;-34,71868772;-58,46152122;0800;BUDGE
+Asuntos Hidricos;Boca de tormenta obstruida;Mucholi;Jorge;10149345;ARAOZ ;Solucionado;08/04/2026;-34,73388939;-58,41400786;0800;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída; MARIS CARAYOL;LUCIA STELLA ;13088316;F MONTERO 1551;Solucionado;08/04/2026;-34,73882106;-58,42017041;whatsapp;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;VARGAS;RAMON ALFREDO;28460167;HOMERO 4565;Solucionado;08/04/2026;-34,72460528;-58,46991054;whatsapp;LAMADRID
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;MIRA;GUSTAVO JAVIER;18253855;PEDRO RIVERA 2375;Solucionado;08/04/2026;-34,751897;-58,427362;atencion_vecinal_azara;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Ibarra;Josefa Cristina;21887296;MOSOTTI 185;Solucionado;08/04/2026;-34,69898187;-58,44166367;whatsapp_cgm;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Otero;Andrea viviana ;21786872;VIRREY CEVALLOS 52;Solucionado;08/04/2026;-34,76236373;-58,39231803;whatsapp_cgm;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Beltracchi;Verónica Andrea;33149540;JUAN B JUSTO ;Solucionado;08/04/2026;-34,79442219;-58,41795709;whatsapp;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Burgos ;Elizabeth fernanda;35755439;BARILARI 3081;Solucionado;08/04/2026;-34,74370258;-58,35688439;whatsapp_cgm;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DAmelio;Gustavo ;20831468;TUPAC AMARU 55;Solucionado;08/04/2026;-34,80205141;-58,43187566;whatsapp;LLAVALLOL
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Merlo;Maria;30652819;MANUEL BALIÑA 1868;Solucionado;08/04/2026;-34,73663635;-58,41045955;whatsapp;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Avila;Ruth;26667345;F MONTERO 1545;Solucionado;08/04/2026;-34,73882106;-58,42017041;0800;BANFIELD
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CABO CORREA ;Solucionado;08/04/2026;-34,7380092;-58,47087882;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 107 ;Solucionado;08/04/2026;-34,75130485;-58,46851515;relevamiento;SANTA CATALINA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída; Balenzuela;Diego;22021535;JOSE N PENNA 1610;Solucionado;08/04/2026;-34,73955015;-58,40709581;whatsapp_cgm;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Atención Vecinal ;Subsecretaría ;801;PILCOMAYO 2285;Solucionado;08/04/2026;-34,70888953;-58,44622536;whatsapp;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Pin Trumino;Maria Florencia ;31293021;CABRERA  1265;Solucionado;08/04/2026;-34,74188822;-58,37832332;whatsapp_cgm;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;CORONEL;JOSE DANIEL;10361360;J J CASTELLI 2300;Solucionado;08/04/2026;-34,7495498;-58,42637827;centro_de_atencion_vecinal;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Valle;Mariana;24935206;C MOLINA ARROTEA 1470;Solucionado;08/04/2026;-34,76649645;-58,41978405;0800;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Ferro;Matias Viegas;33442141;ALMTE BROWN 2302;Solucionado;08/04/2026;-34,76406545;-58,39656892;whatsapp;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;CONDORI;PEDRO  CATALINO;6949528;LA FONTAINE 1574;Solucionado;08/04/2026;-34,75014239;-58,44776489;whatsapp_cgm;SANTA MARTA
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;ABRIL;GERMAN;24434472;CABRERA 220;Solucionado;08/04/2026;-34,73874248;-58,39161843;centro_de_atencion_vecinal;BANFIELD
+Asuntos Hidricos;Sumidero reconstrucción;Marx;Sabina ;24036900;TRIUNVIRATO 198;Solucionado;08/04/2026;-34,781102;-58,388649;centro_de_atencion_vecinal;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;RECONQUISTA ;Solucionado;08/04/2026;-34,79180822;-58,41033205;relevamiento;TURDERA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;AGUILAR;GLADYS MABEL;12978500;FRANCISCO SIRITTO 139;Solucionado;08/04/2026;-34,76740578;-58,43356749;centro_de_atencion_vecinal;PARQUE BARON
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;ARTAZA;JORGE LUIS;18600936;PADRE BRUNO 60;Solucionado;08/04/2026;-34,78774214;-58,40394596;whatsapp_cgm;TURDERA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;RODRIGUEZ;GUILLERMO;14142126;AVENIDA HIPOLITO YRIGOYEN 10768;Solucionado;08/04/2026;-34,7840174;-58,40721291;centro_de_atencion_vecinal;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Puck;Silvia;20430454;ELOY ALFARO 1361;Solucionado;08/04/2026;-34,74402137;-58,43137696;whatsapp;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Martinez;Raul ;7663558;ASCASUBI ;Solucionado;08/04/2026;-34,80203491;-58,42465712;relevamiento;LLAVALLOL
+Asuntos Hidricos;Boca de tormenta obstruida;cenci;silvia nancy;20383329;MARTINA CESPEDES 1761;Solucionado;08/04/2026;-34,73609892;-58,42853278;whatsapp;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública; Binda ;María Alejandra;12274358;ESTEVES CORREA 1002;Solucionado;08/04/2026;-34,7851425;-58,39008988;whatsapp;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Villalba ;Agustin ;44627118;GENERAL CONESA 2415;Solucionado;08/04/2026;-34,70250929;-58,43978926;whatsapp_cgm;FIORITO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;SANTA CATALINA;CGM;7;EVITA ;Solucionado;08/04/2026;-34,74262927;-58,47446197;relevamiento;SANTA CATALINA
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Gomez;Alicia Beatriz;11875888;C LUJAN 780;Solucionado;08/04/2026;-34,81359817;-58,43308621;whatsapp_cgm;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Davalos ;Deisy Paola;94297163;MANUEL DE LAVARDEN 376;Solucionado;08/04/2026;-34,74004296;-58,45277285;centro_de_atencion_vecinal;ALBERTINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Davalos ;Deisy Paola;94297163;MANUEL DE LAVARDEN 390;Solucionado;08/04/2026;-34,74004296;-58,45277285;centro_de_atencion_vecinal;ALBERTINA
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;GARCIA;CLAUDIO;20024341;SAN CARLOS 110;Solucionado;08/04/2026;-34,77727859;-58,41266693;whatsapp_cgm;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;TEMPERLEY;CGM;9;PICHINCHA ;Solucionado;08/04/2026;-34,78219128;-58,40515295;relevamiento;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;BAENA;BEATRIZ ISABEL;11510103;CUYO ;Solucionado;08/04/2026;-34,81181414;-58,42859219;whatsapp_cgm;LLAVALLOL
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;MIGUEL DE UNAMUNO ;Solucionado;08/04/2026;-34,71900121;-58,43853903;relevamiento;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;RIMOLDI;MARIA INES;14142332;SOLER 1233;Solucionado;07/04/2026;-34,77505418;-58,41105392;0800;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;ANTONIO SAENZ 2264;Solucionado;07/04/2026;-34,75428259;-58,42687516;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;gargiulo;maria eugenia;21738419;VIAMONTE 618;Solucionado;07/04/2026;-34,75408727;-58,39078279;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;sicich ;rosana ;20027162;V LONGHI 211;Solucionado;07/04/2026;-34,78441391;-58,39323581;relevamiento;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;NAVIA;CLAUDIA ;22004536;LANUS 2846;Solucionado;07/04/2026;-34,74315399;-58,35998279;whatsapp;SAN JOSE
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;Aranda;Lia;29179482;EL TALA 3282;Solucionado;07/04/2026;-34,75401561;-58,35671476;whatsapp_cgm;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;ATENCION AL VECINO;SUBSECRETARIA GESTION INTEGRAL;803;TILCARA 2812;Solucionado;07/04/2026;-34,71939988;-58,47252287;whatsapp;LAMADRID
+Asuntos Hidricos;Boca de tormenta obstruida;COLONNELLO;LILIANA;16602236;RIOBAMBA ;Solucionado;07/04/2026;-34,76147764;-58,38450092;centro_de_atencion_vecinal;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;GUITIERREZ;MONICA LILIANA;26551997;COSTA RICA 610;Solucionado;07/04/2026;-34,75352144;-58,35490813;centro_de_atencion_vecinal;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;ANGEL;CECILIA;14400834;G KURTH 36;Solucionado;07/04/2026;-34,79675778;-58,41235362;0800;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;CRASL;NOELIA;35189399;CONSTITUYENTES 515;Solucionado;07/04/2026;-34,78719853;-58,42633545;relevamiento;LLAVALLOL
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Zaloga;Franco;45225495;MONACO 800;Solucionado;07/04/2026;-34,78455925;-58,42361798;relevamiento;LLAVALLOL
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico; Vega Actis;Leonardo ;25969256;CORONEL ISIDRO SUAREZ 700;Solucionado;07/04/2026;-34,77747073;-58,40026254;whatsapp;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;SANTA CATALINA;CGM;7;RAUL LLOBERA ;Solucionado;07/04/2026;-34,73207836;-58,48059644;relevamiento;SANTA CATALINA
+Alumbrado Público;Luminaria con riesgo de caída;BUDGE;CGM;2;FIGUEREDO 1913;Solucionado;07/04/2026;-34,71323241;-58,46148542;relevamiento;BUDGE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Insua;Cristian Nahuel Ceferino;24686705;CASEROS 1883;Solucionado;07/04/2026;-34,76937112;-58,42554484;whatsapp_cgm;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;ferro;norma;11331715;CARLOS CROCE 111;Solucionado;07/04/2026;-34,75755064;-58,40951064;0800;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;CABRERA;JUAN CARLOS;11176129;ANCHORENA 198;Solucionado;07/04/2026;-34,77295343;-58,39358178;0800;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Cervenko;Diana ;16120888;AVENIDA HIPOLITO YRIGOYEN 11887;Solucionado;07/04/2026;-34,79426182;-58,40908587;whatsapp;TURDERA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;VARICENTI;YANINA SOLANGE;35997700;PASAJE PALICH 1679 (VEREDA DE ENFRENTE);Solucionado;07/04/2026;-34,75783;-58,46885;0800;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;JUSTINIANO;HECTOR;21466671;CID GUIDY DE FRANC ;Solucionado;07/04/2026;-34,74928636;-58,44567533;whatsapp_cgm;SANTA MARTA
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;ROMERO;ELBA LUISA;12634159;CUYO 980;Solucionado;07/04/2026;-34,80694671;-58,41903857;centro_de_atencion_vecinal;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Atención Vecinal ;Subsecretaría ;801;LAS HERAS 175;Solucionado;07/04/2026;-34,75022978;-58,39690263;whatsapp;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;aguilar;jorge luis ;29497047;INT PEDRO PABLO TURNER 1988;Solucionado;07/04/2026;-34,71068692;-58,46352734;centro_de_atencion_vecinal;BUDGE
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;TOLOZA;GRACIELA LILIANA, ;22742997;OSTENDE 274;Solucionado;07/04/2026;-34,71820899;-58,42919787;centro_de_atencion_vecinal;CENTENARIO
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DELAMO;JUSTO;16914616;GENERAL ARENALES ;Solucionado;07/04/2026;-34,75499783;-58,38895706;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;BENITEZ;EMA  BEATRIZ;94869608;CALLE 105 448;Solucionado;07/04/2026;-34,7285515;-58,49304623;whatsapp_cgm;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;SZEGO;CELIA;10960240;FERNANDO FADER 2631;Solucionado;07/04/2026;-34,76340175;-58,43375431;0800;PARQUE BARON
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Fernández;Valentina;93117773;CLAUDIO DE ALAS 376;Solucionado;07/04/2026;-34,73813551;-58,44902186;whatsapp;ALBERTINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;CGM;CGM temperley;22177607;CERRITO 1700;Solucionado;07/04/2026;-34,75840586;-58,38100078;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Rivas ;Claudio Daniel ;21886363;ANTONIO FILARDI 2469;Solucionado;07/04/2026;-34,70520257;-58,44495266;whatsapp_cgm;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;CAÑETE;OLGA;22266299;R J PAYRO 672;Solucionado;07/04/2026;-34,75040127;-58,41675663;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;seguin ;noemi;5082148;LA GOLONDRINA 1757;Solucionado;07/04/2026;-34,77226166;-58,37288816;0800;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Arce;Marisa;23060997;GENERAL EUSTAQUIO FRIAS ;Solucionado;07/04/2026;-34,78214664;-58,42306067;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;GALEANO;HORACIO ALBERTO ;18375483;C GASPAR NUÑEZ DE ARCE 261;Solucionado;07/04/2026;-34,73230125;-58,43473642;centro_de_atencion_vecinal;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;gelpi;alba;95000520;14 DE JULIO 158;Solucionado;07/04/2026;-34,77398056;-58,3928333;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;VERA;CARLOS ALBERTO ;23468823;PEÑA 818;Solucionado;07/04/2026;-34,74975843;-58,38547677;centro_de_atencion_vecinal;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;CABARONI;LOLA;44823228;PRESIDENTE QUINTANA 386;Solucionado;06/04/2026;-34,7406174;-58,37841072;relevamiento;BANFIELD
+Asuntos Hidricos;Zanja obstruida;Martinez;Leandro Ivan ;35216213;BERNARDO O HIGGINS 1700;Solucionado;06/04/2026;-34,75342984;-58,45694334;whatsapp;SANTA MARTA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;ARAGUAYA 615;Solucionado;06/04/2026;-34,7893794;-58,42000409;relevamiento;LLAVALLOL
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Villalba ;Agustin ;44627118;GENERAL CONESA 2415 ;Solucionado;06/04/2026;-34,70250929;-58,43978926;whatsapp;FIORITO
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;Gonzalez;Carolina;21738152;PRES JUAN D PERON ;Solucionado;06/04/2026;-34,72586513;-58,44201841;whatsapp;CENTENARIO
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;gonzalez;natalia;27147428;POBLADORA 1153;Solucionado;06/04/2026;-34,80605675;-58,42091375;relevamiento;LLAVALLOL
+Asuntos Hidricos;Boca de tormenta obstruida;RINITI;VICENTE RICARDI ;16774357;MARTINA CESPEDES 1785;Solucionado;06/04/2026;-34,73558326;-58,42886116;whatsapp;CENTENARIO
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;DEFENSA CIVIL;AREA;22;6 DE AGOSTO ;Solucionado;06/04/2026;-34,75215278;-58,47398862;relevamiento;SANTA CATALINA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Mori;Martin ;26327803;FELIX DE AZARA 1759;Solucionado;06/04/2026;-34,73905429;-58,40112842;whatsapp;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Periolo;Osvaldo ;7829497;E GASCON 151;Solucionado;06/04/2026;-34,74713297;-58,39314906;mail;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;GALARZA;LUCIANA ;28057317;SAN BENITO 929;Solucionado;06/04/2026;-34,79675469;-58,41016386;0800;TURDERA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Biccai;Claudio;16207312;MARIANO BOEDO 815;Solucionado;06/04/2026;-34,75827533;-58,40889373;0800;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Doncoff;Estefania ;30321134;NAHUEL HUAPI 115;Solucionado;06/04/2026;-34,74621106;-58,36488856;whatsapp_cgm;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Fernández;Valentina;93117773;CLAUDIO DE ALAS 376;Solucionado;06/04/2026;-34,73813551;-58,44902186;whatsapp;ALBERTINA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;SANTA CATALINA;CGM;7;CALLE 1 294;Solucionado;06/04/2026;-34,73274754;-58,49153133;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;JARA;JASMIN;33928405;PEDERNERA 1951;Solucionado;06/04/2026;-34,7514018;-58,37475805;whatsapp;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Valdés;Esther;13525758;CAROLINA MUZZILI 60 ;Solucionado;06/04/2026;-34,7707128;-58,43196388;whatsapp_cgm;PARQUE BARON
+Asuntos Hidricos;Boca de tormenta obstruida;Laumann;Gladys;16961433;ARAOZ ;Solucionado;06/04/2026;-34,73443426;-58,41052018;whatsapp_cgm;BANFIELD
+Asuntos Hidricos;Boca de tormenta obstruida;ibañez;marile;22854815;J L MURATURE ;Solucionado;06/04/2026;-34,71830695;-58,42939082;whatsapp_cgm;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;ATENCION AL VECINO;SUBSECRETARIA GESTION INTEGRAL;803;JOSE N PENNA 99;Solucionado;06/04/2026;-34,7586799;-58,41116656;whatsapp;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;MAYMO;MAURO;36294790;CUYO 1822;Solucionado;06/04/2026;-34,81212402;-58,42921199;whatsapp_cgm;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;LEAL;MAURO;28250711;EL CARDENAL 3691;Solucionado;06/04/2026;-34,75706491;-58,35461178;whatsapp;SAN JOSE
+Asuntos Hidricos;Sumidero tapado;Duranti ;Diego;24913273;JUNCAL 1025;Solucionado;06/04/2026;-34,76467655;-58,38608134;redes;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;gutierrez ;Rosa ;18457826;BENITO PEREZ GALDOS 2385;Solucionado;06/04/2026;-34,70860061;-58,44892401;centro_de_atencion_vecinal;FIORITO
+Asuntos Hidricos;Sumidero tapado;GONZALEZ;LIRIA OLINDA;9675;JUNCAL ;Solucionado;06/04/2026;-34,76564857;-58,3877453;centro_de_atencion_vecinal;TEMPERLEY
+Asuntos Hidricos;Sumidero tapado;GONZALEZ;LIRIA OLINDA;9675;JUNCAL ;Solucionado;06/04/2026;-34,7650987;-58,38671844;centro_de_atencion_vecinal;TEMPERLEY
+Asuntos Hidricos;Sumidero tapado;GONZALEZ;LIRIA OLINDA;9675;JUNCAL ;Solucionado;06/04/2026;-34,76439616;-58,38539422;centro_de_atencion_vecinal;TEMPERLEY
+Asuntos Hidricos;Sumidero tapado;BERNARDEZ;ROCIO ;38705074;CORONEL PRINGLES 52;Solucionado;06/04/2026;-34,76940775;-58,3992044;redes;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;TAPIA;Laureano Rodriguez ;21771571;MALVINAS ARGENTINAS 1103 ;Solucionado;06/04/2026;-34,77323362;-58,38116079;whatsapp;TEMPERLEY
+Asuntos Hidricos;Boca de tormenta obstruida;ALCANTARA;ALEXIS ;33060104;D VELEZ SARSFIELD ;Solucionado;06/04/2026;-34,7628928;-58,38485013;whatsapp;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;LEDESMA;BARBARA;34863371;DR CARLOS VOSS ;Solucionado;06/04/2026;-34,75215278;-58,47398862;relevamiento;SANTA CATALINA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;serafín;Nadia Romina ;41065318;JOSE N PENNA 127;Solucionado;06/04/2026;-34,75735947;-58,41089057;whatsapp;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;vargas;norma ;16258332;GUALEGUAY ;Solucionado;06/04/2026;-34,73184264;-58,47606313;centro_de_atencion_vecinal;LAMADRID
+Asuntos Hidricos;Boca de tormenta obstruida;Atención Vecinal ;Subsecretaría ;801;MANUEL BALIÑA ;Solucionado;06/04/2026;-34,73443426;-58,41052018;whatsapp_cgm;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;HACHEN;JORGE ORLANDO;10552232;ESTANZUELA DE REY 1902;Solucionado;06/04/2026;-34,7299986;-58,42366827;centro_de_atencion_vecinal;CENTENARIO
+Asuntos Hidricos;Boca de tormenta obstruida;MERCURI;VALERIA;26588061;LUIS SAENZ PEÑA ;Solucionado;06/04/2026;-34,7628928;-58,38485013;whatsapp;TEMPERLEY
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;diaz;andres;22004107;FRANCISCO DE MORAZAN ;Solucionado;06/04/2026;-34,71687526;-58,43720602;centro_de_atencion_vecinal;FIORITO
+Asuntos Hidricos;Boca de tormenta obstruida;PARDO;LEONOR;9988068;JUNCAL 1100;Solucionado;06/04/2026;-34,76467655;-58,38608134;0800;TEMPERLEY
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Zaloga;Franco;45225495;ANCHORIS 3388;Solucionado;06/04/2026;-34,75192002;-58,35672592;relevamiento;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Lopez;Guillermo;4591929;ISLA SOLEDAD 232 ;Solucionado;06/04/2026;-34,77552413;-58,4309042;whatsapp_cgm;PARQUE BARON
+Asuntos Hidricos;Sumidero tapado;MONTEFERRANTE;ALFREDO DANIEL;13088122;ARAOZ ;Solucionado;06/04/2026;-34,73400587;-58,41326324;centro_de_atencion_vecinal;BANFIELD
+Asuntos Hidricos;Sumidero tapado;MONTEFERRANTE;ALFREDO DANIEL;13088122;ARAOZ ;Solucionado;06/04/2026;-34,73443426;-58,41052018;centro_de_atencion_vecinal;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Hermosa;Jorge;93898022;CALLE 104 ;Solucionado;06/04/2026;-34,7478619;-58,46570283;unidad_gabinete;SANTA CATALINA
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;DEFENSA CIVIL;AREA;22;PUERTO ARGENTINO 525;Solucionado;06/04/2026;-34,7277179;-58,42708132;relevamiento;CENTENARIO
+Alumbrado Público;Luminaria con riesgo de caída;ayala;olga;18739134;MAR DEL PLATA 62;Solucionado;06/04/2026;-34,75057363;-58,44704774;centro_de_atencion_vecinal;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;GALCERAN;SILVANA GALCERAN;23505617;VIAMONTE 74;Solucionado;06/04/2026;-34,76127903;-58,39211861;whatsapp;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;DEFENSA CIVIL;AREA;22;PUERTO ARGENTINO 525;Solucionado;06/04/2026;-34,7277179;-58,42708132;relevamiento;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Fernandez;Ana;27988576;BLVD ARMESTI 3225;Solucionado;06/04/2026;-34,74334301;-58,35187548;whatsapp_cgm;SAN JOSE
+Asuntos Hidricos;Boca de tormenta obstruida;Iramain;Claudia;22940534;1 DE MARZO 590;Solucionado;06/04/2026;-34,80108628;-58,41558395;whatsapp_cgm;LLAVALLOL
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;sicich ;rosana ;20027162;V LONGHI ;Solucionado;06/04/2026;-34,78390115;-58,39364967;whatsapp_cgm;TEMPERLEY
+Asuntos Hidricos;Boca de tormenta obstruida;Alfaro;Jorge;29055383;RIOBAMBA 1326;Solucionado;06/04/2026;-34,76117958;-58,38402456;whatsapp_cgm;TEMPERLEY
+Asuntos Hidricos;Boca de tormenta obstruida;LLAVALLOL;CGM;3;DOYHENARD ;Solucionado;06/04/2026;-34,80921428;-58,41914413;relevamiento;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Arminio;"Jorge 	";12000498;C MOLINA ARROTEA 2097;Solucionado;06/04/2026;-34,76554125;-58,42638708;0800;LOMAS
+Asuntos Hidricos;Boca de tormenta obstruida;carreira;marta;5076721;JUAN A DE CONDARCO ;Solucionado;06/04/2026;-34,7773417;-58,38936384;whatsapp;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;PULVIRENTI;GRACIELA;12685696;MONSEÑOR A PIAGGIO 646 650;Solucionado;06/04/2026;-34,76727332;-58,41011131;0800;LOMAS
+Asuntos Hidricos;Boca de tormenta obstruida;Nupieri;Laura ;17732734;JOSE GARIBALDI 1000;Solucionado;06/04/2026;-34,77433725;-58,41077564;whatsapp;TEMPERLEY
+Defensa Civil;Cartel Publicitario Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;TOMAS ESPORA ;Solucionado;05/04/2026;-34,77675883;-58,39812466;relevamiento;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Mendicoa;Cristian;21704361;Nicora (esquina Fonrouge) ;Solucionado;05/04/2026;-34,75910365;-58,38456901;sitio_web;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;MALABIA ;Solucionado;04/04/2026;-34,73650488;-58,39020694;relevamiento;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;METAN ;Solucionado;04/04/2026;-34,72737628;-58,47387442;relevamiento;LAMADRID
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Guerrero;Soledad;38860020;López de Vega  1550;Solucionado;04/04/2026;-34,74827365;-58,44476974;sitio_web;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;MANUEL CASTRO 1045;Solucionado;04/04/2026;-34,747716;-58,40142058;relevamiento;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;LUGANO 304;Solucionado;04/04/2026;-34,75558632;-58,38390422;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;GENERAL JOSE DE SAN MARTIN 1415;Solucionado;04/04/2026;-34,74260248;-58,40341915;relevamiento;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;A ALSINA ;Solucionado;04/04/2026;-34,74562313;-58,39363781;relevamiento;BANFIELD
+Defensa Civil;Asistencia por Temporal;Martinez;Marisol;32475360; 14 de julio 142;Solucionado;04/04/2026;-34,77398056;-58,3928333;sitio_web;TEMPERLEY
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Martínez ;José ;24796321;AVENIDA HIPOLITO YRIGOYEN 10137;Solucionado;04/04/2026;-34,7745679;-58,405284;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Aquilano;Guillermo;35996025;ALMAFUERTE ;Solucionado;04/04/2026;-34,75779314;-58,41238229;0800;LOMAS
+Asuntos Hidricos;Boca de tormenta obstruida;Alfaro;Jorge;29055383;RIOBAMBA ;Solucionado;04/04/2026;-34,76147764;-58,38450092;redes;TEMPERLEY
+Asuntos Hidricos;Boca de tormenta obstruida;ALEVATO;MARTIN;28631725;RIOBAMBA 1277 ;Solucionado;04/04/2026;-34,76169797;-58,38499492;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;E CARRIEGO 605;Solucionado;04/04/2026;-34,73544356;-58,45280626;relevamiento;ALBERTINA
+Asuntos Hidricos;Boca de tormenta obstruida;Oraison ;Andrea ;16105485;MAYOR OLIVERO 201;Solucionado;04/04/2026;-34,73091941;-58,41780376;whatsapp;CENTENARIO
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Bejarano y Luna ;Martin ;30592955;ALBERTO LARROQUE 900;Solucionado;04/04/2026;-34,74380325;-58,40723459;0800;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Rossi;Yazmin;47483430;Aníbal Ponce  1972 entre olivos y Fournier ;Solucionado;04/04/2026;-34,7449835;-58,43503229;sitio_web;SANTA MARTA
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;DON BOSCO 1520;Solucionado;04/04/2026;-34,77372673;-58,37787757;relevamiento;TEMPERLEY
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;DEFENSA CIVIL;AREA;22;BOQUERON 800;Solucionado;04/04/2026;-34,76722331;-58,41913904;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;VILELA;HECTOR LEONEL;29266579;YATAY 1017;Solucionado;04/04/2026;-34,75301664;-58,34733343;relevamiento;SAN JOSE
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;BOQUERON ;Solucionado;04/04/2026;-34,7677877;-58,41924653;relevamiento;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;DEFENSA CIVIL;AREA;22;CHACABUCO ;Solucionado;04/04/2026;-34,74562313;-58,39363781;relevamiento;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;DEFENSA CIVIL;AREA;22;LORIA 390;Solucionado;04/04/2026;-34,76286723;-58,40240992;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;GENERAL CARLOS DE ALVEAR ;Solucionado;04/04/2026;-34,75599233;-58,40768819;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;TORTOSA;NATALIA;30086228;CASEROS 1985;Solucionado;03/04/2026;-34,76925776;-58,42634005;relevamiento;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;QUIROZ ;JOSE ;29005902;JOSE N PENNA 1557;Solucionado;03/04/2026;-34,74095737;-58,40740007;relevamiento;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Angel;Ariel;28585982;Ramon Falcon al  200 frente al colegio ;Solucionado;03/04/2026;-34,76762083;-58,40156517;sitio_web;LOMAS
+Defensa Civil;Asistencia por Temporal;costas;karina;20832127;Portela  111;Solucionado;03/04/2026;-34,75728093;-58,39832728;sitio_web;LOMAS
+Defensa Civil;Asistencia por Temporal;Uranga Marchesini;Mauro Ismael;31079807;Alsina  1700;Solucionado;03/04/2026;-34,75463729;-58,39526105;sitio_web;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DOSNIFF;ESTEFANIA;303211336;NAHUEL HUAPI 115;Solucionado;03/04/2026;-34,74621106;-58,36488856;relevamiento;SAN JOSE
+Asuntos Hidricos;Zanja obstruida;SAURO;FERNANDO JORGE;11875519;Av Eva Peron al  100;Solucionado;03/04/2026;-34,77900403;-58,39485048;sitio_web;TEMPERLEY
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;DEFENSA CIVIL;AREA;22;GINEBRA 1702;Solucionado;03/04/2026;-34,72531451;-58,44750317;relevamiento;ALBERTINA
+Alumbrado Público;Luminaria con riesgo de caída;ONETO;JIMENA NATALIA;27913584;Juan Zamora  49;Solucionado;03/04/2026;-34,73371594;-58,41692291;sitio_web;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;EDUARDO;CARLOS;34178402;UCRANIA 895;Solucionado;03/04/2026;-34,81148195;-58,4287655;relevamiento;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;GENERAL A J DE SUCRE ;Solucionado;03/04/2026;-34,77585548;-58,42176881;relevamiento;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Romero;Fernando;30320615;Guido Spano Nº  1060;Solucionado;03/04/2026;-34,78349539;-58,40246209;sitio_web;TURDERA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Bustamante;Paola;28210703;Mayor Olivero  41;Solucionado;03/04/2026;-34,72999037;-58,41617228;sitio_web;CENTENARIO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Zorzoli;Carlos;20540059;EL TALA 2281;Solucionado;03/04/2026;-34,76064868;-58,36861636;redes;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;SILVA;YANINA;29053848;Gandhi  470;Solucionado;03/04/2026;-34,75974988;-58,37376439;sitio_web;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;DEFENSA CIVIL;AREA;22;RUBEN DE ROSAS 1369;Solucionado;02/04/2026;-34,77585406;-58,37487197;relevamiento;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;LUNGARETTI;CARLOS;33554290;JOSE I GORRITI 1169;Solucionado;02/04/2026;-34,75999142;-58,41372078;whatsapp;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;carrosana;carolina;22742126;MARTIN CAPELLO 1995;Solucionado;02/04/2026;-34,74432005;-58,42387172;whatsapp;BANFIELD
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;TURDERA;CGM;10;AVENIDA 9 DE JULIO ;Solucionado;02/04/2026;-34,79008112;-58,41542894;relevamiento;TURDERA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Donato;Norberto;18287782;Darragueira  1418;Solucionado;02/04/2026;-34,73628596;-58,41471527;sitio_web;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Alvarez;Lwopoldo;24155026;RODRIGUEZ PEÑA 520;Solucionado;02/04/2026;-34,74090739;-58,40221505;whatsapp;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;FONROUGE 700;Solucionado;02/04/2026;-34,76098585;-58,38866461;relevamiento;LOMAS
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 107 ;Solucionado;01/04/2026;-34,75130485;-58,46851515;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Sumidero tapado;DE AMBIENTE;SECRETARIA ;21;CALLE 103 ;Solucionado;01/04/2026;-34,74740094;-58,46604598;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;DIAGONAL 61 ;Solucionado;01/04/2026;-34,74713352;-58,48057553;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;GENERAL JUAN F QUIROGA ;Solucionado;01/04/2026;-34,74776894;-58,47212349;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;MANUELA PEDRAZA ;Solucionado;01/04/2026;-34,74149778;-58,47227719;relevamiento;SANTA CATALINA
+Asuntos Hidricos;Boca de tormenta obstruida;DE AMBIENTE;SECRETARIA ;21;MANUELA PEDRAZA ;Solucionado;01/04/2026;-34,74248403;-58,47150482;relevamiento;SANTA CATALINA
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Vaccaro;Maria Cecilia ;23090517;BARTOLOME MITRE 300;Solucionado;01/04/2026;-34,76529962;-58,40083858;relevamiento;LOMAS
+Alumbrado Público;Luminaria con riesgo de caída;Morlacchi ;Ana Laura ;18253904;JULIAN AGUIRRE 1079;Solucionado;01/04/2026;-34,74635838;-58,41224774;relevamiento;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Morlacchi ;Ana Laura ;18253904;JULIAN AGUIRRE 1079;Solucionado;01/04/2026;-34,74635838;-58,41224774;whatsapp;BANFIELD
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;INTERNARDI;THOMAS;33504032;MARIANO BOEDO ;Solucionado;01/04/2026;-34,7592027;-58,40231898;relevamiento;LOMAS
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;Martínez;Gladys ;17541497;Almafuerte  1855;Solucionado;01/04/2026;-34,73680338;-58,40797188;sitio_web;BANFIELD
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;martinez borda;victor daniel;18370022;G HUDSON 2490;Solucionado;01/04/2026;-34,75811694;-58,4339143;whatsapp;PARQUE BARON
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;TAGLIAFICO;SILVIA;13359266;ALMAFUERTE 397;Solucionado;01/04/2026;-34,75484747;-58,41177264;whatsapp;LOMAS
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;VILLARUEL;GABRIELA ;26084780;LARRAZABAL 2499;Solucionado;01/04/2026;-34,70281344;-58,44028371;whatsapp;FIORITO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;DEFENSA CIVIL;AREA;22;D MATHEU 750;Solucionado;01/04/2026;-34,75552187;-58,38650448;relevamiento;LOMAS
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Lorenzo;Matilde;32835609;CARLOS GLADE 975;Solucionado;01/04/2026;-34,7379181;-58,4251942;whatsapp;CENTENARIO
+Alumbrado Público;Luminaria con riesgo de caída;LUMINARIAS;RECLAMOS;25;OSTENDE 588 E/ FILARDI Poste de estructura de Hierro inclinado apoyado sobre Cables;Solucionado;01/04/2026;-34,71984951;-58,43248761;relevamiento;CENTENARIO
+Alumbrado Público;Luminaria con riesgo de caída;LUMINARIAS;RECLAMOS;25;ANTONIO FILARDI 1002 entre Ostende y La Haya;Solucionado;01/04/2026;-34,71985509;-58,43324588;relevamiento;CENTENARIO
+Alumbrado Público;Luminaria con riesgo de caída;LUMINARIAS;RECLAMOS;25;LITUANIA 517;Solucionado;01/04/2026;-34,77335016;-58,37131202;relevamiento;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Benitez;Silvio Hernán;21841922;PIO BAROJA 2337;Solucionado;01/04/2026;-34,70940341;-58,4499015;whatsapp;FIORITO
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Acevedo;Sergio;33431590;OLIVOS 1601;Solucionado;01/04/2026;-34,74273272;-58,43619875;whatsapp_cgm;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Chaij;David;31531386;JACINTO VIERA 270;Solucionado;01/04/2026;-34,79749646;-58,4122787;whatsapp;LLAVALLOL
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;PRADO;AGUSTINA;40423540;LAS CASUARINAS 3353;Solucionado;01/04/2026;-34,75071595;-58,35773541;whatsapp;SAN JOSE
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;Zaloga;Franco;45225495;NECOL 742;Solucionado;01/04/2026;-34,70901691;-58,44405037;relevamiento;FIORITO
+Alumbrado Público;Luminaria con riesgo de caída;VIDOTTO; ROSANA MABEL ;25160569;FRANCISCO B RECONDO 949;Solucionado;01/04/2026;-34,71135871;-58,44506527;whatsapp;FIORITO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;SOLLA;Mariana Lorena;24564437;GENERAL CAPDEVILA 2045;Solucionado;01/04/2026;-34,75113449;-58,38002873;whatsapp_cgm;BANFIELD
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;Palleros; Mariela;36676494;INT FELIPE CASTRO ;Solucionado;01/04/2026;-34,75112687;-58,44230237;whatsapp_cgm;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública; Monzo;Pablo;22001154;ESTEVES CORREA 477;Solucionado;01/04/2026;-34,78255693;-58,39116323;whatsapp;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;El gharbi ;Gloria;35372674;TIMOTEO GORDILLO 933;Solucionado;01/04/2026;-34,73674548;-58,42603264;whatsapp;CENTENARIO
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Vaccaro;Maria Cecilia ;23090517;BARTOLOME MITRE 300;Solucionado;01/04/2026;-34,76529962;-58,40083858;whatsapp;LOMAS
+Defensa Civil;Señalización de Poste / Columna con Riesgo Eléctrico;TEMPERLEY;CGM;9;GENERAL GUEMES 898;Solucionado;01/04/2026;-34,76712171;-58,38020763;relevamiento;TEMPERLEY
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;González;diego;25152517;REVOLUCION DE TEMPERLEY 2898;Solucionado;01/04/2026;-34,75996;-58,36902;whatsapp_cgm;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Funes ;viviana ;26997850;EL PLUMERILLO 2709;Solucionado;01/04/2026;-34,70057082;-58,4453815;whatsapp_cgm;FIORITO
+Defensa Civil;Ramas de Gran Porte con Riesgo de Caída sobre Techo de Vivienda;MAZZOLA;JESICA ;30373542;GRAL IRIARTE 525;Solucionado;01/04/2026;-34,76877548;-58,39006002;whatsapp;TEMPERLEY
+Empresa de Servicios Públicos;Poste de empresa de servicios en mal estado;DEFENSA CIVIL;AREA;22;AVENIDA 9 DE JULIO ;Solucionado;01/04/2026;-34,79008112;-58,41542894;relevamiento;TURDERA
+Asuntos Hidricos;Zanja obstruida;GONZALEZ;NOEMI;25871068;EUSKADI ;Solucionado;01/04/2026;-34,7312427;-58,46632496;centro_de_atencion_vecinal;LAMADRID
+Defensa Civil;Señalización de Poste / Columna con Riesgo de Caída;Pieroni;Maria Luisa ;9748419;DORREGO 587;Solucionado;01/04/2026;-34,77797759;-58,40357855;relevamiento;TEMPERLEY
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Villanueva ;Graciela;11247833;EL CHURRINCHE 3440;Solucionado;01/04/2026;-34,76160251;-58,35638837;whatsapp_cgm;SAN JOSE
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;Traversaro;Gustavo Fabian;20955387;AVENIDA GRAL HORNOS 2066;Solucionado;01/04/2026;-34,70606515;-58,43372712;operativos;FIORITO
+Defensa Civil;Señalización de Bocas de Tormenta / Sumideros sin Tapa;SALVO;ALBERTO EFRAIN;33199425;HOMERO ;Solucionado;01/04/2026;-34,75186846;-58,44955269;centro_de_atencion_vecinal;SANTA MARTA
+Defensa Civil;Árbol Caído con Riesgo de Caída en la Vía Pública;avalos;brisa;46118626;CAMPANA ;Solucionado;01/04/2026;-34,71243179;-58,45353616;whatsapp;BUDGE

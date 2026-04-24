@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAPA COE - Lomas de Zamora</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --bg-main: #19567C;
+            --blanco: #FFFFFF;
+            --acento: #4AB5E0;
+            --magenta: #D34872;
+            --azul-inst: #19567C;
+            --radius-sys: 12px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--blanco);
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        #map { height: 100%; width: 100%; border-radius: 8px; }
+
+        /* Scrollbar personalizado */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #F3F6F9; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #E6EDF3; border-radius: 4px; }
+
+        /* Animación para Puntos Recurrentes (Accidentes/Incidentes) */
+        @keyframes pulse-red {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(211, 72, 114, 0.7); }
+            70% { transform: scale(1.2); box-shadow: 0 0 0 10px rgba(211, 72, 114, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(211, 72, 114, 0); }
+        }
+        .marker-pulse {
+            width: 12px; height: 12px;
+            background: var(--magenta);
+            border-radius: 50%;
+            border: 2px solid white;
+            animation: pulse-red 2s infinite;
+        }
+
+        .layer-loading { opacity: 0.5; pointer-events: none; position: relative; }
+    </style>
+</head>
+<body class="flex flex-col">
+
+    <header class="bg-[var(--bg-main)] shadow-lg border-b-4 border-[var(--acento)] z-20 py-6 px-4 shrink-0">
+        <div class="max-w-[1600px] mx-auto flex items-center justify-center gap-4">
+            <div class="bg-white text-[var(--bg-main)] rounded-full h-14 w-14 flex items-center justify-center shadow-md">
+                <i class="fa-solid fa-tower-broadcast text-2xl"></i>
+            </div>
+            <div class="flex flex-col">
+                <h1 class="text-3xl font-extrabold tracking-tight uppercase leading-none">MAPA COE</h1>
+                <p class="text-[var(--acento)] font-bold text-sm mt-1 uppercase">Gestión de Tráfico y Emergencias - Lomas de Zamora</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full max-w-[1600px] mx-auto py-8 px-4 flex-1 flex flex-col lg:flex-row gap-6">
+        
+        <aside class="w-full lg:w-80 bg-white rounded-xl shadow-md border border-[#E6EDF3] flex flex-col max-h-[calc(100vh-200px)] overflow-hidden">
+            <div class="p-4 border-b bg-[#F3F6F9] flex items-center gap-2">
+                <i data-lucide="layers" class="text-[#0B5F8D] h-5 w-5"></i>
+                <h3 class="font-bold text-[#0F172A] uppercase text-sm">Capas de Datos</h3>
+            </div>
+            
+            <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-6">
+                
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                    <h4 class="text-xs font-extrabold text-blue-700 uppercase mb-3 flex items-center gap-2">
+                        <i data-lucide="gauge" class="h-4 w-4"></i> Tiempo Real
+                    </h4>
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input type="checkbox" id="cb-trafico" class="w-4 h-4 accent-blue-600">
+                        <span class="text-sm text-[#0F172A] font-bold">Tráfico en Vivo</span>
+                    </label>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase mb-3 flex items-center gap-2">
+                        <i data-lucide="map-pin" class="h-4 w-4"></i> Territorio
+                    </h4>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)]" checked>
+                            <span class="text-sm text-[#0F172A] font-medium">Límite Municipal</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" id="cb-cgm" class="w-4 h-4 accent-[var(--bg-main)]">
+                            <span class="text-sm text-[#0F172A] font-medium">CGM (14 Centros)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="border-t pt-4">
+                    <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase mb-3 flex items-center gap-2">
+                        <i data-lucide="shield-alert" class="h-4 w-4"></i> Seguridad Vial
+                    </h4>
+                    <div class="space-y-3">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" id="cb-tareas-preventivas" class="w-4 h-4 accent-[#0B5F8D]">
+                            <span class="text-sm text-[#0F172A] font-medium">Accidentes y Alertas</span>
+                        </label>
+                        
+                        <div id="filtros-tareas" class="hidden pl-7 border-l-2 border-gray-100 space-y-2 mt-2">
+                            <select id="filtro-tipo" class="text-[10px] p-1.5 rounded border bg-gray-50 w-full text-gray-700">
+                                <option value="ALL">Todos los Tipos</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="flex-1 bg-white p-2 rounded-xl shadow-lg border border-[#E6EDF3] flex flex-col min-h-[500px]">
+            <div id="map"></div>
+        </div>
+
+    </main>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2MHti5Cy4IDKPc3Iu0ypNQg_BgsjcMoQ&callback=initMap&libraries=geometry" defer></script>
+
+    <script>
+        let map;
+        let trafficLayer;
+        let infoWindow;
+        let activeGeoJsons = {}; 
+        let sgrMarkers = [];
+
+        function initMap() {
+            lucide.createIcons();
+            infoWindow = new google.maps.InfoWindow();
+
+            // Inicializar Mapa centrado en Lomas
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -34.7573, lng: -58.4035 },
+                zoom: 13,
+                mapTypeControl: true,
+                mapTypeControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
+                styles: [
+                    { "featureType": "poi", "stylers": [{ "visibility": "off" }] },
+                    { "featureType": "transit", "stylers": [{ "visibility": "simplified" }] }
+                ]
+            });
+
+            // Capa de Tráfico
+            trafficLayer = new google.maps.TrafficLayer();
+
+            // Listener: Tráfico
+            document.getElementById('cb-trafico').addEventListener('change', (e) => {
+                e.target.checked ? trafficLayer.setMap(map) : trafficLayer.setMap(null);
+            });
+
+            // Listener: Límite Municipal (GeoJSON)
+            document.getElementById('cb-municipio').addEventListener('change', (e) => {
+                toggleLayer('cb-municipio', './municipios_Lomas%20de%20Zamora.geojson', {
+                    strokeColor: "#19567C", strokeWeight: 4, fillOpacity: 0.05
+                });
+            });
+
+            // Listener: CGM (GeoJSON)
+            document.getElementById('cb-cgm').addEventListener('change', (e) => {
+                toggleLayer('cb-cgm', './CGM.geojson', {
+                    strokeColor: "#4AB5E0", strokeWeight: 2, fillOpacity: 0.1
+                });
+            });
+
+            // Listener: Tareas Preventivas (CSV - Accidentes)
+            document.getElementById('cb-tareas-preventivas').addEventListener('change', (e) => {
+                if(e.target.checked) {
+                    document.getElementById('filtros-tareas').classList.remove('hidden');
+                    cargarSGR();
+                } else {
+                    document.getElementById('filtros-tareas').classList.add('hidden');
+                    limpiarSGR();
+                }
+            });
+
+            // Carga inicial
+            if(document.getElementById('cb-municipio').checked) {
+                document.getElementById('cb-municipio').dispatchEvent(new Event('change'));
+            }
+        }
+
+        // Función Genérica para GeoJSON
+        async function toggleLayer(id, url, styles) {
+            if (activeGeoJsons[id]) {
+                activeGeoJsons[id].forEach(f => map.data.remove(f));
+                delete activeGeoJsons[id];
+                return;
+            }
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                const features = map.data.addGeoJson(data);
+                activeGeoJsons[id] = features;
+
+                map.data.setStyle((f) => styles);
+                
+                map.data.addListener('click', (event) => {
+                    let name = event.feature.getProperty('NOMBRE') || event.feature.getProperty('Name') || "Sector";
+                    infoWindow.setContent(`<div class="p-2 font-bold text-slate-800">${name}</div>`);
+                    infoWindow.setPosition(event.latLng);
+                    infoWindow.open(map);
+                });
+            } catch (err) { console.error("Error capa:", err); }
+        }
+
+        // Carga de Datos desde CSV (Accidentes/Incidentes)
+        function cargarSGR() {
+            fetch('./sgr.csv')
+                .then(res => res.text())
+                .then(csv => {
+                    Papa.parse(csv, {
+                        header: true, delimiter: ';', skipEmptyLines: true,
+                        complete: (results) => {
+                            poblarFiltrosSGR(results.data);
+                            renderizarSGR(results.data);
+                        }
+                    });
+                });
+        }
+
+        function renderizarSGR(data) {
+            limpiarSGR();
+            const filterType = document.getElementById('filtro-tipo').value;
+
+            data.forEach(row => {
+                if (!row.Latitud || !row.Longitud) return;
+                if (filterType !== 'ALL' && row.Tipo !== filterType) return;
+
+                const lat = parseFloat(row.Latitud.replace(',', '.'));
+                const lng = parseFloat(row.Longitud.replace(',', '.'));
+
+                // Marcador personalizado (tipo círculo con sombra)
+                const marker = new google.maps.Marker({
+                    position: { lat, lng },
+                    map: map,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        fillColor: row.Estado === 'solucionado' ? '#16A34A' : '#D34872',
+                        fillOpacity: 1,
+                        strokeColor: '#FFFFFF',
+                        strokeWeight: 2,
+                        scale: 8
+                    },
+                    title: row.Tipo
+                });
+
+                marker.addListener('click', () => {
+                    const content = `
+                        <div class="text-slate-800 p-2 min-w-[200px]">
+                            <div class="text-[10px] font-bold text-blue-600 uppercase mb-1">${row.Fecha}</div>
+                            <div class="font-bold text-sm mb-1">${row.Tipo}</div>
+                            <div class="text-xs text-slate-500 mb-2">${row.Direccion}</div>
+                            <div class="bg-slate-50 p-2 rounded text-[10px]">
+                                <strong>Estado:</strong> ${row.Estado}<br>
+                                <strong>Subtipo:</strong> ${row['Sub Tipo']}
+                            </div>
+                        </div>
+                    `;
+                    infoWindow.setContent(content);
+                    infoWindow.open(map, marker);
+                });
+
+                sgrMarkers.push(marker);
+            });
+        }
+
+        function poblarFiltrosSGR(data) {
+            const tipos = [...new Set(data.map(item => item.Tipo))].filter(Boolean);
+            const select = document.getElementById('filtro-tipo');
+            select.innerHTML = '<option value="ALL">Todos los Tipos</option>';
+            tipos.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t; opt.textContent = t;
+                select.appendChild(opt);
+            });
+            select.onchange = () => renderizarSGR(data);
+        }
+
+        function limpiarSGR() {
+            sgrMarkers.forEach(m => m.setMap(null));
+            sgrMarkers = [];
+        }
+
+    </script>
+</body>
+</html>

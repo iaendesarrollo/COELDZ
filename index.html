@@ -20,18 +20,8 @@
     <!-- Iconos Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Leaflet CSS (Para el Mapa) -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <!-- Leaflet MarkerCluster CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-    
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <!-- Leaflet Heat -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js" crossorigin="anonymous"></script>
-    <!-- Leaflet MarkerCluster JS -->
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2MHti5Cy4IDKPc3Iu0ypNQg_BgsjcMoQ&callback=initMap" defer></script>
 
     <style>
         :root {
@@ -54,57 +44,12 @@
         
         /* Asegurar que el mapa no se superponga con otros elementos z-index */
         #map { z-index: 10; }
-        .leaflet-control-layers { font-family: 'Montserrat', sans-serif; }
 
         /* Scrollbar personalizado usando la paleta */
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #F3F6F9; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #E6EDF3; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748B; }
-
-        /* ESTILOS CUSTOM PARA CLUSTERS */
-        .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
-            background-color: rgba(11, 95, 141, 0.6) !important;
-        }
-        .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
-            background-color: rgba(8, 74, 111, 0.9) !important;
-            color: white !important;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-        }
-
-        /* SISTEMA DE MARCADORES GEOESPACIALES - ZOOM AWARE */
-        .custom-div-icon { background: none; border: none; }
-        .marker-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-        
-        .marker-circle {
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: #FFFFFF;
-            transition: all 0.3s ease;
-            box-shadow: none !important;
-            border: none !important;
-        }
-        .marker-circle svg { transition: all 0.3s ease; }
-
-        .map-zoom-far .marker-circle { width: 8px; height: 8px; }
-        .map-zoom-far .marker-circle svg { width: 4px; height: 4px; stroke-width: 3px; }
-        .map-zoom-medium .marker-circle { width: 12px; height: 12px; }
-        .map-zoom-medium .marker-circle svg { width: 7px; height: 7px; stroke-width: 2.5px; }
-        .map-zoom-high .marker-circle { width: 14px; height: 14px; }
-        .map-zoom-high .marker-circle svg { width: 8px; height: 8px; stroke-width: 2px; }
-        .map-zoom-high .marker-circle:hover { transform: scale(1.3); filter: brightness(1.15); }
-
-        /* ANIMACIÓN PARA EVENTOS RECURRENTES */
-        @keyframes parpadeo-recurrente {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.9); }
-            50% { transform: scale(1.35); box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-        }
-        .marker-recurrent .marker-circle {
-            animation: parpadeo-recurrente 0.85s infinite ease-in-out !important;
-            border: 3px solid #DC2626 !important; /* Borde rojo intenso más grueso */
-        }
 
         /* Loader para las capas del menú */
         .layer-loading { opacity: 0.5; pointer-events: none; position: relative; }
@@ -116,6 +61,45 @@
             transform: translateY(-50%);
             animation: fa-spin 2s infinite linear;
             color: var(--bg-main);
+        }
+
+        /* Estilos para los marcadores SVG personalizados en Google Maps */
+        .custom-marker {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            border: 2px solid white;
+            box-shadow: 0 0 3px rgba(0,0,0,0.5);
+        }
+        
+        .custom-marker svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Efecto titilante */
+        @keyframes parpadeo-recurrente {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.9); }
+            50% { transform: scale(1.35); box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .marker-recurrent {
+            animation: parpadeo-recurrente 0.85s infinite ease-in-out !important;
+            border: 3px solid #DC2626 !important;
+            z-index: 1000 !important; /* Para que quede por encima */
+        }
+        
+        /* Estilos para las ventanas de información de Google Maps */
+        .gm-style .gm-style-iw-c {
+            padding: 0 !important; /* Quitar padding por defecto para usar el de Tailwind */
+            border-radius: 8px;
+        }
+        .gm-style .gm-style-iw-d {
+            overflow: hidden !important; /* Evitar scrollbars innecesarios */
         }
     </style>
 </head>
@@ -155,7 +139,6 @@
                             <i data-lucide="map" class="h-4 w-4"></i> División Territorial
                         </h4>
                         <div class="space-y-3" id="grupo-division-territorial">
-                            <!-- CHECKBOX LIMITE TERRITORIAL MARCADO POR DEFECTO -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer" checked>
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
@@ -429,31 +412,30 @@
 
         // Variables Globales del Mapa y Estado
         let map;
-        let mapBounds = null;
+        let infoWindow; // Usado para popups en Google Maps
+        let mapBounds = null; // Variable para controlar el encuadre automático del mapa
+
+        // Estructuras de datos para almacenar las capas
+        const mapLayers = {};
 
         // Capas CSV
-        let layerTareasPreventivas;
         window.sgrData = [];
         let sgrLoaded = false;
 
-        let layerPreventivasCGM;
         window.prevCgmData = [];
         let prevCgmLoaded = false;
 
-        let layerEventosTormenta;
         window.coeData = [];
         let coeLoaded = false;
 
-        let layerCortesLuz;
         window.cortesData = [];
         let cortesLoaded = false;
 
-        let layerArroyosDesbordados;
         window.arroyosCsvData = [];
         window.arroyosGeojsonData = null;
         let arroyosDesbordadosLoaded = false;
 
-        // Iconografía SVG general para puntos dinámicos
+        // Iconografía SVG general para puntos dinámicos (Se codificarán para Google Maps)
         const svgIconos = {
             preventiva: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
             escoba: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22l4-4"/><path d="M12 2a4 4 0 0 1 4 4c0 3-4 6-4 6s-4-3-4-6a4 4 0 0 1 4-4z"/><path d="M8 8l8 8"/><path d="M10 10l-4 4"/></svg>`,
@@ -477,22 +459,41 @@
             check: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
         };
 
+        // Función para crear iconos para Google Maps a partir de SVGs
+        function createGoogleMarkerIcon(svgString, bgColor, isRecurrent = false) {
+            const svgContent = encodeURIComponent(svgString);
+            const extraStyle = isRecurrent ? `animation: parpadeo-recurrente 0.85s infinite ease-in-out; border: 3px solid #DC2626;` : `border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);`;
+            
+            const html = `
+                <div style="position: absolute; transform: translate(-50%, -50%);">
+                    <div style="width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background-color: ${bgColor}; color: #FFFFFF; ${extraStyle}">
+                        <img src="data:image/svg+xml;utf8,${svgContent.replace(/currentColor/g, '%23FFFFFF')}" style="width: 14px; height: 14px;" />
+                    </div>
+                </div>
+            `;
+            
+            // Usando AdvancedMarkerElement (requerido en nuevas APIs de Google Maps)
+            const el = document.createElement('div');
+            el.innerHTML = html;
+            return el;
+        }
+
         // DICCIONARIO CENTRAL DE CAPAS GEOJSON
         const CONFIG_CAPAS = {
             'cb-municipio': { 
                 url: './municipios_Lomas de Zamora.geojson', 
                 type: 'basic', 
-                style: { color: '#0B5F8D', weight: 4, fillOpacity: 0.05, dashArray: '5,5' } 
+                style: { strokeColor: '#0B5F8D', strokeWeight: 4, fillOpacity: 0.05, strokeDasharray: '5,5' } 
             },
             'cb-cgm': { 
                 url: './CGM.geojson', 
                 type: 'basic', 
-                style: { color: '#4AB5E0', weight: 2, fillOpacity: 0.15 } 
+                style: { strokeColor: '#4AB5E0', strokeWeight: 2, fillOpacity: 0.15 } 
             },
             'cb-barrios': { 
                 url: './barrios_Lomas de Zamora.geojson', 
                 type: 'basic', 
-                style: { color: '#0B5F8D', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
+                style: { strokeColor: '#0B5F8D', strokeWeight: 2, fillOpacity: 0.1, strokeDasharray: '3,3' } 
             },
             // DATOS DEMOGRÁFICOS
             'cb-poblacion': { 
@@ -575,8 +576,6 @@
             }
         };
 
-        const layerInstances = {};
-
         // Función base para sanear geometrías GeoJSON mal formadas
         function sanearGeoJSON(data) {
             if (!data || !data.features || !Array.isArray(data.features)) return data;
@@ -623,80 +622,154 @@
             return data;
         }
 
-        // Función para encuadrar el mapa cuando se carga una capa nueva
-        function actualizarLimitesMapa(layer) {
-            if (!map) return;
-            try {
-                const bounds = layer.getBounds();
-                if (bounds && bounds.isValid()) {
-                    if (!mapBounds) {
-                        mapBounds = bounds;
-                    } else {
-                        mapBounds.extend(bounds);
-                    }
-                    map.fitBounds(mapBounds, { padding: [30, 30] });
+        // --- FUNCIONES DE RENDERIZADO ADAPTADAS A GOOGLE MAPS ---
+
+        function actualizarLimitesMapaGoogle(elementos) {
+            if (!map || elementos.length === 0) return;
+            const bounds = new google.maps.LatLngBounds();
+            
+            elementos.forEach(el => {
+                if (el.position) {
+                    bounds.extend(el.position);
+                } else if (el.getPath) {
+                    el.getPath().forEach(latLng => bounds.extend(latLng));
+                } else if (el.getPaths) {
+                    el.getPaths().forEach(path => {
+                        path.forEach(latLng => bounds.extend(latLng));
+                    });
                 }
-            } catch (e) {
-                console.warn("No se pudo calcular el encuadre para la capa actual.");
+            });
+            
+            map.fitBounds(bounds);
+            
+            // Si es un solo punto, acercar un poco
+            if (elementos.length === 1 && elementos[0].position) {
+                map.setZoom(16);
             }
         }
 
-        // Motor Genérico de Renderizado (Aplica para Instituciones y División Territorial)
-        function renderizarCapaGenerica(data, layerGroup, styleOptions) {
+        function createPopupHtml(title, properties, titleColor = 'var(--bg-main)', extraHeader = '', keysToIgnore = ['NOMBRE', 'NAME', 'Name', 'nombre', 'name']) {
+            let html = `<div class="font-sans min-w-[200px] p-2">
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${titleColor};">${title}</h4>
+                        ${extraHeader}
+                        <ul class="text-xs text-[#64748B] space-y-1">`;
+            for (let key in properties) {
+                if (!keysToIgnore.includes(key) && properties[key] !== null && properties[key] !== "") {
+                    html += `<li><b class="capitalize text-[#0F172A]">${key.replace(/_/g, ' ')}:</b> ${properties[key]}</li>`;
+                }
+            }
+            html += `</ul></div>`;
+            return html;
+        }
+
+        function renderizarCapaGenerica(data, layerId, styleOptions) {
             data = sanearGeoJSON(data);
-            const geoLayer = L.geoJSON(data, {
-                style: styleOptions,
-                pointToLayer: function (feature, latlng) {
-                    if (styleOptions && styleOptions.tipo === 'punto' && styleOptions.svg) {
-                        const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${styleOptions.color || '#0B5F8D'};">${styleOptions.svg}</div></div>`;
-                        const customIcon = L.divIcon({
-                            html: iconHtml,
-                            className: 'custom-div-icon',
-                            iconSize: [24, 24], 
-                            iconAnchor: [12, 12]
-                        });
-                        return L.marker(latlng, { icon: customIcon });
-                    } else {
-                        let radius = styleOptions && styleOptions.radius ? styleOptions.radius : 6;
-                        let fillColor = styleOptions && styleOptions.fillColor ? styleOptions.fillColor : "#0B5F8D";
-                        let color = styleOptions && styleOptions.color ? styleOptions.color : "#FFFFFF";
-                        let weight = styleOptions && styleOptions.weight ? styleOptions.weight : 2;
-                        return L.circleMarker(latlng, { radius: radius, fillColor: fillColor, color: color, weight: weight, opacity: 1, fillOpacity: 0.9 });
-                    }
-                },
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties) {
+            mapLayers[layerId] = [];
+
+            data.features.forEach(feature => {
+                if (feature.geometry.type === 'Point' || feature.geometry.type === 'MultiPoint') {
+                    const coords = feature.geometry.type === 'Point' ? [feature.geometry.coordinates] : feature.geometry.coordinates;
+                    
+                    coords.forEach(coord => {
+                        const latLng = { lat: coord[1], lng: coord[0] };
+                        let marker;
+
+                        if (styleOptions && styleOptions.tipo === 'punto' && styleOptions.svg) {
+                            marker = new google.maps.marker.AdvancedMarkerElement({
+                                map: map,
+                                position: latLng,
+                                content: createGoogleMarkerIcon(styleOptions.svg, styleOptions.color || '#0B5F8D')
+                            });
+                        } else {
+                            // Círculo básico si no hay SVG
+                            marker = new google.maps.Circle({
+                                strokeColor: styleOptions.color || '#FFFFFF',
+                                strokeOpacity: 1,
+                                strokeWeight: styleOptions.weight || 2,
+                                fillColor: styleOptions.fillColor || '#0B5F8D',
+                                fillOpacity: 0.9,
+                                map: map,
+                                center: latLng,
+                                radius: (styleOptions.radius || 6) * 10 // Aproximación metros
+                            });
+                        }
+
                         let props = feature.properties;
                         let nombreStr = props.NOMBRE || props.NAME || props.Name || props.nombre || props.name || "Elemento";
                         
-                        let popupHtml = `<div class="font-sans min-w-[200px]"><h4 class="font-bold text-[var(--bg-main)] border-b border-[#E6EDF3] pb-1 mb-2">${nombreStr}</h4><ul class="text-xs text-[#64748B] space-y-1">`;
-                        const keysToIgnore = ['NOMBRE', 'NAME', 'Name', 'nombre', 'name'];
-                        for (let key in props) {
-                            if (!keysToIgnore.includes(key) && props[key] !== null && props[key] !== "") {
-                                popupHtml += `<li><b class="capitalize">${key.replace(/_/g, ' ')}:</b> ${props[key]}</li>`;
+                        marker.addListener('click', () => {
+                            infoWindow.setContent(createPopupHtml(nombreStr, props));
+                            if (marker instanceof google.maps.Circle) {
+                                infoWindow.setPosition(latLng);
+                                infoWindow.open(map);
+                            } else {
+                                infoWindow.open(map, marker);
                             }
+                        });
+
+                        mapLayers[layerId].push(marker);
+                    });
+                } else if (feature.geometry.type === 'Polygon' || feature.geometry.type === 'MultiPolygon') {
+                    // Para polígonos, usamos Data Layer para mayor facilidad
+                    map.data.addGeoJson(feature);
+                    // Como Data es global, aplicamos un property trick para saber a qué capa pertenece
+                    feature.properties._layerId = layerId;
+                    
+                    map.data.setStyle(function(f) {
+                        if (f.getProperty('_layerId') === layerId) {
+                            return {
+                                strokeColor: styleOptions.strokeColor || '#0B5F8D',
+                                strokeWeight: styleOptions.strokeWeight || 2,
+                                fillColor: styleOptions.fillColor || '#0B5F8D',
+                                fillOpacity: styleOptions.fillOpacity || 0.1,
+                                strokeDasharray: styleOptions.strokeDasharray || null
+                            };
                         }
-                        popupHtml += `</ul></div>`;
-                        layer.bindPopup(popupHtml);
-                    }
+                    });
+                } else if (feature.geometry.type === 'LineString') {
+                    const path = feature.geometry.coordinates.map(c => ({ lat: c[1], lng: c[0] }));
+                    const line = new google.maps.Polyline({
+                        path: path,
+                        strokeColor: styleOptions.color || '#0B5F8D',
+                        strokeOpacity: styleOptions.opacity || 1.0,
+                        strokeWeight: styleOptions.weight || 3,
+                        map: map
+                    });
+                    
+                    let props = feature.properties;
+                    let nombreStr = props.NOMBRE || props.NAME || props.Name || props.nombre || props.name || "Elemento";
+                    
+                    line.addListener('click', (e) => {
+                        infoWindow.setContent(createPopupHtml(nombreStr, props));
+                        infoWindow.setPosition(e.latLng);
+                        infoWindow.open(map);
+                    });
+                    
+                    mapLayers[layerId].push(line);
                 }
             });
-            geoLayer.addTo(layerGroup);
-            actualizarLimitesMapa(geoLayer);
+            
+            // Para Data Layer no podemos hacer fitBounds directamente, habría que iterar. Lo omitimos para polígonos grandes
+            if (mapLayers[layerId].length > 0) {
+                actualizarLimitesMapaGoogle(mapLayers[layerId]);
+            }
         }
 
-        /* -----------------------------------------------------------
-           RENDERIZADOS DEMOGRÁFICOS ENFOCADOS (ATLAS UI)
-        ------------------------------------------------------------- */
+        // --- RENDERIZADOS DEMOGRÁFICOS ---
 
-        function renderizarCapaPoblacion(data, layerGroup) {
+        function renderizarCapaPoblacion(data, layerId) {
             data = sanearGeoJSON(data);
-
+            mapLayers[layerId] = []; // En Gmaps usaremos Data Layer pero registramos para toggle
+            
             let maxVal = 0;
             data.features.forEach(f => {
                 let val = f.properties['Habitantes'] || f.properties['RADIOS_POB'] || 0;
                 if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
                 if (val > maxVal) maxVal = val;
+                
+                f.properties._layerId = layerId;
+                f.properties._val = val;
+                map.data.addGeoJson(f);
             });
 
             function getColor(d) {
@@ -704,634 +777,139 @@
                 return d > maxVal * 0.8 ? '#084A6F' : d > maxVal * 0.6 ? '#0B5F8D' : d > maxVal * 0.4 ? '#2A7FA8' : d > maxVal * 0.2 ? '#6BA1C7' : '#D1E1F0';  
             }
 
-            const geoLayer = L.geoJSON(data, {
-                style: function (feature) {
-                    let val = feature.properties['Habitantes'] || feature.properties['RADIOS_POB'] || 0;
-                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
-                    return { fillColor: getColor(val), weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
-                },
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties) {
-                        let props = feature.properties;
-                        let radioStr = props.REDCODE || props.RADIO || props.LINK_RADIO || props.NOMBRE || "Radio Censal";
-                        let valHabitantes = props.Habitantes || props.RADIOS_POB || props.POBLACION || 0;
-                        let valHogares = props.RADIOS_HOG || props.HOGARES;
-
-                        let popupHtml = `
-                            <div class="font-sans min-w-[200px]">
-                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
-                                <div class="bg-[#EAF1F7] p-2 rounded-md mb-2 border border-[#D1E1F0]">
-                                    <p class="text-xs font-bold text-[#0B5F8D] uppercase">Total Habitantes</p>
-                                    <p class="text-xl font-extrabold text-[#0B5F8D]">${Number(valHabitantes).toLocaleString('es-AR')}</p>
-                                </div>`;
-                        
-                        if (valHogares !== undefined && valHogares !== null) {
-                            popupHtml += `
-                                <ul class="text-xs text-[#64748B] space-y-1 mt-1">
-                                    <li><b class="capitalize text-[#0F172A]">Cantidad de Hogares:</b> ${Number(valHogares).toLocaleString('es-AR')}</li>
-                                </ul>`;
-                        }
-
-                        popupHtml += `</div>`;
-                        layer.bindPopup(popupHtml);
-                    }
+            map.data.setStyle(function(f) {
+                if (f.getProperty('_layerId') === layerId) {
+                    return {
+                        fillColor: getColor(f.getProperty('_val')),
+                        strokeWeight: 2,
+                        strokeColor: 'white',
+                        fillOpacity: 0.85
+                    };
                 }
             });
-            geoLayer.addTo(layerGroup);
-            actualizarLimitesMapa(geoLayer);
         }
 
-        function renderizarCapaPobreza(data, layerGroup) {
+        function renderizarCapaPobreza(data, layerId) {
             data = sanearGeoJSON(data);
-
+            mapLayers[layerId] = [];
+            
             function getColor(d) {
                 if(d === undefined || d === null) return '#F3F6F9';
                 return d >= 15 ? '#003B5C' : d >= 10 ? '#084A6F' : d >= 5  ? '#0B5F8D' : d >= 2  ? '#2A7FA8' : d > 0   ? '#6BA1C7' : '#EAF1F7';
             }
 
-            const geoLayer = L.geoJSON(data, {
-                style: function (feature) {
-                    let val = feature.properties['P_PC_HOG'] || 0;
-                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
-                    return { fillColor: getColor(val), weight: 1, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
-                },
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties) {
-                        let props = feature.properties;
-                        let radioStr = props.LINK_RADIO || "Sector Censal";
-                        let pctHogares = props.P_PC_HOG || 0;
-                        let pctPersonas = props.P_PC_PER || 0;
-                        let valHogares = props.PC_HOG || 0;
-                        let valPersonas = props.PC_PER || 0;
-                        
-                        let popupHtml = `
-                            <div class="font-sans min-w-[220px]">
-                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
-                                <div class="bg-[#FFF5F8] p-2 rounded-md mb-2 border border-[#FBCFE8]">
-                                    <p class="text-xs font-bold text-[#D34872] uppercase">Incidencia (Hogares)</p>
-                                    <p class="text-xl font-extrabold text-[#BE185D]">${pctHogares}%</p>
-                                </div>
-                                <ul class="text-xs text-[#64748B] space-y-1.5">
-                                    <li><b class="text-[#0F172A]">Incidencia (Personas):</b> ${pctPersonas}%</li>
-                                    <li><b class="text-[#0F172A]">Hogares Afectados:</b> ${Number(valHogares).toLocaleString('es-AR')}</li>
-                                    <li><b class="text-[#0F172A]">Personas Afectadas:</b> ${Number(valPersonas).toLocaleString('es-AR')}</li>
-                                </ul>
-                            </div>`;
-                        layer.bindPopup(popupHtml);
-                    }
+            data.features.forEach(f => {
+                let val = f.properties['P_PC_HOG'] || 0;
+                if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                
+                f.properties._layerId = layerId;
+                f.properties._val = val;
+                f.properties._tipo = 'pobreza';
+                map.data.addGeoJson(f);
+            });
+
+            map.data.setStyle(function(f) {
+                if (f.getProperty('_layerId') === layerId) {
+                    return {
+                        fillColor: getColor(f.getProperty('_val')),
+                        strokeWeight: 1,
+                        strokeColor: 'white',
+                        fillOpacity: 0.85
+                    };
                 }
             });
-            geoLayer.addTo(layerGroup);
-            actualizarLimitesMapa(geoLayer);
         }
 
-        function renderizarCapaInundables(data, layerGroup) {
+        function renderizarCapaInundables(data, layerId) {
             data = sanearGeoJSON(data);
-
+            mapLayers[layerId] = [];
+            
             function getColor(d) {
                 if(d === undefined || d === null) return '#F3F6F9'; 
                 return d >= 80 ? '#DC2626' : d >= 60 ? '#084A6F' : d >= 40 ? '#0B5F8D' : d >= 20 ? '#2A7FA8' : '#D1E1F0';  
             }
 
-            const geoLayer = L.geoJSON(data, {
-                style: function (feature) {
-                    let val = feature.properties['PORCENTAJE'];
-                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
-                    return { fillColor: getColor(val), weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
-                },
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties) {
-                        let props = feature.properties;
-                        let radioStr = props.REDCODE || props.LINK_RADIO || props.NOMBRE || "Sector Geográfico";
-                        let pctRiesgo = props.PORCENTAJE || props.ZONA_INUND || 0;
-                        let pobAfectada = props.POBLACION || props.RADIOS_POB || 0;
-                        let hogAfectados = props.RADIOS_HOG || 0;
-                        
-                        let popupHtml = `
-                            <div class="font-sans min-w-[200px]">
-                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
-                                <div class="bg-[#FEF2F2] p-2 rounded-md mb-2 border border-[#FECACA]">
-                                    <p class="text-xs font-bold text-[#DC2626] uppercase">Riesgo de Inundación</p>
-                                    <p class="text-xl font-extrabold text-[#B91C1C]">${Number(pctRiesgo).toLocaleString('es-AR')}%</p>
-                                </div>
-                                <ul class="text-xs text-[#64748B] space-y-1">
-                                    <li><b class="capitalize text-[#0F172A]">Población Afectada:</b> ${Number(pobAfectada).toLocaleString('es-AR')}</li>
-                                    <li><b class="capitalize text-[#0F172A]">Hogares Afectados:</b> ${Number(hogAfectados).toLocaleString('es-AR')}</li>
-                                </ul>
-                            </div>`;
-                        layer.bindPopup(popupHtml);
-                    }
+            data.features.forEach(f => {
+                let val = f.properties['PORCENTAJE'];
+                if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                
+                f.properties._layerId = layerId;
+                f.properties._val = val;
+                f.properties._tipo = 'inundable';
+                map.data.addGeoJson(f);
+            });
+
+            map.data.setStyle(function(f) {
+                if (f.getProperty('_layerId') === layerId) {
+                    return {
+                        fillColor: getColor(f.getProperty('_val')),
+                        strokeWeight: 2,
+                        strokeColor: 'white',
+                        fillOpacity: 0.85
+                    };
                 }
             });
-            geoLayer.addTo(layerGroup);
-            actualizarLimitesMapa(geoLayer);
         }
 
-        // Renderizado específico para Arroyos (Capa Demográfica base)
-        function renderizarCapaArroyos(data, layerGroup) {
+        function renderizarCapaArroyos(data, layerId) {
             data = sanearGeoJSON(data);
-            const geoLayer = L.geoJSON(data, {
-                style: { color: '#4AB5E0', weight: 4, opacity: 0.9 }, // Color celeste visible
-                onEachFeature: function (feature, layer) {
-                    if (feature.properties) {
-                        let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name || "Arroyo";
-                        let umbral = feature.properties.umbral_desborde || feature.properties['UMBRAL DESBORDE'] || "Sin datos";
-
-                        let popupHtml = `
-                            <div class="font-sans min-w-[200px]">
-                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2 flex items-center gap-1">
-                                    <i class="fa-solid fa-water"></i> ${name}
-                                </h4>
-                                <ul class="text-xs text-[#64748B] space-y-1">
-                                    <li><b class="text-[#0F172A]">Umbral de Desborde:</b> <span class="text-[#D34872] font-bold">${umbral} mts</span></li>
-                                </ul>
-                            </div>`;
-                        layer.bindPopup(popupHtml);
-                        layer.bindTooltip(name, { direction: 'top', className: 'custom-map-tooltip' });
-                    }
-                }
-            });
-            geoLayer.addTo(layerGroup);
-            actualizarLimitesMapa(geoLayer);
-        }
-
-        /* -----------------------------------------------------------
-           LÓGICA ESPECÍFICA PARA EVENTOS POR TORMENTA (coe.csv y corte_luz.csv)
-        ------------------------------------------------------------- */
-
-        function cargarEventosTormenta() {
-            const cb = document.getElementById('cb-eventos-tormenta');
-            const label = cb.closest('label');
-            label.classList.add('layer-loading');
-
-            fetch('./coe.csv')
-                .then(response => {
-                    if (!response.ok) throw new Error("Archivo coe.csv no encontrado.");
-                    return response.text();
-                })
-                .then(csvText => {
-                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
-                    
-                    Papa.parse(cleanCsvText, {
-                        header: true,
-                        skipEmptyLines: true,
-                        complete: function(results) {
-                            window.coeData = results.data;
-                            coeLoaded = true;
-                            document.getElementById('filtros-eventos').classList.remove('hidden');
-                            poblarFiltrosEventos();
-                            filtrarYRenderizarEventos();
-                            label.classList.remove('layer-loading');
-                        }
+            mapLayers[layerId] = [];
+            
+            data.features.forEach(feature => {
+                if (feature.geometry.type === 'LineString') {
+                    const path = feature.geometry.coordinates.map(c => ({ lat: c[1], lng: c[0] }));
+                    const line = new google.maps.Polyline({
+                        path: path,
+                        strokeColor: '#4AB5E0',
+                        strokeOpacity: 0.9,
+                        strokeWeight: 4,
+                        map: map
                     });
-                })
-                .catch(err => {
-                    console.error("Error al cargar Eventos por Tormenta:", err);
-                    alert("Error al cargar coe.csv. Verifica que el archivo exista en la ruta local correspondiente.");
-                    cb.checked = false;
-                    label.classList.remove('layer-loading');
-                });
-        }
-
-        function poblarFiltrosEventos() {
-            const cgms = new Set();
-            const tipos = new Set();
-            const fechas = new Set();
-
-            window.coeData.forEach(row => {
-                if (row.CGM) cgms.add(row.CGM.trim());
-                if (row['Tipo Evento']) tipos.add(row['Tipo Evento'].trim());
-                if (row.Fecha) fechas.add(row.Fecha.trim());
-            });
-
-            const poblarSelect = (id, setValores) => {
-                const select = document.getElementById(id);
-                select.innerHTML = select.options[0].outerHTML; 
-                Array.from(setValores).sort().forEach(val => {
-                    if (val === '') return;
-                    const opt = document.createElement('option');
-                    opt.value = val;
-                    opt.textContent = val;
-                    select.appendChild(opt);
-                });
-            };
-
-            poblarSelect('filtro-evt-cgm', cgms);
-            poblarSelect('filtro-evt-tipo', tipos);
-
-            // Ordenar Fechas asumiendo formato AAAA-MM-DD
-            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
-            
-            const selectFecha = document.getElementById('filtro-evt-fecha');
-            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
-            arrayFechas.forEach(val => {
-                const opt = document.createElement('option');
-                opt.value = val;
-                opt.textContent = val;
-                selectFecha.appendChild(opt);
-            });
-        }
-
-        function filtrarYRenderizarEventos() {
-            layerEventosTormenta.clearLayers();
-            
-            const fCgm = document.getElementById('filtro-evt-cgm').value;
-            const fTipo = document.getElementById('filtro-evt-tipo').value;
-            const fFecha = document.getElementById('filtro-evt-fecha').value;
-
-            const latLngs = [];
-            const eventosAgrupados = {};
-
-            window.coeData.forEach(row => {
-                const cgm = (row.CGM || '').trim();
-                const tipo = (row['Tipo Evento'] || '').trim();
-                const fecha = (row.Fecha || '').trim();
-
-                // Evaluar todos los filtros
-                if (fCgm !== 'ALL' && cgm !== fCgm) return;
-                if (fTipo !== 'ALL' && tipo !== fTipo) return;
-                if (fFecha !== 'ALL' && fecha !== fFecha) return;
-
-                let coordsStr = (row.Coordenadas || "").trim();
-                if (!coordsStr) return;
-                
-                // Remover posibles comillas si quedaron en el parsing y dividir por la coma
-                coordsStr = coordsStr.replace(/['"]/g, '');
-                let parts = coordsStr.split(',');
-                if (parts.length < 2) return;
-
-                const lat = parseFloat(parts[0].trim());
-                const lng = parseFloat(parts[1].trim());
-
-                if (isNaN(lat) || isNaN(lng)) return;
-
-                // Agrupamos por coordenadas para detectar recurrencia
-                const key = `${lat},${lng}`;
-                if (!eventosAgrupados[key]) eventosAgrupados[key] = [];
-                eventosAgrupados[key].push(row);
-            });
-
-            for (const key in eventosAgrupados) {
-                const grupo = eventosAgrupados[key];
-                const [latStr, lngStr] = key.split(',');
-                const lat = parseFloat(latStr);
-                const lng = parseFloat(lngStr);
-                const isRecurrent = grupo.length > 1;
-
-                // Tomamos el tipo del primer evento como representativo para el color del ícono
-                const primerEvento = grupo[0];
-                const tipo = primerEvento['Tipo Evento'] || '';
-                const cgm = primerEvento.CGM || '';
-
-                // Asignar Color e Ícono según el tipo de evento
-                let tipoEventoLower = tipo.toLowerCase();
-                let svgUsado = svgIconos.alerta;
-                let bgColor = '#D34872'; // Magenta por defecto (alerta general)
-
-                if (tipoEventoLower.includes('anegamiento') || tipoEventoLower.includes('agua') || tipoEventoLower.includes('inundacion')) {
-                    svgUsado = svgIconos.anegamiento;
-                    bgColor = '#4AB5E0'; // Celeste
-                } else if (tipoEventoLower.includes('arbol') || tipoEventoLower.includes('árbol') || tipoEventoLower.includes('rama')) {
-                    svgUsado = svgIconos.arbol;
-                    bgColor = '#19567C'; // Azul Oscuro
-                } else if (tipoEventoLower.includes('poste') || tipoEventoLower.includes('cable') || tipoEventoLower.includes('luz')) {
-                    svgUsado = svgIconos.poste;
-                    bgColor = '#F59E0B'; // Naranja/Amarillo Alerta Eléctrica
-                }
-
-                let claseExtra = isRecurrent ? 'marker-recurrent relative z-50' : '';
-
-                const iconHtml = `<div class="marker-container ${claseExtra}"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgUsado}</div></div>`;
-                const customIcon = L.divIcon({
-                    html: iconHtml,
-                    className: 'custom-div-icon',
-                    iconSize: [24, 24], 
-                    iconAnchor: [12, 12]
-                });
-
-                const marker = L.marker([lat, lng], { icon: customIcon });
-
-                let popupHtml = `<div class="font-sans min-w-[240px]">`;
-                
-                if (isRecurrent) {
-                    popupHtml += `<div class="bg-[#FEF2F2] text-[#DC2626] text-[10px] font-bold px-2 py-1.5 rounded mb-2 uppercase flex items-center gap-1.5 border border-[#FECACA]"><i class="fa-solid fa-triangle-exclamation"></i> ALERTA: PUNTO RECURRENTE (${grupo.length} Reportes)</div>`;
-                }
-
-                popupHtml += `<h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${isRecurrent ? 'Múltiples Incidentes' : tipo}</h4>
-                    <div class="max-h-[160px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
-
-                grupo.forEach(row => {
-                    popupHtml += `
-                        <div class="bg-[#F8FAFC] p-2 rounded border border-[#E2E8F0]">
-                            <p class="text-xs font-bold text-[#0F172A] mb-1 leading-tight">${row['Tipo Evento']}</p>
-                            <ul class="text-[10px] text-[#64748B] space-y-0.5">
-                                <li><b class="text-[#475569]">Fecha:</b> ${row.Fecha}</li>
-                                <li><b class="text-[#475569]">Dirección:</b> ${row.Direccion || '-'}</li>
-                                <li><b class="text-[#475569]">CGM:</b> ${row.CGM || '-'}</li>
+                    
+                    let props = feature.properties;
+                    let name = props.name || props.NOMBRE || props.Name || "Arroyo";
+                    let umbral = props.umbral_desborde || props['UMBRAL DESBORDE'] || "Sin datos";
+                    
+                    let popupHtml = `
+                        <div class="font-sans min-w-[200px] p-2">
+                            <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2 flex items-center gap-1">
+                                <i class="fa-solid fa-water"></i> ${name}
+                            </h4>
+                            <ul class="text-xs text-[#64748B] space-y-1">
+                                <li><b class="text-[#0F172A]">Umbral de Desborde:</b> <span class="text-[#D34872] font-bold">${umbral} mts</span></li>
                             </ul>
                         </div>`;
-                });
-
-                popupHtml += `</div></div>`;
-                
-                marker.bindPopup(popupHtml);
-                layerEventosTormenta.addLayer(marker);
-                latLngs.push([lat, lng]);
-            }
-
-            // Ajustar el zoom automáticamente si hay puntos filtrados
-            if (latLngs.length > 0 && map.hasLayer(layerEventosTormenta)) {
-                const zoomBounds = L.latLngBounds(latLngs);
-                map.fitBounds(zoomBounds, { padding: [30, 30] });
-            }
-        }
-
-        // ---------- CORTES DE LUZ -----------
-        function cargarCortesLuz() {
-            const cb = document.getElementById('cb-cortes-luz');
-            const label = cb.closest('label');
-            label.classList.add('layer-loading');
-
-            fetch('./corte_luz.csv')
-                .then(response => {
-                    if (!response.ok) throw new Error("Archivo corte_luz.csv no encontrado.");
-                    return response.text();
-                })
-                .then(csvText => {
-                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
-                    
-                    Papa.parse(cleanCsvText, {
-                        header: true,
-                        skipEmptyLines: true,
-                        complete: function(results) {
-                            window.cortesData = results.data;
-                            cortesLoaded = true;
-                            document.getElementById('filtros-cortes-luz').classList.remove('hidden');
-                            poblarFiltrosCortes();
-                            filtrarYRenderizarCortes();
-                            label.classList.remove('layer-loading');
-                        }
+                        
+                    line.addListener('click', (e) => {
+                        infoWindow.setContent(popupHtml);
+                        infoWindow.setPosition(e.latLng);
+                        infoWindow.open(map);
                     });
-                })
-                .catch(err => {
-                    console.error("Error al cargar Cortes de Luz:", err);
-                    alert("Error al cargar corte_luz.csv. Verifica que el archivo exista en la ruta local correspondiente.");
-                    cb.checked = false;
-                    label.classList.remove('layer-loading');
-                });
-        }
-
-        function poblarFiltrosCortes() {
-            const cgms = new Set();
-            const tipos = new Set();
-            const fechas = new Set();
-
-            window.cortesData.forEach(row => {
-                if (row.CGM) cgms.add(row.CGM.trim());
-                if (row.TIPO_AFECTACION) tipos.add(row.TIPO_AFECTACION.trim());
-                if (row.FECHA) fechas.add(row.FECHA.trim());
-            });
-
-            const poblarSelect = (id, setValores) => {
-                const select = document.getElementById(id);
-                select.innerHTML = select.options[0].outerHTML; 
-                Array.from(setValores).sort().forEach(val => {
-                    if (val === '') return;
-                    const opt = document.createElement('option');
-                    opt.value = val;
-                    opt.textContent = val;
-                    select.appendChild(opt);
-                });
-            };
-
-            poblarSelect('filtro-corte-cgm', cgms);
-            poblarSelect('filtro-corte-tipo', tipos);
-
-            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
-            const selectFecha = document.getElementById('filtro-corte-fecha');
-            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
-            arrayFechas.forEach(val => {
-                const opt = document.createElement('option');
-                opt.value = val;
-                opt.textContent = val;
-                selectFecha.appendChild(opt);
-            });
-        }
-
-        function filtrarYRenderizarCortes() {
-            layerCortesLuz.clearLayers();
-            
-            const fCgm = document.getElementById('filtro-corte-cgm').value;
-            const fTipo = document.getElementById('filtro-corte-tipo').value;
-            const fFecha = document.getElementById('filtro-corte-fecha').value;
-
-            const latLngs = [];
-
-            window.cortesData.forEach(row => {
-                const cgm = (row.CGM || '').trim();
-                const tipo = (row.TIPO_AFECTACION || '').trim();
-                const fecha = (row.FECHA || '').trim();
-
-                // Evaluar todos los filtros
-                if (fCgm !== 'ALL' && cgm !== fCgm) return;
-                if (fTipo !== 'ALL' && tipo !== fTipo) return;
-                if (fFecha !== 'ALL' && fecha !== fFecha) return;
-
-                let coordsStr = (row.COORDENADAS || "").trim();
-                if (!coordsStr) return;
-                
-                coordsStr = coordsStr.replace(/['"]/g, '');
-                let parts = coordsStr.split(',');
-                if (parts.length < 2) return;
-
-                const lat = parseFloat(parts[0].trim());
-                const lng = parseFloat(parts[1].trim());
-
-                if (isNaN(lat) || isNaN(lng)) return;
-
-                // Color e ícono estandarizado para energía
-                let bgColor = '#F59E0B'; // Naranja Alerta
-
-                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.energia}</div></div>`;
-                const customIcon = L.divIcon({
-                    html: iconHtml,
-                    className: 'custom-div-icon',
-                    iconSize: [24, 24], 
-                    iconAnchor: [12, 12]
-                });
-
-                const marker = L.marker([lat, lng], { icon: customIcon });
-
-                let usuariosInfo = (row.USUARIOS_AFECTADOS && row.USUARIOS_AFECTADOS !== '') ? Number(row.USUARIOS_AFECTADOS).toLocaleString('es-AR') : 'Sin datos';
-
-                let popupHtml = `
-                    <div class="font-sans min-w-[220px]">
-                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};"><i class="fa-solid fa-bolt mr-1"></i> ${tipo}</h4>
-                        <div class="bg-[#FFFBEB] p-2 rounded-md mb-2 border border-[#FEF3C7]">
-                            <p class="text-[10px] font-bold text-[#D97706] uppercase">Usuarios Afectados</p>
-                            <p class="text-lg font-extrabold text-[#B45309]">${usuariosInfo}</p>
-                        </div>
-                        <ul class="text-xs text-[#64748B] space-y-1.5">
-                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
-                            <li><b class="text-[#0F172A]">Inicio:</b> ${row.HORA_INICIO || '-'}</li>
-                            <li><b class="text-[#0F172A]">Fin:</b> ${row.HORA_FIN || '-'}</li>
-                            <li><b class="text-[#0F172A]">Duración:</b> ${row.DURACION_CORTE || '-'}</li>
-                            <li><b class="text-[#0F172A]">CGM:</b> ${cgm || '-'}</li>
-                        </ul>
-                    </div>`;
-                
-                marker.bindPopup(popupHtml);
-                layerCortesLuz.addLayer(marker);
-                latLngs.push([lat, lng]);
-            });
-
-            // Ajustar el zoom automáticamente si hay puntos filtrados
-            if (latLngs.length > 0 && map.hasLayer(layerCortesLuz)) {
-                const zoomBounds = L.latLngBounds(latLngs);
-                map.fitBounds(zoomBounds, { padding: [30, 30] });
-            }
-        }
-
-        // ---------- ARROYOS DESBORDADOS -----------
-        async function cargarArroyosDesbordados() {
-            const cb = document.getElementById('cb-arroyos-desbordados');
-            const label = cb.closest('label');
-            label.classList.add('layer-loading');
-
-            try {
-                // Leer ambos archivos en paralelo para mayor velocidad
-                const [csvRes, geoRes] = await Promise.all([
-                    fetch('./arroyos.csv'),
-                    fetch('./ARROYOS.geojson')
-                ]);
-
-                if (!csvRes.ok) throw new Error("Archivo arroyos.csv no encontrado.");
-                if (!geoRes.ok) throw new Error("Archivo ARROYOS.geojson no encontrado.");
-
-                const csvText = await csvRes.text();
-                const geoData = await geoRes.json();
-
-                window.arroyosGeojsonData = sanearGeoJSON(geoData);
-
-                const cleanCsvText = csvText.replace(/^\uFEFF/, '');
-                
-                Papa.parse(cleanCsvText, {
-                    header: true,
-                    skipEmptyLines: true,
-                    complete: function(results) {
-                        window.arroyosCsvData = results.data;
-                        arroyosDesbordadosLoaded = true;
-                        document.getElementById('filtros-arroyos-desbordados').classList.remove('hidden');
-                        poblarFiltrosArroyosDesbordados();
-                        filtrarYRenderizarArroyosDesbordados();
-                        label.classList.remove('layer-loading');
-                    }
-                });
-            } catch(err) {
-                console.error("Error al cargar Arroyos Desbordados:", err);
-                alert("Error al cargar datos de arroyos. Verifica que arroyos.csv y ARROYOS.geojson existan.");
-                cb.checked = false;
-                label.classList.remove('layer-loading');
-            }
-        }
-
-        function poblarFiltrosArroyosDesbordados() {
-            const fechas = new Set();
-
-            window.arroyosCsvData.forEach(row => {
-                if (row.Fecha) fechas.add(row.Fecha.trim());
-            });
-
-            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
-            const selectFecha = document.getElementById('filtro-arroyo-fecha');
-            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
-            arrayFechas.forEach(val => {
-                const opt = document.createElement('option');
-                opt.value = val;
-                opt.textContent = val;
-                selectFecha.appendChild(opt);
-            });
-        }
-
-        function filtrarYRenderizarArroyosDesbordados() {
-            layerArroyosDesbordados.clearLayers();
-            
-            const fFecha = document.getElementById('filtro-arroyo-fecha').value;
-
-            // 1. Encontrar qué arroyos están desbordados
-            let desbordadosMap = {}; 
-            
-            window.arroyosCsvData.forEach(row => {
-                const fecha = (row.Fecha || '').trim();
-                const estado = (row.Estado_Arroyo || '').trim().toUpperCase();
-                const nombre = (row.Arroyo || '').trim();
-
-                // Foco del proceso: Solo si está desbordado
-                if (estado !== 'DESBORDADO') return;
-                
-                // Filtro por fecha si aplica
-                if (fFecha !== 'ALL' && fecha !== fFecha) return;
-
-                if (!desbordadosMap[nombre]) desbordadosMap[nombre] = [];
-                desbordadosMap[nombre].push(row);
-            });
-
-            // Si no hay ninguno desbordado bajo estos filtros, salimos
-            if (Object.keys(desbordadosMap).length === 0) return;
-
-            // 2. Extraer solo las líneas de esos arroyos específicos desde el GeoJSON
-            const featuresRenderizar = window.arroyosGeojsonData.features.filter(f => {
-                let name = f.properties.name || f.properties.NOMBRE || f.properties.Name;
-                return name && desbordadosMap[name];
-            });
-
-            if (featuresRenderizar.length === 0) return;
-
-            // 3. Renderizar las líneas en ROJO
-            const geoLayer = L.geoJSON({ type: 'FeatureCollection', features: featuresRenderizar }, {
-                style: { color: '#DC2626', weight: 6, opacity: 0.9 }, // Color Rojo de emergencia y trazo grueso
-                onEachFeature: function(feature, layer) {
-                    let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name || "Arroyo";
-                    let umbral = feature.properties.umbral_desborde || feature.properties['UMBRAL DESBORDE'] || "Sin datos";
-                    let registros = desbordadosMap[name];
                     
-                    let popupHtml = `<div class="font-sans min-w-[240px]">
-                        <h4 class="font-bold text-[#DC2626] border-b border-[#FECACA] pb-1.5 mb-2 flex items-center gap-1">
-                            <i class="fa-solid fa-water"></i> Desborde: ${name}
-                        </h4>
-                        <div class="mb-2 text-xs">
-                            <b class="text-[#0F172A]">Umbral de Desborde:</b> <span class="text-[#DC2626] font-bold">${umbral} mts</span>
-                        </div>
-                        <div class="max-h-[180px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
-                    
-                    registros.forEach(r => {
-                        let cgmStr = r.CGM ? `(CGM: ${r.CGM})` : '';
-                        popupHtml += `
-                            <div class="bg-[#FEF2F2] p-2 rounded border border-[#FECACA] text-xs">
-                                <p><b class="text-[#0F172A]">${r.Fecha} ${r.Hora}</b> ${cgmStr}</p>
-                                <p class="text-[#B91C1C] mt-0.5"><b>Nivel Medido:</b> ${r['Nivel Arroyo']} cm</p>
-                            </div>`;
-                    });
-
-                    popupHtml += `</div></div>`;
-                    layer.bindPopup(popupHtml);
-                    layer.bindTooltip(name, { direction: 'top', className: 'custom-map-tooltip' });
+                    mapLayers[layerId].push(line);
                 }
             });
+            actualizarLimitesMapaGoogle(mapLayers[layerId]);
+        }
 
-            layerArroyosDesbordados.addLayer(geoLayer);
-            
-            // Auto Zoom a las áreas desbordadas
-            if (map.hasLayer(layerArroyosDesbordados)) {
-                const bounds = geoLayer.getBounds();
-                if (bounds.isValid()) {
-                    map.fitBounds(bounds, { padding: [30, 30] });
+        // Función Helper para ocultar/mostrar Data Layer
+        function toggleDataLayer(layerId, show) {
+            map.data.forEach(function(feature) {
+                if (feature.getProperty('_layerId') === layerId) {
+                    map.data.overrideStyle(feature, { visible: show });
                 }
+            });
+        }
+
+        function clearMapLayer(layerId) {
+            if (mapLayers[layerId]) {
+                mapLayers[layerId].forEach(el => el.setMap(null));
+                mapLayers[layerId] = [];
             }
         }
 
         /* -----------------------------------------------------------
-           LÓGICA ESPECÍFICA PARA TAREAS PREVENTIVAS (sgr.csv)
+           LÓGICA CSVs
         ------------------------------------------------------------- */
         
         function cargarTareasPreventivas() {
@@ -1346,7 +924,6 @@
                 })
                 .then(csvText => {
                     const cleanCsvText = csvText.replace(/^\uFEFF/, '');
-                    
                     Papa.parse(cleanCsvText, {
                         header: true,
                         delimiter: ';',
@@ -1363,7 +940,7 @@
                 })
                 .catch(err => {
                     console.error("Error al cargar Tareas Preventivas:", err);
-                    alert("Error al cargar sgr.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    alert("Error al cargar sgr.csv. Verifica que el archivo exista en la ruta local.");
                     cb.checked = false;
                     label.classList.remove('layer-loading');
                 });
@@ -1398,7 +975,6 @@
             poblarSelect('filtro-tipo', tipos);
             poblarSelect('filtro-subtipo', subtipos);
 
-            // Ordenar Fechas (DD/MM/YYYY) de manera descendente
             const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => {
                 const [d1, m1, y1] = a.split('/');
                 const [d2, m2, y2] = b.split('/');
@@ -1416,14 +992,12 @@
         }
 
         function filtrarYRenderizarTareas() {
-            layerTareasPreventivas.clearLayers();
+            clearMapLayer('tareasPreventivas');
             
             const fCgm = document.getElementById('filtro-cgm').value;
             const fTipo = document.getElementById('filtro-tipo').value;
             const fSubtipo = document.getElementById('filtro-subtipo').value;
             const fFecha = document.getElementById('filtro-fecha').value;
-
-            const latLngs = [];
 
             window.sgrData.forEach(row => {
                 const cgm = (row.Zonificacion_CAV || '').trim();
@@ -1432,38 +1006,30 @@
                 const fecha = (row.Fecha || '').trim();
                 const estado = (row.Estado || '').trim().toLowerCase();
 
-                // Evaluar todos los filtros
                 if (fCgm !== 'ALL' && cgm !== fCgm) return;
                 if (fTipo !== 'ALL' && tipo !== fTipo) return;
                 if (fSubtipo !== 'ALL' && subtipo !== fSubtipo) return;
                 if (fFecha !== 'ALL' && fecha !== fFecha) return;
 
                 if (!row.Latitud || !row.Longitud) return;
-
                 const lat = parseFloat(row.Latitud.replace(',', '.'));
                 const lng = parseFloat(row.Longitud.replace(',', '.'));
-
                 if (isNaN(lat) || isNaN(lng)) return;
 
-                // Lógica Visual: Verde para "Solucionado", Azul por defecto
                 let isSolucionado = estado === 'solucionado';
-                let bgColor = isSolucionado ? '#16A34A' : '#0B5F8D'; // Verde o Azul
-                let svgIcono = isSolucionado ? svgIconos.check : svgIconos.preventiva; // Palomita o Escudo
+                let bgColor = isSolucionado ? '#16A34A' : '#0B5F8D'; 
+                let svgIcono = isSolucionado ? svgIconos.check : svgIconos.preventiva;
                 let estadoClassColor = isSolucionado ? 'text-green-600' : 'text-[#0B5F8D]';
 
-                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIcono}</div></div>`;
-                const customIcon = L.divIcon({
-                    html: iconHtml,
-                    className: 'custom-div-icon',
-                    iconSize: [24, 24], 
-                    iconAnchor: [12, 12]
+                const marker = new google.maps.marker.AdvancedMarkerElement({
+                    map: map,
+                    position: {lat: lat, lng: lng},
+                    content: createGoogleMarkerIcon(svgIcono, bgColor)
                 });
 
-                const marker = L.marker([lat, lng], { icon: customIcon });
-
                 let popupHtml = `
-                    <div class="font-sans min-w-[220px]">
-                        <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${tipo}</h4>
+                    <div class="font-sans min-w-[220px] p-2">
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${tipo}</h4>
                         <ul class="text-xs text-[#64748B] space-y-1.5">
                             <li><b class="text-[#0F172A]">Sub Tipo:</b> ${subtipo}</li>
                             <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
@@ -1474,15 +1040,16 @@
                         </ul>
                     </div>`;
                 
-                marker.bindPopup(popupHtml);
-                layerTareasPreventivas.addLayer(marker);
-                latLngs.push([lat, lng]);
+                marker.addListener('click', () => {
+                    infoWindow.setContent(popupHtml);
+                    infoWindow.open(map, marker);
+                });
+                
+                mapLayers['tareasPreventivas'].push(marker);
             });
 
-            // Ajustar el zoom automáticamente si hay puntos filtrados
-            if (latLngs.length > 0 && map.hasLayer(layerTareasPreventivas)) {
-                const zoomBounds = L.latLngBounds(latLngs);
-                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            if (mapLayers['tareasPreventivas'].length > 0) {
+                actualizarLimitesMapaGoogle(mapLayers['tareasPreventivas']);
             }
         }
 
@@ -1499,10 +1066,9 @@
                 })
                 .then(csvText => {
                     const cleanCsvText = csvText.replace(/^\uFEFF/, '');
-                    
                     Papa.parse(cleanCsvText, {
                         header: true,
-                        skipEmptyLines: true, // csv is comma separated by default in papaparse
+                        skipEmptyLines: true,
                         complete: function(results) {
                             window.prevCgmData = results.data;
                             prevCgmLoaded = true;
@@ -1515,7 +1081,7 @@
                 })
                 .catch(err => {
                     console.error("Error al cargar Tareas Preventivas CGM:", err);
-                    alert("Error al cargar preventivas_cgm.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    alert("Error al cargar preventivas_cgm.csv. Verifica ruta local.");
                     cb.checked = false;
                     label.classList.remove('layer-loading');
                 });
@@ -1559,27 +1125,23 @@
         }
 
         function filtrarYRenderizarPreventivasCGM() {
-            layerPreventivasCGM.clearLayers();
+            clearMapLayer('preventivasCGM');
             
             const fCgm = document.getElementById('filtro-prev-cgm-cgm').value;
             const fTarea = document.getElementById('filtro-prev-cgm-tarea').value;
             const fFecha = document.getElementById('filtro-prev-cgm-fecha').value;
-
-            const latLngs = [];
 
             window.prevCgmData.forEach(row => {
                 const cgm = (row.CGM || '').trim();
                 const tarea = (row.Tarea_Preventiva || '').trim();
                 const fecha = (row.Fecha || '').trim();
 
-                // Evaluar todos los filtros
                 if (fCgm !== 'ALL' && cgm !== fCgm) return;
                 if (fTarea !== 'ALL' && tarea !== fTarea) return;
                 if (fFecha !== 'ALL' && fecha !== fFecha) return;
 
                 let coordsStr = (row.Coordenadas || "").trim();
                 if (!coordsStr) return;
-                
                 coordsStr = coordsStr.replace(/['"]/g, '');
                 let parts = coordsStr.split(',');
                 if (parts.length < 2) return;
@@ -1589,22 +1151,16 @@
 
                 if (isNaN(lat) || isNaN(lng)) return;
 
-                // Color e ícono para tareas de CGM
-                let bgColor = '#F97316'; // Naranja
+                let bgColor = '#F97316'; 
 
-                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.escoba}</div></div>`;
-                const customIcon = L.divIcon({
-                    html: iconHtml,
-                    className: 'custom-div-icon',
-                    iconSize: [24, 24], 
-                    iconAnchor: [12, 12]
+                const marker = new google.maps.marker.AdvancedMarkerElement({
+                    map: map,
+                    position: {lat: lat, lng: lng},
+                    content: createGoogleMarkerIcon(svgIconos.escoba, bgColor)
                 });
-
-                const marker = L.marker([lat, lng], { icon: customIcon });
 
                 let fotoHtml = '';
                 if (row.Foto && row.Foto.trim() !== '') {
-                    // Limpiamos la ruta de la foto para evitar errores comunes en CSVs
                     let fotoSrc = row.Foto.trim().replace(/^['"]|['"]$/g, '');
                     fotoHtml = `<div class="mt-2 mb-2 w-full h-32 bg-gray-100 rounded overflow-hidden flex items-center justify-center border border-gray-200">
                                     <img src="${fotoSrc}" alt="Foto Tarea Preventiva" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\\'text-gray-400 text-xs\\'>Imagen no disponible</span>'">
@@ -1612,7 +1168,7 @@
                 }
 
                 let popupHtml = `
-                    <div class="font-sans min-w-[240px]">
+                    <div class="font-sans min-w-[240px] p-2">
                         <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};"><i class="fa-solid fa-broom mr-1"></i> Tarea Preventiva CGM</h4>
                         ${fotoHtml}
                         <ul class="text-xs text-[#64748B] space-y-1.5 mt-2">
@@ -1624,15 +1180,455 @@
                         </ul>
                     </div>`;
                 
-                marker.bindPopup(popupHtml, { minWidth: 240 });
-                layerPreventivasCGM.addLayer(marker);
-                latLngs.push([lat, lng]);
+                marker.addListener('click', () => {
+                    infoWindow.setContent(popupHtml);
+                    infoWindow.open(map, marker);
+                });
+                
+                mapLayers['preventivasCGM'].push(marker);
             });
 
-            // Ajustar el zoom automáticamente si hay puntos filtrados
-            if (latLngs.length > 0 && map.hasLayer(layerPreventivasCGM)) {
-                const zoomBounds = L.latLngBounds(latLngs);
-                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            if (mapLayers['preventivasCGM'].length > 0) {
+                actualizarLimitesMapaGoogle(mapLayers['preventivasCGM']);
+            }
+        }
+
+        // ---------- EVENTOS POR TORMENTA -----------
+        function cargarEventosTormenta() {
+            const cb = document.getElementById('cb-eventos-tormenta');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./coe.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo coe.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            window.coeData = results.data;
+                            coeLoaded = true;
+                            document.getElementById('filtros-eventos').classList.remove('hidden');
+                            poblarFiltrosEventos();
+                            filtrarYRenderizarEventos();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Eventos por Tormenta:", err);
+                    alert("Error al cargar coe.csv. Verifica ruta local.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosEventos() {
+            const cgms = new Set();
+            const tipos = new Set();
+            const fechas = new Set();
+
+            window.coeData.forEach(row => {
+                if (row.CGM) cgms.add(row.CGM.trim());
+                if (row['Tipo Evento']) tipos.add(row['Tipo Evento'].trim());
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-evt-cgm', cgms);
+            poblarSelect('filtro-evt-tipo', tipos);
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-evt-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarEventos() {
+            clearMapLayer('eventosTormenta');
+            
+            const fCgm = document.getElementById('filtro-evt-cgm').value;
+            const fTipo = document.getElementById('filtro-evt-tipo').value;
+            const fFecha = document.getElementById('filtro-evt-fecha').value;
+
+            const eventosAgrupados = {};
+
+            window.coeData.forEach(row => {
+                const cgm = (row.CGM || '').trim();
+                const tipo = (row['Tipo Evento'] || '').trim();
+                const fecha = (row.Fecha || '').trim();
+
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTipo !== 'ALL' && tipo !== fTipo) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                let coordsStr = (row.Coordenadas || "").trim();
+                if (!coordsStr) return;
+                coordsStr = coordsStr.replace(/['"]/g, '');
+                let parts = coordsStr.split(',');
+                if (parts.length < 2) return;
+
+                const lat = parseFloat(parts[0].trim());
+                const lng = parseFloat(parts[1].trim());
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                const key = `${lat},${lng}`;
+                if (!eventosAgrupados[key]) eventosAgrupados[key] = [];
+                eventosAgrupados[key].push(row);
+            });
+
+            for (const key in eventosAgrupados) {
+                const grupo = eventosAgrupados[key];
+                const [latStr, lngStr] = key.split(',');
+                const lat = parseFloat(latStr);
+                const lng = parseFloat(lngStr);
+                const isRecurrent = grupo.length > 1;
+
+                const primerEvento = grupo[0];
+                const tipo = primerEvento['Tipo Evento'] || '';
+                
+                let tipoEventoLower = tipo.toLowerCase();
+                let svgUsado = svgIconos.alerta;
+                let bgColor = '#D34872'; 
+
+                if (tipoEventoLower.includes('anegamiento') || tipoEventoLower.includes('agua') || tipoEventoLower.includes('inundacion')) {
+                    svgUsado = svgIconos.anegamiento;
+                    bgColor = '#4AB5E0';
+                } else if (tipoEventoLower.includes('arbol') || tipoEventoLower.includes('árbol') || tipoEventoLower.includes('rama')) {
+                    svgUsado = svgIconos.arbol;
+                    bgColor = '#19567C'; 
+                } else if (tipoEventoLower.includes('poste') || tipoEventoLower.includes('cable') || tipoEventoLower.includes('luz')) {
+                    svgUsado = svgIconos.poste;
+                    bgColor = '#F59E0B'; 
+                }
+
+                const marker = new google.maps.marker.AdvancedMarkerElement({
+                    map: map,
+                    position: {lat: lat, lng: lng},
+                    content: createGoogleMarkerIcon(svgUsado, bgColor, isRecurrent)
+                });
+
+                let popupHtml = `<div class="font-sans min-w-[240px] p-2">`;
+                if (isRecurrent) {
+                    popupHtml += `<div class="bg-[#FEF2F2] text-[#DC2626] text-[10px] font-bold px-2 py-1.5 rounded mb-2 uppercase flex items-center gap-1.5 border border-[#FECACA]"><i class="fa-solid fa-triangle-exclamation"></i> ALERTA: PUNTO RECURRENTE (${grupo.length} Reportes)</div>`;
+                }
+                popupHtml += `<h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${isRecurrent ? 'Múltiples Incidentes' : tipo}</h4>
+                    <div class="max-h-[160px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
+
+                grupo.forEach(row => {
+                    popupHtml += `
+                        <div class="bg-[#F8FAFC] p-2 rounded border border-[#E2E8F0]">
+                            <p class="text-xs font-bold text-[#0F172A] mb-1 leading-tight">${row['Tipo Evento']}</p>
+                            <ul class="text-[10px] text-[#64748B] space-y-0.5">
+                                <li><b class="text-[#475569]">Fecha:</b> ${row.Fecha}</li>
+                                <li><b class="text-[#475569]">Dirección:</b> ${row.Direccion || '-'}</li>
+                                <li><b class="text-[#475569]">CGM:</b> ${row.CGM || '-'}</li>
+                            </ul>
+                        </div>`;
+                });
+                popupHtml += `</div></div>`;
+                
+                marker.addListener('click', () => {
+                    infoWindow.setContent(popupHtml);
+                    infoWindow.open(map, marker);
+                });
+                
+                mapLayers['eventosTormenta'].push(marker);
+            }
+
+            if (mapLayers['eventosTormenta'].length > 0) {
+                actualizarLimitesMapaGoogle(mapLayers['eventosTormenta']);
+            }
+        }
+
+        // ---------- CORTES DE LUZ -----------
+        function cargarCortesLuz() {
+            const cb = document.getElementById('cb-cortes-luz');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./corte_luz.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo corte_luz.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            window.cortesData = results.data;
+                            cortesLoaded = true;
+                            document.getElementById('filtros-cortes-luz').classList.remove('hidden');
+                            poblarFiltrosCortes();
+                            filtrarYRenderizarCortes();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Cortes de Luz:", err);
+                    alert("Error al cargar corte_luz.csv. Verifica ruta local.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosCortes() {
+            const cgms = new Set();
+            const tipos = new Set();
+            const fechas = new Set();
+
+            window.cortesData.forEach(row => {
+                if (row.CGM) cgms.add(row.CGM.trim());
+                if (row.TIPO_AFECTACION) tipos.add(row.TIPO_AFECTACION.trim());
+                if (row.FECHA) fechas.add(row.FECHA.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-corte-cgm', cgms);
+            poblarSelect('filtro-corte-tipo', tipos);
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-corte-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarCortes() {
+            clearMapLayer('cortesLuz');
+            
+            const fCgm = document.getElementById('filtro-corte-cgm').value;
+            const fTipo = document.getElementById('filtro-corte-tipo').value;
+            const fFecha = document.getElementById('filtro-corte-fecha').value;
+
+            window.cortesData.forEach(row => {
+                const cgm = (row.CGM || '').trim();
+                const tipo = (row.TIPO_AFECTACION || '').trim();
+                const fecha = (row.FECHA || '').trim();
+
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTipo !== 'ALL' && tipo !== fTipo) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                let coordsStr = (row.COORDENADAS || "").trim();
+                if (!coordsStr) return;
+                coordsStr = coordsStr.replace(/['"]/g, '');
+                let parts = coordsStr.split(',');
+                if (parts.length < 2) return;
+
+                const lat = parseFloat(parts[0].trim());
+                const lng = parseFloat(parts[1].trim());
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                let bgColor = '#F59E0B'; 
+
+                const marker = new google.maps.marker.AdvancedMarkerElement({
+                    map: map,
+                    position: {lat: lat, lng: lng},
+                    content: createGoogleMarkerIcon(svgIconos.energia, bgColor)
+                });
+
+                let usuariosInfo = (row.USUARIOS_AFECTADOS && row.USUARIOS_AFECTADOS !== '') ? Number(row.USUARIOS_AFECTADOS).toLocaleString('es-AR') : 'Sin datos';
+
+                let popupHtml = `
+                    <div class="font-sans min-w-[220px] p-2">
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};"><i class="fa-solid fa-bolt mr-1"></i> ${tipo}</h4>
+                        <div class="bg-[#FFFBEB] p-2 rounded-md mb-2 border border-[#FEF3C7]">
+                            <p class="text-[10px] font-bold text-[#D97706] uppercase">Usuarios Afectados</p>
+                            <p class="text-lg font-extrabold text-[#B45309]">${usuariosInfo}</p>
+                        </div>
+                        <ul class="text-xs text-[#64748B] space-y-1.5">
+                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
+                            <li><b class="text-[#0F172A]">Inicio:</b> ${row.HORA_INICIO || '-'}</li>
+                            <li><b class="text-[#0F172A]">Fin:</b> ${row.HORA_FIN || '-'}</li>
+                            <li><b class="text-[#0F172A]">Duración:</b> ${row.DURACION_CORTE || '-'}</li>
+                            <li><b class="text-[#0F172A]">CGM:</b> ${cgm || '-'}</li>
+                        </ul>
+                    </div>`;
+                
+                marker.addListener('click', () => {
+                    infoWindow.setContent(popupHtml);
+                    infoWindow.open(map, marker);
+                });
+                
+                mapLayers['cortesLuz'].push(marker);
+            });
+
+            if (mapLayers['cortesLuz'].length > 0) {
+                actualizarLimitesMapaGoogle(mapLayers['cortesLuz']);
+            }
+        }
+
+        // ---------- ARROYOS DESBORDADOS -----------
+        async function cargarArroyosDesbordados() {
+            const cb = document.getElementById('cb-arroyos-desbordados');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            try {
+                const [csvRes, geoRes] = await Promise.all([
+                    fetch('./arroyos.csv'),
+                    fetch('./ARROYOS.geojson')
+                ]);
+
+                if (!csvRes.ok) throw new Error("Archivo arroyos.csv no encontrado.");
+                if (!geoRes.ok) throw new Error("Archivo ARROYOS.geojson no encontrado.");
+
+                const csvText = await csvRes.text();
+                const geoData = await geoRes.json();
+
+                window.arroyosGeojsonData = sanearGeoJSON(geoData);
+
+                const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                
+                Papa.parse(cleanCsvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        window.arroyosCsvData = results.data;
+                        arroyosDesbordadosLoaded = true;
+                        document.getElementById('filtros-arroyos-desbordados').classList.remove('hidden');
+                        poblarFiltrosArroyosDesbordados();
+                        filtrarYRenderizarArroyosDesbordados();
+                        label.classList.remove('layer-loading');
+                    }
+                });
+            } catch(err) {
+                console.error("Error al cargar Arroyos Desbordados:", err);
+                alert("Error al cargar datos de arroyos. Verifica archivos locales.");
+                cb.checked = false;
+                label.classList.remove('layer-loading');
+            }
+        }
+
+        function poblarFiltrosArroyosDesbordados() {
+            const fechas = new Set();
+
+            window.arroyosCsvData.forEach(row => {
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-arroyo-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarArroyosDesbordados() {
+            clearMapLayer('arroyosDesbordados');
+            
+            const fFecha = document.getElementById('filtro-arroyo-fecha').value;
+
+            let desbordadosMap = {}; 
+            
+            window.arroyosCsvData.forEach(row => {
+                const fecha = (row.Fecha || '').trim();
+                const estado = (row.Estado_Arroyo || '').trim().toUpperCase();
+                const nombre = (row.Arroyo || '').trim();
+
+                if (estado !== 'DESBORDADO') return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                if (!desbordadosMap[nombre]) desbordadosMap[nombre] = [];
+                desbordadosMap[nombre].push(row);
+            });
+
+            if (Object.keys(desbordadosMap).length === 0) return;
+
+            window.arroyosGeojsonData.features.forEach(feature => {
+                let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name;
+                if (!name || !desbordadosMap[name]) return;
+
+                if (feature.geometry.type === 'LineString') {
+                    const path = feature.geometry.coordinates.map(c => ({ lat: c[1], lng: c[0] }));
+                    const line = new google.maps.Polyline({
+                        path: path,
+                        strokeColor: '#DC2626',
+                        strokeOpacity: 0.9,
+                        strokeWeight: 6,
+                        map: map
+                    });
+
+                    let umbral = feature.properties.umbral_desborde || feature.properties['UMBRAL DESBORDE'] || "Sin datos";
+                    let registros = desbordadosMap[name];
+                    
+                    let popupHtml = `<div class="font-sans min-w-[240px] p-2">
+                        <h4 class="font-bold text-[#DC2626] border-b border-[#FECACA] pb-1.5 mb-2 flex items-center gap-1">
+                            <i class="fa-solid fa-water"></i> Desborde: ${name}
+                        </h4>
+                        <div class="mb-2 text-xs">
+                            <b class="text-[#0F172A]">Umbral de Desborde:</b> <span class="text-[#DC2626] font-bold">${umbral} mts</span>
+                        </div>
+                        <div class="max-h-[180px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
+                    
+                    registros.forEach(r => {
+                        let cgmStr = r.CGM ? `(CGM: ${r.CGM})` : '';
+                        popupHtml += `
+                            <div class="bg-[#FEF2F2] p-2 rounded border border-[#FECACA] text-xs">
+                                <p><b class="text-[#0F172A]">${r.Fecha} ${r.Hora}</b> ${cgmStr}</p>
+                                <p class="text-[#B91C1C] mt-0.5"><b>Nivel Medido:</b> ${r['Nivel Arroyo']} cm</p>
+                            </div>`;
+                    });
+
+                    popupHtml += `</div></div>`;
+                    
+                    line.addListener('click', (e) => {
+                        infoWindow.setContent(popupHtml);
+                        infoWindow.setPosition(e.latLng);
+                        infoWindow.open(map);
+                    });
+
+                    mapLayers['arroyosDesbordados'].push(line);
+                }
+            });
+
+            if (mapLayers['arroyosDesbordados'] && mapLayers['arroyosDesbordados'].length > 0) {
+                actualizarLimitesMapaGoogle(mapLayers['arroyosDesbordados']);
             }
         }
 
@@ -1641,55 +1637,137 @@
             const mapContainer = document.getElementById('map');
             if (!mapContainer) return;
 
-            map = L.map('map').setView([-34.7573, -58.4035], 12);
+            // Iniciar mapa de Google Maps con Map ID requerido para AdvancedMarkerElement
+            map = new google.maps.Map(mapContainer, {
+                center: { lat: -34.7573, lng: -58.4035 },
+                zoom: 12,
+                mapId: 'DEMO_MAP_ID', // Requerido para AdvancedMarkerElement
+                streetViewControl: true, // Esto activa a Pegman!
+                streetViewControlOptions: {
+                    position: google.maps.ControlPosition.RIGHT_BOTTOM
+                },
+                mapTypeControl: false,
+                fullscreenControl: true
+            });
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+            infoWindow = new google.maps.InfoWindow();
 
-            layerTareasPreventivas = L.layerGroup();
-            layerPreventivasCGM = L.layerGroup();
-            layerEventosTormenta = L.layerGroup();
-            layerCortesLuz = L.layerGroup();
-            layerArroyosDesbordados = L.layerGroup();
+            // Setup de popup global de datos (polígonos)
+            map.data.addListener('click', function(event) {
+                let f = event.feature;
+                let layerId = f.getProperty('_layerId');
+                let props = {};
+                f.forEachProperty((val, name) => props[name] = val);
+                
+                let html = '';
+                if (f.getProperty('_tipo') === 'pobreza') {
+                     let radioStr = props.LINK_RADIO || "Sector Censal";
+                        let pctHogares = props.P_PC_HOG || 0;
+                        let pctPersonas = props.P_PC_PER || 0;
+                        let valHogares = props.PC_HOG || 0;
+                        let valPersonas = props.PC_PER || 0;
+                        
+                        html = `
+                            <div class="font-sans min-w-[220px] p-2">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                                <div class="bg-[#FFF5F8] p-2 rounded-md mb-2 border border-[#FBCFE8]">
+                                    <p class="text-xs font-bold text-[#D34872] uppercase">Incidencia (Hogares)</p>
+                                    <p class="text-xl font-extrabold text-[#BE185D]">${pctHogares}%</p>
+                                </div>
+                                <ul class="text-xs text-[#64748B] space-y-1.5">
+                                    <li><b class="text-[#0F172A]">Incidencia (Personas):</b> ${pctPersonas}%</li>
+                                    <li><b class="text-[#0F172A]">Hogares Afectados:</b> ${Number(valHogares).toLocaleString('es-AR')}</li>
+                                    <li><b class="text-[#0F172A]">Personas Afectadas:</b> ${Number(valPersonas).toLocaleString('es-AR')}</li>
+                                </ul>
+                            </div>`;
+                } else if (f.getProperty('_tipo') === 'inundable') {
+                    let radioStr = props.REDCODE || props.LINK_RADIO || props.NOMBRE || "Sector Geográfico";
+                    let pctRiesgo = props.PORCENTAJE || props.ZONA_INUND || 0;
+                    let pobAfectada = props.POBLACION || props.RADIOS_POB || 0;
+                    let hogAfectados = props.RADIOS_HOG || 0;
+                    
+                    html = `
+                        <div class="font-sans min-w-[200px] p-2">
+                            <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                            <div class="bg-[#FEF2F2] p-2 rounded-md mb-2 border border-[#FECACA]">
+                                <p class="text-xs font-bold text-[#DC2626] uppercase">Riesgo de Inundación</p>
+                                <p class="text-xl font-extrabold text-[#B91C1C]">${Number(pctRiesgo).toLocaleString('es-AR')}%</p>
+                            </div>
+                            <ul class="text-xs text-[#64748B] space-y-1">
+                                <li><b class="capitalize text-[#0F172A]">Población Afectada:</b> ${Number(pobAfectada).toLocaleString('es-AR')}</li>
+                                <li><b class="capitalize text-[#0F172A]">Hogares Afectados:</b> ${Number(hogAfectados).toLocaleString('es-AR')}</li>
+                            </ul>
+                        </div>`;
+                } else if (layerId === 'cb-poblacion') {
+                        let radioStr = props.REDCODE || props.RADIO || props.LINK_RADIO || props.NOMBRE || "Radio Censal";
+                        let valHabitantes = props.Habitantes || props.RADIOS_POB || props.POBLACION || 0;
+                        let valHogares = props.RADIOS_HOG || props.HOGARES;
 
+                        html = `
+                            <div class="font-sans min-w-[200px] p-2">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                                <div class="bg-[#EAF1F7] p-2 rounded-md mb-2 border border-[#D1E1F0]">
+                                    <p class="text-xs font-bold text-[#0B5F8D] uppercase">Total Habitantes</p>
+                                    <p class="text-xl font-extrabold text-[#0B5F8D]">${Number(valHabitantes).toLocaleString('es-AR')}</p>
+                                </div>`;
+                        
+                        if (valHogares !== undefined && valHogares !== null) {
+                            html += `
+                                <ul class="text-xs text-[#64748B] space-y-1 mt-1">
+                                    <li><b class="capitalize text-[#0F172A]">Cantidad de Hogares:</b> ${Number(valHogares).toLocaleString('es-AR')}</li>
+                                </ul>`;
+                        }
+
+                        html += `</div>`;
+                } else {
+                    let nombreStr = props.NOMBRE || props.NAME || props.Name || props.nombre || props.name || "Elemento";
+                    html = createPopupHtml(nombreStr, props);
+                }
+
+                infoWindow.setContent(html);
+                infoWindow.setPosition(event.latLng);
+                infoWindow.open(map);
+            });
+
+            // Inicializar Data Layer vacía
+            mapLayers['cb-poblacion'] = [];
+            mapLayers['cb-pobreza'] = [];
+            mapLayers['cb-inundables'] = [];
+
+            // Setup de Capas
             const setupLayerControl = (checkboxId, configParams) => {
                 const cb = document.getElementById(checkboxId);
                 if (!cb) return;
                 
-                layerInstances[checkboxId] = L.layerGroup();
-                const layer = layerInstances[checkboxId];
+                mapLayers[checkboxId] = [];
+                let layerLoaded = false;
 
-                // Carga inicial y listeners
                 const handleLayerToggle = async (isChecked) => {
                     if (isChecked) {
-                        if (!layer.hasLoaded) {
+                        if (!layerLoaded) {
                             try {
                                 const label = cb.closest('label');
                                 label.classList.add('layer-loading');
                                 
-                                // Reemplazar espacios por %20 para evitar problemas de parseo en el fetch
                                 const safeUrl = configParams.url.replace(/ /g, '%20');
                                 const response = await fetch(safeUrl);
                                 
                                 if (!response.ok) throw new Error("HTTP " + response.status);
                                 const data = await response.json();
                                 
-                                // Enrutador para usar los renders especializados
                                 if (configParams.type === 'poblacion') {
-                                    renderizarCapaPoblacion(data, layer);
+                                    renderizarCapaPoblacion(data, checkboxId);
                                 } else if (configParams.type === 'pobreza') {
-                                    renderizarCapaPobreza(data, layer);
+                                    renderizarCapaPobreza(data, checkboxId);
                                 } else if (configParams.type === 'inundables') {
-                                    renderizarCapaInundables(data, layer);
+                                    renderizarCapaInundables(data, checkboxId);
                                 } else if (configParams.type === 'arroyos') {
-                                    renderizarCapaArroyos(data, layer);
+                                    renderizarCapaArroyos(data, checkboxId);
                                 } else {
-                                    renderizarCapaGenerica(data, layer, configParams.style);
+                                    renderizarCapaGenerica(data, checkboxId, configParams.style);
                                 }
 
-                                layer.hasLoaded = true;
+                                layerLoaded = true;
                             } catch (err) {
                                 console.error(`Error al cargar capa: ${configParams.url}`, err);
                                 alert(`No se pudo cargar la información. Verifica que el archivo exista en la ruta: ${configParams.url}`);
@@ -1698,161 +1776,104 @@
                                 const label = cb.closest('label');
                                 label.classList.remove('layer-loading');
                             }
+                        } else {
+                            if (['cb-poblacion', 'cb-pobreza', 'cb-inundables'].includes(checkboxId)) {
+                                toggleDataLayer(checkboxId, true);
+                            } else {
+                                mapLayers[checkboxId].forEach(el => el.setMap(map));
+                            }
                         }
-                        if (cb.checked) map.addLayer(layer);
                     } else {
-                        map.removeLayer(layer);
+                        if (['cb-poblacion', 'cb-pobreza', 'cb-inundables'].includes(checkboxId)) {
+                            toggleDataLayer(checkboxId, false);
+                        } else {
+                            mapLayers[checkboxId].forEach(el => el.setMap(null));
+                        }
                     }
                 };
 
                 cb.addEventListener('change', (e) => handleLayerToggle(e.target.checked));
             };
 
-            // Setup de Control Especial: Tareas Preventivas CSV
-            const cbTareas = document.getElementById('cb-tareas-preventivas');
-            if (cbTareas) {
-                cbTareas.addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        map.addLayer(layerTareasPreventivas);
-                        if (!sgrLoaded) cargarTareasPreventivas();
-                        else filtrarYRenderizarTareas();
-                    } else {
-                        map.removeLayer(layerTareasPreventivas);
-                        document.getElementById('filtros-tareas').classList.add('hidden'); 
-                    }
-                });
-            }
+            // Event Listeners para CSVs
+            const setupCsvLayer = (cbId, filtersId, loadFn, filterFn, dataKey, loadedFlagKey) => {
+                const cb = document.getElementById(cbId);
+                if (cb) {
+                    mapLayers[dataKey] = [];
+                    cb.addEventListener('change', (e) => {
+                        if (e.target.checked) {
+                            if (!window[loadedFlagKey]) window[loadFn]();
+                            else {
+                                window[filterFn]();
+                                mapLayers[dataKey].forEach(el => el.setMap(map));
+                            }
+                        } else {
+                            mapLayers[dataKey].forEach(el => el.setMap(null));
+                            document.getElementById(filtersId).classList.add('hidden'); 
+                        }
+                    });
+                }
+            };
 
-            // Setup Eventos de Cambio en Filtros Tareas Preventivas
+            window.cargarTareasPreventivas = cargarTareasPreventivas;
+            window.filtrarYRenderizarTareas = filtrarYRenderizarTareas;
+            setupCsvLayer('cb-tareas-preventivas', 'filtros-tareas', 'cargarTareasPreventivas', 'filtrarYRenderizarTareas', 'tareasPreventivas', 'sgrLoaded');
+
             ['filtro-cgm', 'filtro-tipo', 'filtro-subtipo', 'filtro-fecha'].forEach(id => {
-                document.getElementById(id).addEventListener('change', () => {
-                    if(document.getElementById('cb-tareas-preventivas').checked) {
-                        filtrarYRenderizarTareas();
-                    }
+                let el = document.getElementById(id);
+                if (el) el.addEventListener('change', () => {
+                    if(document.getElementById('cb-tareas-preventivas').checked) filtrarYRenderizarTareas();
                 });
             });
 
-            // Setup de Control Especial: Tareas Preventivas CGM CSV
-            const cbPrevCgm = document.getElementById('cb-preventivas-cgm');
-            if (cbPrevCgm) {
-                cbPrevCgm.addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        map.addLayer(layerPreventivasCGM);
-                        if (!prevCgmLoaded) cargarPreventivasCGM();
-                        else filtrarYRenderizarPreventivasCGM();
-                    } else {
-                        map.removeLayer(layerPreventivasCGM);
-                        document.getElementById('filtros-preventivas-cgm').classList.add('hidden'); 
-                    }
-                });
-            }
+            window.cargarPreventivasCGM = cargarPreventivasCGM;
+            window.filtrarYRenderizarPreventivasCGM = filtrarYRenderizarPreventivasCGM;
+            setupCsvLayer('cb-preventivas-cgm', 'filtros-preventivas-cgm', 'cargarPreventivasCGM', 'filtrarYRenderizarPreventivasCGM', 'preventivasCGM', 'prevCgmLoaded');
 
-            // Setup Eventos de Cambio en Filtros Preventivas CGM
             ['filtro-prev-cgm-fecha', 'filtro-prev-cgm-cgm', 'filtro-prev-cgm-tarea'].forEach(id => {
-                document.getElementById(id).addEventListener('change', () => {
-                    if(document.getElementById('cb-preventivas-cgm').checked) {
-                        filtrarYRenderizarPreventivasCGM();
-                    }
+                let el = document.getElementById(id);
+                if (el) el.addEventListener('change', () => {
+                    if(document.getElementById('cb-preventivas-cgm').checked) filtrarYRenderizarPreventivasCGM();
                 });
             });
 
-            // Setup de Control Especial: Eventos Tormenta CSV
-            const cbEventos = document.getElementById('cb-eventos-tormenta');
-            if (cbEventos) {
-                cbEventos.addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        map.addLayer(layerEventosTormenta);
-                        if (!coeLoaded) cargarEventosTormenta();
-                        else filtrarYRenderizarEventos();
-                    } else {
-                        map.removeLayer(layerEventosTormenta);
-                        document.getElementById('filtros-eventos').classList.add('hidden'); 
-                    }
-                });
-            }
+            window.cargarEventosTormenta = cargarEventosTormenta;
+            window.filtrarYRenderizarEventos = filtrarYRenderizarEventos;
+            setupCsvLayer('cb-eventos-tormenta', 'filtros-eventos', 'cargarEventosTormenta', 'filtrarYRenderizarEventos', 'eventosTormenta', 'coeLoaded');
 
-            // Setup Eventos de Cambio en Filtros Eventos Tormenta
             ['filtro-evt-fecha', 'filtro-evt-cgm', 'filtro-evt-tipo'].forEach(id => {
-                document.getElementById(id).addEventListener('change', () => {
-                    if(document.getElementById('cb-eventos-tormenta').checked) {
-                        filtrarYRenderizarEventos();
-                    }
+                let el = document.getElementById(id);
+                if (el) el.addEventListener('change', () => {
+                    if(document.getElementById('cb-eventos-tormenta').checked) filtrarYRenderizarEventos();
                 });
             });
 
-            // Setup de Control Especial: Cortes de Luz CSV
-            const cbCortesLuz = document.getElementById('cb-cortes-luz');
-            if (cbCortesLuz) {
-                cbCortesLuz.addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        map.addLayer(layerCortesLuz);
-                        if (!cortesLoaded) cargarCortesLuz();
-                        else filtrarYRenderizarCortes();
-                    } else {
-                        map.removeLayer(layerCortesLuz);
-                        document.getElementById('filtros-cortes-luz').classList.add('hidden'); 
-                    }
-                });
-            }
+            window.cargarCortesLuz = cargarCortesLuz;
+            window.filtrarYRenderizarCortes = filtrarYRenderizarCortes;
+            setupCsvLayer('cb-cortes-luz', 'filtros-cortes-luz', 'cargarCortesLuz', 'filtrarYRenderizarCortes', 'cortesLuz', 'cortesLoaded');
 
-            // Setup Eventos de Cambio en Filtros Cortes de Luz
             ['filtro-corte-fecha', 'filtro-corte-cgm', 'filtro-corte-tipo'].forEach(id => {
-                document.getElementById(id).addEventListener('change', () => {
-                    if(document.getElementById('cb-cortes-luz').checked) {
-                        filtrarYRenderizarCortes();
-                    }
+                let el = document.getElementById(id);
+                if (el) el.addEventListener('change', () => {
+                    if(document.getElementById('cb-cortes-luz').checked) filtrarYRenderizarCortes();
                 });
             });
 
-            // Setup de Control Especial: Arroyos Desbordados
-            const cbArroyosDesb = document.getElementById('cb-arroyos-desbordados');
-            if (cbArroyosDesb) {
-                cbArroyosDesb.addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        map.addLayer(layerArroyosDesbordados);
-                        if (!arroyosDesbordadosLoaded) cargarArroyosDesbordados();
-                        else filtrarYRenderizarArroyosDesbordados();
-                    } else {
-                        map.removeLayer(layerArroyosDesbordados);
-                        document.getElementById('filtros-arroyos-desbordados').classList.add('hidden'); 
-                    }
-                });
-            }
+            window.cargarArroyosDesbordados = cargarArroyosDesbordados;
+            window.filtrarYRenderizarArroyosDesbordados = filtrarYRenderizarArroyosDesbordados;
+            setupCsvLayer('cb-arroyos-desbordados', 'filtros-arroyos-desbordados', 'cargarArroyosDesbordados', 'filtrarYRenderizarArroyosDesbordados', 'arroyosDesbordados', 'arroyosDesbordadosLoaded');
 
-            // Setup Filtro de Arroyos Desbordados
             const fArroyoFecha = document.getElementById('filtro-arroyo-fecha');
             if (fArroyoFecha) {
                 fArroyoFecha.addEventListener('change', () => {
-                    if(cbArroyosDesb && cbArroyosDesb.checked) {
-                        filtrarYRenderizarArroyosDesbordados();
-                    }
+                    if(document.getElementById('cb-arroyos-desbordados').checked) filtrarYRenderizarArroyosDesbordados();
                 });
             }
 
+            // Inicializar las capas estáticas
             for (const checkboxId in CONFIG_CAPAS) {
                 setupLayerControl(checkboxId, CONFIG_CAPAS[checkboxId]);
             }
-
-            function updateMapZoomClass() {
-                if (!map) return;
-                const zoom = map.getZoom();
-                const mapDomContainer = document.getElementById('map');
-                
-                mapDomContainer.classList.remove('map-zoom-far', 'map-zoom-medium', 'map-zoom-high');
-                if (zoom < 13) mapDomContainer.classList.add('map-zoom-far');
-                else if (zoom <= 15) mapDomContainer.classList.add('map-zoom-medium');
-                else mapDomContainer.classList.add('map-zoom-high');
-            }
-            
-            map.on('zoomend', updateMapZoomClass);
-            updateMapZoomClass();
-
-            // FIX: Forzar recálculo del mapa cuando se carga el contenedor para evitar grises
-            setTimeout(function() {
-                if (map) {
-                    map.invalidateSize();
-                }
-            }, 500);
 
             // Cargar municipio automáticamente al iniciar
             setTimeout(() => {
@@ -1861,17 +1882,7 @@
                     cbMuni.dispatchEvent(new Event('change'));
                 }
             }, 800);
-            
-            // Vigilar el contenedor del mapa para recalibrar en caso de que Flexbox se reajuste
-            const resizeObserver = new ResizeObserver(() => {
-                if (map) map.invalidateSize();
-            });
-            resizeObserver.observe(document.getElementById('map'));
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initMap();
-        });
 
     </script>
 </body>

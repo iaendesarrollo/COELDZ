@@ -106,6 +106,22 @@
             border: 3px solid #DC2626 !important; /* Borde rojo intenso más grueso */
         }
 
+        /* Tooltip Externo (Solo visible en zoom alto para puntos) */
+        .custom-map-tooltip {
+            background-color: #0F172A;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            box-shadow: none;
+            transition: opacity 0.2s ease;
+        }
+        .custom-map-tooltip::before { display: none; }
+        #map:not(.map-zoom-high) .custom-map-tooltip { display: none !important; }
+
         /* Loader para las capas del menú */
         .layer-loading { opacity: 0.5; pointer-events: none; position: relative; }
         .layer-loading::after {
@@ -203,9 +219,10 @@
                             <i data-lucide="shield-alert" class="h-4 w-4"></i> Tareas Preventivas
                         </h4>
                         <div class="space-y-3" id="grupo-tareas-preventivas">
+                            <!-- TAREAS PREVENTIVAS (SGR) -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-tareas-preventivas" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
-                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Alertas y Reclamos</span>
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Reclamos SGR</span>
                             </label>
 
                             <!-- Contenedor de Filtros Dinámicos -->
@@ -429,7 +446,7 @@
 
         // Variables Globales del Mapa y Estado
         let map;
-        let mapBounds = null;
+        let mapBounds = null; // Variable para controlar el encuadre automático del mapa
 
         // Capas CSV
         let layerTareasPreventivas;
@@ -1192,7 +1209,7 @@
             }
         }
 
-        // ---------- ARROYOS DESBORDADOS -----------
+        // ---------- NUEVO: ARROYOS DESBORDADOS -----------
         async function cargarArroyosDesbordados() {
             const cb = document.getElementById('cb-arroyos-desbordados');
             const label = cb.closest('label');
@@ -1349,7 +1366,6 @@
                     
                     Papa.parse(cleanCsvText, {
                         header: true,
-                        delimiter: ';',
                         skipEmptyLines: true,
                         complete: function(results) {
                             window.sgrData = results.data;
@@ -1398,11 +1414,32 @@
             poblarSelect('filtro-tipo', tipos);
             poblarSelect('filtro-subtipo', subtipos);
 
-            // Ordenar Fechas (DD/MM/YYYY) de manera descendente
+            // Ordenar Fechas asumiendo formato AAAA-MM-DD si es ISO o parsear DD/MM/YYYY
             const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => {
-                const [d1, m1, y1] = a.split('/');
-                const [d2, m2, y2] = b.split('/');
-                return new Date(y2, m2-1, d2) - new Date(y1, m1-1, d1);
+                let d1, m1, y1, d2, m2, y2;
+                
+                if (a.includes('-')) {
+                    [y1, m1, d1] = a.split('-');
+                } else if (a.includes('/')) {
+                    [d1, m1, y1] = a.split('/');
+                }
+
+                if (b.includes('-')) {
+                    [y2, m2, d2] = b.split('-');
+                } else if (b.includes('/')) {
+                    [d2, m2, y2] = b.split('/');
+                }
+
+                // If year doesn't exist, we fallback to string comparison
+                if (!y1 || !y2 || y1.length < 4 || y2.length < 4) {
+                    return b.localeCompare(a);
+                }
+                
+                // Normalizing to ISO string for easier comparison 'YYYY-MM-DD'
+                let isoA = `${y1}-${m1.padStart(2, '0')}-${d1.substring(0, 2).padStart(2, '0')}`;
+                let isoB = `${y2}-${m2.padStart(2, '0')}-${d2.substring(0, 2).padStart(2, '0')}`;
+
+                return isoB.localeCompare(isoA);
             });
             
             const selectFecha = document.getElementById('filtro-fecha');
@@ -1499,10 +1536,9 @@
                 })
                 .then(csvText => {
                     const cleanCsvText = csvText.replace(/^\uFEFF/, '');
-                    
                     Papa.parse(cleanCsvText, {
                         header: true,
-                        skipEmptyLines: true, // csv is comma separated by default in papaparse
+                        skipEmptyLines: true,
                         complete: function(results) {
                             window.prevCgmData = results.data;
                             prevCgmLoaded = true;
@@ -1515,7 +1551,7 @@
                 })
                 .catch(err => {
                     console.error("Error al cargar Tareas Preventivas CGM:", err);
-                    alert("Error al cargar preventivas_cgm.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    alert("Error al cargar preventivas_cgm.csv. Verifica ruta local.");
                     cb.checked = false;
                     label.classList.remove('layer-loading');
                 });
@@ -1572,14 +1608,12 @@
                 const tarea = (row.Tarea_Preventiva || '').trim();
                 const fecha = (row.Fecha || '').trim();
 
-                // Evaluar todos los filtros
                 if (fCgm !== 'ALL' && cgm !== fCgm) return;
                 if (fTarea !== 'ALL' && tarea !== fTarea) return;
                 if (fFecha !== 'ALL' && fecha !== fFecha) return;
 
                 let coordsStr = (row.Coordenadas || "").trim();
                 if (!coordsStr) return;
-                
                 coordsStr = coordsStr.replace(/['"]/g, '');
                 let parts = coordsStr.split(',');
                 if (parts.length < 2) return;
@@ -1589,8 +1623,7 @@
 
                 if (isNaN(lat) || isNaN(lng)) return;
 
-                // Color e ícono para tareas de CGM
-                let bgColor = '#F97316'; // Naranja
+                let bgColor = '#F97316'; 
 
                 const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.escoba}</div></div>`;
                 const customIcon = L.divIcon({
@@ -1604,7 +1637,6 @@
 
                 let fotoHtml = '';
                 if (row.Foto && row.Foto.trim() !== '') {
-                    // Limpiamos la ruta de la foto para evitar errores comunes en CSVs
                     let fotoSrc = row.Foto.trim().replace(/^['"]|['"]$/g, '');
                     fotoHtml = `<div class="mt-2 mb-2 w-full h-32 bg-gray-100 rounded overflow-hidden flex items-center justify-center border border-gray-200">
                                     <img src="${fotoSrc}" alt="Foto Tarea Preventiva" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\\'text-gray-400 text-xs\\'>Imagen no disponible</span>'">
@@ -1629,12 +1661,12 @@
                 latLngs.push([lat, lng]);
             });
 
-            // Ajustar el zoom automáticamente si hay puntos filtrados
             if (latLngs.length > 0 && map.hasLayer(layerPreventivasCGM)) {
                 const zoomBounds = L.latLngBounds(latLngs);
                 map.fitBounds(zoomBounds, { padding: [30, 30] });
             }
         }
+
 
         // LÓGICA PRINCIPAL DE INICIALIZACIÓN
         function initMap() {

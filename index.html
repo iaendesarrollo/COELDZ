@@ -4,23 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAPA COE</title>
+    <!-- Tailwind CSS para estilos -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- PapaParse para lectura de CSV -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- Fuentes de Google (Montserrat) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Iconos Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
+    <!-- Leaflet CSS (Para el Mapa) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Leaflet MarkerCluster CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Leaflet Heat -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js" crossorigin="anonymous"></script>
+    <!-- Leaflet MarkerCluster JS -->
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
     <style>
@@ -111,6 +121,7 @@
 </head>
 <body class="relative min-h-screen flex flex-col">
 
+    <!-- Encabezado Institucional (MAPA COE) -->
     <header class="bg-[var(--bg-main)] shadow-lg border-b-4 border-[var(--acento)] relative z-20 flex items-center justify-center w-full shrink-0 py-6 px-4">
         <div class="flex items-center gap-4">
             <div class="bg-[var(--blanco)] text-[var(--bg-main)] rounded-full shadow-md flex items-center justify-center h-14 w-14 shrink-0">
@@ -123,10 +134,13 @@
         </div>
     </header>
 
+    <!-- Contenedor Único del Mapa de Análisis Territorial -->
     <div id="map-view" class="w-full max-w-[1600px] mx-auto py-8 px-4 sm:px-6 lg:px-8 flex-1 flex flex-col">
         
+        <!-- Contenedor Principal del Mapa con Layout de Sidebar -->
         <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[600px]">
             
+            <!-- MENU LATERAL IZQUIERDO (Capas y Filtros) -->
             <aside class="w-full lg:w-80 bg-[#FFFFFF] rounded-xl shadow-md border border-[#E6EDF3] flex flex-col relative z-20 shrink-0 max-h-[500px] lg:max-h-[calc(100vh-140px)]">
                 <div class="p-4 border-b border-[#E6EDF3] bg-[#F3F6F9] rounded-t-xl flex items-center gap-2 shrink-0">
                     <i data-lucide="layers" class="text-[#0B5F8D] h-5 w-5"></i>
@@ -135,11 +149,13 @@
                 
                 <div class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-6" id="menu-capas-container">
                     
+                    <!-- BLOQUE 1: DIVISIÓN TERRITORIAL -->
                     <div>
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i data-lucide="map" class="h-4 w-4"></i> División Territorial
                         </h4>
                         <div class="space-y-3" id="grupo-division-territorial">
+                            <!-- CHECKBOX LIMITE TERRITORIAL MARCADO POR DEFECTO -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer" checked>
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
@@ -155,6 +171,7 @@
                         </div>
                     </div>
 
+                    <!-- BLOQUE 2: DATOS DEMOGRÁFICOS -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i data-lucide="pie-chart" class="h-4 w-4"></i> Datos Demográficos
@@ -172,6 +189,7 @@
                                 <input type="checkbox" id="cb-inundables" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Zonas Inundables</span>
                             </label>
+                            <!-- ARROYOS -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-arroyos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Arroyos</span>
@@ -179,6 +197,7 @@
                         </div>
                     </div>
 
+                    <!-- BLOQUE 3: TAREAS PREVENTIVAS -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i data-lucide="shield-alert" class="h-4 w-4"></i> Tareas Preventivas
@@ -189,6 +208,7 @@
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Alertas y Reclamos</span>
                             </label>
 
+                            <!-- Contenedor de Filtros Dinámicos -->
                             <div id="filtros-tareas" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
                                 <div class="flex flex-col">
                                     <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
@@ -215,9 +235,38 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <!-- NUEVO: TAREAS PREVENTIVAS CGM -->
+                            <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
+                                <input type="checkbox" id="cb-preventivas-cgm" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Tareas Preventivas CGM</span>
+                            </label>
+
+                            <!-- Contenedor de Filtros Dinámicos Preventivas CGM -->
+                            <div id="filtros-preventivas-cgm" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-prev-cgm-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
+                                    <select id="filtro-prev-cgm-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los CGM</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Tarea</label>
+                                    <select id="filtro-prev-cgm-tarea" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Tareas</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- BLOQUE 4: EVENTOS POR TORMENTA -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-cloud-showers-heavy text-[var(--acento)] text-lg"></i> Eventos por Tormenta
@@ -228,6 +277,7 @@
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Incidentes Reportados (COE)</span>
                             </label>
 
+                            <!-- Contenedor de Filtros Dinámicos Eventos COE -->
                             <div id="filtros-eventos" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
                                 <div class="flex flex-col">
                                     <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
@@ -249,11 +299,13 @@
                                 </div>
                             </div>
                             
+                            <!-- CORTES DE LUZ -->
                             <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
                                 <input type="checkbox" id="cb-cortes-luz" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Cortes de Luz</span>
                             </label>
 
+                            <!-- Contenedor de Filtros Dinámicos Cortes de Luz -->
                             <div id="filtros-cortes-luz" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
                                 <div class="flex flex-col">
                                     <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
@@ -275,6 +327,7 @@
                                 </div>
                             </div>
 
+                            <!-- ARROYOS DESBORDADOS -->
                             <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
                                 <input type="checkbox" id="cb-arroyos-desbordados" class="w-4 h-4 accent-[#DC2626] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#DC2626] transition-colors font-medium">Arroyos Desbordados</span>
@@ -292,6 +345,7 @@
                         </div>
                     </div>
 
+                    <!-- BLOQUE 5: INSTITUCIONES -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-building-columns text-[var(--acento)] text-lg"></i> Instituciones
@@ -340,6 +394,7 @@
                         </div>
                     </div>
 
+                    <!-- BLOQUE 6: SEGURIDAD -->
                     <div class="border-t border-[#E6EDF3] pt-4">
                         <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
                             <i class="fa-solid fa-shield-halved text-[var(--acento)] text-lg"></i> Seguridad
@@ -359,6 +414,7 @@
                 </div>
             </aside>
 
+            <!-- MAPA PRINCIPAL -->
             <div class="w-full flex-1 bg-[#FFFFFF] p-2 rounded-xl shadow-lg border border-[#E6EDF3] relative z-10 flex flex-col">
                 <div id="map" class="w-full flex-1 rounded-lg relative z-0 min-h-[500px]"></div>
             </div>
@@ -366,6 +422,7 @@
         </div>
     </div>
 
+    <!-- Scripts de Lógica e Inicialización del Mapa -->
     <script>
         // Inicializar Iconos Lucide
         lucide.createIcons();
@@ -378,6 +435,10 @@
         let layerTareasPreventivas;
         window.sgrData = [];
         let sgrLoaded = false;
+
+        let layerPreventivasCGM;
+        window.prevCgmData = [];
+        let prevCgmLoaded = false;
 
         let layerEventosTormenta;
         window.coeData = [];
@@ -395,6 +456,7 @@
         // Iconografía SVG general para puntos dinámicos
         const svgIconos = {
             preventiva: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+            escoba: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22l4-4"/><path d="M12 2a4 4 0 0 1 4 4c0 3-4 6-4 6s-4-3-4-6a4 4 0 0 1 4-4z"/><path d="M8 8l8 8"/><path d="M10 10l-4 4"/></svg>`,
             civiles: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="11" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
             jubilados: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
             cultural: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
@@ -1130,7 +1192,7 @@
             }
         }
 
-        // ---------- NUEVO: ARROYOS DESBORDADOS -----------
+        // ---------- ARROYOS DESBORDADOS -----------
         async function cargarArroyosDesbordados() {
             const cb = document.getElementById('cb-arroyos-desbordados');
             const label = cb.closest('label');
@@ -1401,7 +1463,7 @@
 
                 let popupHtml = `
                     <div class="font-sans min-w-[220px]">
-                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${tipo}</h4>
+                        <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${tipo}</h4>
                         <ul class="text-xs text-[#64748B] space-y-1.5">
                             <li><b class="text-[#0F172A]">Sub Tipo:</b> ${subtipo}</li>
                             <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
@@ -1424,6 +1486,156 @@
             }
         }
 
+        // ---------- NUEVO: TAREAS PREVENTIVAS CGM -----------
+        function cargarPreventivasCGM() {
+            const cb = document.getElementById('cb-preventivas-cgm');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./preventivas_cgm.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo preventivas_cgm.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        skipEmptyLines: true, // csv is comma separated by default in papaparse
+                        complete: function(results) {
+                            window.prevCgmData = results.data;
+                            prevCgmLoaded = true;
+                            document.getElementById('filtros-preventivas-cgm').classList.remove('hidden');
+                            poblarFiltrosPreventivasCGM();
+                            filtrarYRenderizarPreventivasCGM();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Tareas Preventivas CGM:", err);
+                    alert("Error al cargar preventivas_cgm.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosPreventivasCGM() {
+            const cgms = new Set();
+            const tareas = new Set();
+            const fechas = new Set();
+
+            window.prevCgmData.forEach(row => {
+                if (row.CGM) cgms.add(row.CGM.trim());
+                if (row.Tarea_Preventiva) tareas.add(row.Tarea_Preventiva.trim());
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-prev-cgm-cgm', cgms);
+            poblarSelect('filtro-prev-cgm-tarea', tareas);
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-prev-cgm-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarPreventivasCGM() {
+            layerPreventivasCGM.clearLayers();
+            
+            const fCgm = document.getElementById('filtro-prev-cgm-cgm').value;
+            const fTarea = document.getElementById('filtro-prev-cgm-tarea').value;
+            const fFecha = document.getElementById('filtro-prev-cgm-fecha').value;
+
+            const latLngs = [];
+
+            window.prevCgmData.forEach(row => {
+                const cgm = (row.CGM || '').trim();
+                const tarea = (row.Tarea_Preventiva || '').trim();
+                const fecha = (row.Fecha || '').trim();
+
+                // Evaluar todos los filtros
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTarea !== 'ALL' && tarea !== fTarea) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                let coordsStr = (row.Coordenadas || "").trim();
+                if (!coordsStr) return;
+                
+                coordsStr = coordsStr.replace(/['"]/g, '');
+                let parts = coordsStr.split(',');
+                if (parts.length < 2) return;
+
+                const lat = parseFloat(parts[0].trim());
+                const lng = parseFloat(parts[1].trim());
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                // Color e ícono para tareas de CGM
+                let bgColor = '#F97316'; // Naranja
+
+                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.escoba}</div></div>`;
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-div-icon',
+                    iconSize: [24, 24], 
+                    iconAnchor: [12, 12]
+                });
+
+                const marker = L.marker([lat, lng], { icon: customIcon });
+
+                let fotoHtml = '';
+                if (row.Foto && row.Foto.trim() !== '') {
+                    // Limpiamos la ruta de la foto para evitar errores comunes en CSVs
+                    let fotoSrc = row.Foto.trim().replace(/^['"]|['"]$/g, '');
+                    fotoHtml = `<div class="mt-2 mb-2 w-full h-32 bg-gray-100 rounded overflow-hidden flex items-center justify-center border border-gray-200">
+                                    <img src="${fotoSrc}" alt="Foto Tarea Preventiva" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\\'text-gray-400 text-xs\\'>Imagen no disponible</span>'">
+                                </div>`;
+                }
+
+                let popupHtml = `
+                    <div class="font-sans min-w-[240px]">
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};"><i class="fa-solid fa-broom mr-1"></i> Tarea Preventiva CGM</h4>
+                        ${fotoHtml}
+                        <ul class="text-xs text-[#64748B] space-y-1.5 mt-2">
+                            <li><b class="text-[#0F172A]">Área:</b> ${row.Area || '-'}</li>
+                            <li><b class="text-[#0F172A]">Tarea:</b> ${tarea}</li>
+                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha} ${row.Hora || ''}</li>
+                            <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
+                            <li><b class="text-[#0F172A]">Observaciones:</b> ${row.Observaciones || '-'}</li>
+                        </ul>
+                    </div>`;
+                
+                marker.bindPopup(popupHtml, { minWidth: 240 });
+                layerPreventivasCGM.addLayer(marker);
+                latLngs.push([lat, lng]);
+            });
+
+            // Ajustar el zoom automáticamente si hay puntos filtrados
+            if (latLngs.length > 0 && map.hasLayer(layerPreventivasCGM)) {
+                const zoomBounds = L.latLngBounds(latLngs);
+                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            }
+        }
+
         // LÓGICA PRINCIPAL DE INICIALIZACIÓN
         function initMap() {
             const mapContainer = document.getElementById('map');
@@ -1437,6 +1649,7 @@
             }).addTo(map);
 
             layerTareasPreventivas = L.layerGroup();
+            layerPreventivasCGM = L.layerGroup();
             layerEventosTormenta = L.layerGroup();
             layerCortesLuz = L.layerGroup();
             layerArroyosDesbordados = L.layerGroup();
@@ -1515,6 +1728,30 @@
                 document.getElementById(id).addEventListener('change', () => {
                     if(document.getElementById('cb-tareas-preventivas').checked) {
                         filtrarYRenderizarTareas();
+                    }
+                });
+            });
+
+            // Setup de Control Especial: Tareas Preventivas CGM CSV
+            const cbPrevCgm = document.getElementById('cb-preventivas-cgm');
+            if (cbPrevCgm) {
+                cbPrevCgm.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerPreventivasCGM);
+                        if (!prevCgmLoaded) cargarPreventivasCGM();
+                        else filtrarYRenderizarPreventivasCGM();
+                    } else {
+                        map.removeLayer(layerPreventivasCGM);
+                        document.getElementById('filtros-preventivas-cgm').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Eventos de Cambio en Filtros Preventivas CGM
+            ['filtro-prev-cgm-fecha', 'filtro-prev-cgm-cgm', 'filtro-prev-cgm-tarea'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    if(document.getElementById('cb-preventivas-cgm').checked) {
+                        filtrarYRenderizarPreventivasCGM();
                     }
                 });
             });

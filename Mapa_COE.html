@@ -7,6 +7,9 @@
     <!-- Tailwind CSS para estilos -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- PapaParse para lectura de CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -92,6 +95,17 @@
         .map-zoom-high .marker-circle svg { width: 8px; height: 8px; stroke-width: 2px; }
         .map-zoom-high .marker-circle:hover { transform: scale(1.3); filter: brightness(1.15); }
 
+        /* ANIMACIÓN PARA EVENTOS RECURRENTES */
+        @keyframes parpadeo-recurrente {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.9); }
+            50% { transform: scale(1.35); box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .marker-recurrent .marker-circle {
+            animation: parpadeo-recurrente 0.85s infinite ease-in-out !important;
+            border: 3px solid #DC2626 !important; /* Borde rojo intenso más grueso */
+        }
+
         /* Loader para las capas del menú */
         .layer-loading { opacity: 0.5; pointer-events: none; position: relative; }
         .layer-loading::after {
@@ -141,8 +155,9 @@
                             <i data-lucide="map" class="h-4 w-4"></i> División Territorial
                         </h4>
                         <div class="space-y-3" id="grupo-division-territorial">
+                            <!-- CHECKBOX LIMITE TERRITORIAL MARCADO POR DEFECTO -->
                             <label class="flex items-center gap-3 cursor-pointer group relative">
-                                <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer">
+                                <input type="checkbox" id="cb-municipio" class="w-4 h-4 accent-[var(--bg-main)] cursor-pointer" checked>
                                 <span class="text-sm text-[#0F172A] group-hover:text-[var(--acento)] transition-colors font-medium">Límite Territorial (Municipio)</span>
                             </label>
                             <label class="flex items-center gap-3 cursor-pointer group relative">
@@ -152,6 +167,246 @@
                             <label class="flex items-center gap-3 cursor-pointer group relative">
                                 <input type="checkbox" id="cb-barrios" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
                                 <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Barrios Lomas de Zamora</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 2: DATOS DEMOGRÁFICOS -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i data-lucide="pie-chart" class="h-4 w-4"></i> Datos Demográficos
+                        </h4>
+                        <div class="space-y-3" id="grupo-datos-demograficos">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-poblacion" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Población</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-pobreza" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Pobreza Crónica</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-inundables" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Zonas Inundables</span>
+                            </label>
+                            <!-- ARROYOS -->
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-arroyos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Arroyos</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 3: TAREAS PREVENTIVAS -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i data-lucide="shield-alert" class="h-4 w-4"></i> Tareas Preventivas
+                        </h4>
+                        <div class="space-y-3" id="grupo-tareas-preventivas">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-tareas-preventivas" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Alertas y Reclamos</span>
+                            </label>
+
+                            <!-- Contenedor de Filtros Dinámicos -->
+                            <div id="filtros-tareas" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
+                                    <select id="filtro-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los CGM</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Tipo</label>
+                                    <select id="filtro-tipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los Tipos</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Sub Tipo</label>
+                                    <select id="filtro-subtipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los Sub Tipos</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- NUEVO: TAREAS PREVENTIVAS CGM -->
+                            <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
+                                <input type="checkbox" id="cb-preventivas-cgm" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Tareas Preventivas CGM</span>
+                            </label>
+
+                            <!-- Contenedor de Filtros Dinámicos Preventivas CGM -->
+                            <div id="filtros-preventivas-cgm" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-prev-cgm-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
+                                    <select id="filtro-prev-cgm-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los CGM</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Tarea</label>
+                                    <select id="filtro-prev-cgm-tarea" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Tareas</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 4: EVENTOS POR TORMENTA -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-showers-heavy text-[var(--acento)] text-lg"></i> Eventos por Tormenta
+                        </h4>
+                        <div class="space-y-3" id="grupo-eventos-tormenta">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-eventos-tormenta" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Incidentes Reportados (COE)</span>
+                            </label>
+
+                            <!-- Contenedor de Filtros Dinámicos Eventos COE -->
+                            <div id="filtros-eventos" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-evt-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
+                                    <select id="filtro-evt-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los CGM</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Tipo</label>
+                                    <select id="filtro-evt-tipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los Tipos</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- CORTES DE LUZ -->
+                            <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
+                                <input type="checkbox" id="cb-cortes-luz" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Cortes de Luz</span>
+                            </label>
+
+                            <!-- Contenedor de Filtros Dinámicos Cortes de Luz -->
+                            <div id="filtros-cortes-luz" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-corte-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por CGM</label>
+                                    <select id="filtro-corte-cgm" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los CGM</option>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Afectación</label>
+                                    <select id="filtro-corte-tipo" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#0B5F8D] cursor-pointer">
+                                        <option value="ALL">Todos los Tipos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- ARROYOS DESBORDADOS -->
+                            <label class="flex items-center gap-3 cursor-pointer group relative mt-3">
+                                <input type="checkbox" id="cb-arroyos-desbordados" class="w-4 h-4 accent-[#DC2626] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#DC2626] transition-colors font-medium">Arroyos Desbordados</span>
+                            </label>
+
+                            <div id="filtros-arroyos-desbordados" class="hidden flex flex-col gap-2.5 mt-2 pl-7 border-l-2 border-[#E6EDF3] ml-2">
+                                <div class="flex flex-col">
+                                    <label class="text-[10px] text-[#64748B] font-bold uppercase mb-1">Filtrar por Fecha</label>
+                                    <select id="filtro-arroyo-fecha" class="text-xs p-1.5 rounded border border-[#E6EDF3] bg-[#F3F6F9] text-[#0F172A] w-full outline-none focus:border-[#DC2626] cursor-pointer">
+                                        <option value="ALL">Todas las Fechas</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 5: INSTITUCIONES -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns text-[var(--acento)] text-lg"></i> Instituciones
+                        </h4>
+                        <div class="space-y-3" id="grupo-instituciones">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-asoc-civiles" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Asociaciones Civiles</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-centro-jubilados" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Centros de Jubilados</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-centros-culturales" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Centros Culturales</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-centros-sanitarios" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Centros de Atención Sanitaria</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-clubes-deportivos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Clubes Deportivos</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-comedores" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Comedores</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-establecimientos-educativos" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Establecimientos Educativos</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-fundaciones" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Fundaciones</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-iglesias" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Iglesias</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-soc-fomento" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Sociedades de Fomento</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- BLOQUE 6: SEGURIDAD -->
+                    <div class="border-t border-[#E6EDF3] pt-4">
+                        <h4 class="text-xs font-extrabold text-[#0B5F8D] uppercase tracking-wider mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-[var(--acento)] text-lg"></i> Seguridad
+                        </h4>
+                        <div class="space-y-3" id="grupo-seguridad">
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-camaras" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Cámaras de Seguridad</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group relative">
+                                <input type="checkbox" id="cb-alarmas" class="w-4 h-4 accent-[#0B5F8D] cursor-pointer">
+                                <span class="text-sm text-[#0F172A] group-hover:text-[#0B5F8D] transition-colors font-medium">Alarmas Comunitarias</span>
                             </label>
                         </div>
                     </div>
@@ -174,10 +429,55 @@
 
         // Variables Globales del Mapa y Estado
         let map;
-        let mapBounds = null; // Variable para controlar el encuadre automático del mapa
+        let mapBounds = null;
 
-        // DICCIONARIO CENTRAL DE CAPAS
-        // Aquí configuraremos las URL de los GeoJSON y sus estilos a medida que avancemos.
+        // Capas CSV
+        let layerTareasPreventivas;
+        window.sgrData = [];
+        let sgrLoaded = false;
+
+        let layerPreventivasCGM;
+        window.prevCgmData = [];
+        let prevCgmLoaded = false;
+
+        let layerEventosTormenta;
+        window.coeData = [];
+        let coeLoaded = false;
+
+        let layerCortesLuz;
+        window.cortesData = [];
+        let cortesLoaded = false;
+
+        let layerArroyosDesbordados;
+        window.arroyosCsvData = [];
+        window.arroyosGeojsonData = null;
+        let arroyosDesbordadosLoaded = false;
+
+        // Iconografía SVG general para puntos dinámicos
+        const svgIconos = {
+            preventiva: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+            escoba: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22l4-4"/><path d="M12 2a4 4 0 0 1 4 4c0 3-4 6-4 6s-4-3-4-6a4 4 0 0 1 4-4z"/><path d="M8 8l8 8"/><path d="M10 10l-4 4"/></svg>`,
+            civiles: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="11" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+            jubilados: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+            cultural: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
+            hospital: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 21h18"/><path d="M8 21v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6"/><path d="M12 7v4"/><path d="M10 9h4"/></svg>`,
+            comedores: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg>`,
+            deportes: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+            educacion: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
+            fundaciones: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+            iglesias: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M7 8h10"/></svg>`,
+            fomento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`,
+            camara: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>`,
+            alarma: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>`,
+            anegamiento: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-3a6 6 0 0 1 12 0v3"/><path d="M12 2v2"/><path d="M4 22v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><path d="M14 14h-4"/><path d="M16 14h.01"/><path d="M8 14h.01"/></svg>`,
+            arbol: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-8"/><path d="m8 14-2.5-2.5a3.5 3.5 0 0 1 5-5 5 5 0 0 1 7 5 3.5 3.5 0 0 1-2.5 2.5Z"/></svg>`,
+            poste: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="M8 22h8"/><path d="M8 2h8"/></svg>`,
+            alerta: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
+            energia: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+            check: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+        };
+
+        // DICCIONARIO CENTRAL DE CAPAS GEOJSON
         const CONFIG_CAPAS = {
             'cb-municipio': { 
                 url: './municipios_Lomas de Zamora.geojson', 
@@ -192,14 +492,92 @@
             'cb-barrios': { 
                 url: './barrios_Lomas de Zamora.geojson', 
                 type: 'basic', 
-                style: { color: '#D34872', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
+                style: { color: '#0B5F8D', weight: 2, fillOpacity: 0.1, dashArray: '3,3' } 
+            },
+            // DATOS DEMOGRÁFICOS
+            'cb-poblacion': { 
+                url: './poblacion_Lomas de Zamora.geojson', 
+                type: 'poblacion' 
+            },
+            'cb-pobreza': { 
+                url: './pobreza_cronica_Lomas de Zamora.geojson', 
+                type: 'pobreza'   
+            },
+            'cb-inundables': { 
+                url: './zonas_inundables_Lomas de Zamora.geojson', 
+                type: 'inundables' 
+            },
+            'cb-arroyos': { 
+                url: './ARROYOS.geojson', 
+                type: 'arroyos'
+            },
+            // INSTITUCIONES
+            'cb-asoc-civiles': { 
+                url: './Asociaciones Civiles.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.civiles, color: '#4AB5E0' } 
+            },
+            'cb-centro-jubilados': { 
+                url: './Centro de Jubilados.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.jubilados, color: '#6BA1C7' } 
+            },
+            'cb-centros-culturales': { 
+                url: './Centros Culturales.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.cultural, color: '#0B5F8D' } 
+            },
+            'cb-centros-sanitarios': { 
+                url: './Centros de Atencion Sanitaria.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.hospital, color: '#D34872' } 
+            },
+            'cb-clubes-deportivos': { 
+                url: './Clubes Deportivos.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.deportes, color: '#4AB5E0' } 
+            },
+            'cb-comedores': { 
+                url: './Comedores.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.comedores, color: '#2A7FA8' } 
+            },
+            'cb-establecimientos-educativos': { 
+                url: './Establecimientos Educativos.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.educacion, color: '#084A6F' } 
+            },
+            'cb-fundaciones': { 
+                url: './Fundaciones.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.fundaciones, color: '#003B5C' } 
+            },
+            'cb-iglesias': { 
+                url: './Iglesias.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.iglesias, color: '#19567C' } 
+            },
+            'cb-soc-fomento': { 
+                url: './Sociedades de Fomento.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.fomento, color: '#0B5F8D' } 
+            },
+            // SEGURIDAD
+            'cb-camaras': { 
+                url: './Camaras.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.camara, color: '#D34872' } 
+            },
+            'cb-alarmas': { 
+                url: './Alarmas.geojson', 
+                type: 'basic', 
+                style: { tipo: 'punto', svg: svgIconos.alarma, color: '#19567C' } 
             }
         };
 
-        // Objeto para almacenar las instancias de LayerGroup de Leaflet
         const layerInstances = {};
 
-        // Función base para sanear geometrías GeoJSON mal formadas (Motor mantenido)
+        // Función base para sanear geometrías GeoJSON mal formadas
         function sanearGeoJSON(data) {
             if (!data || !data.features || !Array.isArray(data.features)) return data;
             
@@ -263,7 +641,7 @@
             }
         }
 
-        // Motor Genérico de Renderizado (Listo para ser utilizado cuando agreguemos capas)
+        // Motor Genérico de Renderizado (Aplica para Instituciones y División Territorial)
         function renderizarCapaGenerica(data, layerGroup, styleOptions) {
             data = sanearGeoJSON(data);
             const geoLayer = L.geoJSON(data, {
@@ -307,12 +685,962 @@
             actualizarLimitesMapa(geoLayer);
         }
 
+        /* -----------------------------------------------------------
+           RENDERIZADOS DEMOGRÁFICOS ENFOCADOS (ATLAS UI)
+        ------------------------------------------------------------- */
+
+        function renderizarCapaPoblacion(data, layerGroup) {
+            data = sanearGeoJSON(data);
+
+            let maxVal = 0;
+            data.features.forEach(f => {
+                let val = f.properties['Habitantes'] || f.properties['RADIOS_POB'] || 0;
+                if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                if (val > maxVal) maxVal = val;
+            });
+
+            function getColor(d) {
+                if(!maxVal || d === undefined) return '#F3F6F9'; 
+                return d > maxVal * 0.8 ? '#084A6F' : d > maxVal * 0.6 ? '#0B5F8D' : d > maxVal * 0.4 ? '#2A7FA8' : d > maxVal * 0.2 ? '#6BA1C7' : '#D1E1F0';  
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = feature.properties['Habitantes'] || feature.properties['RADIOS_POB'] || 0;
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return { fillColor: getColor(val), weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let radioStr = props.REDCODE || props.RADIO || props.LINK_RADIO || props.NOMBRE || "Radio Censal";
+                        let valHabitantes = props.Habitantes || props.RADIOS_POB || props.POBLACION || 0;
+                        let valHogares = props.RADIOS_HOG || props.HOGARES;
+
+                        let popupHtml = `
+                            <div class="font-sans min-w-[200px]">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                                <div class="bg-[#EAF1F7] p-2 rounded-md mb-2 border border-[#D1E1F0]">
+                                    <p class="text-xs font-bold text-[#0B5F8D] uppercase">Total Habitantes</p>
+                                    <p class="text-xl font-extrabold text-[#0B5F8D]">${Number(valHabitantes).toLocaleString('es-AR')}</p>
+                                </div>`;
+                        
+                        if (valHogares !== undefined && valHogares !== null) {
+                            popupHtml += `
+                                <ul class="text-xs text-[#64748B] space-y-1 mt-1">
+                                    <li><b class="capitalize text-[#0F172A]">Cantidad de Hogares:</b> ${Number(valHogares).toLocaleString('es-AR')}</li>
+                                </ul>`;
+                        }
+
+                        popupHtml += `</div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function renderizarCapaPobreza(data, layerGroup) {
+            data = sanearGeoJSON(data);
+
+            function getColor(d) {
+                if(d === undefined || d === null) return '#F3F6F9';
+                return d >= 15 ? '#003B5C' : d >= 10 ? '#084A6F' : d >= 5  ? '#0B5F8D' : d >= 2  ? '#2A7FA8' : d > 0   ? '#6BA1C7' : '#EAF1F7';
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = feature.properties['P_PC_HOG'] || 0;
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return { fillColor: getColor(val), weight: 1, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let radioStr = props.LINK_RADIO || "Sector Censal";
+                        let pctHogares = props.P_PC_HOG || 0;
+                        let pctPersonas = props.P_PC_PER || 0;
+                        let valHogares = props.PC_HOG || 0;
+                        let valPersonas = props.PC_PER || 0;
+                        
+                        let popupHtml = `
+                            <div class="font-sans min-w-[220px]">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                                <div class="bg-[#FFF5F8] p-2 rounded-md mb-2 border border-[#FBCFE8]">
+                                    <p class="text-xs font-bold text-[#D34872] uppercase">Incidencia (Hogares)</p>
+                                    <p class="text-xl font-extrabold text-[#BE185D]">${pctHogares}%</p>
+                                </div>
+                                <ul class="text-xs text-[#64748B] space-y-1.5">
+                                    <li><b class="text-[#0F172A]">Incidencia (Personas):</b> ${pctPersonas}%</li>
+                                    <li><b class="text-[#0F172A]">Hogares Afectados:</b> ${Number(valHogares).toLocaleString('es-AR')}</li>
+                                    <li><b class="text-[#0F172A]">Personas Afectadas:</b> ${Number(valPersonas).toLocaleString('es-AR')}</li>
+                                </ul>
+                            </div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        function renderizarCapaInundables(data, layerGroup) {
+            data = sanearGeoJSON(data);
+
+            function getColor(d) {
+                if(d === undefined || d === null) return '#F3F6F9'; 
+                return d >= 80 ? '#DC2626' : d >= 60 ? '#084A6F' : d >= 40 ? '#0B5F8D' : d >= 20 ? '#2A7FA8' : '#D1E1F0';  
+            }
+
+            const geoLayer = L.geoJSON(data, {
+                style: function (feature) {
+                    let val = feature.properties['PORCENTAJE'];
+                    if(typeof val === 'string') val = parseFloat(val.replace(/[^\d.-]/g, '')) || 0;
+                    return { fillColor: getColor(val), weight: 2, opacity: 1, color: 'white', dashArray: '3', fillOpacity: 0.85 };
+                },
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let props = feature.properties;
+                        let radioStr = props.REDCODE || props.LINK_RADIO || props.NOMBRE || "Sector Geográfico";
+                        let pctRiesgo = props.PORCENTAJE || props.ZONA_INUND || 0;
+                        let pobAfectada = props.POBLACION || props.RADIOS_POB || 0;
+                        let hogAfectados = props.RADIOS_HOG || 0;
+                        
+                        let popupHtml = `
+                            <div class="font-sans min-w-[200px]">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">Sector / Radio: ${radioStr}</h4>
+                                <div class="bg-[#FEF2F2] p-2 rounded-md mb-2 border border-[#FECACA]">
+                                    <p class="text-xs font-bold text-[#DC2626] uppercase">Riesgo de Inundación</p>
+                                    <p class="text-xl font-extrabold text-[#B91C1C]">${Number(pctRiesgo).toLocaleString('es-AR')}%</p>
+                                </div>
+                                <ul class="text-xs text-[#64748B] space-y-1">
+                                    <li><b class="capitalize text-[#0F172A]">Población Afectada:</b> ${Number(pobAfectada).toLocaleString('es-AR')}</li>
+                                    <li><b class="capitalize text-[#0F172A]">Hogares Afectados:</b> ${Number(hogAfectados).toLocaleString('es-AR')}</li>
+                                </ul>
+                            </div>`;
+                        layer.bindPopup(popupHtml);
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        // Renderizado específico para Arroyos (Capa Demográfica base)
+        function renderizarCapaArroyos(data, layerGroup) {
+            data = sanearGeoJSON(data);
+            const geoLayer = L.geoJSON(data, {
+                style: { color: '#4AB5E0', weight: 4, opacity: 0.9 }, // Color celeste visible
+                onEachFeature: function (feature, layer) {
+                    if (feature.properties) {
+                        let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name || "Arroyo";
+                        let umbral = feature.properties.umbral_desborde || feature.properties['UMBRAL DESBORDE'] || "Sin datos";
+
+                        let popupHtml = `
+                            <div class="font-sans min-w-[200px]">
+                                <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2 flex items-center gap-1">
+                                    <i class="fa-solid fa-water"></i> ${name}
+                                </h4>
+                                <ul class="text-xs text-[#64748B] space-y-1">
+                                    <li><b class="text-[#0F172A]">Umbral de Desborde:</b> <span class="text-[#D34872] font-bold">${umbral} mts</span></li>
+                                </ul>
+                            </div>`;
+                        layer.bindPopup(popupHtml);
+                        layer.bindTooltip(name, { direction: 'top', className: 'custom-map-tooltip' });
+                    }
+                }
+            });
+            geoLayer.addTo(layerGroup);
+            actualizarLimitesMapa(geoLayer);
+        }
+
+        /* -----------------------------------------------------------
+           LÓGICA ESPECÍFICA PARA EVENTOS POR TORMENTA (coe.csv y corte_luz.csv)
+        ------------------------------------------------------------- */
+
+        function cargarEventosTormenta() {
+            const cb = document.getElementById('cb-eventos-tormenta');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./coe.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo coe.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            window.coeData = results.data;
+                            coeLoaded = true;
+                            document.getElementById('filtros-eventos').classList.remove('hidden');
+                            poblarFiltrosEventos();
+                            filtrarYRenderizarEventos();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Eventos por Tormenta:", err);
+                    alert("Error al cargar coe.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosEventos() {
+            const cgms = new Set();
+            const tipos = new Set();
+            const fechas = new Set();
+
+            window.coeData.forEach(row => {
+                if (row.CGM) cgms.add(row.CGM.trim());
+                if (row['Tipo Evento']) tipos.add(row['Tipo Evento'].trim());
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-evt-cgm', cgms);
+            poblarSelect('filtro-evt-tipo', tipos);
+
+            // Ordenar Fechas asumiendo formato AAAA-MM-DD
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            
+            const selectFecha = document.getElementById('filtro-evt-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarEventos() {
+            layerEventosTormenta.clearLayers();
+            
+            const fCgm = document.getElementById('filtro-evt-cgm').value;
+            const fTipo = document.getElementById('filtro-evt-tipo').value;
+            const fFecha = document.getElementById('filtro-evt-fecha').value;
+
+            const latLngs = [];
+            const eventosAgrupados = {};
+
+            window.coeData.forEach(row => {
+                const cgm = (row.CGM || '').trim();
+                const tipo = (row['Tipo Evento'] || '').trim();
+                const fecha = (row.Fecha || '').trim();
+
+                // Evaluar todos los filtros
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTipo !== 'ALL' && tipo !== fTipo) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                let coordsStr = (row.Coordenadas || "").trim();
+                if (!coordsStr) return;
+                
+                // Remover posibles comillas si quedaron en el parsing y dividir por la coma
+                coordsStr = coordsStr.replace(/['"]/g, '');
+                let parts = coordsStr.split(',');
+                if (parts.length < 2) return;
+
+                const lat = parseFloat(parts[0].trim());
+                const lng = parseFloat(parts[1].trim());
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                // Agrupamos por coordenadas para detectar recurrencia
+                const key = `${lat},${lng}`;
+                if (!eventosAgrupados[key]) eventosAgrupados[key] = [];
+                eventosAgrupados[key].push(row);
+            });
+
+            for (const key in eventosAgrupados) {
+                const grupo = eventosAgrupados[key];
+                const [latStr, lngStr] = key.split(',');
+                const lat = parseFloat(latStr);
+                const lng = parseFloat(lngStr);
+                const isRecurrent = grupo.length > 1;
+
+                // Tomamos el tipo del primer evento como representativo para el color del ícono
+                const primerEvento = grupo[0];
+                const tipo = primerEvento['Tipo Evento'] || '';
+                const cgm = primerEvento.CGM || '';
+
+                // Asignar Color e Ícono según el tipo de evento
+                let tipoEventoLower = tipo.toLowerCase();
+                let svgUsado = svgIconos.alerta;
+                let bgColor = '#D34872'; // Magenta por defecto (alerta general)
+
+                if (tipoEventoLower.includes('anegamiento') || tipoEventoLower.includes('agua') || tipoEventoLower.includes('inundacion')) {
+                    svgUsado = svgIconos.anegamiento;
+                    bgColor = '#4AB5E0'; // Celeste
+                } else if (tipoEventoLower.includes('arbol') || tipoEventoLower.includes('árbol') || tipoEventoLower.includes('rama')) {
+                    svgUsado = svgIconos.arbol;
+                    bgColor = '#19567C'; // Azul Oscuro
+                } else if (tipoEventoLower.includes('poste') || tipoEventoLower.includes('cable') || tipoEventoLower.includes('luz')) {
+                    svgUsado = svgIconos.poste;
+                    bgColor = '#F59E0B'; // Naranja/Amarillo Alerta Eléctrica
+                }
+
+                let claseExtra = isRecurrent ? 'marker-recurrent relative z-50' : '';
+
+                const iconHtml = `<div class="marker-container ${claseExtra}"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgUsado}</div></div>`;
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-div-icon',
+                    iconSize: [24, 24], 
+                    iconAnchor: [12, 12]
+                });
+
+                const marker = L.marker([lat, lng], { icon: customIcon });
+
+                let popupHtml = `<div class="font-sans min-w-[240px]">`;
+                
+                if (isRecurrent) {
+                    popupHtml += `<div class="bg-[#FEF2F2] text-[#DC2626] text-[10px] font-bold px-2 py-1.5 rounded mb-2 uppercase flex items-center gap-1.5 border border-[#FECACA]"><i class="fa-solid fa-triangle-exclamation"></i> ALERTA: PUNTO RECURRENTE (${grupo.length} Reportes)</div>`;
+                }
+
+                popupHtml += `<h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};">${isRecurrent ? 'Múltiples Incidentes' : tipo}</h4>
+                    <div class="max-h-[160px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
+
+                grupo.forEach(row => {
+                    popupHtml += `
+                        <div class="bg-[#F8FAFC] p-2 rounded border border-[#E2E8F0]">
+                            <p class="text-xs font-bold text-[#0F172A] mb-1 leading-tight">${row['Tipo Evento']}</p>
+                            <ul class="text-[10px] text-[#64748B] space-y-0.5">
+                                <li><b class="text-[#475569]">Fecha:</b> ${row.Fecha}</li>
+                                <li><b class="text-[#475569]">Dirección:</b> ${row.Direccion || '-'}</li>
+                                <li><b class="text-[#475569]">CGM:</b> ${row.CGM || '-'}</li>
+                            </ul>
+                        </div>`;
+                });
+
+                popupHtml += `</div></div>`;
+                
+                marker.bindPopup(popupHtml);
+                layerEventosTormenta.addLayer(marker);
+                latLngs.push([lat, lng]);
+            }
+
+            // Ajustar el zoom automáticamente si hay puntos filtrados
+            if (latLngs.length > 0 && map.hasLayer(layerEventosTormenta)) {
+                const zoomBounds = L.latLngBounds(latLngs);
+                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            }
+        }
+
+        // ---------- CORTES DE LUZ -----------
+        function cargarCortesLuz() {
+            const cb = document.getElementById('cb-cortes-luz');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./corte_luz.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo corte_luz.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            window.cortesData = results.data;
+                            cortesLoaded = true;
+                            document.getElementById('filtros-cortes-luz').classList.remove('hidden');
+                            poblarFiltrosCortes();
+                            filtrarYRenderizarCortes();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Cortes de Luz:", err);
+                    alert("Error al cargar corte_luz.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosCortes() {
+            const cgms = new Set();
+            const tipos = new Set();
+            const fechas = new Set();
+
+            window.cortesData.forEach(row => {
+                if (row.CGM) cgms.add(row.CGM.trim());
+                if (row.TIPO_AFECTACION) tipos.add(row.TIPO_AFECTACION.trim());
+                if (row.FECHA) fechas.add(row.FECHA.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-corte-cgm', cgms);
+            poblarSelect('filtro-corte-tipo', tipos);
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-corte-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarCortes() {
+            layerCortesLuz.clearLayers();
+            
+            const fCgm = document.getElementById('filtro-corte-cgm').value;
+            const fTipo = document.getElementById('filtro-corte-tipo').value;
+            const fFecha = document.getElementById('filtro-corte-fecha').value;
+
+            const latLngs = [];
+
+            window.cortesData.forEach(row => {
+                const cgm = (row.CGM || '').trim();
+                const tipo = (row.TIPO_AFECTACION || '').trim();
+                const fecha = (row.FECHA || '').trim();
+
+                // Evaluar todos los filtros
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTipo !== 'ALL' && tipo !== fTipo) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                let coordsStr = (row.COORDENADAS || "").trim();
+                if (!coordsStr) return;
+                
+                coordsStr = coordsStr.replace(/['"]/g, '');
+                let parts = coordsStr.split(',');
+                if (parts.length < 2) return;
+
+                const lat = parseFloat(parts[0].trim());
+                const lng = parseFloat(parts[1].trim());
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                // Color e ícono estandarizado para energía
+                let bgColor = '#F59E0B'; // Naranja Alerta
+
+                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.energia}</div></div>`;
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-div-icon',
+                    iconSize: [24, 24], 
+                    iconAnchor: [12, 12]
+                });
+
+                const marker = L.marker([lat, lng], { icon: customIcon });
+
+                let usuariosInfo = (row.USUARIOS_AFECTADOS && row.USUARIOS_AFECTADOS !== '') ? Number(row.USUARIOS_AFECTADOS).toLocaleString('es-AR') : 'Sin datos';
+
+                let popupHtml = `
+                    <div class="font-sans min-w-[220px]">
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};"><i class="fa-solid fa-bolt mr-1"></i> ${tipo}</h4>
+                        <div class="bg-[#FFFBEB] p-2 rounded-md mb-2 border border-[#FEF3C7]">
+                            <p class="text-[10px] font-bold text-[#D97706] uppercase">Usuarios Afectados</p>
+                            <p class="text-lg font-extrabold text-[#B45309]">${usuariosInfo}</p>
+                        </div>
+                        <ul class="text-xs text-[#64748B] space-y-1.5">
+                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
+                            <li><b class="text-[#0F172A]">Inicio:</b> ${row.HORA_INICIO || '-'}</li>
+                            <li><b class="text-[#0F172A]">Fin:</b> ${row.HORA_FIN || '-'}</li>
+                            <li><b class="text-[#0F172A]">Duración:</b> ${row.DURACION_CORTE || '-'}</li>
+                            <li><b class="text-[#0F172A]">CGM:</b> ${cgm || '-'}</li>
+                        </ul>
+                    </div>`;
+                
+                marker.bindPopup(popupHtml);
+                layerCortesLuz.addLayer(marker);
+                latLngs.push([lat, lng]);
+            });
+
+            // Ajustar el zoom automáticamente si hay puntos filtrados
+            if (latLngs.length > 0 && map.hasLayer(layerCortesLuz)) {
+                const zoomBounds = L.latLngBounds(latLngs);
+                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            }
+        }
+
+        // ---------- ARROYOS DESBORDADOS -----------
+        async function cargarArroyosDesbordados() {
+            const cb = document.getElementById('cb-arroyos-desbordados');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            try {
+                // Leer ambos archivos en paralelo para mayor velocidad
+                const [csvRes, geoRes] = await Promise.all([
+                    fetch('./arroyos.csv'),
+                    fetch('./ARROYOS.geojson')
+                ]);
+
+                if (!csvRes.ok) throw new Error("Archivo arroyos.csv no encontrado.");
+                if (!geoRes.ok) throw new Error("Archivo ARROYOS.geojson no encontrado.");
+
+                const csvText = await csvRes.text();
+                const geoData = await geoRes.json();
+
+                window.arroyosGeojsonData = sanearGeoJSON(geoData);
+
+                const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                
+                Papa.parse(cleanCsvText, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function(results) {
+                        window.arroyosCsvData = results.data;
+                        arroyosDesbordadosLoaded = true;
+                        document.getElementById('filtros-arroyos-desbordados').classList.remove('hidden');
+                        poblarFiltrosArroyosDesbordados();
+                        filtrarYRenderizarArroyosDesbordados();
+                        label.classList.remove('layer-loading');
+                    }
+                });
+            } catch(err) {
+                console.error("Error al cargar Arroyos Desbordados:", err);
+                alert("Error al cargar datos de arroyos. Verifica que arroyos.csv y ARROYOS.geojson existan.");
+                cb.checked = false;
+                label.classList.remove('layer-loading');
+            }
+        }
+
+        function poblarFiltrosArroyosDesbordados() {
+            const fechas = new Set();
+
+            window.arroyosCsvData.forEach(row => {
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-arroyo-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarArroyosDesbordados() {
+            layerArroyosDesbordados.clearLayers();
+            
+            const fFecha = document.getElementById('filtro-arroyo-fecha').value;
+
+            // 1. Encontrar qué arroyos están desbordados
+            let desbordadosMap = {}; 
+            
+            window.arroyosCsvData.forEach(row => {
+                const fecha = (row.Fecha || '').trim();
+                const estado = (row.Estado_Arroyo || '').trim().toUpperCase();
+                const nombre = (row.Arroyo || '').trim();
+
+                // Foco del proceso: Solo si está desbordado
+                if (estado !== 'DESBORDADO') return;
+                
+                // Filtro por fecha si aplica
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                if (!desbordadosMap[nombre]) desbordadosMap[nombre] = [];
+                desbordadosMap[nombre].push(row);
+            });
+
+            // Si no hay ninguno desbordado bajo estos filtros, salimos
+            if (Object.keys(desbordadosMap).length === 0) return;
+
+            // 2. Extraer solo las líneas de esos arroyos específicos desde el GeoJSON
+            const featuresRenderizar = window.arroyosGeojsonData.features.filter(f => {
+                let name = f.properties.name || f.properties.NOMBRE || f.properties.Name;
+                return name && desbordadosMap[name];
+            });
+
+            if (featuresRenderizar.length === 0) return;
+
+            // 3. Renderizar las líneas en ROJO
+            const geoLayer = L.geoJSON({ type: 'FeatureCollection', features: featuresRenderizar }, {
+                style: { color: '#DC2626', weight: 6, opacity: 0.9 }, // Color Rojo de emergencia y trazo grueso
+                onEachFeature: function(feature, layer) {
+                    let name = feature.properties.name || feature.properties.NOMBRE || feature.properties.Name || "Arroyo";
+                    let umbral = feature.properties.umbral_desborde || feature.properties['UMBRAL DESBORDE'] || "Sin datos";
+                    let registros = desbordadosMap[name];
+                    
+                    let popupHtml = `<div class="font-sans min-w-[240px]">
+                        <h4 class="font-bold text-[#DC2626] border-b border-[#FECACA] pb-1.5 mb-2 flex items-center gap-1">
+                            <i class="fa-solid fa-water"></i> Desborde: ${name}
+                        </h4>
+                        <div class="mb-2 text-xs">
+                            <b class="text-[#0F172A]">Umbral de Desborde:</b> <span class="text-[#DC2626] font-bold">${umbral} mts</span>
+                        </div>
+                        <div class="max-h-[180px] overflow-y-auto custom-scrollbar pr-1 space-y-2">`;
+                    
+                    registros.forEach(r => {
+                        let cgmStr = r.CGM ? `(CGM: ${r.CGM})` : '';
+                        popupHtml += `
+                            <div class="bg-[#FEF2F2] p-2 rounded border border-[#FECACA] text-xs">
+                                <p><b class="text-[#0F172A]">${r.Fecha} ${r.Hora}</b> ${cgmStr}</p>
+                                <p class="text-[#B91C1C] mt-0.5"><b>Nivel Medido:</b> ${r['Nivel Arroyo']} cm</p>
+                            </div>`;
+                    });
+
+                    popupHtml += `</div></div>`;
+                    layer.bindPopup(popupHtml);
+                    layer.bindTooltip(name, { direction: 'top', className: 'custom-map-tooltip' });
+                }
+            });
+
+            layerArroyosDesbordados.addLayer(geoLayer);
+            
+            // Auto Zoom a las áreas desbordadas
+            if (map.hasLayer(layerArroyosDesbordados)) {
+                const bounds = geoLayer.getBounds();
+                if (bounds.isValid()) {
+                    map.fitBounds(bounds, { padding: [30, 30] });
+                }
+            }
+        }
+
+        /* -----------------------------------------------------------
+           LÓGICA ESPECÍFICA PARA TAREAS PREVENTIVAS (sgr.csv)
+        ------------------------------------------------------------- */
+        
+        function cargarTareasPreventivas() {
+            const cb = document.getElementById('cb-tareas-preventivas');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./sgr.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo sgr.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        delimiter: ';',
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            window.sgrData = results.data;
+                            sgrLoaded = true;
+                            document.getElementById('filtros-tareas').classList.remove('hidden');
+                            poblarFiltrosTareas();
+                            filtrarYRenderizarTareas();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Tareas Preventivas:", err);
+                    alert("Error al cargar sgr.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosTareas() {
+            const cgms = new Set();
+            const tipos = new Set();
+            const subtipos = new Set();
+            const fechas = new Set();
+
+            window.sgrData.forEach(row => {
+                if (row.Zonificacion_CAV) cgms.add(row.Zonificacion_CAV.trim());
+                if (row.Tipo) tipos.add(row.Tipo.trim());
+                if (row['Sub Tipo']) subtipos.add(row['Sub Tipo'].trim());
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-cgm', cgms);
+            poblarSelect('filtro-tipo', tipos);
+            poblarSelect('filtro-subtipo', subtipos);
+
+            // Ordenar Fechas (DD/MM/YYYY) de manera descendente
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => {
+                const [d1, m1, y1] = a.split('/');
+                const [d2, m2, y2] = b.split('/');
+                return new Date(y2, m2-1, d2) - new Date(y1, m1-1, d1);
+            });
+            
+            const selectFecha = document.getElementById('filtro-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarTareas() {
+            layerTareasPreventivas.clearLayers();
+            
+            const fCgm = document.getElementById('filtro-cgm').value;
+            const fTipo = document.getElementById('filtro-tipo').value;
+            const fSubtipo = document.getElementById('filtro-subtipo').value;
+            const fFecha = document.getElementById('filtro-fecha').value;
+
+            const latLngs = [];
+
+            window.sgrData.forEach(row => {
+                const cgm = (row.Zonificacion_CAV || '').trim();
+                const tipo = (row.Tipo || '').trim();
+                const subtipo = (row['Sub Tipo'] || '').trim();
+                const fecha = (row.Fecha || '').trim();
+                const estado = (row.Estado || '').trim().toLowerCase();
+
+                // Evaluar todos los filtros
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTipo !== 'ALL' && tipo !== fTipo) return;
+                if (fSubtipo !== 'ALL' && subtipo !== fSubtipo) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                if (!row.Latitud || !row.Longitud) return;
+
+                const lat = parseFloat(row.Latitud.replace(',', '.'));
+                const lng = parseFloat(row.Longitud.replace(',', '.'));
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                // Lógica Visual: Verde para "Solucionado", Azul por defecto
+                let isSolucionado = estado === 'solucionado';
+                let bgColor = isSolucionado ? '#16A34A' : '#0B5F8D'; // Verde o Azul
+                let svgIcono = isSolucionado ? svgIconos.check : svgIconos.preventiva; // Palomita o Escudo
+                let estadoClassColor = isSolucionado ? 'text-green-600' : 'text-[#0B5F8D]';
+
+                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIcono}</div></div>`;
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-div-icon',
+                    iconSize: [24, 24], 
+                    iconAnchor: [12, 12]
+                });
+
+                const marker = L.marker([lat, lng], { icon: customIcon });
+
+                let popupHtml = `
+                    <div class="font-sans min-w-[220px]">
+                        <h4 class="font-bold text-[#0B5F8D] border-b border-[#E6EDF3] pb-1 mb-2">${tipo}</h4>
+                        <ul class="text-xs text-[#64748B] space-y-1.5">
+                            <li><b class="text-[#0F172A]">Sub Tipo:</b> ${subtipo}</li>
+                            <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
+                            <li><b class="text-[#0F172A]">Vecino:</b> ${row.Nombre || ''} ${row.Apellido || ''}</li>
+                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha}</li>
+                            <li><b class="text-[#0F172A]">Estado:</b> <span class="${estadoClassColor} font-bold">${row.Estado || '-'}</span></li>
+                            <li><b class="text-[#0F172A]">Zonificación:</b> ${cgm || '-'}</li>
+                        </ul>
+                    </div>`;
+                
+                marker.bindPopup(popupHtml);
+                layerTareasPreventivas.addLayer(marker);
+                latLngs.push([lat, lng]);
+            });
+
+            // Ajustar el zoom automáticamente si hay puntos filtrados
+            if (latLngs.length > 0 && map.hasLayer(layerTareasPreventivas)) {
+                const zoomBounds = L.latLngBounds(latLngs);
+                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            }
+        }
+
+        // ---------- NUEVO: TAREAS PREVENTIVAS CGM -----------
+        function cargarPreventivasCGM() {
+            const cb = document.getElementById('cb-preventivas-cgm');
+            const label = cb.closest('label');
+            label.classList.add('layer-loading');
+
+            fetch('./preventivas_cgm.csv')
+                .then(response => {
+                    if (!response.ok) throw new Error("Archivo preventivas_cgm.csv no encontrado.");
+                    return response.text();
+                })
+                .then(csvText => {
+                    const cleanCsvText = csvText.replace(/^\uFEFF/, '');
+                    
+                    Papa.parse(cleanCsvText, {
+                        header: true,
+                        skipEmptyLines: true, // csv is comma separated by default in papaparse
+                        complete: function(results) {
+                            window.prevCgmData = results.data;
+                            prevCgmLoaded = true;
+                            document.getElementById('filtros-preventivas-cgm').classList.remove('hidden');
+                            poblarFiltrosPreventivasCGM();
+                            filtrarYRenderizarPreventivasCGM();
+                            label.classList.remove('layer-loading');
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.error("Error al cargar Tareas Preventivas CGM:", err);
+                    alert("Error al cargar preventivas_cgm.csv. Verifica que el archivo exista en la ruta local correspondiente.");
+                    cb.checked = false;
+                    label.classList.remove('layer-loading');
+                });
+        }
+
+        function poblarFiltrosPreventivasCGM() {
+            const cgms = new Set();
+            const tareas = new Set();
+            const fechas = new Set();
+
+            window.prevCgmData.forEach(row => {
+                if (row.CGM) cgms.add(row.CGM.trim());
+                if (row.Tarea_Preventiva) tareas.add(row.Tarea_Preventiva.trim());
+                if (row.Fecha) fechas.add(row.Fecha.trim());
+            });
+
+            const poblarSelect = (id, setValores) => {
+                const select = document.getElementById(id);
+                select.innerHTML = select.options[0].outerHTML; 
+                Array.from(setValores).sort().forEach(val => {
+                    if (val === '') return;
+                    const opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val;
+                    select.appendChild(opt);
+                });
+            };
+
+            poblarSelect('filtro-prev-cgm-cgm', cgms);
+            poblarSelect('filtro-prev-cgm-tarea', tareas);
+
+            const arrayFechas = Array.from(fechas).filter(f => f !== '').sort((a,b) => b.localeCompare(a));
+            const selectFecha = document.getElementById('filtro-prev-cgm-fecha');
+            selectFecha.innerHTML = selectFecha.options[0].outerHTML;
+            arrayFechas.forEach(val => {
+                const opt = document.createElement('option');
+                opt.value = val;
+                opt.textContent = val;
+                selectFecha.appendChild(opt);
+            });
+        }
+
+        function filtrarYRenderizarPreventivasCGM() {
+            layerPreventivasCGM.clearLayers();
+            
+            const fCgm = document.getElementById('filtro-prev-cgm-cgm').value;
+            const fTarea = document.getElementById('filtro-prev-cgm-tarea').value;
+            const fFecha = document.getElementById('filtro-prev-cgm-fecha').value;
+
+            const latLngs = [];
+
+            window.prevCgmData.forEach(row => {
+                const cgm = (row.CGM || '').trim();
+                const tarea = (row.Tarea_Preventiva || '').trim();
+                const fecha = (row.Fecha || '').trim();
+
+                // Evaluar todos los filtros
+                if (fCgm !== 'ALL' && cgm !== fCgm) return;
+                if (fTarea !== 'ALL' && tarea !== fTarea) return;
+                if (fFecha !== 'ALL' && fecha !== fFecha) return;
+
+                let coordsStr = (row.Coordenadas || "").trim();
+                if (!coordsStr) return;
+                
+                coordsStr = coordsStr.replace(/['"]/g, '');
+                let parts = coordsStr.split(',');
+                if (parts.length < 2) return;
+
+                const lat = parseFloat(parts[0].trim());
+                const lng = parseFloat(parts[1].trim());
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                // Color e ícono para tareas de CGM
+                let bgColor = '#F97316'; // Naranja
+
+                const iconHtml = `<div class="marker-container"><div class="marker-circle" style="background-color: ${bgColor}; border: 2px solid white; box-shadow: 0 0 3px rgba(0,0,0,0.5);">${svgIconos.escoba}</div></div>`;
+                const customIcon = L.divIcon({
+                    html: iconHtml,
+                    className: 'custom-div-icon',
+                    iconSize: [24, 24], 
+                    iconAnchor: [12, 12]
+                });
+
+                const marker = L.marker([lat, lng], { icon: customIcon });
+
+                let fotoHtml = '';
+                if (row.Foto && row.Foto.trim() !== '') {
+                    // Limpiamos la ruta de la foto para evitar errores comunes en CSVs
+                    let fotoSrc = row.Foto.trim().replace(/^['"]|['"]$/g, '');
+                    fotoHtml = `<div class="mt-2 mb-2 w-full h-32 bg-gray-100 rounded overflow-hidden flex items-center justify-center border border-gray-200">
+                                    <img src="${fotoSrc}" alt="Foto Tarea Preventiva" class="w-full h-full object-cover" onerror="this.parentElement.innerHTML='<span class=\\'text-gray-400 text-xs\\'>Imagen no disponible</span>'">
+                                </div>`;
+                }
+
+                let popupHtml = `
+                    <div class="font-sans min-w-[240px]">
+                        <h4 class="font-bold border-b border-[#E6EDF3] pb-1 mb-2" style="color: ${bgColor};"><i class="fa-solid fa-broom mr-1"></i> Tarea Preventiva CGM</h4>
+                        ${fotoHtml}
+                        <ul class="text-xs text-[#64748B] space-y-1.5 mt-2">
+                            <li><b class="text-[#0F172A]">Área:</b> ${row.Area || '-'}</li>
+                            <li><b class="text-[#0F172A]">Tarea:</b> ${tarea}</li>
+                            <li><b class="text-[#0F172A]">Fecha:</b> ${fecha} ${row.Hora || ''}</li>
+                            <li><b class="text-[#0F172A]">Dirección:</b> ${row.Direccion || '-'}</li>
+                            <li><b class="text-[#0F172A]">Observaciones:</b> ${row.Observaciones || '-'}</li>
+                        </ul>
+                    </div>`;
+                
+                marker.bindPopup(popupHtml, { minWidth: 240 });
+                layerPreventivasCGM.addLayer(marker);
+                latLngs.push([lat, lng]);
+            });
+
+            // Ajustar el zoom automáticamente si hay puntos filtrados
+            if (latLngs.length > 0 && map.hasLayer(layerPreventivasCGM)) {
+                const zoomBounds = L.latLngBounds(latLngs);
+                map.fitBounds(zoomBounds, { padding: [30, 30] });
+            }
+        }
+
         // LÓGICA PRINCIPAL DE INICIALIZACIÓN
         function initMap() {
             const mapContainer = document.getElementById('map');
             if (!mapContainer) return;
 
-            // Inicializar centrado en Lomas de Zamora (Ajustable a futuro)
             map = L.map('map').setView([-34.7573, -58.4035], 12);
 
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -320,7 +1648,12 @@
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // Preparar el motor de Fetch para las capas futuras
+            layerTareasPreventivas = L.layerGroup();
+            layerPreventivasCGM = L.layerGroup();
+            layerEventosTormenta = L.layerGroup();
+            layerCortesLuz = L.layerGroup();
+            layerArroyosDesbordados = L.layerGroup();
+
             const setupLayerControl = (checkboxId, configParams) => {
                 const cb = document.getElementById(checkboxId);
                 if (!cb) return;
@@ -328,20 +1661,34 @@
                 layerInstances[checkboxId] = L.layerGroup();
                 const layer = layerInstances[checkboxId];
 
-                cb.addEventListener('change', async (e) => {
-                    if (e.target.checked) {
+                // Carga inicial y listeners
+                const handleLayerToggle = async (isChecked) => {
+                    if (isChecked) {
                         if (!layer.hasLoaded) {
                             try {
                                 const label = cb.closest('label');
                                 label.classList.add('layer-loading');
                                 
-                                const response = await fetch(configParams.url);
+                                // Reemplazar espacios por %20 para evitar problemas de parseo en el fetch
+                                const safeUrl = configParams.url.replace(/ /g, '%20');
+                                const response = await fetch(safeUrl);
+                                
                                 if (!response.ok) throw new Error("HTTP " + response.status);
                                 const data = await response.json();
                                 
-                                // Renderizado por defecto
-                                renderizarCapaGenerica(data, layer, configParams.style);
-                                
+                                // Enrutador para usar los renders especializados
+                                if (configParams.type === 'poblacion') {
+                                    renderizarCapaPoblacion(data, layer);
+                                } else if (configParams.type === 'pobreza') {
+                                    renderizarCapaPobreza(data, layer);
+                                } else if (configParams.type === 'inundables') {
+                                    renderizarCapaInundables(data, layer);
+                                } else if (configParams.type === 'arroyos') {
+                                    renderizarCapaArroyos(data, layer);
+                                } else {
+                                    renderizarCapaGenerica(data, layer, configParams.style);
+                                }
+
                                 layer.hasLoaded = true;
                             } catch (err) {
                                 console.error(`Error al cargar capa: ${configParams.url}`, err);
@@ -356,15 +1703,136 @@
                     } else {
                         map.removeLayer(layer);
                     }
-                });
+                };
+
+                cb.addEventListener('change', (e) => handleLayerToggle(e.target.checked));
             };
 
-            // Recorrer configuración (actualmente vacía)
+            // Setup de Control Especial: Tareas Preventivas CSV
+            const cbTareas = document.getElementById('cb-tareas-preventivas');
+            if (cbTareas) {
+                cbTareas.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerTareasPreventivas);
+                        if (!sgrLoaded) cargarTareasPreventivas();
+                        else filtrarYRenderizarTareas();
+                    } else {
+                        map.removeLayer(layerTareasPreventivas);
+                        document.getElementById('filtros-tareas').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Eventos de Cambio en Filtros Tareas Preventivas
+            ['filtro-cgm', 'filtro-tipo', 'filtro-subtipo', 'filtro-fecha'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    if(document.getElementById('cb-tareas-preventivas').checked) {
+                        filtrarYRenderizarTareas();
+                    }
+                });
+            });
+
+            // Setup de Control Especial: Tareas Preventivas CGM CSV
+            const cbPrevCgm = document.getElementById('cb-preventivas-cgm');
+            if (cbPrevCgm) {
+                cbPrevCgm.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerPreventivasCGM);
+                        if (!prevCgmLoaded) cargarPreventivasCGM();
+                        else filtrarYRenderizarPreventivasCGM();
+                    } else {
+                        map.removeLayer(layerPreventivasCGM);
+                        document.getElementById('filtros-preventivas-cgm').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Eventos de Cambio en Filtros Preventivas CGM
+            ['filtro-prev-cgm-fecha', 'filtro-prev-cgm-cgm', 'filtro-prev-cgm-tarea'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    if(document.getElementById('cb-preventivas-cgm').checked) {
+                        filtrarYRenderizarPreventivasCGM();
+                    }
+                });
+            });
+
+            // Setup de Control Especial: Eventos Tormenta CSV
+            const cbEventos = document.getElementById('cb-eventos-tormenta');
+            if (cbEventos) {
+                cbEventos.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerEventosTormenta);
+                        if (!coeLoaded) cargarEventosTormenta();
+                        else filtrarYRenderizarEventos();
+                    } else {
+                        map.removeLayer(layerEventosTormenta);
+                        document.getElementById('filtros-eventos').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Eventos de Cambio en Filtros Eventos Tormenta
+            ['filtro-evt-fecha', 'filtro-evt-cgm', 'filtro-evt-tipo'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    if(document.getElementById('cb-eventos-tormenta').checked) {
+                        filtrarYRenderizarEventos();
+                    }
+                });
+            });
+
+            // Setup de Control Especial: Cortes de Luz CSV
+            const cbCortesLuz = document.getElementById('cb-cortes-luz');
+            if (cbCortesLuz) {
+                cbCortesLuz.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerCortesLuz);
+                        if (!cortesLoaded) cargarCortesLuz();
+                        else filtrarYRenderizarCortes();
+                    } else {
+                        map.removeLayer(layerCortesLuz);
+                        document.getElementById('filtros-cortes-luz').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Eventos de Cambio en Filtros Cortes de Luz
+            ['filtro-corte-fecha', 'filtro-corte-cgm', 'filtro-corte-tipo'].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    if(document.getElementById('cb-cortes-luz').checked) {
+                        filtrarYRenderizarCortes();
+                    }
+                });
+            });
+
+            // Setup de Control Especial: Arroyos Desbordados
+            const cbArroyosDesb = document.getElementById('cb-arroyos-desbordados');
+            if (cbArroyosDesb) {
+                cbArroyosDesb.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        map.addLayer(layerArroyosDesbordados);
+                        if (!arroyosDesbordadosLoaded) cargarArroyosDesbordados();
+                        else filtrarYRenderizarArroyosDesbordados();
+                    } else {
+                        map.removeLayer(layerArroyosDesbordados);
+                        document.getElementById('filtros-arroyos-desbordados').classList.add('hidden'); 
+                    }
+                });
+            }
+
+            // Setup Filtro de Arroyos Desbordados
+            const fArroyoFecha = document.getElementById('filtro-arroyo-fecha');
+            if (fArroyoFecha) {
+                fArroyoFecha.addEventListener('change', () => {
+                    if(cbArroyosDesb && cbArroyosDesb.checked) {
+                        filtrarYRenderizarArroyosDesbordados();
+                    }
+                });
+            }
+
             for (const checkboxId in CONFIG_CAPAS) {
                 setupLayerControl(checkboxId, CONFIG_CAPAS[checkboxId]);
             }
 
-            // Lógica de clases CSS para hacer los SVG escalables según el nivel de zoom
             function updateMapZoomClass() {
                 if (!map) return;
                 const zoom = map.getZoom();
@@ -378,9 +1846,29 @@
             
             map.on('zoomend', updateMapZoomClass);
             updateMapZoomClass();
+
+            // FIX: Forzar recálculo del mapa cuando se carga el contenedor para evitar grises
+            setTimeout(function() {
+                if (map) {
+                    map.invalidateSize();
+                }
+            }, 500);
+
+            // Cargar municipio automáticamente al iniciar
+            setTimeout(() => {
+                const cbMuni = document.getElementById('cb-municipio');
+                if (cbMuni && cbMuni.checked) {
+                    cbMuni.dispatchEvent(new Event('change'));
+                }
+            }, 800);
+            
+            // Vigilar el contenedor del mapa para recalibrar en caso de que Flexbox se reajuste
+            const resizeObserver = new ResizeObserver(() => {
+                if (map) map.invalidateSize();
+            });
+            resizeObserver.observe(document.getElementById('map'));
         }
 
-        // Ejecutar todo cuando cargue la página
         document.addEventListener('DOMContentLoaded', () => {
             initMap();
         });
